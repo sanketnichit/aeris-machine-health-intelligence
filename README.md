@@ -23,6 +23,44 @@ AERIS is a focused predictive-maintenance project built around the **AI4I 2020 P
 | Secondary validation | Failure-mode attribution, uncertainty, calibration and sensitivity studies |
 | Reproducibility | Pinned dependencies + documented validation |
 
+## Verified benchmark result
+
+Primary seed-42 held-out risk-model result:
+
+- **PR-AUC: 0.899**
+- **Precision @ 0.50: 0.965**
+- **Recall @ 0.50: 0.809**
+- **F1 @ 0.50: 0.880**
+- **Brier score: 0.0075**
+
+Held-out confusion at the 0.50 threshold: **55 TP, 2 FP, 13 FN, 1,930 TN**.
+
+95% stratified bootstrap intervals:
+
+| Metric | 95% interval |
+|---|---|
+| PR-AUC | [0.835, 0.953] |
+| Precision | [0.915, 1.000] |
+| Recall | [0.721, 0.897] |
+| F1 | [0.817, 0.938] |
+| Brier | [0.0050, 0.0102] |
+
+Across five fixed-model stratified splits, mean PR-AUC is **0.881 ± 0.025** and mean F1 is **0.836 ± 0.057** at the 0.50 calibrated threshold.
+
+> These are benchmark measurements on synthetic AI4I data, not estimates of production fleet performance.
+
+## Reviewer fast path
+
+For a quick technical review:
+
+1. **Start here:** this section for the held-out result and uncertainty context.
+2. **Architecture:** read `docs/engineering_decisions.md` and the architecture diagram below.
+3. **Implementation:** inspect `src/models.py`, `src/features.py`, and `src/console_models.py`.
+4. **Evidence:** read `reports/risk_model.md` and `reports/explainability.md`.
+5. **Demo:** run `streamlit run app.py` and use `docs/demo_script.md`.
+6. **Reproducibility:** finish with `docs/reproducibility_audit.md`.
+7. **Deep dive:** use `extended-validation/` for robustness studies.
+
 ## Project scope
 
 ### Core v1
@@ -164,19 +202,6 @@ A few compact EDA views are committed alongside the reports:
 
 These figures are descriptive checks on the synthetic AI4I benchmark; they are not production-fleet evidence.
 
-## Reviewer quick path
-
-A technical reviewer can follow the core project in this order:
-
-1. `README.md` — scope, architecture and headline results.
-2. `docs/engineering_decisions.md` — why the design choices were made.
-3. `reports/baseline_metrics.md` — initial baseline.
-4. `reports/risk_model.md` — primary model, calibration and held-out evaluation.
-5. `reports/explainability.md` — model attribution.
-6. `app.py` + `docs/demo_script.md` — live console and demonstration path.
-7. `docs/reproducibility_audit.md` — reproduction record.
-8. `extended-validation/README.md` — optional robustness studies.
-
 ## Current status
 
 ### Core
@@ -250,32 +275,6 @@ streamlit run app.py
 ```
 
 The console trains its inference bundle through `src/console_models.py`, reusing the canonical calibrated HGB and model-specific explanation/mode builders.
-
-## Current verified results
-
-Primary seed-42 held-out risk-model result:
-
-- **PR-AUC: 0.899**
-- **Precision @ 0.50: 0.965**
-- **Recall @ 0.50: 0.809**
-- **F1 @ 0.50: 0.880**
-- **Brier score: 0.0075**
-
-The held-out error profile at the 0.50 threshold is **55 true positives, 2 false positives, 13 false negatives and 1,930 true negatives**.
-
-The 95% stratified bootstrap intervals are:
-
-| Metric | 95% interval |
-|---|---|
-| PR-AUC | [0.835, 0.953] |
-| Precision | [0.915, 1.000] |
-| Recall | [0.721, 0.897] |
-| F1 | [0.817, 0.938] |
-| Brier | [0.0050, 0.0102] |
-
-Across five fixed-model stratified splits, mean PR-AUC is **0.881 ± 0.025** and mean F1 is **0.836 ± 0.057** at the 0.50 calibrated threshold.
-
-These are benchmark measurements on synthetic AI4I data, not estimates of production fleet performance.
 
 ## Future work
 
