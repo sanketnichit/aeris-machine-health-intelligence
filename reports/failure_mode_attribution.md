@@ -2,22 +2,26 @@
 
 AERIS v1 treats failure modes as a **multi-label attribution** problem rather than forcing every failed row into exactly one class.
 
-The production-facing attribution layer currently covers HDF, PWF and OSF. TWF and RNF are deferred because their positive counts/label behaviour are not strong enough for a defensible model.
+## Cross-validation feasibility check
 
-## Cross-validation evidence
-
-| Mode | Positives | 5-fold mean PR-AUC | 5-fold mean Precision | 5-fold mean Recall | 5-fold mean F1 |
+| Mode | Positives | Mean PR-AUC | Mean Precision | Mean Recall | Mean F1 |
 |---|---:|---:|---:|---:|---:|
-| HDF | 115 | 0.986 ± 0.016 | 0.928 | 0.965 | 0.945 |
-| PWF | 95 | 0.791 ± 0.037 | 0.648 | 0.832 | 0.728 |
-| OSF | 98 | 0.942 ± 0.030 | 0.820 | 0.948 | 0.878 |
-| TWF | 46 | 0.119 ± 0.069 | 0.103 | 0.111 | 0.106 |
+| HDF | 115 | 1.000 ± 0.000 | 1.000 | 1.000 | 1.000 |
+| PWF | 95 | 0.917 ± 0.039 | 0.811 | 0.895 | 0.849 |
+| OSF | 98 | 0.944 ± 0.035 | 0.820 | 0.928 | 0.868 |
+| TWF | 46 | 0.129 ± 0.081 | 0.186 | 0.156 | 0.159 |
 | RNF | 19 | 0.010 ± 0.010 | 0.000 | 0.000 | 0.000 |
 
-## Interpretation
+## Production-facing v1 decision
 
-HDF, PWF and OSF show enough signal for a useful attribution layer under this benchmark. TWF and RNF should not be presented as reliable failure-mode predictions in v1. AERIS therefore prefers honest partial coverage over a five-class model that looks complete but is statistically weak.
+Promote **HDF, PWF and OSF** into the v1 attribution panel.
+
+TWF and RNF remain deferred because their cross-validated signal is too weak/unstable for an engineering-facing prediction layer.
+
+## Synthetic-benchmark caveat
+
+The very strong HDF signal should not be interpreted as evidence of physical root-cause understanding. The AI4I benchmark is synthetic and can contain structured relationships between its generated labels and operating variables. AERIS therefore reports these mode scores as benchmark attribution signals, not physical diagnoses.
 
 ## Multi-label caveat
 
-AI4I allows more than one failure-mode flag to be present for a failed row. The UI should therefore show mode scores side-by-side rather than claim that exactly one physical root cause has been proven.
+A single failed observation can have more than one mode flag. Therefore AERIS reports mode scores side-by-side and does not claim that one model output proves a unique physical root cause.
