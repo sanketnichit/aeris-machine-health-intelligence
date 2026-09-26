@@ -10,6 +10,8 @@ Run: streamlit run app.py
 from __future__ import annotations
 
 from pathlib import Path
+import urllib.error
+import urllib.request
 
 import numpy as np
 import pandas as pd
@@ -25,6 +27,53 @@ from src.features import MODEL_FEATURES, add_engineered_features
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "ai4i2020.csv"
 
+DATASET_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/00601/ai4i2020.csv"
+
+EXPECTED_DATASET_HEADER = (
+    "UDI,Product ID,Type,Air temperature [K],Process temperature [K],"
+    "Rotational speed [rpm],Torque [Nm],Tool wear [min],Machine failure,"
+    "TWF,HDF,PWF,OSF,RNF"
+)
+
+def ensure_dataset() -> None:
+    """Ensure the benchmark CSV exists for local and Community Cloud runs."""
+    if DATA_PATH.exists():
+        return
+
+    DATA_PATH.parent.mkdir(parents=True, exist_ok=True)
+    request = urllib.request.Request(
+        DATASET_URL,
+        headers={"User-Agent": "AERIS-streamlit/1.0"},
+    )
+
+    try:
+        with urllib.request.urlopen(request, timeout=30) as response:
+            payload = response.read()
+    except urllib.error.URLError as exc:
+        st.error(
+            "The AI4I benchmark CSV is missing and could not be downloaded from UCI. "
+            "Download it manually to data/ai4i2020.csv. Network error: " + str(exc)
+        )
+        st.stop()
+
+    header = payload.splitlines()[0].decode("utf-8-sig").strip()
+    if header != EXPECTED_DATASET_HEADER:
+        st.error(
+            "The downloaded file did not match the expected AI4I 2020 schema. "
+            "Download the canonical CSV and place it at data/ai4i2020.csv."
+        )
+        st.stop()
+
+    temp_path = DATA_PATH.with_suffix(".csv.tmp")
+    try:
+        temp_path.write_bytes(payload)
+        temp_path.replace(DATA_PATH)
+    finally:
+        if temp_path.exists():
+            temp_path.unlink()
+
+
+ensure_dataset()
 RISK_THRESHOLD = 0.50
 SCREENING_THRESHOLD = 0.20
 
