@@ -4,9 +4,14 @@ import pandas as pd
 from sklearn.metrics import average_precision_score
 from sklearn.model_selection import train_test_split
 
-from features import MODEL_FEATURES, add_engineered_features
-from models import build_calibrated_hgb
-from load_data import load_raw
+try:
+    from .features import MODEL_FEATURES, add_engineered_features
+    from .models import build_calibrated_hgb
+    from .load_data import load_raw
+except ImportError:  # direct script execution from src/
+    from features import MODEL_FEATURES, add_engineered_features
+    from models import build_calibrated_hgb
+    from load_data import load_raw
 
 
 ROOT = Path(__file__).resolve().parents[1]
