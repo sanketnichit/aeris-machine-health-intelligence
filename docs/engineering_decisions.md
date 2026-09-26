@@ -69,6 +69,8 @@ The highest-value next dataset is a real industrial time-series benchmark such a
 Both are deliberately outside the application-deadline v1 scope.
 
 
-## 10. Uncertainty and error analysis
+## 10. Uncertainty, calibration and feature stability
 
 AERIS reports uncertainty around held-out metrics with stratified bootstrap intervals and checks the fixed model across five independent stratified splits. The primary seed-42 evaluation remains the headline result for consistency. Held-out error analysis is descriptive only; it does not trigger hidden threshold tuning. The current error profile shows 18 false negatives and 4 false positives at the 0.50 calibrated threshold, with many false negatives carrying the TWF flag. This is treated as a limitation and future investigation point rather than a reason to overstate the current mode layer.
+
+AERIS now checks three additional robustness questions: (1) how much held-out metric estimates move under stratified bootstrap resampling, (2) whether the calibrated risk score behaves similarly across product types and selected operating regimes, and (3) whether permutation-importance rankings remain broadly stable across five independent stratified splits. These checks are descriptive robustness audits, not additional tuning loops. They strengthen the evidence around the v1 model without changing the primary seed-42 evaluation.
