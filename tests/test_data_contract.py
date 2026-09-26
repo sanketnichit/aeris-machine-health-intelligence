@@ -51,3 +51,62 @@ def test_no_identifier_is_used_as_model_feature():
     assert '"PWF"' not in model_source
     assert '"OSF"' not in model_source
     assert '"RNF"' not in model_source
+
+
+def test_loader_normalizes_ai4i_column_names_and_reads_utf8_bom(tmp_path):
+    from src.load_data import load_raw
+
+    path = tmp_path / "ai4i2020.csv"
+    pd.DataFrame(
+        [
+            {
+                "UDI": 1,
+                "Product ID": "L1",
+                "Type": "L",
+                "Air temperature [K]": 298.0,
+                "Process temperature [K]": 308.0,
+                "Rotational speed [rpm]": 1500,
+                "Torque [Nm]": 40.0,
+                "Tool wear [min]": 10,
+                "Machine failure": 0,
+                "TWF": 0,
+                "HDF": 0,
+                "PWF": 0,
+                "OSF": 0,
+                "RNF": 0,
+            }
+        ]
+    ).to_csv(path, index=False, encoding="utf-8-sig")
+
+    frame = load_raw(path)
+
+    assert list(frame.columns) == [
+        "udi",
+        "product_id",
+        "type",
+        "air_temp_k",
+        "process_temp_k",
+        "rot_speed_rpm",
+        "torque_nm",
+        "tool_wear_min",
+        "machine_failure",
+        "twf",
+        "hdf",
+        "pwf",
+        "osf",
+        "rnf",
+    ]
+    assert frame.loc[0, "machine_failure"] == 0
+
+
+def test_loader_reports_missing_dataset_path(tmp_path):
+    from src.load_data import load_raw
+
+    missing = tmp_path / "missing.csv"
+
+    try:
+        load_raw(missing)
+    except FileNotFoundError as exc:
+        assert "ai4i2020.csv" in str(exc)
+    else:
+        raise AssertionError("load_raw should raise FileNotFoundError for a missing dataset")
