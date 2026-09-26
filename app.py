@@ -314,11 +314,12 @@ raw_row = pd.DataFrame(
 # Use exactly the same deterministic feature engineering as the offline pipeline.
 app_row = add_engineered_features(raw_row)[MODEL_FEATURES]
 
-try:
-    risk_model, explainer_pre, explain_model, mode_models = train_models()
-except (FileNotFoundError, ValueError) as exc:
-    st.error(str(exc))
-    st.stop()
+with st.spinner("Preparing AERIS model bundle..."):
+    try:
+        risk_model, explainer_pre, explain_model, mode_models = train_models()
+    except (FileNotFoundError, ValueError) as exc:
+        st.error(str(exc))
+        st.stop()
 
 risk = float(risk_model.predict_proba(app_row)[0, 1])
 label, state_note = risk_state(risk)
