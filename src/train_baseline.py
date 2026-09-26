@@ -22,8 +22,12 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
-from features import BASE_FEATURES
-from load_data import load_raw
+try:
+    from .features import BASE_FEATURES
+    from .load_data import load_raw
+except ImportError:  # direct script execution from src/
+    from features import BASE_FEATURES
+    from load_data import load_raw
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPORT_PATH = PROJECT_ROOT / "reports" / "baseline_metrics.md"
