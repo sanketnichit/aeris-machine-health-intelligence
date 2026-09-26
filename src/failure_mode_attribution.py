@@ -9,6 +9,7 @@ from pathlib import Path
 import pandas as pd
 from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.metrics import make_scorer, precision_score
 from sklearn.model_selection import StratifiedKFold, cross_validate
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
@@ -77,7 +78,7 @@ def main() -> None:
             cv=cv,
             scoring={
                 "pr_auc": "average_precision",
-                "precision": "precision",
+                "precision": make_scorer(precision_score, zero_division=0),
                 "recall": "recall",
                 "f1": "f1",
             },
