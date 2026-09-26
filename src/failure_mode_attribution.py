@@ -22,26 +22,24 @@ FEATURES = MODEL_FEATURES
 ALL_MODES = ["twf", "hdf", "pwf", "osf", "rnf"]
 
 
-build_pipeline = build_mode_pipeline
-
 def main() -> None:
     df = add_engineered_features(load_raw())
     X = df[FEATURES]
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
     lines = [
-        "# Failure-mode Attribution\\n\\n",
+        "# Failure-mode Attribution\n\n",
         "AERIS v1 treats failure modes as a **multi-label attribution** problem "
-        "rather than forcing every failed row into exactly one class.\\n\\n",
-        "## Cross-validation feasibility check\\n\\n",
-        "| Mode | Positives | Mean PR-AUC | Mean Precision | Mean Recall | Mean F1 |\\n",
-        "|---|---:|---:|---:|---:|---:|\\n",
+        "rather than forcing every failed row into exactly one class.\n\n",
+        "## Cross-validation feasibility check\n\n",
+        "| Mode | Positives | Mean PR-AUC | Mean Precision | Mean Recall | Mean F1 |\n",
+        "|---|---:|---:|---:|---:|---:|\n",
     ]
 
     for mode in ALL_MODES:
         y = df[mode]
         scores = cross_validate(
-            build_pipeline(),
+            build_mode_pipeline(),
             X,
             y,
             cv=cv,
@@ -60,25 +58,30 @@ def main() -> None:
             f"{scores['test_pr_auc'].mean():.3f} ± {scores['test_pr_auc'].std():.3f} | "
             f"{scores['test_precision'].mean():.3f} | "
             f"{scores['test_recall'].mean():.3f} | "
-            f"{scores['test_f1'].mean():.3f} |\\n"
+            f"{scores['test_f1'].mean():.3f} |\n"
         )
 
     lines.extend(
         [
-            "\\n## Production-facing v1 decision\\n",
-            "Promote **HDF, PWF and OSF** into the v1 attribution panel. "
-            "TWF and RNF are deferred because their cross-validated signal is "
-            "too weak/unstable for an honest engineering-facing prediction layer.\\n\\n",
-            "## Multi-label caveat\\n",
-            "A single failed observation can have more than one mode flag. "
-            "Therefore AERIS reports mode scores side-by-side and does not claim "
-            "that one model output proves a unique physical root cause.\\n",
+            "\n## Production-facing v1 decision\n",
+            "Promote **HDF, PWF and OSF** into the v1 attribution panel.\n\n",
+            "TWF and RNF remain deferred because their cross-validated signal is too weak/unstable "
+            "for an engineering-facing prediction layer.\n\n",
+            "## Synthetic-benchmark caveat\n",
+            "The very strong HDF signal should not be interpreted as evidence of physical root-cause "
+            "understanding. The AI4I benchmark is synthetic and can contain structured relationships "
+            "between its generated labels and operating variables. AERIS therefore reports these mode "
+            "scores as benchmark attribution signals, not physical diagnoses.\n\n",
+            "## Multi-label caveat\n",
+            "A single failed observation can have more than one mode flag. Therefore AERIS reports mode "
+            "scores side-by-side and does not claim that one model output proves a unique physical root cause.\n",
         ]
     )
 
+    report = "".join(lines)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text("".join(lines), encoding="utf-8")
-    print("".join(lines))
+    REPORT.write_text(report, encoding="utf-8")
+    print(report)
 
 
 if __name__ == "__main__":
