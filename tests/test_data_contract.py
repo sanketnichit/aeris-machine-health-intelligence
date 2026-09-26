@@ -163,3 +163,22 @@ def test_validation_report_catches_basic_contract_violations():
     assert "Unique type values: ['L', 'X']" in report
     assert "Rows where machine_failure disagrees with any failure-mode flag: 1" in report
     assert "Failure (1): 1 (50.00%)" in report
+
+
+def test_loader_rejects_missing_required_columns(tmp_path):
+    from src.load_data import load_raw
+
+    path = tmp_path / "ai4i2020.csv"
+    pd.DataFrame([{"UDI": 1, "Product ID": "L1"}]).to_csv(
+        path,
+        index=False,
+        encoding="utf-8-sig",
+    )
+
+    try:
+        load_raw(path)
+    except ValueError as exc:
+        assert "required AI4I columns" in str(exc)
+        assert "machine_failure" in str(exc)
+    else:
+        raise AssertionError("load_raw should reject an incomplete AI4I schema")
