@@ -12,6 +12,8 @@ import numpy as np
 import pandas as pd
 import shap
 import streamlit as st
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import HistGradientBoostingClassifier
 from src.features import MODEL_FEATURES, add_engineered_features
 from src.console_models import train_console_models
 
