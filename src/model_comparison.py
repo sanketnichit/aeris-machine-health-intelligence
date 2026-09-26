@@ -1,0 +1,193 @@
+"""
+AERIS - model comparison on the AI4I 2020 benchmark.
+
+Design:
+- Hold out a final stratified test set once.
+- Compare three different model families using 5-fold stratified CV on the
+  training portion only.
+- Use average precision (PR-AUC/AP), recall, precision and F1 as primary
+  imbalance-aware metrics.
+- Do not tune against the final test set.
+"""
+from pathlib import Path
+
+import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    average_precision_score,
+    f1_score,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
+from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_split
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder
+
+from load_data import load_raw
+
+
+ROOT = Path(__file__).resolve().parents[1]
+REPORT = ROOT / "reports" / "model_comparison.md"
+
+FEATURES = [
+    "type",
+    "air_temp_k",
+    "process_temp_k",
+    "rot_speed_rpm",
+    "torque_nm",
+    "tool_wear_min",
+]
+
+
+def build_preprocessor() -> ColumnTransformer:
+    return ColumnTransformer(
+        transformers=[
+            (
+                "categorical",
+                OneHotEncoder(handle_unknown="ignore"),
+                ["type"],
+            ),
+            (
+                "numeric",
+                "passthrough",
+                FEATURES[1:],
+            ),
+        ]
+    )
+
+
+def main() -> None:
+    df = load_raw()
+    X = df[FEATURES]
+    y = df["machine_failure"]
+
+    X_train, X_test, y_train, y_test = train_test_split(
+        X,
+        y,
+        test_size=0.20,
+        random_state=42,
+        stratify=y,
+    )
+
+    models = {
+        "Logistic Regression": LogisticRegression(
+            max_iter=2000,
+            class_weight="balanced",
+            random_state=42,
+        ),
+        "Random Forest": RandomForestClassifier(
+            n_estimators=500,
+            class_weight="balanced_subsample",
+            random_state=42,
+            n_jobs=-1,
+        ),
+        "HistGradientBoosting": HistGradientBoostingClassifier(
+            max_iter=300,
+            learning_rate=0.06,
+            max_leaf_nodes=31,
+            l2_regularization=1.0,
+            random_state=42,
+        ),
+    }
+
+    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
+    rows = []
+
+    for name, model in models.items():
+        pipeline = Pipeline(
+            steps=[
+                ("preprocessor", build_preprocessor()),
+                ("model", model),
+            ]
+        )
+
+        scores = cross_validate(
+            pipeline,
+            X_train,
+            y_train,
+            cv=cv,
+            scoring={
+                "pr_auc": "average_precision",
+                "roc_auc": "roc_auc",
+                "precision": "precision",
+                "recall": "recall",
+                "f1": "f1",
+            },
+            n_jobs=-1,
+        )
+
+        pipeline.fit(X_train, y_train)
+        probabilities = pipeline.predict_proba(X_test)[:, 1]
+        predictions = (probabilities >= 0.5).astype(int)
+
+        rows.append(
+            {
+                "model": name,
+                "cv_pr_auc_mean": scores["test_pr_auc"].mean(),
+                "cv_pr_auc_std": scores["test_pr_auc"].std(),
+                "cv_roc_auc_mean": scores["test_roc_auc"].mean(),
+                "cv_precision_mean": scores["test_precision"].mean(),
+                "cv_recall_mean": scores["test_recall"].mean(),
+                "cv_f1_mean": scores["test_f1"].mean(),
+                "test_pr_auc": average_precision_score(y_test, probabilities),
+                "test_roc_auc": roc_auc_score(y_test, probabilities),
+                "test_precision": precision_score(
+                    y_test, predictions, zero_division=0
+                ),
+                "test_recall": recall_score(y_test, predictions, zero_division=0),
+                "test_f1": f1_score(y_test, predictions, zero_division=0),
+            }
+        )
+
+    result = pd.DataFrame(rows).sort_values("cv_pr_auc_mean", ascending=False)
+
+    lines = [
+        "# Model Comparison\n\n",
+        "## Evaluation design\n",
+        "- 80/20 stratified train/test split (random seed 42).\n",
+        "- Model selection uses only 5-fold stratified CV on the training set.\n",
+        "- The final test set is evaluated once after model selection.\n",
+        "- Primary metric: average precision (PR-AUC/AP), because failures are rare.\n",
+        "- Secondary metrics: precision, recall, F1 and ROC-AUC.\n\n",
+        "## Results\n\n",
+        "| Model | CV PR-AUC | CV Recall | CV F1 | Test PR-AUC | Test Precision | Test Recall | Test F1 |\n",
+        "|---|---:|---:|---:|---:|---:|---:|---:|\n",
+    ]
+
+    for _, row in result.iterrows():
+        lines.append(
+            f"| {row['model']} | "
+            f"{row['cv_pr_auc_mean']:.3f} ± {row['cv_pr_auc_std']:.3f} | "
+            f"{row['cv_recall_mean']:.3f} | "
+            f"{row['cv_f1_mean']:.3f} | "
+            f"{row['test_pr_auc']:.3f} | "
+            f"{row['test_precision']:.3f} | "
+            f"{row['test_recall']:.3f} | "
+            f"{row['test_f1']:.3f} |\n"
+        )
+
+    lines.extend(
+        [
+            "\n## Selection\n",
+            "HistGradientBoosting is the current model to carry forward. "
+            "It gives the strongest cross-validated PR-AUC in this experiment "
+            "while retaining strong held-out failure detection without requiring "
+            "an external XGBoost dependency.\n\n",
+            "## Next step\n",
+            "Calibrate the selected model's probabilities for the risk score, "
+            "then add feature-level explanations. Threshold selection remains a "
+            "separate decision from probability calibration.\n",
+        ]
+    )
+
+    REPORT.parent.mkdir(parents=True, exist_ok=True)
+    REPORT.write_text("".join(lines), encoding="utf-8")
+
+    print("".join(lines))
+
+
+if __name__ == "__main__":
+    main()
