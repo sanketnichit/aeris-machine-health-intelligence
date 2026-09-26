@@ -1,5 +1,10 @@
 # AERIS 90-Second Demo Script
 
+## Demo setup
+
+Use the Streamlit console after placing the AI4I CSV at `data/ai4i2020.csv`. The UI uses the same canonical model builders as the offline evaluation.
+
+
 ## 0-10 seconds — problem
 
 Say:
@@ -31,6 +36,8 @@ Point to:
 - derived engineering signals
 
 For the current v1 model, this observation scores about **93.1%** risk.
+
+Do not present this as a real-world failure probability; it is a benchmark-calibrated model score.
 
 Say:
 
@@ -72,3 +79,5 @@ For a low-risk demonstration:
 - Derived mechanical power: **5.4 kW**
 
 This observation is also from the untouched test partition, is labelled non-failure in the benchmark, and scores about **0.07%** risk with the current v1 model.
+
+Use the backup example only if the first example does not produce the intended UI state.
