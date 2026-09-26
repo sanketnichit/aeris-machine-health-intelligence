@@ -1,9 +1,7 @@
 """
 AERIS - Machine Health Intelligence
 Focused Streamlit engineering console.
-
-Run:
-    streamlit run app.py
+Run: streamlit run app.py
 """
 from __future__ import annotations
 
@@ -20,7 +18,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
-
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "ai4i2020.csv"
 
@@ -33,6 +30,9 @@ FEATURES = [
     "Tool wear [min]",
 ]
 MODES = ["HDF", "PWF", "OSF"]
+RISK_THRESHOLD = 0.50
+MODEL_PR_AUC = 0.849
+MODEL_F1 = 0.820
 
 
 def build_preprocessor() -> ColumnTransformer:
@@ -50,6 +50,10 @@ def build_preprocessor() -> ColumnTransformer:
 
 @st.cache_data
 def load_data() -> pd.DataFrame:
+    if not DATA_PATH.exists():
+        raise FileNotFoundError(
+            "AI4I dataset not found. Place ai4i2020.csv in data/."
+        )
     return pd.read_csv(DATA_PATH)
 
 
@@ -59,7 +63,7 @@ def train_models():
     X = df[FEATURES]
     y = df["Machine failure"]
 
-    X_train, X_test, y_train, y_test = train_test_split(
+    X_train, _, y_train, _ = train_test_split(
         X,
         y,
         test_size=0.20,
@@ -91,7 +95,6 @@ def train_models():
     )
     risk_model.fit(X_train, y_train)
 
-    # Separate tree model for SHAP explanations.
     explainer_pre = build_preprocessor()
     X_train_t = explainer_pre.fit_transform(X_train, y_train)
 
@@ -106,8 +109,7 @@ def train_models():
 
     mode_models = {}
     for mode in MODES:
-        mode_target = mode
-        m = Pipeline(
+        mode_model = Pipeline(
             [
                 ("preprocessor", build_preprocessor()),
                 (
@@ -123,18 +125,23 @@ def train_models():
                 ),
             ]
         )
-        m.fit(X_train, df.loc[X_train.index, mode_target])
-        mode_models[mode] = m
+        mode_model.fit(X_train, df.loc[X_train.index, mode])
+        mode_models[mode] = mode_model
 
     return risk_model, explainer_pre, explain_model, mode_models
 
 
-def risk_label(risk: float) -> tuple[str, str]:
-    if risk >= 0.5:
-        return "HIGH RISK", "The model predicts the positive failure class."
-    if risk >= 0.2:
-        return "ELEVATED", "The model sees a meaningful increase in failure risk."
-    return "LOWER RISK", "The model does not cross the current failure threshold."
+def risk_state(risk: float) -> tuple[str, str]:
+    if risk >= 0.50:
+        return "HIGH RISK", "Threshold crossed"
+    if risk >= 0.20:
+        return "ELEVATED", "Screening signal"
+    return "LOWER", "Below threshold"
+
+
+@st.cache_resource
+def get_shap_explainer(model: HistGradientBoostingClassifier):
+    return shap.TreeExplainer(model)
 
 
 def local_shap(
@@ -143,22 +150,21 @@ def local_shap(
     row: pd.DataFrame,
 ) -> pd.DataFrame:
     transformed = preprocessor.transform(row)
-    explainer = shap.TreeExplainer(tree_model)
-    values = explainer.shap_values(transformed)
-
+    explainer = get_shap_explainer(tree_model)
+    values = np.asarray(explainer.shap_values(transformed)).reshape(-1)
     names = preprocessor.get_feature_names_out()
-    values = np.asarray(values).reshape(-1)
 
     rows: list[tuple[str, float]] = []
     type_total = 0.0
+
     for name, value in zip(names, values):
         if name.startswith("categorical__Type_"):
             type_total += float(value)
         else:
-            clean = name.replace("numeric__", "")
-            rows.append((clean, float(value)))
+            rows.append((name.replace("numeric__", ""), float(value)))
 
     rows.append(("Machine type", type_total))
+
     return (
         pd.DataFrame(rows, columns=["Feature", "SHAP value"])
         .assign(abs_value=lambda d: d["SHAP value"].abs())
@@ -167,37 +173,88 @@ def local_shap(
 
 
 st.set_page_config(
-    page_title="AERIS — Machine Health Intelligence",
+    page_title="AERIS | Machine Health Intelligence",
     page_icon="⚙️",
     layout="wide",
+    initial_sidebar_state="expanded",
 )
 
-st.title("⚙️ AERIS — Machine Health Intelligence")
-st.caption(
-    "Explainable machine-failure detection and risk scoring using the AI4I 2020 benchmark."
+st.markdown(
+    """
+    <style>
+        .main-title { font-size: 2.3rem; font-weight: 750; margin-bottom: 0.15rem; }
+        .subtitle { color: #6b7280; font-size: 1rem; margin-bottom: 1.2rem; }
+        .section-label {
+            font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.10em;
+            color: #6b7280; font-weight: 700;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
 )
 
-st.info(
-    "This is a portfolio/research prototype using public benchmark data. "
-    "The score is a calibrated model estimate, not a production maintenance decision."
+st.markdown(
+    '<div class="main-title">⚙️ AERIS — Machine Health Intelligence</div>',
+    unsafe_allow_html=True,
 )
-
-risk_model, explainer_pre, explain_model, mode_models = train_models()
+st.markdown(
+    '<div class="subtitle">Explainable fault detection and calibrated failure-risk scoring for the AI4I 2020 benchmark.</div>',
+    unsafe_allow_html=True,
+)
 
 with st.sidebar:
-    st.header("Machine operating state")
-    machine_type = st.selectbox("Machine type", ["L", "M", "H"])
-    air_temp = st.number_input("Air temperature [K]", 295.0, 305.0, 298.0, 0.1)
+    st.markdown(
+        '<div class="section-label">Machine operating state</div>',
+        unsafe_allow_html=True,
+    )
+    st.caption("Enter one machine observation to inspect the model response.")
+
+    machine_type = st.selectbox(
+        "Product type",
+        ["L", "M", "H"],
+        index=1,
+        help="AI4I product-type category.",
+    )
+    air_temp = st.number_input(
+        "Air temperature [K]",
+        min_value=295.0,
+        max_value=305.0,
+        value=298.0,
+        step=0.1,
+    )
     process_temp = st.number_input(
         "Process temperature [K]",
-        300.0,
-        315.0,
-        308.0,
-        0.1,
+        min_value=300.0,
+        max_value=315.0,
+        value=308.0,
+        step=0.1,
     )
-    rpm = st.number_input("Rotational speed [rpm]", 800, 3000, 1500, 1)
-    torque = st.number_input("Torque [Nm]", 1.0, 80.0, 40.0, 0.1)
-    tool_wear = st.number_input("Tool wear [min]", 0, 300, 100, 1)
+    rpm = st.number_input(
+        "Rotational speed [rpm]",
+        min_value=800,
+        max_value=3000,
+        value=1500,
+        step=1,
+    )
+    torque = st.number_input(
+        "Torque [Nm]",
+        min_value=1.0,
+        max_value=80.0,
+        value=40.0,
+        step=0.1,
+    )
+    tool_wear = st.number_input(
+        "Tool wear [min]",
+        min_value=0,
+        max_value=300,
+        value=100,
+        step=1,
+    )
+
+    st.divider()
+    st.caption(
+        "HistGradientBoosting + sigmoid calibration · Primary metric: PR-AUC"
+    )
 
 row = pd.DataFrame(
     [
@@ -212,59 +269,102 @@ row = pd.DataFrame(
     ]
 )
 
+try:
+    risk_model, explainer_pre, explain_model, mode_models = train_models()
+except FileNotFoundError as exc:
+    st.error(str(exc))
+    st.stop()
+
 risk = float(risk_model.predict_proba(row)[0, 1])
-label, detail = risk_label(risk)
+label, _ = risk_state(risk)
+temp_delta = process_temp - air_temp
 
-c1, c2, c3 = st.columns(3)
-c1.metric("Failure risk", f"{risk * 100:.1f}%")
-c2.metric("Predicted state", label)
-c3.metric("Temperature delta", f"{process_temp - air_temp:.1f} K")
+k1, k2, k3, k4 = st.columns(4)
+k1.metric("Failure risk", f"{risk * 100:.1f}%")
+k2.metric("Current state", label)
+k3.metric("Temp delta", f"{temp_delta:.1f} K")
+k4.metric("Alert threshold", f"{RISK_THRESHOLD * 100:.0f}%")
 
-st.caption(detail)
+st.progress(min(max(risk, 0.0), 1.0))
 
-left, right = st.columns(2)
+if risk >= RISK_THRESHOLD:
+    st.error(
+        "⚠️ **Threshold crossed.** The model flags this operating state for further inspection."
+    )
+elif risk >= 0.20:
+    st.warning(
+        "🟡 **Elevated model risk.** Treat this as a screening signal, not a diagnosis."
+    )
+else:
+    st.success(
+        "🟢 **Below the current threshold.** This does not guarantee the machine is healthy."
+    )
+
+left, right = st.columns([1.45, 1])
 
 with left:
-    st.subheader("Why did the model score this observation this way?")
-    explanation = local_shap(explainer_pre, explain_model, row).head(6)
-    chart = explanation.set_index("Feature")["SHAP value"]
-    st.bar_chart(chart)
+    st.subheader("Why did the model score it this way?")
+    explanation = local_shap(explainer_pre, explain_model, row).head(5)
+    st.bar_chart(
+        explanation.set_index("Feature")["SHAP value"],
+        height=300,
+    )
     st.caption(
-        "Positive SHAP values push the underlying tree model toward failure; "
-        "negative values push it toward non-failure. SHAP explains model behaviour, "
-        "not physical causality."
+        "Positive values push the underlying tree model toward failure; negative values "
+        "push it toward non-failure. SHAP explains model behaviour, not physical causality."
     )
 
 with right:
     st.subheader("Failure-mode attribution")
-    mode_values = {}
+
+    mode_rows = []
     for mode, model in mode_models.items():
-        mode_values[mode] = float(model.predict_proba(row)[0, 1])
+        score = float(model.predict_proba(row)[0, 1])
+        mode_rows.append({"Mode": mode, "Model score": score})
 
-    mode_frame = pd.DataFrame(
-        {"Estimated mode likelihood": mode_values}
+    mode_frame = pd.DataFrame(mode_rows)
+    st.dataframe(
+        mode_frame.style.format({"Model score": "{:.1%}"}),
+        use_container_width=True,
+        hide_index=True,
     )
-    st.bar_chart(mode_frame)
-
     st.caption(
-        "HDF, PWF and OSF are the modes promoted into v1. The underlying dataset "
-        "permits overlapping mode labels, so this panel reports separate scores "
-        "rather than claiming one unique root cause."
+        "HDF, PWF and OSF are separate mode scores. Source labels can overlap, "
+        "so AERIS does not claim one unique physical root cause."
     )
 
 st.divider()
-st.subheader("AERIS interpretation")
 
-if risk >= 0.5:
-    st.error(
-        "⚠️ The model crosses the current failure decision threshold. "
-        "Inspect the contributing features before treating this as an engineering alert."
+with st.expander("Model quality & scope"):
+    q1, q2, q3, q4 = st.columns(4)
+    q1.metric("PR-AUC", f"{MODEL_PR_AUC:.3f}")
+    q2.metric("F1 @ 0.50", f"{MODEL_F1:.3f}")
+    q3.metric("Dataset", "AI4I 2020")
+    q4.metric("Failures", "3.39%")
+
+    st.markdown(
+        """
+        **Important context**
+
+        AERIS uses the synthetic AI4I 2020 benchmark as a controlled predictive-maintenance
+        experiment. The risk score is calibrated for this benchmark and should not be treated
+        as a production maintenance probability or as evidence about any specific real-world fleet.
+        """
     )
-elif risk >= 0.2:
-    st.warning(
-        "🟡 The model sees elevated risk. This is a screening signal, not a diagnosis."
-    )
-else:
-    st.success(
-        "🟢 The model does not cross the current failure threshold for this operating state."
+
+with st.expander("Engineering notes"):
+    st.markdown(
+        """
+        **Feature set:** product type, air/process temperature, rotational speed,
+        torque and tool wear.
+
+        **Excluded from prediction:** UDI, Product ID and failure-mode target flags,
+        because they would introduce identifier/label leakage.
+
+        **Primary evaluation:** PR-AUC, with precision, recall and F1 reported because
+        failures are rare.
+
+        **Future extensions:** C-MAPSS/RUL, temporal degradation modelling,
+        counterfactual analysis and real industrial time-series validation.
+        """
     )
