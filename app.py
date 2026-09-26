@@ -3,6 +3,7 @@ AERIS - Machine Health Intelligence
 Focused Streamlit engineering console.
 Run: streamlit run app.py
 """
+
 from __future__ import annotations
 
 from pathlib import Path
@@ -18,10 +19,13 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
+from src.features import DERIVED_FEATURES, MODEL_FEATURES, add_engineered_features
+
+
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "ai4i2020.csv"
 
-FEATURES = [
+RAW_FEATURES = [
     "Type",
     "Air temperature [K]",
     "Process temperature [K]",
@@ -31,8 +35,11 @@ FEATURES = [
 ]
 MODES = ["HDF", "PWF", "OSF"]
 RISK_THRESHOLD = 0.50
-MODEL_PR_AUC = 0.849
-MODEL_F1 = 0.820
+
+# Primary seed-42 held-out evaluation for the current engineered-feature model.
+MODEL_PR_AUC = 0.899
+MODEL_F1 = 0.880
+MODEL_BRIER = 0.0075
 
 
 def build_preprocessor() -> ColumnTransformer:
@@ -40,10 +47,13 @@ def build_preprocessor() -> ColumnTransformer:
         [
             (
                 "categorical",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
+                OneHotEncoder(
+                    handle_unknown="ignore",
+                    sparse_output=False,
+                ),
                 ["Type"],
             ),
-            ("numeric", "passthrough", FEATURES[1:]),
+            ("numeric", "passthrough", MODEL_FEATURES[1:]),
         ]
     )
 
@@ -59,8 +69,10 @@ def load_data() -> pd.DataFrame:
 
 @st.cache_resource
 def train_models():
-    df = load_data()
-    X = df[FEATURES]
+    raw = load_data()
+    df = add_engineered_features(raw)
+
+    X = df[MODEL_FEATURES]
     y = df["Machine failure"]
 
     X_train, _, y_train, _ = train_test_split(
@@ -128,11 +140,16 @@ def train_models():
         mode_model.fit(X_train, df.loc[X_train.index, mode])
         mode_models[mode] = mode_model
 
-    return risk_model, explainer_pre, explain_model, mode_models
+    return (
+        risk_model,
+        explainer_pre,
+        explain_model,
+        mode_models,
+    )
 
 
 def risk_state(risk: float) -> tuple[str, str]:
-    if risk >= 0.50:
+    if risk >= RISK_THRESHOLD:
         return "HIGH RISK", "Threshold crossed"
     if risk >= 0.20:
         return "ELEVATED", "Screening signal"
@@ -161,7 +178,12 @@ def local_shap(
         if name.startswith("categorical__Type_"):
             type_total += float(value)
         else:
-            rows.append((name.replace("numeric__", ""), float(value)))
+            rows.append(
+                (
+                    name.replace("numeric__", ""),
+                    float(value),
+                )
+            )
 
     rows.append(("Machine type", type_total))
 
@@ -185,8 +207,11 @@ st.markdown(
         .main-title { font-size: 2.3rem; font-weight: 750; margin-bottom: 0.15rem; }
         .subtitle { color: #6b7280; font-size: 1rem; margin-bottom: 1.2rem; }
         .section-label {
-            font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.10em;
-            color: #6b7280; font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.10em;
+            color: #6b7280;
+            font-weight: 700;
         }
     </style>
     """,
@@ -207,7 +232,10 @@ with st.sidebar:
         '<div class="section-label">Machine operating state</div>',
         unsafe_allow_html=True,
     )
-    st.caption("Enter one machine observation to inspect the model response.")
+    st.caption(
+        "Enter one machine observation. AERIS derives two engineering features "
+        "before scoring the state."
+    )
 
     machine_type = st.selectbox(
         "Product type",
@@ -256,7 +284,7 @@ with st.sidebar:
         "HistGradientBoosting + sigmoid calibration · Primary metric: PR-AUC"
     )
 
-row = pd.DataFrame(
+raw_row = pd.DataFrame(
     [
         {
             "Type": machine_type,
@@ -269,21 +297,49 @@ row = pd.DataFrame(
     ]
 )
 
+# The app stores raw user inputs in source-column names, then uses the same
+# deterministic feature engineering as the offline training pipeline.
+scored_row = add_engineered_features(
+    raw_row.rename(
+        columns={
+            "Type": "type",
+            "Air temperature [K]": "air_temp_k",
+            "Process temperature [K]": "process_temp_k",
+            "Rotational speed [rpm]": "rot_speed_rpm",
+            "Torque [Nm]": "torque_nm",
+            "Tool wear [min]": "tool_wear_min",
+        }
+    )
+)
+
+app_row = scored_row.rename(
+    columns={
+        "type": "Type",
+        "air_temp_k": "Air temperature [K]",
+        "process_temp_k": "Process temperature [K]",
+        "rot_speed_rpm": "Rotational speed [rpm]",
+        "torque_nm": "Torque [Nm]",
+        "tool_wear_min": "Tool wear [min]",
+    }
+)[MODEL_FEATURES]
+
 try:
     risk_model, explainer_pre, explain_model, mode_models = train_models()
 except FileNotFoundError as exc:
     st.error(str(exc))
     st.stop()
 
-risk = float(risk_model.predict_proba(row)[0, 1])
+risk = float(risk_model.predict_proba(app_row)[0, 1])
 label, _ = risk_state(risk)
-temp_delta = process_temp - air_temp
+
+temp_delta = float(app_row["temp_delta_k"].iloc[0])
+mechanical_power = float(app_row["mechanical_power_kw"].iloc[0])
 
 k1, k2, k3, k4 = st.columns(4)
 k1.metric("Failure risk", f"{risk * 100:.1f}%")
 k2.metric("Current state", label)
 k3.metric("Temp delta", f"{temp_delta:.1f} K")
-k4.metric("Alert threshold", f"{RISK_THRESHOLD * 100:.0f}%")
+k4.metric("Mechanical power", f"{mechanical_power:.1f} kW")
 
 st.progress(min(max(risk, 0.0), 1.0))
 
@@ -304,14 +360,19 @@ left, right = st.columns([1.45, 1])
 
 with left:
     st.subheader("Why did the model score it this way?")
-    explanation = local_shap(explainer_pre, explain_model, row).head(5)
+    explanation = local_shap(
+        explainer_pre,
+        explain_model,
+        app_row,
+    ).head(5)
     st.bar_chart(
         explanation.set_index("Feature")["SHAP value"],
         height=300,
     )
     st.caption(
-        "Positive values push the underlying tree model toward failure; negative values "
-        "push it toward non-failure. SHAP explains model behaviour, not physical causality."
+        "Positive values push the underlying tree model toward failure; negative "
+        "values push it toward non-failure. SHAP explains model behaviour, not "
+        "physical causality."
     )
 
 with right:
@@ -319,7 +380,7 @@ with right:
 
     mode_rows = []
     for mode, model in mode_models.items():
-        score = float(model.predict_proba(row)[0, 1])
+        score = float(model.predict_proba(app_row)[0, 1])
         mode_rows.append({"Mode": mode, "Model score": score})
 
     mode_frame = pd.DataFrame(mode_rows)
@@ -335,34 +396,51 @@ with right:
 
 st.divider()
 
+with st.expander("Derived engineering features"):
+    st.markdown(
+        """
+        AERIS adds two deterministic features before prediction:
+
+        **Temperature delta** = process temperature − air temperature
+
+        **Mechanical power** = torque × rotational speed / 9549.2966
+
+        These are transformations of observed operating signals; they do not use
+        machine-failure labels or failure-mode flags.
+        """
+    )
+
 with st.expander("Model quality & scope"):
     q1, q2, q3, q4 = st.columns(4)
     q1.metric("PR-AUC", f"{MODEL_PR_AUC:.3f}")
     q2.metric("F1 @ 0.50", f"{MODEL_F1:.3f}")
-    q3.metric("Dataset", "AI4I 2020")
+    q3.metric("Brier", f"{MODEL_BRIER:.4f}")
     q4.metric("Failures", "3.39%")
 
     st.markdown(
         """
         **Important context**
 
-        AERIS uses the synthetic AI4I 2020 benchmark as a controlled predictive-maintenance
-        experiment. The risk score is calibrated for this benchmark and should not be treated
-        as a production maintenance probability or as evidence about any specific real-world fleet.
+        AERIS uses the synthetic AI4I 2020 benchmark as a controlled
+        predictive-maintenance experiment. The risk score is calibrated for this
+        benchmark and should not be treated as a production maintenance probability
+        or as evidence about any specific real-world fleet.
         """
     )
 
 with st.expander("Engineering notes"):
     st.markdown(
         """
-        **Feature set:** product type, air/process temperature, rotational speed,
+        **Raw inputs:** product type, air/process temperature, rotational speed,
         torque and tool wear.
+
+        **Derived inputs:** temperature delta and mechanical power.
 
         **Excluded from prediction:** UDI, Product ID and failure-mode target flags,
         because they would introduce identifier/label leakage.
 
-        **Primary evaluation:** PR-AUC, with precision, recall and F1 reported because
-        failures are rare.
+        **Primary evaluation:** PR-AUC, with precision, recall, F1 and Brier score
+        reported because failures are rare.
 
         **Future extensions:** C-MAPSS/RUL, temporal degradation modelling,
         counterfactual analysis and real industrial time-series validation.
