@@ -96,8 +96,14 @@ def train_models():
     return train_console_models(DATA_PATH, random_state=42)
 
 
-@st.cache_resource
 def get_shap_explainer(model: HistGradientBoostingClassifier):
+    """Build a local SHAP explainer for the already-cached canonical model.
+
+    Streamlit resource caching attempts to serialize function-bearing sklearn
+    objects on some environments. The canonical model bundle is already cached,
+    so caching the SHAP explainer separately adds little value and can make the
+    UI brittle across Python/runtime combinations.
+    """
     return shap.TreeExplainer(model)
 
 
