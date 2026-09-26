@@ -4,6 +4,8 @@
 
 **Explainable fault detection and calibrated failure-risk scoring for industrial equipment.**
 
+**Live demo:** https://aeris-machine-health-intelligence.streamlit.app/
+
 **Quick links:** [Model Card](docs/model_card.md) · [Engineering Decisions](docs/engineering_decisions.md) · [Reproducibility Audit](docs/reproducibility_audit.md) · [90-Second Demo](docs/demo_script.md) · [Runbook](RUNBOOK.md) · [Extended Validation](extended-validation/README.md)
 
 > AERIS is designed first as a small, auditable predictive-maintenance system. Portfolio presentation is secondary to getting the engineering and evaluation right.
