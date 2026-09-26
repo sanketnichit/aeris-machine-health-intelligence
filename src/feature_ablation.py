@@ -1,9 +1,6 @@
 from pathlib import Path
 
 import pandas as pd
-from sklearn.calibration import CalibratedClassifierCV
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import (
     average_precision_score,
     brier_score_loss,
@@ -12,11 +9,10 @@ from sklearn.metrics import (
     recall_score,
 )
 from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 from features import MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
+from models import build_calibrated_hgb, build_hgb_pipeline
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,32 +29,9 @@ RAW_FEATURES = [
 ENGINEERED_FEATURES = MODEL_FEATURES
 
 
-def build_model(features: list[str]) -> Pipeline:
-    pre = ColumnTransformer(
-        [
-            (
-                "categorical",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-                ["type"],
-            ),
-            ("numeric", "passthrough", features[1:]),
-        ]
-    )
-    return Pipeline(
-        [
-            ("preprocessor", pre),
-            (
-                "model",
-                HistGradientBoostingClassifier(
-                    max_iter=300,
-                    learning_rate=0.06,
-                    max_leaf_nodes=31,
-                    l2_regularization=1.0,
-                    random_state=42,
-                ),
-            ),
-        ]
-    )
+def build_model(features: list[str]):
+    """Build the canonical HGB architecture for the selected feature contract."""
+    return build_hgb_pipeline(features)
 
 
 def evaluate(
@@ -83,11 +56,11 @@ def evaluate(
         n_jobs=-1,
     )
 
-    calibrated = CalibratedClassifierCV(
-        build_model(features),
-        method="sigmoid",
+    calibrated = build_calibrated_hgb(
+        calibration_method="sigmoid",
         cv=5,
         n_jobs=-1,
+        features=features,
     ).fit(X_train, y_train)
 
     probability = calibrated.predict_proba(X_test)[:, 1]
