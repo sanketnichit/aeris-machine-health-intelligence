@@ -93,7 +93,8 @@ aeris-machine-health-intelligence/
 │   ├── error_analysis.py
 │   ├── feature_stability.py
 │   ├── calibration_audit.py
-│   └── feature_ablation.py
+│   ├── feature_ablation.py
+│   └── models.py
 ├── reports/
 │   ├── data_validation.md
 │   ├── model_comparison.md
@@ -116,7 +117,8 @@ aeris-machine-health-intelligence/
 └── tests/
     ├── test_data_contract.py
     ├── test_features.py
-    └── test_model_smoke.py
+    ├── test_model_smoke.py
+    └── test_models.py
 ```
 
 ## Current status
@@ -142,6 +144,7 @@ aeris-machine-health-intelligence/
 - [x] Feature-importance stability audit
 - [x] Subgroup/risk-bin calibration audit
 - [x] Model pipeline smoke test
+- [x] Shared model-architecture contract tests
 - [x] Engineering-feature unit test
 - [x] Data-contract tests + CI
 
