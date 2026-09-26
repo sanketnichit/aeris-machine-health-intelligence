@@ -19,7 +19,8 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
-from src.features import DERIVED_FEATURES, MODEL_FEATURES, add_engineered_features
+from src.features import MODEL_FEATURES, add_engineered_features
+from src.load_data import RENAME_MAP
 
 
 ROOT = Path(__file__).resolve().parent
@@ -51,7 +52,7 @@ def build_preprocessor() -> ColumnTransformer:
                     handle_unknown="ignore",
                     sparse_output=False,
                 ),
-                ["Type"],
+                ["type"],
             ),
             ("numeric", "passthrough", MODEL_FEATURES[1:]),
         ]
@@ -64,7 +65,7 @@ def load_data() -> pd.DataFrame:
         raise FileNotFoundError(
             "AI4I dataset not found. Place ai4i2020.csv in data/."
         )
-    return pd.read_csv(DATA_PATH)
+    return pd.read_csv(DATA_PATH, encoding="utf-8-sig").rename(columns=RENAME_MAP)
 
 
 @st.cache_resource
@@ -287,41 +288,18 @@ with st.sidebar:
 raw_row = pd.DataFrame(
     [
         {
-            "Type": machine_type,
-            "Air temperature [K]": air_temp,
-            "Process temperature [K]": process_temp,
-            "Rotational speed [rpm]": rpm,
-            "Torque [Nm]": torque,
-            "Tool wear [min]": tool_wear,
+            "type": machine_type,
+            "air_temp_k": air_temp,
+            "process_temp_k": process_temp,
+            "rot_speed_rpm": rpm,
+            "torque_nm": torque,
+            "tool_wear_min": tool_wear,
         }
     ]
 )
 
-# The app stores raw user inputs in source-column names, then uses the same
-# deterministic feature engineering as the offline training pipeline.
-scored_row = add_engineered_features(
-    raw_row.rename(
-        columns={
-            "Type": "type",
-            "Air temperature [K]": "air_temp_k",
-            "Process temperature [K]": "process_temp_k",
-            "Rotational speed [rpm]": "rot_speed_rpm",
-            "Torque [Nm]": "torque_nm",
-            "Tool wear [min]": "tool_wear_min",
-        }
-    )
-)
-
-app_row = scored_row.rename(
-    columns={
-        "type": "Type",
-        "air_temp_k": "Air temperature [K]",
-        "process_temp_k": "Process temperature [K]",
-        "rot_speed_rpm": "Rotational speed [rpm]",
-        "torque_nm": "Torque [Nm]",
-        "tool_wear_min": "Tool wear [min]",
-    }
-)[MODEL_FEATURES]
+# Use exactly the same deterministic feature engineering as the offline pipeline.
+app_row = add_engineered_features(raw_row)[MODEL_FEATURES]
 
 try:
     risk_model, explainer_pre, explain_model, mode_models = train_models()
