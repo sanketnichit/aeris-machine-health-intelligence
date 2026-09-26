@@ -7,9 +7,6 @@ measurement. It is evaluated on a final held-out test set.
 from pathlib import Path
 
 import pandas as pd
-from sklearn.calibration import CalibratedClassifierCV
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import (
     average_precision_score,
     brier_score_loss,
@@ -18,10 +15,9 @@ from sklearn.metrics import (
     recall_score,
 )
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 from features import MODEL_FEATURES, add_engineered_features
+from models import build_calibrated_hgb
 from load_data import load_raw
 
 
@@ -44,39 +40,7 @@ def main() -> None:
         stratify=y,
     )
 
-    preprocessor = ColumnTransformer(
-        transformers=[
-            (
-                "categorical",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-                ["type"],
-            ),
-            ("numeric", "passthrough", FEATURES[1:]),
-        ]
-    )
-
-    base_model = Pipeline(
-        steps=[
-            ("preprocessor", preprocessor),
-            (
-                "model",
-                HistGradientBoostingClassifier(
-                    max_iter=300,
-                    learning_rate=0.06,
-                    max_leaf_nodes=31,
-                    l2_regularization=1.0,
-                    random_state=42,
-                ),
-            ),
-        ]
-    )
-
-    calibrated = CalibratedClassifierCV(
-        base_model,
-        method="sigmoid",
-        cv=5,
-        n_jobs=-1,
-    )
+    calibrated = build_calibrated_hgb(cv=5, n_jobs=-1)
 
     calibrated.fit(X_train, y_train)
 
