@@ -73,7 +73,11 @@ HDF, PWF and OSF show enough cross-validated signal to expose as separate mode l
 
 The very strong HDF benchmark result is not presented as evidence of physical root-cause understanding.
 
-## 10. Uncertainty, calibration and feature stability
+## 10. Console architecture
+
+The Streamlit console trains through `src/console_models.py`, which reuses the canonical model builders from `src/models.py`. The risk model, explanation tree and failure-mode models therefore share the same feature contract and documented architecture instead of having separate UI-only implementations. A runtime test exercises the bundle on a temporary benchmark-shaped dataset.
+
+## 11. Uncertainty, calibration and feature stability
 
 AERIS reports uncertainty around held-out metrics with stratified bootstrap intervals and checks the fixed model across five independent stratified splits. The primary seed-42 evaluation remains the headline result for consistency.
 
@@ -85,7 +89,7 @@ AERIS also checks:
 
 These checks are descriptive robustness audits, not additional tuning loops.
 
-## 11. What would make v2 stronger?
+## 12. What would make v2 stronger?
 
 The highest-value next datasets are real industrial time-series sources such as UCI MetroPT-3, followed by C-MAPSS for temporal degradation/RUL work.
 
