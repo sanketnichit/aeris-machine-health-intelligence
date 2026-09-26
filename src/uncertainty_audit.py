@@ -16,20 +16,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
+from features import MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
 
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "uncertainty_audit.md"
 
-FEATURES = [
-    "type",
-    "air_temp_k",
-    "process_temp_k",
-    "rot_speed_rpm",
-    "torque_nm",
-    "tool_wear_min",
-]
+FEATURES = MODEL_FEATURES
 
 RNG_SEED = 20260926
 N_BOOTSTRAP = 3000
@@ -104,7 +98,7 @@ def ci(values: np.ndarray) -> tuple[float, float]:
 
 
 def main() -> None:
-    df = load_raw()
+    df = add_engineered_features(load_raw())
     X = df[FEATURES]
     y = df["machine_failure"]
 
