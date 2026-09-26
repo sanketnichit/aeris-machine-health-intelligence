@@ -6,7 +6,10 @@ from pathlib import Path
 
 import pandas as pd
 
-from load_data import load_raw
+try:
+    from .load_data import load_raw
+except ImportError:  # direct script execution from src/
+    from load_data import load_raw
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 REPORT_PATH = PROJECT_ROOT / "reports" / "data_validation.md"
