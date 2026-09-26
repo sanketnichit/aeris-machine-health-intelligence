@@ -8,9 +8,9 @@ AERIS is a focused predictive-maintenance project built around the **AI4I 2020 P
 
 ### Core
 1. **Fault detection** — classify whether a machine observation indicates failure.
-2. **Failure-mode classification** — for predicted failures, identify the most likely failure mode.
-3. **Risk scoring + explanation** — estimate failure risk and explain which features contributed most to the prediction.
-4. **One engineering visualization** — a compact Machine Health Console for inspecting predictions and contributing factors.
+2. **Risk scoring + explanation** — produce a calibrated failure-risk score and explain the prediction using model-derived feature importance.
+3. **One engineering visualization** — a compact Machine Health Console for inspecting risk, predicted state and contributing factors.
+4. **Failure-mode attribution (secondary)** — show multi-label likelihoods for HDF, PWF and OSF only; sparse/unstable TWF and RNF are explicitly deferred.
 
 ### Explicitly out of scope for v1
 - Remaining-useful-life (RUL) modelling
@@ -36,7 +36,7 @@ The dataset contains 10,000 machine observations with process variables, product
 
 C-MAPSS is a stronger benchmark for temporal degradation and RUL prediction, but it introduces substantially more sequence-processing and evaluation complexity. AERIS uses AI4I for v1 so the project can establish a trustworthy detection → classification → explanation pipeline first.
 
-C-MAPSS/RUL is deliberately reserved for future work.
+C-MAPSS/RUL is deliberately reserved for future work. AI4I is synthetic, so its results are a controlled benchmark, not evidence about a real machine fleet.
 
 ## Data validation
 
@@ -76,23 +76,25 @@ aeris-machine-health-intelligence/
 - [x] Data validation
 - [x] Class-balance analysis
 - [x] Exploratory data analysis
-- [x] Binary failure-detection baseline
-- [ ] Imbalance-aware model comparison
-- [ ] Failure-mode classifier
-- [x] First-pass feature importance
+- [x] Binary Random Forest baseline
+- [x] 3-model comparison with held-out test set
+- [x] HistGradientBoosting selected for v1
+- [x] Sigmoid-calibrated risk model
+- [x] Failure-mode feasibility analysis
+- [ ] Final feature explanations (permutation importance → SHAP)
 - [ ] Machine Health Console
 
 ## Planned modelling sequence
 
 The project will be built in the following order:
 
-1. Get **one Random Forest binary classifier** working end-to-end.
-2. Measure precision, recall, F1 and PR-AUC.
-3. Add a second/third model only after the baseline is trustworthy.
-4. Add the failure-mode classification stage.
-5. Add simple feature-importance explanations first.
-6. Upgrade to SHAP only after the core pipeline is stable.
-7. Add calibration as optional polish if time permits.
+1. Get one complete baseline model working end-to-end.
+2. Compare model families using stratified cross-validation on the training set.
+3. Select HistGradientBoosting based on cross-validated PR-AUC and held-out behaviour.
+4. Calibrate the selected model's probabilities for the risk score.
+5. Add feature-level explanations; start with permutation importance, then SHAP.
+6. Add the secondary multi-label failure-mode attribution layer only where the data supports it.
+7. Build one focused visualization.
 
 ## Running the current pipeline
 
