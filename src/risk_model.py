@@ -21,24 +21,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
+from features import MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
 
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "risk_model.md"
 
-FEATURES = [
-    "type",
-    "air_temp_k",
-    "process_temp_k",
-    "rot_speed_rpm",
-    "torque_nm",
-    "tool_wear_min",
-]
+FEATURES = MODEL_FEATURES
 
 
 def main() -> None:
-    df = load_raw()
+    df = add_engineered_features(load_raw())
     X = df[FEATURES]
     y = df["machine_failure"]
 
@@ -100,7 +94,8 @@ def main() -> None:
     lines = [
         "# AERIS Risk Model\n\n",
         "## Model\n",
-        "HistGradientBoostingClassifier with sigmoid probability calibration "
+        "HistGradientBoostingClassifier with deterministic engineering-derived " 
+        "features and sigmoid probability calibration "
         "using 5-fold cross-validation on the training set.\n\n",
         "## Held-out test results\n",
         f"- Precision @ 0.50: **{precision:.3f}**\n",
