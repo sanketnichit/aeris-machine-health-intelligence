@@ -87,7 +87,7 @@ For the same seed-42 held-out evaluation:
 - Sigmoid Brier: 0.007521
 - Isotonic Brier: 0.007416
 
-Sigmoid remains the v1 mapping because it is simpler and less flexible for this small positive class while preserving essentially the same ranking behaviour.
+Sigmoid remains the v1 mapping because it is simpler and less flexible for this small positive class.
 
 ## Secondary robustness reproduction
 
