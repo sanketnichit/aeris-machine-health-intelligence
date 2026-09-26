@@ -12,7 +12,10 @@ from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
-from features import MODEL_FEATURES
+try:
+    from .features import MODEL_FEATURES
+except ImportError:  # direct script execution from src/
+    from features import MODEL_FEATURES
 
 
 HGB_PARAMS = {
