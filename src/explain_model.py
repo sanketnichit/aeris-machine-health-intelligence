@@ -115,14 +115,13 @@ def main() -> None:
     lines = [
         "# AERIS Explainability\n\n",
         "## Global feature importance: permutation importance\n\n",
-        "| Feature | Mean AP decrease | Std |\n",
-        "|---|---:|---:|\n",
+        "| Feature | Mean AP decrease |\n",
+        "|---|---:|\n",
     ]
 
     for _, row in permutation_df.iterrows():
         lines.append(
-            f"| {row['feature']} | {row['importance_mean']:.4f} | "
-            f"{row['importance_std']:.4f} |\n"
+            f"| {row['feature']} | {row['importance_mean']:.4f} |\n"
         )
 
     lines.extend(
