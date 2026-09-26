@@ -10,7 +10,7 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_split
 
-from features import MODEL_FEATURES, add_engineered_features
+from features import BASE_FEATURES, MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
 from models import build_calibrated_hgb, build_hgb_pipeline
 
@@ -18,14 +18,7 @@ from models import build_calibrated_hgb, build_hgb_pipeline
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "feature_ablation.md"
 
-RAW_FEATURES = [
-    "type",
-    "air_temp_k",
-    "process_temp_k",
-    "rot_speed_rpm",
-    "torque_nm",
-    "tool_wear_min",
-]
+RAW_FEATURES = BASE_FEATURES
 ENGINEERED_FEATURES = MODEL_FEATURES
 
 
