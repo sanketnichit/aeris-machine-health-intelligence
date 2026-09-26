@@ -1,9 +1,6 @@
 from pathlib import Path
 
 import pandas as pd
-from sklearn.calibration import CalibratedClassifierCV
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import (
     average_precision_score,
     brier_score_loss,
@@ -12,10 +9,9 @@ from sklearn.metrics import (
     recall_score,
 )
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 from features import MODEL_FEATURES, add_engineered_features
+from models import build_calibrated_hgb
 from load_data import load_raw
 
 
@@ -34,34 +30,7 @@ SEEDS = [42, 7, 21, 84, 123]
 THRESHOLD = 0.50
 
 
-def build_model() -> CalibratedClassifierCV:
-    pre = ColumnTransformer(
-        transformers=[
-            (
-                "categorical",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-                ["type"],
-            ),
-            ("numeric", "passthrough", FEATURES[1:]),
-        ]
-    )
-    base = Pipeline(
-        [
-            ("preprocessor", pre),
-            (
-                "model",
-                HistGradientBoostingClassifier(
-                    max_iter=300,
-                    learning_rate=0.06,
-                    max_leaf_nodes=31,
-                    l2_regularization=1.0,
-                    random_state=42,
-                ),
-            ),
-        ]
-    )
-    return CalibratedClassifierCV(base, method="sigmoid", cv=5, n_jobs=-1)
-
+build_model = build_calibrated_hgb
 
 def main() -> None:
     df = add_engineered_features(load_raw())
