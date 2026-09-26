@@ -1,8 +1,27 @@
 # AERIS — Machine Health Intelligence
 
+[![AERIS CI](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/workflows/ci.yml)
+
 **Explainable fault detection and calibrated failure-risk scoring for industrial equipment.**
 
+> **Portfolio focus:** a deliberately small predictive-maintenance system built to be auditable, reproducible and honest about uncertainty.
+
 AERIS is a focused predictive-maintenance project built around the **AI4I 2020 Predictive Maintenance Dataset**. The project intentionally prioritizes a small, auditable end-to-end ML pipeline over a large collection of loosely validated features.
+
+## At a glance
+
+| Area | AERIS v1 |
+|---|---|
+| Dataset | AI4I 2020 Predictive Maintenance (UCI) |
+| Problem | Binary machine-failure detection |
+| Risk layer | Sigmoid-calibrated HistGradientBoosting |
+| Primary metric | PR-AUC / average precision |
+| Explainability | Permutation importance + SHAP |
+| Secondary layer | HDF / PWF / OSF mode attribution |
+| Evaluation | Stratified 80/20 holdout + 5-fold training CV |
+| Robustness | Bootstrap, split sensitivity, calibration, error and feature-stability audits |
+| UI | Streamlit Machine Health Console |
+| Reproducibility | Pinned dependencies + documented audit |
 
 ## Project scope
 
@@ -64,6 +83,31 @@ These transformations use only observed inputs. They do not use machine-failure 
 
 The derived features materially improve the AI4I benchmark results, but the project treats that improvement cautiously because synthetic datasets can encode structured relationships between inputs and labels.
 
+## Architecture
+
+```mermaid
+flowchart LR
+    A[AI4I 2020 CSV] --> B[Data validation]
+    B --> C[Feature contract]
+    C --> D[6 observed inputs]
+    C --> E[2 engineered signals]
+    D --> F[Canonical HGB]
+    E --> F
+    F --> G[Sigmoid calibration]
+    G --> H[Failure-risk score]
+    F --> I[SHAP / model explanation]
+    C --> J[Failure-mode models]
+    H --> K[Streamlit console]
+    I --> K
+    J --> K
+    K --> L[Engineering review]
+    style A fill:#111827,color:#fff
+    style K fill:#0f766e,color:#fff
+    style L fill:#1d4ed8,color:#fff
+```
+
+The important architectural rule is that the **offline evaluation and Streamlit console share the same feature contract and model builders**. The console implementation lives in `src/console_models.py`; it does not maintain a separate UI-only model definition.
+
 ## Repository structure
 
 ```
@@ -120,6 +164,18 @@ aeris-machine-health-intelligence/
     ├── test_model_smoke.py
     └── test_models.py
 ```
+
+## Reviewer quick path
+
+A technical reviewer can follow the project in this order:
+
+1. `README.md` — scope, architecture and headline results.
+2. `docs/engineering_decisions.md` — why the design choices were made.
+3. `reports/risk_model.md` — primary evaluation and calibration.
+4. `reports/feature_ablation.md` — evidence for the engineered features.
+5. `reports/uncertainty_audit.md` and `reports/split_sensitivity.md` — robustness.
+6. `app.py` + `docs/demo_script.md` — live console and demonstration path.
+7. `docs/reproducibility_audit.md` — reproduction record.
 
 ## Current status
 
