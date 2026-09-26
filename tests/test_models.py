@@ -49,3 +49,12 @@ def test_canonical_mode_model_contract():
     model = pipe.named_steps["model"]
     assert model.get_params()["class_weight"] == MODE_HGB_PARAMS["class_weight"]
     assert model.get_params()["max_iter"] == MODE_HGB_PARAMS["max_iter"]
+
+
+def test_audits_use_canonical_engineered_features():
+    from src.error_analysis import FEATURES as ERROR_FEATURES
+    from src.features import MODEL_FEATURES
+    from src.split_sensitivity import FEATURES as SPLIT_FEATURES
+
+    assert ERROR_FEATURES == MODEL_FEATURES
+    assert SPLIT_FEATURES == MODEL_FEATURES
