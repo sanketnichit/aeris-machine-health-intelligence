@@ -33,6 +33,6 @@ HistGradientBoosting is the current model to carry forward. Random Forest is nea
 
 The derived features materially improve the benchmark model. This should be interpreted as a benchmark result, not proof that these two transformations are physically causal or sufficient for a real machine fleet. AI4I is synthetic, and its target generation can contain structured relationships between the operating variables and failure labels.
 
-## Next step
+## Downstream use
 
-Calibrate the selected model's probabilities for the risk score, then explain the prediction. Threshold selection remains a separate deployment decision from probability calibration.
+The selected HGB architecture is carried into the calibrated risk model, explainability workflow and Streamlit console. Threshold selection remains a separate deployment decision from probability calibration.
