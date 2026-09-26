@@ -151,6 +151,19 @@ aeris-machine-health-intelligence/
 
 The extended-validation directory contains additional robustness and study code that supports the project without making the minimum v1 pipeline look larger than it is.
 
+
+## Visual data checks
+
+A few compact EDA views are committed alongside the reports:
+
+![Class balance](figures/01_class_balance.svg)
+
+![Failure rate by product type](figures/02_failure_rate_by_type.svg)
+
+![Correlation matrix](figures/06_correlation_heatmap.svg)
+
+These figures are descriptive checks on the synthetic AI4I benchmark; they are not production-fleet evidence.
+
 ## Reviewer quick path
 
 A technical reviewer can follow the core project in this order:
