@@ -142,7 +142,7 @@ These values describe model behaviour and do not establish physical causality.
 
 ## CI verification
 
-The current repository source has been validated by GitHub Actions on Python 3.12.14 with the pinned dependency set. The latest validation run completed successfully with all repository tests passing.
+The repository CI is configured to compile the Python sources and run the full test suite on every push and pull request. Earlier validation runs completed successfully with the pinned dependency set.
 
 ## Reproduction boundary
 
