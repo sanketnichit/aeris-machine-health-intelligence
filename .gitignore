@@ -11,3 +11,6 @@ data/ai4i2020.csv
 
 # Generated local artifacts
 .streamlit/
+
+# Local persisted AERIS console model cache
+.aeris_cache/
