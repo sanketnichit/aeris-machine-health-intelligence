@@ -18,10 +18,10 @@ except ImportError:  # direct script execution from src/
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FIGURES_DIR = PROJECT_ROOT / "figures"
-FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
 
 def savefig(name: str) -> None:
+    FIGURES_DIR.mkdir(parents=True, exist_ok=True)
     plt.tight_layout()
     plt.savefig(FIGURES_DIR / f"{name}.png", dpi=140)
     plt.close()
