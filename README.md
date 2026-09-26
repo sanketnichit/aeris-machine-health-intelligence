@@ -4,6 +4,8 @@
 
 **Explainable fault detection and calibrated failure-risk scoring for industrial equipment.**
 
+**Quick links:** [Model Card](docs/model_card.md) · [Engineering Decisions](docs/engineering_decisions.md) · [Reproducibility Audit](docs/reproducibility_audit.md) · [90-Second Demo](docs/demo_script.md) · [Runbook](RUNBOOK.md)
+
 > **Portfolio focus:** a deliberately small predictive-maintenance system built to be auditable, reproducible and honest about uncertainty.
 
 AERIS is a focused predictive-maintenance project built around the **AI4I 2020 Predictive Maintenance Dataset**. The project intentionally prioritizes a small, auditable end-to-end ML pipeline over a large collection of loosely validated features.
@@ -138,7 +140,8 @@ aeris-machine-health-intelligence/
 │   ├── feature_stability.py
 │   ├── calibration_audit.py
 │   ├── feature_ablation.py
-│   └── models.py
+│   ├── models.py
+│   └── console_models.py
 ├── reports/
 │   ├── data_validation.md
 │   ├── model_comparison.md
@@ -156,13 +159,15 @@ aeris-machine-health-intelligence/
 ├── docs/
 │   ├── engineering_decisions.md
 │   ├── model_card.md
-│   └── demo_script.md
+│   ├── demo_script.md
+│   └── reproducibility_audit.md
 ├── figures/
 └── tests/
     ├── test_data_contract.py
     ├── test_features.py
     ├── test_model_smoke.py
-    └── test_models.py
+    ├── test_models.py
+    └── test_console_models.py
 ```
 
 ## Reviewer quick path
