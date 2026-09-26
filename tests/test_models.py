@@ -17,6 +17,19 @@ def test_canonical_preprocessor_contract():
     assert list(pre.transformers[0][2]) == ["type"]
 
 
+def test_preprocessor_supports_feature_override():
+    raw_features = [
+        "type",
+        "air_temp_k",
+        "process_temp_k",
+        "rot_speed_rpm",
+        "torque_nm",
+        "tool_wear_min",
+    ]
+    pre = build_preprocessor(raw_features)
+    assert list(pre.transformers[1][2]) == raw_features[1:]
+
+
 def test_canonical_hgb_pipeline_contract():
     pipe = build_hgb_pipeline()
     assert isinstance(pipe, Pipeline)
