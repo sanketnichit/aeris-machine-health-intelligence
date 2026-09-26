@@ -144,6 +144,7 @@ aeris-machine-health-intelligence/
 │   └── console_models.py
 ├── reports/
 │   ├── data_validation.md
+│   ├── baseline_metrics.md
 │   ├── model_comparison.md
 │   ├── risk_model.md
 │   ├── threshold_analysis.md
@@ -176,8 +177,9 @@ A technical reviewer can follow the project in this order:
 
 1. `README.md` — scope, architecture and headline results.
 2. `docs/engineering_decisions.md` — why the design choices were made.
-3. `reports/risk_model.md` — primary evaluation and calibration.
-4. `reports/feature_ablation.md` — evidence for the engineered features.
+3. `reports/baseline_metrics.md` — first raw-feature Random Forest baseline.
+4. `reports/risk_model.md` — primary evaluation and calibration.
+5. `reports/feature_ablation.md` — evidence for the engineered features.
 5. `reports/uncertainty_audit.md` and `reports/split_sensitivity.md` — robustness.
 6. `app.py` + `docs/demo_script.md` — live console and demonstration path.
 7. `docs/reproducibility_audit.md` — reproduction record.\n8. `docs/interview_walkthrough.md` + `docs/resume_bullets.md` — application-ready project framing.
