@@ -1,7 +1,9 @@
-pandas
-numpy
-matplotlib
-scikit-learn
-streamlit
-shap
-pytest
+# Direct dependencies pinned to the GitHub Actions environment used for the
+# reproducible AERIS v1 validation on 2026-09-26.
+pandas==3.0.6
+numpy==2.5.3
+matplotlib==3.11.2
+scikit-learn==1.9.1
+streamlit==1.64.0
+shap==0.52.0
+pytest==9.1.1
