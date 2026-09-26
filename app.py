@@ -15,21 +15,12 @@ import streamlit as st
 from sklearn.model_selection import train_test_split
 
 from src.features import MODEL_FEATURES, add_engineered_features
-from src.models import build_calibrated_hgb, build_mode_pipeline, build_preprocessor, build_hgb_pipeline
-from src.load_data import RENAME_MAP
+from src.console_models import train_console_models
 
 
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "ai4i2020.csv"
 
-RAW_FEATURES = [
-    "Type",
-    "Air temperature [K]",
-    "Process temperature [K]",
-    "Rotational speed [rpm]",
-    "Torque [Nm]",
-    "Tool wear [min]",
-]
 MODES = ["hdf", "pwf", "osf"]
 RISK_THRESHOLD = 0.50
 
@@ -46,6 +37,12 @@ def risk_state(risk: float) -> tuple[str, str]:
     if risk >= 0.20:
         return "ELEVATED", "Screening signal"
     return "LOWER", "Below threshold"
+
+
+@st.cache_resource
+def train_models():
+    """Train the UI model bundle using the canonical offline architecture."""
+    return train_console_models(DATA_PATH, random_state=42)
 
 
 @st.cache_resource
@@ -137,36 +134,36 @@ with st.sidebar:
     )
     air_temp = st.number_input(
         "Air temperature [K]",
-        min_value=295.0,
-        max_value=305.0,
+        min_value=295.3,
+        max_value=304.5,
         value=298.0,
         step=0.1,
     )
     process_temp = st.number_input(
         "Process temperature [K]",
-        min_value=300.0,
-        max_value=315.0,
+        min_value=305.7,
+        max_value=313.8,
         value=308.0,
         step=0.1,
     )
     rpm = st.number_input(
         "Rotational speed [rpm]",
-        min_value=800,
-        max_value=3000,
+        min_value=1168,
+        max_value=2886,
         value=1500,
         step=1,
     )
     torque = st.number_input(
         "Torque [Nm]",
-        min_value=1.0,
-        max_value=80.0,
+        min_value=3.8,
+        max_value=76.6,
         value=40.0,
         step=0.1,
     )
     tool_wear = st.number_input(
         "Tool wear [min]",
         min_value=0,
-        max_value=300,
+        max_value=253,
         value=100,
         step=1,
     )
@@ -174,6 +171,10 @@ with st.sidebar:
     st.divider()
     st.caption(
         "HistGradientBoosting + sigmoid calibration · Primary metric: PR-AUC"
+    )
+    st.caption(
+        "Input limits follow the observed AI4I benchmark ranges to keep the demo "
+        "inside the model's validated feature domain."
     )
 
 raw_row = pd.DataFrame(
