@@ -24,25 +24,23 @@ from sklearn.metrics import (
 )
 from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_split
 from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
+from features import MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
 
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "model_comparison.md"
 
-FEATURES = [
-    "type",
-    "air_temp_k",
-    "process_temp_k",
-    "rot_speed_rpm",
-    "torque_nm",
-    "tool_wear_min",
-]
+FEATURES = MODEL_FEATURES
 
 
-def build_preprocessor() -> ColumnTransformer:
+def build_preprocessor(scale_numeric: bool = False) -> ColumnTransformer:
+    numeric = "passthrough"
+    if scale_numeric:
+        numeric = Pipeline([("scaler", StandardScaler())])
+
     return ColumnTransformer(
         transformers=[
             (
@@ -50,17 +48,13 @@ def build_preprocessor() -> ColumnTransformer:
                 OneHotEncoder(handle_unknown="ignore", sparse_output=False),
                 ["type"],
             ),
-            (
-                "numeric",
-                "passthrough",
-                FEATURES[1:],
-            ),
+            ("numeric", numeric, FEATURES[1:]),
         ]
     )
 
 
 def main() -> None:
-    df = load_raw()
+    df = add_engineered_features(load_raw())
     X = df[FEATURES]
     y = df["machine_failure"]
 
@@ -99,7 +93,12 @@ def main() -> None:
     for name, model in models.items():
         pipeline = Pipeline(
             steps=[
-                ("preprocessor", build_preprocessor()),
+                (
+                    "preprocessor",
+                    build_preprocessor(
+                        scale_numeric=name == "Logistic Regression"
+                    ),
+                ),
                 ("model", model),
             ]
         )
