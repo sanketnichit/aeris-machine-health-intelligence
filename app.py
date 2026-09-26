@@ -28,12 +28,31 @@ MODEL_BRIER = 0.0075
 
 
 
+DEMO_PRESETS = {
+    "Held-out failure example": {
+        "type": "L",
+        "air_temp_k": 300.8,
+        "process_temp_k": 309.9,
+        "rot_speed_rpm": 1312,
+        "torque_nm": 65.3,
+        "tool_wear_min": 192,
+    },
+    "Held-out non-failure example": {
+        "type": "L",
+        "air_temp_k": 297.6,
+        "process_temp_k": 308.6,
+        "rot_speed_rpm": 1576,
+        "torque_nm": 32.7,
+        "tool_wear_min": 83,
+    },
+}
+
 def risk_state(risk: float) -> tuple[str, str]:
     if risk >= RISK_THRESHOLD:
         return "HIGH RISK", "Threshold crossed"
     if risk >= 0.20:
         return "ELEVATED", "Screening signal"
-    return "LOWER", "Below threshold"
+    return "LOWER RISK", "Below threshold"
 
 
 @st.cache_resource
@@ -115,6 +134,7 @@ st.markdown(
     '<div class="subtitle">Explainable fault detection and calibrated failure-risk scoring for the AI4I 2020 benchmark.</div>',
     unsafe_allow_html=True,
 )
+st.caption("Benchmark prototype · Seed-42 evaluation · PR-AUC is the primary metric")
 
 with st.sidebar:
     st.markdown(
@@ -126,46 +146,59 @@ with st.sidebar:
         "before scoring the state."
     )
 
+    preset = st.selectbox(
+        "Demo state",
+        ["Custom"] + list(DEMO_PRESETS),
+        help="Use a documented held-out benchmark example or enter a custom operating state.",
+    )
+
+    preset_values = DEMO_PRESETS.get(preset, {})
     machine_type = st.selectbox(
         "Product type",
         ["L", "M", "H"],
-        index=1,
+        index=["L", "M", "H"].index(preset_values.get("type", "M")),
+        disabled=preset != "Custom",
         help="AI4I product-type category.",
     )
     air_temp = st.number_input(
         "Air temperature [K]",
         min_value=295.3,
         max_value=304.5,
-        value=298.0,
+        value=float(preset_values.get("air_temp_k", 298.0)),
         step=0.1,
+        disabled=preset != "Custom",
     )
     process_temp = st.number_input(
         "Process temperature [K]",
         min_value=305.7,
         max_value=313.8,
-        value=308.0,
+        value=float(preset_values.get("process_temp_k", 308.0)),
         step=0.1,
+        disabled=preset != "Custom",
     )
     rpm = st.number_input(
         "Rotational speed [rpm]",
         min_value=1168,
         max_value=2886,
-        value=1500,
+        value=int(preset_values.get("rot_speed_rpm", 1500)),
         step=1,
+        disabled=preset != "Custom",
     )
     torque = st.number_input(
         "Torque [Nm]",
         min_value=3.8,
         max_value=76.6,
-        value=40.0,
+        value=float(preset_values.get("torque_nm", 40.0)),
         step=0.1,
+        disabled=preset != "Custom",
     )
     tool_wear = st.number_input(
         "Tool wear [min]",
         min_value=0,
         max_value=253,
-        value=100,
+        value=int(preset_values.get("tool_wear_min", 100)),
         step=1,
+        disabled=preset != "Custom",
     )
 
     st.divider()
