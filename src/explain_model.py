@@ -1,31 +1,29 @@
 """
 AERIS - feature explanation.
 
-The project uses:
-1) permutation importance on the held-out test set for robust global ranking;
-2) SHAP TreeExplainer on the fitted HistGradientBoosting base model for
-   local/global explanation after the core model is trustworthy.
+Global permutation importance uses the canonical calibrated risk model on the
+held-out test set. SHAP explains the canonical underlying HistGradientBoosting
+model before probability calibration.
 
-The calibrated wrapper is used for the risk score; SHAP explains the underlying
-tree model that produces the uncalibrated score before probability calibration.
+Model attribution is not physical causality.
 """
+
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 import shap
 from sklearn.inspection import permutation_importance
-from sklearn.metrics import make_scorer, average_precision_score
+from sklearn.metrics import average_precision_score, make_scorer
 from sklearn.model_selection import train_test_split
 
 from features import MODEL_FEATURES, add_engineered_features
-from models import build_hgb_pipeline, build_preprocessor
 from load_data import load_raw
+from models import build_calibrated_hgb, build_hgb_pipeline, build_preprocessor
 
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "explainability.md"
-
 FEATURES = MODEL_FEATURES
 
 
@@ -42,10 +40,9 @@ def main() -> None:
         stratify=y,
     )
 
-    preprocessor = build_preprocessor()
+    calibrated = build_calibrated_hgb(cv=5, n_jobs=-1)
+    calibrated.fit(X_train, y_train)
 
-
-    # Permutation importance on the final held-out test set.
     scorer = make_scorer(
         average_precision_score,
         response_method="predict_proba",
@@ -68,23 +65,17 @@ def main() -> None:
         }
     ).sort_values("importance_mean", ascending=False)
 
-    # SHAP on the fitted underlying tree model, using an unseen test subset.
-    fitted_pre = build_preprocessor().fit(X_train, y_train)
-    transformed_train = fitted_pre.transform(X_train)
-    transformed_test = fitted_pre.transform(X_test)
+    # Fit the canonical underlying tree architecture on the training partition.
+    explainer_pre = build_preprocessor()
+    transformed_train = explainer_pre.fit_transform(X_train, y_train)
+    transformed_test = explainer_pre.transform(X_test)
 
-    fitted_tree = HistGradientBoostingClassifier(
-        max_iter=300,
-        learning_rate=0.06,
-        max_leaf_nodes=31,
-        l2_regularization=1.0,
-        random_state=42,
-    )
+    fitted_tree = build_hgb_pipeline().named_steps["model"]
     fitted_tree.fit(transformed_train, y_train)
 
     explainer = shap.TreeExplainer(fitted_tree)
-    shap_values = explainer.shap_values(transformed_test[:200])
-    transformed_names = fitted_pre.get_feature_names_out()
+    shap_values = np.asarray(explainer.shap_values(transformed_test[:200]))
+    transformed_names = explainer_pre.get_feature_names_out()
 
     shap_importance = (
         pd.DataFrame(
@@ -106,15 +97,15 @@ def main() -> None:
     for _, row in permutation_df.iterrows():
         lines.append(
             f"| {row['feature']} | {row['importance_mean']:.4f} | "
-            f"{row['importance_std']:.4f} |\\n"
+            f"{row['importance_std']:.4f} |\n"
         )
 
     lines.extend(
         [
-            "\\nPermutation importance is computed on the held-out test set using "
+            "\nPermutation importance is computed on the held-out test set using "
             "average precision. A larger decrease means the model loses more "
-            "ranking performance when that feature is permuted.\\n\\n",
-            "## SHAP global importance\\n\\n",
+            "ranking performance when that feature is permuted.\n\n",
+            "## SHAP global importance\n\n",
             "| Encoded feature | Mean absolute SHAP |\n",
             "|---|---:|\n",
         ]
@@ -122,14 +113,15 @@ def main() -> None:
 
     for _, row in shap_importance.iterrows():
         lines.append(
-            f"| {row['feature']} | {row['mean_abs_shap']:.4f} |\\n"
+            f"| {row['feature']} | {row['mean_abs_shap']:.4f} |\n"
         )
 
     lines.extend(
         [
-            "\\nSHAP values are used for explanation, not as evidence that a "
-            "feature is a physical root cause. Correlated variables can share "
-            "or redistribute model attribution.\\n",
+            "\nSHAP values explain the underlying tree model before probability "
+            "calibration. They are model attributions, not physical root-cause "
+            "measurements. Correlated raw and engineered variables can share or "
+            "redistribute attribution.\n",
         ]
     )
 
