@@ -38,7 +38,7 @@ They are target-side information. Feeding TWF/HDF/PWF/OSF/RNF into the binary de
 
 ### Why HistGradientBoosting?
 
-It gave a strong held-out result and a good balance of precision, recall and F1 among the tested model families. Random Forest was close on cross-validated PR-AUC, so the choice was not based on one number alone.
+It was carried forward from the training-partition comparison because Random Forest was nearly tied on cross-validated PR-AUC while HGB had higher cross-validated recall and F1. The held-out test set was kept for final comparison rather than model selection.
 
 ### Why calibrate the model?
 
