@@ -230,7 +230,7 @@ app_row = add_engineered_features(raw_row)[MODEL_FEATURES]
 
 try:
     risk_model, explainer_pre, explain_model, mode_models = train_models()
-except FileNotFoundError as exc:
+except (FileNotFoundError, ValueError) as exc:
     st.error(str(exc))
     st.stop()
 
