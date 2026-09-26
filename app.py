@@ -103,6 +103,22 @@ DEMO_PRESETS = {
         "torque_nm": 32.7,
         "tool_wear_min": 83,
     },
+    "High tool-wear stress test": {
+        "type": "M",
+        "air_temp_k": 300.1,
+        "process_temp_k": 310.4,
+        "rot_speed_rpm": 1650,
+        "torque_nm": 46.0,
+        "tool_wear_min": 235,
+    },
+    "High-load stress test": {
+        "type": "H",
+        "air_temp_k": 301.2,
+        "process_temp_k": 311.1,
+        "rot_speed_rpm": 1950,
+        "torque_nm": 68.0,
+        "tool_wear_min": 180,
+    },
 }
 
 
@@ -288,7 +304,7 @@ with st.sidebar:
     preset = st.selectbox(
         "Scenario",
         ["Custom"] + list(DEMO_PRESETS),
-        help="The two documented presets are held-out benchmark examples used in the project demo.",
+        help="Two presets are held-out benchmark examples; the stress-test presets are illustrative operating conditions.",
     )
 
     preset_values = DEMO_PRESETS.get(preset, {})
