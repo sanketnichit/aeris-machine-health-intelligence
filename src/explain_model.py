@@ -26,6 +26,31 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "explainability.md"
 FEATURES = MODEL_FEATURES
 
+DISPLAY_NAMES = {
+    "type": "Type",
+    "air_temp_k": "Air temperature [K]",
+    "process_temp_k": "Process temperature [K]",
+    "rot_speed_rpm": "Rotational speed [rpm]",
+    "torque_nm": "Torque [Nm]",
+    "tool_wear_min": "Tool wear [min]",
+    "temp_delta_k": "Temperature delta [K]",
+    "mechanical_power_kw": "Mechanical power [kW]",
+}
+
+
+def display_feature(name: str) -> str:
+    """Map the internal feature contract to a stable human-readable label."""
+    return DISPLAY_NAMES.get(name, name)
+
+
+def display_transformed_feature(name: str) -> str:
+    """Map a transformed preprocessing name to a readable label."""
+    if name.startswith("categorical__type_"):
+        return name.replace("categorical__type_", "Type_")
+    if name.startswith("numeric__"):
+        return display_feature(name.replace("numeric__", ""))
+    return name
+
 
 def main() -> None:
     df = add_engineered_features(load_raw())
@@ -59,7 +84,7 @@ def main() -> None:
 
     permutation_df = pd.DataFrame(
         {
-            "feature": FEATURES,
+            "feature": [display_feature(feature) for feature in FEATURES],
             "importance_mean": permutation.importances_mean,
             "importance_std": permutation.importances_std,
         }
@@ -80,7 +105,7 @@ def main() -> None:
     shap_importance = (
         pd.DataFrame(
             {
-                "feature": transformed_names,
+                "feature": [display_transformed_feature(name) for name in transformed_names],
                 "mean_abs_shap": np.abs(shap_values).mean(axis=0),
             }
         )
