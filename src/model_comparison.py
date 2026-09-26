@@ -47,7 +47,7 @@ def build_preprocessor() -> ColumnTransformer:
         transformers=[
             (
                 "categorical",
-                OneHotEncoder(handle_unknown="ignore"),
+                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
                 ["type"],
             ),
             (
