@@ -4,10 +4,16 @@ The console uses the same seed-42 train/test partition and canonical model
 builders as the offline evaluation pipeline. The held-out partition is never
 needed by the UI at inference time; it is used only to keep the training
 architecture consistent with the documented v1 evaluation.
+
+The trained console bundle is persisted in a local, git-ignored cache so the
+first launch trains the models once and subsequent app restarts load them
+directly.
 """
 
 from __future__ import annotations
 
+import hashlib
+import pickle
 from pathlib import Path
 
 import pandas as pd
@@ -15,9 +21,42 @@ from sklearn.model_selection import train_test_split
 
 from .features import MODEL_FEATURES, add_engineered_features
 from .load_data import load_raw
-from .models import build_calibrated_hgb, build_hgb_pipeline, build_mode_pipeline, build_preprocessor
+from .models import (
+    build_calibrated_hgb,
+    build_hgb_pipeline,
+    build_mode_pipeline,
+    build_preprocessor,
+)
 
 MODES = ["hdf", "pwf", "osf"]
+CACHE_VERSION = "2026-09-26-console-bundle-v1"
+
+
+def _cache_path(data_path: Path) -> Path:
+    """Return a cache path keyed to the dataset bytes and model contract."""
+    digest = hashlib.sha256(data_path.read_bytes()).hexdigest()[:16]
+    cache_dir = data_path.parent.parent / ".aeris_cache"
+    cache_dir.mkdir(parents=True, exist_ok=True)
+    return cache_dir / f"console_bundle_{CACHE_VERSION}_{digest}.pkl"
+
+
+def _load_cached_bundle(cache_path: Path):
+    try:
+        with cache_path.open("rb") as handle:
+            return pickle.load(handle)
+    except (OSError, EOFError, pickle.PickleError, AttributeError, ImportError, ValueError):
+        return None
+
+
+def _save_cached_bundle(cache_path: Path, bundle) -> None:
+    temp_path = cache_path.with_suffix(".tmp")
+    try:
+        with temp_path.open("wb") as handle:
+            pickle.dump(bundle, handle, protocol=pickle.HIGHEST_PROTOCOL)
+        temp_path.replace(cache_path)
+    finally:
+        if temp_path.exists():
+            temp_path.unlink()
 
 
 def train_console_models(
@@ -25,13 +64,14 @@ def train_console_models(
     *,
     random_state: int = 42,
 ):
-    """Train the console's risk, SHAP tree and failure-mode models.
+    """Load a persisted console bundle or train the canonical UI models."""
+    data_path = Path(data_path)
+    cache_path = _cache_path(data_path)
 
-    The binary risk model is the canonical calibrated HGB used by the offline
-    risk-model evaluation. The explanation tree shares the same architecture
-    and training partition, while mode models use the canonical class-weighted
-    architecture on the same training partition.
-    """
+    cached_bundle = _load_cached_bundle(cache_path)
+    if cached_bundle is not None:
+        return cached_bundle
+
     df = add_engineered_features(load_raw(data_path))
 
     X = df[MODEL_FEATURES]
@@ -66,4 +106,6 @@ def train_console_models(
         mode_model.fit(X_train, df.loc[train_idx, mode])
         mode_models[mode] = mode_model
 
-    return risk_model, explainer_pre, explain_model, mode_models
+    bundle = (risk_model, explainer_pre, explain_model, mode_models)
+    _save_cached_bundle(cache_path, bundle)
+    return bundle
