@@ -17,9 +17,14 @@ from sklearn.inspection import permutation_importance
 from sklearn.metrics import average_precision_score, make_scorer
 from sklearn.model_selection import train_test_split
 
-from features import MODEL_FEATURES, add_engineered_features
-from load_data import load_raw
-from models import build_calibrated_hgb, build_hgb_pipeline, build_preprocessor
+try:
+    from .features import MODEL_FEATURES, add_engineered_features
+    from .load_data import load_raw
+    from .models import build_calibrated_hgb, build_hgb_pipeline, build_preprocessor
+except ImportError:  # direct script execution from src/
+    from features import MODEL_FEATURES, add_engineered_features
+    from load_data import load_raw
+    from models import build_calibrated_hgb, build_hgb_pipeline, build_preprocessor
 
 
 ROOT = Path(__file__).resolve().parents[1]
