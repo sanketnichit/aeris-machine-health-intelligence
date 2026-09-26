@@ -1,15 +1,12 @@
 from pathlib import Path
 
 import pandas as pd
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import average_precision_score, make_scorer
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 from features import MODEL_FEATURES, add_engineered_features
+from models import build_hgb_pipeline
 from load_data import load_raw
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -18,26 +15,7 @@ SPLIT_SEEDS = [42, 7, 21, 84, 123]
 N_REPEATS = 10
 
 
-def build_pipeline() -> Pipeline:
-    pre = ColumnTransformer(
-        [
-            (
-                "categorical",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-                ["type"],
-            ),
-            ("numeric", "passthrough", FEATURES[1:]),
-        ]
-    )
-    model = HistGradientBoostingClassifier(
-        max_iter=300,
-        learning_rate=0.06,
-        max_leaf_nodes=31,
-        l2_regularization=1.0,
-        random_state=42,
-    )
-    return Pipeline([("preprocessor", pre), ("model", model)])
-
+build_pipeline = build_hgb_pipeline
 
 def main() -> None:
     df = add_engineered_features(load_raw())
