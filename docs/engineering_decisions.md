@@ -49,7 +49,7 @@ Primary metric is average precision because the failure class is rare. Precision
 
 ## 6. Model choice
 
-HistGradientBoosting currently gives the strongest held-out PR-AUC and a strong cross-validated precision/recall/F1 balance among the tested model families. Random Forest is close on cross-validated PR-AUC, so the selection is not based on a single metric in isolation.
+HistGradientBoosting is the model carried forward from the training-partition comparison because Random Forest is nearly tied on cross-validated PR-AUC while HGB has higher cross-validated recall and F1. The held-out test set is reserved for final comparison rather than model selection.
 
 XGBoost is intentionally not a dependency for v1. A strong scikit-learn implementation is enough to establish the method.
 
