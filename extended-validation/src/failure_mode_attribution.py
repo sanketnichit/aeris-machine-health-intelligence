@@ -5,6 +5,12 @@ AI4I failure-mode labels are not mutually exclusive, so this stage is multi-labe
 We only promote modes whose cross-validated signal is defensible.
 """
 from pathlib import Path
+import sys
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 import pandas as pd
 from sklearn.metrics import make_scorer, precision_score
@@ -14,13 +20,13 @@ try:
     from .features import MODEL_FEATURES, add_engineered_features
     from .models import build_mode_pipeline
     from .load_data import load_raw
-except ImportError:  # direct script execution from src/
+except ImportError:  # direct script execution from extended-validation/src/
     from features import MODEL_FEATURES, add_engineered_features
     from models import build_mode_pipeline
     from load_data import load_raw
 
-ROOT = Path(__file__).resolve().parents[1]
-REPORT = ROOT / "reports" / "failure_mode_attribution.md"
+ROOT = PROJECT_ROOT
+REPORT = ROOT / "extended-validation" / "reports" / "failure_mode_attribution.md"
 
 FEATURES = MODEL_FEATURES
 

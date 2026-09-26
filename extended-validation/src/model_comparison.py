@@ -10,6 +10,12 @@ Design:
 - Do not tune against the final test set.
 """
 from pathlib import Path
+import sys
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
@@ -30,14 +36,14 @@ try:
     from .features import MODEL_FEATURES, add_engineered_features
     from .load_data import load_raw
     from .models import build_hgb_pipeline
-except ImportError:  # direct script execution from src/
+except ImportError:  # direct script execution from extended-validation/src/
     from features import MODEL_FEATURES, add_engineered_features
     from load_data import load_raw
     from models import build_hgb_pipeline
 
 
-ROOT = Path(__file__).resolve().parents[1]
-REPORT = ROOT / "reports" / "model_comparison.md"
+ROOT = PROJECT_ROOT
+REPORT = ROOT / "extended-validation" / "reports" / "model_comparison.md"
 
 FEATURES = MODEL_FEATURES
 

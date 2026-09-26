@@ -1,4 +1,10 @@
 from pathlib import Path
+import sys
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 import pandas as pd
 from sklearn.metrics import brier_score_loss
@@ -8,12 +14,12 @@ try:
     from .features import MODEL_FEATURES, add_engineered_features
     from .models import build_calibrated_hgb
     from .load_data import load_raw
-except ImportError:  # direct script execution from src/
+except ImportError:  # direct script execution from extended-validation/src/
     from features import MODEL_FEATURES, add_engineered_features
     from models import build_calibrated_hgb
     from load_data import load_raw
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = PROJECT_ROOT
 FEATURES = MODEL_FEATURES
 
 
@@ -126,7 +132,7 @@ def main() -> None:
         ]
     )
 
-    out = ROOT / "reports" / "calibration_audit.md"
+    out = ROOT / "extended-validation" / "reports" / "calibration_audit.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("".join(lines), encoding="utf-8")
     print("".join(lines))

@@ -23,8 +23,6 @@ EXPECTED_COLUMNS = {
 def test_ai4i_schema_and_shape():
     path = Path("data/ai4i2020.csv")
     if not path.exists():
-        # The repository intentionally does not commit the benchmark CSV.
-        # This test is exercised locally/CI when the dataset is provided.
         return
 
     df = pd.read_csv(path)
@@ -42,15 +40,21 @@ def test_failure_label_is_binary():
     assert set(df["Machine failure"].unique()).issubset({0, 1})
 
 
-def test_no_identifier_is_used_as_model_feature():
-    model_source = Path("src/model_comparison.py").read_text(encoding="utf-8")
-    assert '"UDI"' not in model_source
-    assert '"Product ID"' not in model_source
-    assert '"TWF"' not in model_source
-    assert '"HDF"' not in model_source
-    assert '"PWF"' not in model_source
-    assert '"OSF"' not in model_source
-    assert '"RNF"' not in model_source
+def test_model_feature_contract_excludes_target_side_fields():
+    from src.features import MODEL_FEATURES
+
+    forbidden = {
+        "UDI",
+        "Product ID",
+        "TWF",
+        "HDF",
+        "PWF",
+        "OSF",
+        "RNF",
+        "machine_failure",
+    }
+
+    assert forbidden.isdisjoint(MODEL_FEATURES)
 
 
 def test_loader_normalizes_ai4i_column_names_and_reads_utf8_bom(tmp_path):
