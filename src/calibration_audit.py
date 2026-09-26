@@ -9,17 +9,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
+from features import MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
 
 ROOT = Path(__file__).resolve().parents[1]
-FEATURES = [
-    "type",
-    "air_temp_k",
-    "process_temp_k",
-    "rot_speed_rpm",
-    "torque_nm",
-    "tool_wear_min",
-]
+FEATURES = MODEL_FEATURES
 
 
 def build_model() -> CalibratedClassifierCV:
@@ -62,7 +56,7 @@ def add_rows(lines, name, subset, prob):
 
 
 def main() -> None:
-    df = load_raw()
+    df = add_engineered_features(load_raw())
     X = df[FEATURES]
     y = df["machine_failure"]
 
