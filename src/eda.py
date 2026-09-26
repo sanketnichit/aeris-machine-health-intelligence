@@ -11,7 +11,10 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import pandas as pd
 
-from load_data import load_raw
+try:
+    from .load_data import load_raw
+except ImportError:  # direct script execution from src/
+    from load_data import load_raw
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FIGURES_DIR = PROJECT_ROOT / "figures"
