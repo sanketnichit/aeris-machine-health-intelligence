@@ -35,7 +35,7 @@ def build_pipeline() -> Pipeline:
         transformers=[
             (
                 "categorical",
-                OneHotEncoder(handle_unknown="ignore"),
+                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
                 ["type"],
             ),
             ("numeric", "passthrough", FEATURES[1:]),
