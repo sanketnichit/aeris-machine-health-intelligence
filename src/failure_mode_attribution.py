@@ -63,10 +63,10 @@ def main() -> None:
 
     lines.extend(
         [
-            "\n## Production-facing v1 decision\n",
+            "\n## AERIS v1 exposure decision\n",
             "Promote **HDF, PWF and OSF** into the v1 attribution panel.\n\n",
             "TWF and RNF remain deferred because their cross-validated signal is too weak/unstable "
-            "for an engineering-facing prediction layer.\n\n",
+            "for the v1 engineering review panel.\n\n",
             "## Synthetic-benchmark caveat\n",
             "The very strong HDF signal should not be interpreted as evidence of physical root-cause "
             "understanding. The AI4I benchmark is synthetic and can contain structured relationships "
