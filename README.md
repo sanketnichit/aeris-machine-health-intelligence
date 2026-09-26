@@ -1,0 +1,124 @@
+# AERIS — Machine Health Intelligence
+
+**Explainable fault detection and failure-risk scoring for industrial equipment.**
+
+AERIS is a focused predictive-maintenance project built around the **AI4I 2020 Predictive Maintenance Dataset**. The project intentionally prioritizes a small, rigorous end-to-end ML pipeline over a large collection of loosely validated features.
+
+## Project scope
+
+### Core
+1. **Fault detection** — classify whether a machine observation indicates failure.
+2. **Failure-mode classification** — for predicted failures, identify the most likely failure mode.
+3. **Risk scoring + explanation** — estimate failure risk and explain which features contributed most to the prediction.
+4. **One engineering visualization** — a compact Machine Health Console for inspecting predictions and contributing factors.
+
+### Explicitly out of scope for v1
+- Remaining-useful-life (RUL) modelling
+- What-if / counterfactual simulation
+- LLM-generated engineering reports
+- Streaming/Kafka deployment
+- C-MAPSS temporal modelling
+- Motorsport/FastF1 domain transfer
+
+These are documented as future extensions only. The project does not claim to use proprietary Red Bull/F1 telemetry.
+
+## Dataset
+
+**AI4I 2020 Predictive Maintenance Dataset**  
+UCI Machine Learning Repository, dataset ID 601.
+
+Source: https://doi.org/10.24432/C5HS5C  
+License: CC BY 4.0
+
+The dataset contains 10,000 machine observations with process variables, product type, a machine-failure target, and failure-mode indicators.
+
+## Why AI4I instead of C-MAPSS?
+
+C-MAPSS is a stronger benchmark for temporal degradation and RUL prediction, but it introduces substantially more sequence-processing and evaluation complexity. AERIS uses AI4I for v1 so the project can establish a trustworthy detection → classification → explanation pipeline first.
+
+C-MAPSS/RUL is deliberately reserved for future work.
+
+## Data validation
+
+Before modelling, the dataset is checked for:
+
+- missing values
+- duplicates
+- schema/type consistency
+- physically invalid ranges
+- target/flag consistency
+- class imbalance
+
+Current validation found **3.39% positive machine-failure labels**, making this an imbalanced classification problem. Precision, recall and PR-AUC are therefore prioritized over raw accuracy.
+
+A documented target/flag inconsistency exists in 27 rows; AERIS reports this instead of silently rewriting the source labels.
+
+## Repository structure
+
+```
+aeris-machine-health-intelligence/
+├── data/
+│   └── ai4i2020.csv
+├── src/
+│   ├── load_data.py
+│   ├── validate_data.py
+│   └── eda.py
+├── figures/
+│   ├── 01_class_balance.png
+│   ├── 02_failure_rate_by_type.png
+│   ├── 03_temp_diff_vs_speed.png
+│   ├── 04_torque_vs_toolwear.png
+│   ├── 05_failure_mode_breakdown.png
+│   └── 06_correlation_heatmap.png
+├── reports/
+│   └── data_validation.md
+├── requirements.txt
+└── README.md
+```
+
+## Current status
+
+- [x] Dataset loaded and schema-normalized
+- [x] Data validation
+- [x] Class-balance analysis
+- [x] Exploratory data analysis
+- [ ] Binary failure-detection baseline
+- [ ] Imbalance-aware model comparison
+- [ ] Failure-mode classifier
+- [ ] Feature-importance explanations
+- [ ] Machine Health Console
+
+## Planned modelling sequence
+
+The project will be built in the following order:
+
+1. Get **one Random Forest binary classifier** working end-to-end.
+2. Measure precision, recall, F1 and PR-AUC.
+3. Add a second/third model only after the baseline is trustworthy.
+4. Add the failure-mode classification stage.
+5. Add simple feature-importance explanations first.
+6. Upgrade to SHAP only after the core pipeline is stable.
+7. Add calibration as optional polish if time permits.
+
+## Running the current pipeline
+
+From the repository root:
+
+```bash
+pip install -r requirements.txt
+python src/validate_data.py
+python src/eda.py
+```
+
+## Future work
+
+- NASA C-MAPSS run-to-failure / RUL extension
+- temporal degradation modelling
+- counterfactual what-if analysis
+- streaming telemetry
+- deployment and monitoring
+- FastF1/motorsport-domain adaptation
+
+## Disclaimer
+
+AERIS is an educational/portfolio project using public benchmark data. It is not a production maintenance system and does not represent Red Bull Powertrains systems, models, telemetry or engineering decisions.
