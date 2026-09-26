@@ -57,3 +57,43 @@ def test_console_model_bundle_runs(tmp_path):
     for model in mode_models.values():
         score = model.predict_proba(sample)[0, 1]
         assert 0.0 <= score <= 1.0
+
+
+def test_console_bundle_explanation_preprocessor_matches_model_feature_contract(tmp_path):
+    rows = []
+    for i in range(120):
+        failure = int(i % 5 == 0 or i % 11 == 0)
+        rows.append(
+            {
+                "UDI": i + 1,
+                "Product ID": f"LTEST{i:04d}",
+                "Type": ["L", "M", "H"][i % 3],
+                "Air temperature [K]": 296.0 + (i % 20) * 0.2,
+                "Process temperature [K]": 306.5 + (i % 20) * 0.2,
+                "Rotational speed [rpm]": 1200 + (i % 40) * 20 + failure * 180,
+                "Torque [Nm]": 20.0 + (i % 25) * 1.2 + failure * 8,
+                "Tool wear [min]": i % 120,
+                "Machine failure": failure,
+                "TWF": int(failure and i % 10 == 0),
+                "HDF": int(failure and i % 3 == 0),
+                "PWF": int(failure and i % 4 == 0),
+                "OSF": int(failure and i % 5 == 0),
+                "RNF": 0,
+            }
+        )
+
+    path = tmp_path / "ai4i2020.csv"
+    pd.DataFrame(rows).to_csv(path, index=False)
+
+    _risk, preprocessor, _explain, _modes = train_console_models(path)
+
+    assert preprocessor.feature_names_in_.tolist() == [
+        "type",
+        "air_temp_k",
+        "process_temp_k",
+        "rot_speed_rpm",
+        "torque_nm",
+        "tool_wear_min",
+        "temp_delta_k",
+        "mechanical_power_kw",
+    ]
