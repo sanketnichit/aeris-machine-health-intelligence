@@ -96,15 +96,16 @@ def train_models():
     return train_console_models(DATA_PATH, random_state=42)
 
 
-def get_shap_explainer(model: HistGradientBoostingClassifier):
-    """Build a local SHAP explainer for the already-cached canonical model.
+@st.cache_resource
+def get_shap_explainer(_model: HistGradientBoostingClassifier):
+    """Cache the SHAP explainer without hashing the sklearn model object.
 
-    Streamlit resource caching attempts to serialize function-bearing sklearn
-    objects on some environments. The canonical model bundle is already cached,
-    so caching the SHAP explainer separately adds little value and can make the
-    UI brittle across Python/runtime combinations.
+    Streamlit's default argument hashing can choke on function-bearing sklearn
+    objects. The leading underscore intentionally excludes the already-canonical
+    model from cache-key hashing while retaining the explainer across reruns.
+    The console model bundle is fixed for the running AERIS process.
     """
-    return shap.TreeExplainer(model)
+    return shap.TreeExplainer(_model)
 
 
 def local_shap(
