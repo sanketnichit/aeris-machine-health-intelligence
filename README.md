@@ -51,7 +51,7 @@ UCI Machine Learning Repository, dataset ID 601.
 Source: https://doi.org/10.24432/C5HS5C  
 License: CC BY 4.0
 
-The dataset contains 10,000 machine observations with process variables, product type, a machine-failure target, and failure-mode indicators. The raw CSV is kept outside the repository's first commit; place it under `data/ai4i2020.csv` before running the scripts.
+The dataset contains 10,000 machine observations with process variables, product type, a machine-failure target, and failure-mode indicators. The raw CSV is intentionally not committed to the repository; place it under `data/ai4i2020.csv` before running the scripts.
 
 ## Why AI4I instead of C-MAPSS?
 
