@@ -33,8 +33,9 @@ The benchmark CSV is intentionally not committed to the repository.
     python src/error_analysis.py
     python src/feature_stability.py
     python src/calibration_audit.py
+    python src/feature_ablation.py
 
-The current v1 model uses the shared feature contract in `src/features.py`. It adds temperature delta and mechanical power deterministically from raw operating inputs.
+The current v1 model uses the shared feature contract in `src/features.py` and the raw-vs-engineered ablation in `src/feature_ablation.py` to justify the added signals. It adds temperature delta and mechanical power deterministically from raw operating inputs.
 
 ## Test
 
