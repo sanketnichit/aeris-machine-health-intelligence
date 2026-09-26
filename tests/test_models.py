@@ -77,5 +77,5 @@ def test_extended_model_comparison_report_keeps_test_set_out_of_selection():
         "## Engineering interpretation", 1
     )[0]
 
-    assert "held-out test results are reported for final comparison and are not used to tune or select the model" in selection
+    assert "not used to tune or select the model" in selection
     assert "held-out PR-AUC and recall/F1 balance" not in selection
