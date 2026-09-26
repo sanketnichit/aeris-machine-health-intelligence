@@ -47,7 +47,7 @@ FEATURES = [
 def build_base_model() -> Pipeline:
     pre = ColumnTransformer(
         [
-            ("cat", OneHotEncoder(handle_unknown="ignore"), ["Type"]),
+            ("cat", OneHotEncoder(handle_unknown="ignore", sparse_output=False), ["Type"]),
             ("num", "passthrough", FEATURES[1:]),
         ]
     )
