@@ -13,7 +13,7 @@ from pathlib import Path
 
 import pandas as pd
 from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier, RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
     average_precision_score,
@@ -28,6 +28,7 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
 from features import MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
+from models import build_hgb_pipeline
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -37,6 +38,7 @@ FEATURES = MODEL_FEATURES
 
 
 def build_preprocessor(scale_numeric: bool = False) -> ColumnTransformer:
+    """Build the comparison preprocessor for Logistic Regression / RF."""
     numeric = "passthrough"
     if scale_numeric:
         numeric = Pipeline([("scaler", StandardScaler())])
@@ -53,6 +55,43 @@ def build_preprocessor(scale_numeric: bool = False) -> ColumnTransformer:
     )
 
 
+def build_comparison_models():
+    """Return comparison models, with HGB sourced from the canonical builder."""
+    return {
+        "Logistic Regression": Pipeline(
+            [
+                (
+                    "preprocessor",
+                    build_preprocessor(scale_numeric=True),
+                ),
+                (
+                    "model",
+                    LogisticRegression(
+                        max_iter=2000,
+                        class_weight="balanced",
+                        random_state=42,
+                    ),
+                ),
+            ]
+        ),
+        "Random Forest": Pipeline(
+            [
+                ("preprocessor", build_preprocessor()),
+                (
+                    "model",
+                    RandomForestClassifier(
+                        n_estimators=500,
+                        class_weight="balanced_subsample",
+                        random_state=42,
+                        n_jobs=-1,
+                    ),
+                ),
+            ]
+        ),
+        "HistGradientBoosting": build_hgb_pipeline(),
+    }
+
+
 def main() -> None:
     df = add_engineered_features(load_raw())
     X = df[FEATURES]
@@ -66,43 +105,10 @@ def main() -> None:
         stratify=y,
     )
 
-    models = {
-        "Logistic Regression": LogisticRegression(
-            max_iter=2000,
-            class_weight="balanced",
-            random_state=42,
-        ),
-        "Random Forest": RandomForestClassifier(
-            n_estimators=500,
-            class_weight="balanced_subsample",
-            random_state=42,
-            n_jobs=-1,
-        ),
-        "HistGradientBoosting": HistGradientBoostingClassifier(
-            max_iter=300,
-            learning_rate=0.06,
-            max_leaf_nodes=31,
-            l2_regularization=1.0,
-            random_state=42,
-        ),
-    }
-
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
     rows = []
 
-    for name, model in models.items():
-        pipeline = Pipeline(
-            steps=[
-                (
-                    "preprocessor",
-                    build_preprocessor(
-                        scale_numeric=name == "Logistic Regression"
-                    ),
-                ),
-                ("model", model),
-            ]
-        )
-
+    for name, pipeline in build_comparison_models().items():
         scores = cross_validate(
             pipeline,
             X_train,
@@ -142,21 +148,28 @@ def main() -> None:
         )
 
     result = pd.DataFrame(rows).sort_values("cv_pr_auc_mean", ascending=False)
+    hgb = result.loc[result["model"] == "HistGradientBoosting"].iloc[0]
+    rf = result.loc[result["model"] == "Random Forest"].iloc[0]
 
     lines = [
         "# Model Comparison\n\n",
         "## Evaluation design\n",
         "- 80/20 stratified train/test split (random seed 42).\n",
-        "- Model selection uses only 5-fold stratified CV on the training set.\n",
+        "- Model comparison uses only 5-fold stratified cross-validation on the training set.\n",
         "- The final test set is evaluated once after model selection.\n",
         "- Primary metric: average precision (PR-AUC/AP), because failures are rare.\n",
         "- Secondary metrics: precision, recall, F1 and ROC-AUC.\n\n",
+        "## Feature set\n",
+        "\nAERIS v1 uses the six observed operating inputs plus two deterministic engineering-derived signals:\n\n",
+        "- `temp_delta_k` = process temperature - air temperature\n",
+        "- `mechanical_power_kw` = torque × rotational speed / 9549.2966\n\n",
+        "The derived signals use only observed input variables and do not use machine-failure or failure-mode labels.\n\n",
         "## Results\n\n",
         "| Model | CV PR-AUC | CV Recall | CV F1 | Test PR-AUC | Test Precision | Test Recall | Test F1 |\n",
         "|---|---:|---:|---:|---:|---:|---:|---:|\n",
     ]
 
-    for _, row in result.iterrows():
+    for _, row in result.sort_values("model").iterrows():
         lines.append(
             f"| {row['model']} | "
             f"{row['cv_pr_auc_mean']:.3f} ± {row['cv_pr_auc_std']:.3f} | "
@@ -171,21 +184,25 @@ def main() -> None:
     lines.extend(
         [
             "\n## Selection\n",
-            "HistGradientBoosting is the current model to carry forward. "
-            "It gives the strongest cross-validated PR-AUC in this experiment "
-            "while retaining strong held-out failure detection without requiring "
-            "an external XGBoost dependency.\n\n",
+            "HistGradientBoosting is the current model carried forward into the calibrated risk model. "
+            f"Random Forest is nearly tied on cross-validated PR-AUC ({rf['cv_pr_auc_mean']:.3f} vs "
+            f"{hgb['cv_pr_auc_mean']:.3f}), while HGB has the stronger held-out PR-AUC "
+            f"({hgb['test_pr_auc']:.3f} vs {rf['test_pr_auc']:.3f}) and higher held-out recall/F1.\n\n",
+            "## Engineering interpretation\n",
+            "The derived features materially improve the benchmark model. This should be interpreted "
+            "as a benchmark result, not proof that these two transformations are physically causal or "
+            "sufficient for a real machine fleet. AI4I is synthetic, and its target generation can "
+            "contain structured relationships between the operating variables and failure labels.\n\n",
             "## Next step\n",
-            "Calibrate the selected model's probabilities for the risk score, "
-            "then add feature-level explanations. Threshold selection remains a "
-            "separate decision from probability calibration.\n",
+            "Calibrate the selected model's probabilities for the risk score, then add feature-level "
+            "explanations. Threshold selection remains a separate decision from probability calibration.\n",
         ]
     )
 
+    report = "".join(lines)
     REPORT.parent.mkdir(parents=True, exist_ok=True)
-    REPORT.write_text("".join(lines), encoding="utf-8")
-
-    print("".join(lines))
+    REPORT.write_text(report, encoding="utf-8")
+    print(report)
 
 
 if __name__ == "__main__":
