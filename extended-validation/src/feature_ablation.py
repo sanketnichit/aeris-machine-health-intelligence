@@ -1,4 +1,10 @@
 from pathlib import Path
+import sys
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 import pandas as pd
 from sklearn.metrics import (
@@ -14,14 +20,14 @@ try:
     from .features import BASE_FEATURES, MODEL_FEATURES, add_engineered_features
     from .load_data import load_raw
     from .models import build_calibrated_hgb, build_hgb_pipeline
-except ImportError:  # direct script execution from src/
+except ImportError:  # direct script execution from extended-validation/src/
     from features import BASE_FEATURES, MODEL_FEATURES, add_engineered_features
     from load_data import load_raw
     from models import build_calibrated_hgb, build_hgb_pipeline
 
 
-ROOT = Path(__file__).resolve().parents[1]
-REPORT = ROOT / "reports" / "feature_ablation.md"
+ROOT = PROJECT_ROOT
+REPORT = ROOT / "extended-validation" / "reports" / "feature_ablation.md"
 
 RAW_FEATURES = BASE_FEATURES
 ENGINEERED_FEATURES = MODEL_FEATURES

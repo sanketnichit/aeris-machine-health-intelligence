@@ -1,4 +1,10 @@
 from pathlib import Path
+import sys
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 import pandas as pd
 from sklearn.inspection import permutation_importance
@@ -9,12 +15,12 @@ try:
     from .features import MODEL_FEATURES, add_engineered_features
     from .models import build_hgb_pipeline
     from .load_data import load_raw
-except ImportError:  # direct script execution from src/
+except ImportError:  # direct script execution from extended-validation/src/
     from features import MODEL_FEATURES, add_engineered_features
     from models import build_hgb_pipeline
     from load_data import load_raw
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = PROJECT_ROOT
 FEATURES = MODEL_FEATURES
 SPLIT_SEEDS = [42, 7, 21, 84, 123]
 N_REPEATS = 10
@@ -124,7 +130,7 @@ def main() -> None:
         ]
     )
 
-    out = ROOT / "reports" / "feature_stability.md"
+    out = ROOT / "extended-validation" / "reports" / "feature_stability.md"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text("".join(lines), encoding="utf-8")
     print("".join(lines))

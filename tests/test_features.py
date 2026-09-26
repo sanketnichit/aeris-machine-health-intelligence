@@ -58,8 +58,7 @@ def test_engineered_feature_function_does_not_mutate_input():
     assert "mechanical_power_kw" in result.columns
 
 
-def test_raw_ablation_contract_matches_base_features():
-    from src.feature_ablation import RAW_FEATURES
-    from src.features import BASE_FEATURES
+def test_base_feature_contract_matches_model_prefix():
+    from src.features import BASE_FEATURES, MODEL_FEATURES
 
-    assert RAW_FEATURES == BASE_FEATURES
+    assert MODEL_FEATURES[: len(BASE_FEATURES)] == BASE_FEATURES

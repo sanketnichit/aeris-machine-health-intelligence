@@ -20,30 +20,39 @@ Download the AI4I 2020 CSV from the canonical UCI source and place it at:
 
 The benchmark CSV is intentionally not committed to the repository.
 
-## Validate and reproduce
+## Validate and reproduce the core system
+
+From the repository root:
 
     python src/validate_data.py
     python src/eda.py
     python src/train_baseline.py
-    python src/model_comparison.py
     python src/risk_model.py
-    python src/failure_mode_attribution.py
     python src/explain_model.py
-    python src/evaluate_thresholds.py
-    python src/uncertainty_audit.py
-    python src/split_sensitivity.py
-    python src/error_analysis.py
-    python src/feature_stability.py
-    python src/calibration_audit.py
-    python src/feature_ablation.py
 
-The current v1 model uses the shared feature contract in `src/features.py` and the raw-vs-engineered ablation in `src/feature_ablation.py` to justify the added signals. The Streamlit console trains through `src/console_models.py` so the UI reuses the same canonical model architecture rather than duplicating model definitions. It adds temperature delta and mechanical power deterministically from raw operating inputs.
+The v1 risk model uses the shared feature contract in `src/features.py` and the canonical model builders in `src/models.py`. The Streamlit console trains through `src/console_models.py`, so the UI reuses the same model architecture rather than maintaining a second risk-model implementation.
+
+## Extended validation
+
+Additional studies live under `extended-validation/` so the core implementation remains easy to inspect:
+
+    python extended-validation/src/model_comparison.py
+    python extended-validation/src/feature_ablation.py
+    python extended-validation/src/evaluate_thresholds.py
+    python extended-validation/src/uncertainty_audit.py
+    python extended-validation/src/split_sensitivity.py
+    python extended-validation/src/error_analysis.py
+    python extended-validation/src/feature_stability.py
+    python extended-validation/src/calibration_audit.py
+    python extended-validation/src/failure_mode_attribution.py
+
+These studies validate robustness, threshold behaviour, feature contribution and secondary attribution. They are not hidden tuning loops and do not replace the primary seed-42 evaluation.
 
 ## Test
 
     pytest -q
 
-The repository CI also runs Python compilation checks for `src/` and `app.py`.
+CI also compiles both the core `src/` package and the extended-validation Python scripts.
 
 ## Launch the console
 
@@ -51,4 +60,4 @@ The repository CI also runs Python compilation checks for `src/` and `app.py`.
 
 ## Reporting rule
 
-Never report a model metric without stating the dataset, evaluation design, threshold when relevant, and major limitations. The objective is a reproducible and defensible engineering prototype, not the highest-looking accuracy number.
+Never report a model metric without stating the dataset, evaluation design, threshold when relevant, and major limitations. The objective is a reproducible engineering prototype, not the highest-looking metric.

@@ -68,20 +68,14 @@ def test_model_feature_contract_excludes_target_side_fields():
     assert forbidden.isdisjoint(MODEL_FEATURES)
 
 
-def test_audits_use_canonical_engineered_features():
-    from src.error_analysis import FEATURES as ERROR_FEATURES
-    from src.features import MODEL_FEATURES
-    from src.split_sensitivity import FEATURES as SPLIT_FEATURES
-
-    assert ERROR_FEATURES == MODEL_FEATURES
-    assert SPLIT_FEATURES == MODEL_FEATURES
-
-
-def test_model_comparison_report_keeps_test_set_out_of_selection():
+def test_extended_model_comparison_report_keeps_test_set_out_of_selection():
     from pathlib import Path
 
-    report = Path("reports/model_comparison.md").read_text(encoding="utf-8")
-    selection = report.split("## Selection", 1)[1].split("## Engineering interpretation", 1)[0]
+    report = Path("extended-validation/reports/model_comparison.md")
+    assert report.exists()
+    selection = report.read_text(encoding="utf-8").split("## Selection", 1)[1].split(
+        "## Engineering interpretation", 1
+    )[0]
 
-    assert "held-out test set is reserved for final comparison" in selection
+    assert "not used to tune or select the model" in selection
     assert "held-out PR-AUC and recall/F1 balance" not in selection

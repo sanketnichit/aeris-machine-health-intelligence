@@ -6,6 +6,12 @@ evaluated on the untouched test partition. Calibration is evaluated separately.
 """
 
 from pathlib import Path
+import sys
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+SRC_DIR = PROJECT_ROOT / "src"
+if str(SRC_DIR) not in sys.path:
+    sys.path.insert(0, str(SRC_DIR))
 
 import matplotlib
 matplotlib.use("Agg")
@@ -26,15 +32,15 @@ try:
     from .features import MODEL_FEATURES, add_engineered_features
     from .models import build_calibrated_hgb, build_hgb_pipeline
     from .load_data import load_raw
-except ImportError:  # direct script execution from src/
+except ImportError:  # direct script execution from extended-validation/src/
     from features import MODEL_FEATURES, add_engineered_features
     from models import build_calibrated_hgb, build_hgb_pipeline
     from load_data import load_raw
 
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = PROJECT_ROOT
 FIGURES = ROOT / "figures"
-REPORT = ROOT / "reports" / "threshold_analysis.md"
+REPORT = ROOT / "extended-validation" / "reports" / "threshold_analysis.md"
 FEATURES = MODEL_FEATURES
 
 
