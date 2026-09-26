@@ -35,7 +35,7 @@ The benchmark CSV is intentionally not committed to the repository.
     python src/calibration_audit.py
     python src/feature_ablation.py
 
-The current v1 model uses the shared feature contract in `src/features.py` and the raw-vs-engineered ablation in `src/feature_ablation.py` to justify the added signals. It adds temperature delta and mechanical power deterministically from raw operating inputs.
+The current v1 model uses the shared feature contract in `src/features.py` and the raw-vs-engineered ablation in `src/feature_ablation.py` to justify the added signals. The Streamlit console trains through `src/console_models.py` so the UI reuses the same canonical model architecture rather than duplicating model definitions. It adds temperature delta and mechanical power deterministically from raw operating inputs.
 
 ## Test
 
