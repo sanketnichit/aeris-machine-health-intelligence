@@ -22,6 +22,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
+from features import BASE_FEATURES
 from load_data import load_raw
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -31,14 +32,7 @@ REPORT_PATH = PROJECT_ROOT / "reports" / "baseline_metrics.md"
 def main() -> None:
     df = load_raw()
 
-    feature_cols = [
-        "type",
-        "air_temp_k",
-        "process_temp_k",
-        "rot_speed_rpm",
-        "torque_nm",
-        "tool_wear_min",
-    ]
+    feature_cols = BASE_FEATURES
 
     X = df[feature_cols].copy()
     y = df["machine_failure"].copy()
