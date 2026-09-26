@@ -12,14 +12,7 @@ from load_data import load_raw
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "error_analysis.md"
 
-FEATURES = [
-    "type",
-    "air_temp_k",
-    "process_temp_k",
-    "rot_speed_rpm",
-    "torque_nm",
-    "tool_wear_min",
-]
+FEATURES = MODEL_FEATURES
 MODES = ["twf", "hdf", "pwf", "osf", "rnf"]
 
 
