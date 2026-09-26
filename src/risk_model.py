@@ -128,7 +128,7 @@ def main() -> None:
         "For the same held-out test set:\n\n",
         f"- Sigmoid calibration Brier score: **{sigmoid_brier:.5f}**\n",
         f"- Isotonic calibration Brier score: **{isotonic_brier:.5f}**\n\n",
-        "Sigmoid was retained for v1 because the mapping remains simpler and less flexible for a small positive class.\n\n",
+        "Sigmoid was retained for v1 because the mapping is simpler and less flexible for a small positive class.\n\n",
         "## Decision threshold\n\n",
         "A threshold is a deployment decision, not a property of the trained model.\n\n",
         "Using out-of-fold predictions from the training partition, the raw-model thresholds below produced the following untouched-test results:\n\n",
