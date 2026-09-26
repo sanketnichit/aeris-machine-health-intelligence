@@ -14,16 +14,12 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 import shap
-from sklearn.calibration import CalibratedClassifierCV
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.inspection import permutation_importance
 from sklearn.metrics import make_scorer, average_precision_score
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 from features import MODEL_FEATURES, add_engineered_features
+from models import build_hgb_pipeline, build_preprocessor
 from load_data import load_raw
 
 
@@ -46,39 +42,8 @@ def main() -> None:
         stratify=y,
     )
 
-    preprocessor = ColumnTransformer(
-        transformers=[
-            (
-                "categorical",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-                ["type"],
-            ),
-            ("numeric", "passthrough", FEATURES[1:]),
-        ]
-    )
+    preprocessor = build_preprocessor()
 
-    tree_model = HistGradientBoostingClassifier(
-        max_iter=300,
-        learning_rate=0.06,
-        max_leaf_nodes=31,
-        l2_regularization=1.0,
-        random_state=42,
-    )
-
-    base_pipeline = Pipeline(
-        steps=[
-            ("preprocessor", preprocessor),
-            ("model", tree_model),
-        ]
-    )
-
-    calibrated = CalibratedClassifierCV(
-        base_pipeline,
-        method="sigmoid",
-        cv=5,
-        n_jobs=-1,
-    )
-    calibrated.fit(X_train, y_train)
 
     # Permutation importance on the final held-out test set.
     scorer = make_scorer(
@@ -104,7 +69,7 @@ def main() -> None:
     ).sort_values("importance_mean", ascending=False)
 
     # SHAP on the fitted underlying tree model, using an unseen test subset.
-    fitted_pre = preprocessor.fit(X_train, y_train)
+    fitted_pre = build_preprocessor().fit(X_train, y_train)
     transformed_train = fitted_pre.transform(X_train)
     transformed_test = fitted_pre.transform(X_test)
 
