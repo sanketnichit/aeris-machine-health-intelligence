@@ -32,3 +32,27 @@ def test_engineered_features_are_deterministic():
         "temp_delta_k",
         "mechanical_power_kw",
     ]
+
+
+def test_engineered_feature_function_does_not_mutate_input():
+    source = pd.DataFrame(
+        {
+            "type": ["L"],
+            "air_temp_k": [300.0],
+            "process_temp_k": [310.0],
+            "rot_speed_rpm": [1500],
+            "torque_nm": [40.0],
+            "tool_wear_min": [100],
+        }
+    )
+
+    original_columns = list(source.columns)
+    original_values = source.copy(deep=True)
+
+    result = add_engineered_features(source)
+
+    assert list(source.columns) == original_columns
+    pd.testing.assert_frame_equal(source, original_values)
+    assert result is not source
+    assert "temp_delta_k" in result.columns
+    assert "mechanical_power_kw" in result.columns
