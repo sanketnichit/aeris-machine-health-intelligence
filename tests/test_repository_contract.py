@@ -59,3 +59,15 @@ def test_gitignore_keeps_committed_figures_trackable():
     gitignore = (ROOT / ".gitignore").read_text(encoding="utf-8")
     assert "figures/*.png" not in gitignore
     assert "figures/01_class_balance.svg" not in gitignore
+
+
+def test_dataset_setup_contract():
+    script = ROOT / "scripts/download_dataset.py"
+    assert script.is_file()
+
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    dataset_readme = (ROOT / "data/README.md").read_text(encoding="utf-8")
+
+    assert "python scripts/download_dataset.py" in readme
+    assert "python scripts/download_dataset.py" in dataset_readme
+    assert "data/ai4i2020.csv" in dataset_readme
