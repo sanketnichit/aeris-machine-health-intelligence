@@ -4,7 +4,7 @@
 
 Say:
 
-> "AERIS is an explainable predictive-maintenance prototype. It takes a machine operating state and estimates failure risk, then shows which input signals are driving the model and which benchmark failure modes deserve attention."
+> "AERIS is an explainable predictive-maintenance prototype. It takes a machine operating state, derives two engineering signals from those inputs, estimates failure risk, then shows which signals are driving the model and which benchmark failure modes deserve attention."
 
 ## 10-25 seconds — input
 
@@ -16,6 +16,8 @@ Use this held-out test-set failure example:
 - Rotational speed: **1312 rpm**
 - Torque: **65.3 Nm**
 - Tool wear: **192 min**
+- Derived temperature delta: **9.1 K**
+- Derived mechanical power: **9.0 kW**
 
 This is an actual observation from the untouched benchmark test partition. Do not edit the values during the demo.
 
@@ -26,6 +28,9 @@ Point to:
 - failure-risk score
 - current state
 - alert threshold
+- derived engineering signals
+
+For the current v1 model, this observation scores about **93.1%** risk.
 
 Say:
 
@@ -37,7 +42,7 @@ Point to the SHAP chart.
 
 Say:
 
-> "This is the local explanation. Positive contributions push the underlying model toward the failure class; negative contributions push it away. These are model attributions, not claims of physical causality."
+> "This is the local explanation. Positive contributions push the underlying tree model toward the failure class; negative contributions push it away. These are model attributions, not claims of physical causality."
 
 ## 65-80 seconds — failure modes
 
@@ -51,7 +56,7 @@ Say:
 
 Finish with:
 
-> "The interesting part is not the dashboard. It is the evaluation discipline behind it: severe class imbalance, PR-AUC as the primary metric, held-out testing, probability calibration, threshold analysis, leakage controls and explicit dataset limitations."
+> "The interesting part is not the dashboard. It is the evaluation discipline behind it: severe class imbalance, PR-AUC as the primary metric, held-out testing, probability calibration, threshold analysis, leakage controls, engineering-derived features and explicit dataset limitations."
 
 ## Backup example
 
@@ -63,5 +68,7 @@ For a low-risk demonstration:
 - Rotational speed: **1576 rpm**
 - Torque: **32.7 Nm**
 - Tool wear: **83 min**
+- Derived temperature delta: **11.0 K**
+- Derived mechanical power: **5.4 kW**
 
-This observation is also from the untouched test partition and is labelled non-failure in the benchmark.
+This observation is also from the untouched test partition, is labelled non-failure in the benchmark, and scores about **0.07%** risk with the current v1 model.
