@@ -2,13 +2,15 @@
 
 ## Environment
 
-Recommended: Python 3.12+.
+Recommended: Python 3.12.x for the pinned validation environment.
 
 Windows PowerShell:
 
     py -m venv .venv
     .\.venv\Scripts\Activate.ps1
     pip install -r requirements.txt
+
+The direct dependencies are pinned to the versions used by the CI validation environment.
 
 ## Dataset
 
