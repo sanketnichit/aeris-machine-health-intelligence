@@ -69,9 +69,12 @@ aeris-machine-health-intelligence/
 │   ├── model_comparison.md
 │   ├── risk_model.md
 │   ├── failure_mode_attribution.md
-│   └── explainability.md
+│   ├── explainability.md
+│   ├── threshold_analysis.md
+│   └── subgroup_audit.md
 ├── docs/
-│   └── engineering_decisions.md
+│   ├── engineering_decisions.md
+│   └── model_card.md
 ├── app.py
 ├── requirements.txt
 └── README.md
@@ -115,9 +118,10 @@ python src/model_comparison.py
 python src/risk_model.py
 python src/failure_mode_attribution.py
 python src/explain_model.py
+python src/evaluate_thresholds.py
 ```
 
-The EDA command writes six PNG figures to `figures/`.
+The EDA command writes six PNG figures to figures/. The threshold evaluation writes the calibration and precision-recall plots there as well.
 
 ### Run the engineering console
 
@@ -129,7 +133,7 @@ The console lets you enter a machine operating state and inspect the calibrated 
 
 ## Current verified results
 
-The current held-out evaluation uses an 80/20 stratified split with model selection on the training portion only. HistGradientBoosting produced PR-AUC **0.843** on the final test set. After sigmoid probability calibration, the risk model produced **0.849 PR-AUC, 0.926 precision, 0.735 recall, 0.820 F1, and 0.0108 Brier score** at the 0.50 decision threshold.
+The current held-out evaluation uses an 80/20 stratified split with model selection on the training portion only. HistGradientBoosting produced PR-AUC **0.843** on the final test set. After sigmoid probability calibration, the risk model produced **0.849 PR-AUC, 0.926 precision, 0.735 recall, 0.820 F1, and 0.0108 Brier score** at the 0.50 decision threshold. A threshold study and product-type subgroup audit are included so the project does not hide the precision/recall trade-off or small-sample uncertainty.
 
 See `reports/model_comparison.md`, `reports/risk_model.md`, and `reports/explainability.md` for the full experiment record.
 
