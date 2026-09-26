@@ -2,14 +2,13 @@
 AERIS - threshold and calibration evaluation.
 
 Thresholds are selected from out-of-fold training predictions only, then
-evaluated on the untouched test set. Calibration is evaluated separately.
+evaluated on the untouched test partition. Calibration is evaluated separately.
 """
+
 from pathlib import Path
 
 import matplotlib
-
 matplotlib.use("Agg")
-
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.calibration import CalibratedClassifierCV, calibration_curve
@@ -27,31 +26,27 @@ from sklearn.model_selection import StratifiedKFold, cross_val_predict, train_te
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
+from features import MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
 
 
 ROOT = Path(__file__).resolve().parents[1]
 FIGURES = ROOT / "figures"
 REPORT = ROOT / "reports" / "threshold_analysis.md"
-
-FEATURES = [
-    "Type",
-    "Air temperature [K]",
-    "Process temperature [K]",
-    "Rotational speed [rpm]",
-    "Torque [Nm]",
-    "Tool wear [min]",
-]
+FEATURES = MODEL_FEATURES
 
 
 def build_base_model() -> Pipeline:
     pre = ColumnTransformer(
         [
-            ("cat", OneHotEncoder(handle_unknown="ignore", sparse_output=False), ["Type"]),
+            (
+                "cat",
+                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
+                ["type"],
+            ),
             ("num", "passthrough", FEATURES[1:]),
         ]
     )
-
     model = HistGradientBoostingClassifier(
         max_iter=300,
         learning_rate=0.06,
@@ -63,9 +58,9 @@ def build_base_model() -> Pipeline:
 
 
 def main() -> None:
-    df = load_raw()
+    df = add_engineered_features(load_raw())
     X = df[FEATURES]
-    y = df["Machine failure"]
+    y = df["machine_failure"]
 
     X_train, X_test, y_train, y_test = train_test_split(
         X,
@@ -88,7 +83,6 @@ def main() -> None:
     )[:, 1]
 
     precision, recall, thresholds = precision_recall_curve(y_train, oof_prob)
-
     candidates = []
     for beta in (0.5, 1.0, 2.0):
         f_beta = (
