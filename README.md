@@ -147,6 +147,7 @@ aeris-machine-health-intelligence/
 - [x] Shared model-architecture contract tests
 - [x] Engineering-feature unit test
 - [x] Data-contract tests + CI
+- [x] Shared console model bundle + runtime test
 
 ## Evaluation discipline
 
@@ -191,7 +192,7 @@ The threshold evaluation writes the calibration and precision-recall plots to `f
 streamlit run app.py
 ```
 
-The console lets you enter a machine operating state and inspect the calibrated failure risk, model explanation, derived engineering signals, and HDF/PWF/OSF mode scores.
+The console trains its inference bundle through `src/console_models.py`, which reuses the canonical calibrated HGB, explanation-tree and failure-mode model builders. UI input limits follow the observed AI4I benchmark ranges.
 
 ## Current verified results
 
