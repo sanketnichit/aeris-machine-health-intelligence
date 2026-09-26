@@ -6,10 +6,9 @@ import io
 import sys
 import urllib.error
 import urllib.request
-import zipfile
 from pathlib import Path
 
-DATASET_URL = "https://archive.ics.uci.edu/static/public/601/ai4i2020.zip"
+DATASET_URL = "https://archive.ics.uci.edu/ml/machine-learning-databases/00601/ai4i2020.csv"
 EXPECTED_FILENAME = "ai4i2020.csv"
 EXPECTED_HEADER = [
     "UDI",
@@ -42,7 +41,11 @@ def parse_args() -> argparse.Namespace:
 
 
 def validate_csv_bytes(csv_bytes: bytes) -> None:
-    with io.TextIOWrapper(io.BytesIO(csv_bytes), encoding="utf-8-sig", newline="") as stream:
+    with io.TextIOWrapper(
+        io.BytesIO(csv_bytes),
+        encoding="utf-8-sig",
+        newline="",
+    ) as stream:
         reader = csv.reader(stream)
         header = next(reader, None)
 
@@ -70,7 +73,7 @@ def main() -> int:
 
     try:
         with urllib.request.urlopen(request, timeout=30) as response:
-            archive_bytes = response.read()
+            csv_bytes = response.read()
     except urllib.error.URLError as exc:
         print(
             f"Could not download the dataset from UCI: {exc}",
@@ -79,24 +82,12 @@ def main() -> int:
         return 1
 
     try:
-        with zipfile.ZipFile(io.BytesIO(archive_bytes)) as archive:
-            matches = [
-                info
-                for info in archive.infolist()
-                if Path(info.filename).name.lower() == EXPECTED_FILENAME
-            ]
-
-            if len(matches) != 1:
-                raise RuntimeError(
-                    f"Expected exactly one {EXPECTED_FILENAME} in the UCI archive; "
-                    f"found {len(matches)}."
-                )
-
-            csv_bytes = archive.read(matches[0])
-
         validate_csv_bytes(csv_bytes)
-    except (zipfile.BadZipFile, KeyError, RuntimeError, StopIteration) as exc:
-        print(f"Downloaded UCI archive is not the expected AI4I dataset: {exc}", file=sys.stderr)
+    except RuntimeError as exc:
+        print(
+            f"Downloaded file is not the expected AI4I dataset: {exc}",
+            file=sys.stderr,
+        )
         return 1
 
     temp_path = output_path.with_suffix(".csv.tmp")
