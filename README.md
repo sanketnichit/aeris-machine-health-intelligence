@@ -1,16 +1,16 @@
 # AERIS — Machine Health Intelligence
 
-**Explainable fault detection and failure-risk scoring for industrial equipment.**
+**Explainable fault detection and calibrated failure-risk scoring for industrial equipment.**
 
-AERIS is a focused predictive-maintenance project built around the **AI4I 2020 Predictive Maintenance Dataset**. The project intentionally prioritizes a small, rigorous end-to-end ML pipeline over a large collection of loosely validated features.
+AERIS is a focused predictive-maintenance project built around the **AI4I 2020 Predictive Maintenance Dataset**. The project intentionally prioritizes a small, auditable end-to-end ML pipeline over a large collection of loosely validated features.
 
 ## Project scope
 
 ### Core
 1. **Fault detection** — classify whether a machine observation indicates failure.
-2. **Risk scoring + explanation** — produce a calibrated failure-risk score and explain the prediction using model-derived feature importance.
+2. **Risk scoring + explanation** — produce a calibrated failure-risk score and explain the model response.
 3. **One engineering visualization** — a compact Machine Health Console for inspecting risk, predicted state and contributing factors.
-4. **Failure-mode attribution (secondary)** — show multi-label likelihoods for HDF, PWF and OSF only; sparse/unstable TWF and RNF are explicitly deferred.
+4. **Failure-mode attribution (secondary)** — expose HDF, PWF and OSF separately; TWF and RNF remain deferred because their benchmark signals are weak/unstable.
 
 ### Explicitly out of scope for v1
 - Remaining-useful-life (RUL) modelling
@@ -30,11 +30,11 @@ UCI Machine Learning Repository, dataset ID 601.
 Source: https://doi.org/10.24432/C5HS5C  
 License: CC BY 4.0
 
-The dataset contains 10,000 machine observations with process variables, product type, a machine-failure target, and failure-mode indicators. The raw CSV is kept outside the repository's first commit; place it under data/ai4i2020.csv before running the scripts.
+The dataset contains 10,000 machine observations with process variables, product type, a machine-failure target, and failure-mode indicators. The raw CSV is kept outside the repository's first commit; place it under `data/ai4i2020.csv` before running the scripts.
 
 ## Why AI4I instead of C-MAPSS?
 
-C-MAPSS is a stronger benchmark for temporal degradation and RUL prediction, but it introduces substantially more sequence-processing and evaluation complexity. AERIS uses AI4I for v1 so the project can establish a trustworthy detection → classification → explanation pipeline first.
+C-MAPSS is stronger for temporal degradation and RUL work, but it introduces substantially more sequence-processing and evaluation complexity. AERIS uses AI4I for v1 so the project can establish a trustworthy detection → risk scoring → explanation workflow first.
 
 C-MAPSS/RUL is deliberately reserved for future work. AI4I is synthetic, so its results are a controlled benchmark, not evidence about a real machine fleet.
 
@@ -53,6 +53,17 @@ Current validation found **3.39% positive machine-failure labels**, making this 
 
 A documented target/flag inconsistency exists in 27 rows; AERIS reports this instead of silently rewriting the source labels.
 
+## Feature design
+
+AERIS uses six observed operating signals plus two deterministic engineering-derived features:
+
+- `temp_delta_k` = process temperature − air temperature
+- `mechanical_power_kw` = torque × rotational speed / 9549.2966
+
+These transformations use only observed inputs. They do not use machine-failure or failure-mode labels.
+
+The derived features materially improve the AI4I benchmark results, but the project treats that improvement cautiously because synthetic datasets can encode structured relationships between inputs and labels.
+
 ## Repository structure
 
 ```
@@ -66,7 +77,9 @@ aeris-machine-health-intelligence/
 ├── data/
 │   └── README.md
 ├── src/
+│   ├── __init__.py
 │   ├── load_data.py
+│   ├── features.py
 │   ├── validate_data.py
 │   ├── eda.py
 │   ├── train_baseline.py
@@ -74,7 +87,12 @@ aeris-machine-health-intelligence/
 │   ├── risk_model.py
 │   ├── failure_mode_attribution.py
 │   ├── explain_model.py
-│   └── evaluate_thresholds.py
+│   ├── evaluate_thresholds.py
+│   ├── uncertainty_audit.py
+│   ├── split_sensitivity.py
+│   ├── error_analysis.py
+│   ├── feature_stability.py
+│   └── calibration_audit.py
 ├── reports/
 │   ├── data_validation.md
 │   ├── model_comparison.md
@@ -82,14 +100,21 @@ aeris-machine-health-intelligence/
 │   ├── threshold_analysis.md
 │   ├── failure_mode_attribution.md
 │   ├── explainability.md
-│   └── subgroup_audit.md
+│   ├── subgroup_audit.md
+│   ├── uncertainty_audit.md
+│   ├── split_sensitivity.md
+│   ├── error_analysis.md
+│   ├── feature_stability.md
+│   └── calibration_audit.md
 ├── docs/
 │   ├── engineering_decisions.md
 │   ├── model_card.md
 │   └── demo_script.md
 ├── figures/
 └── tests/
-    └── test_data_contract.py
+    ├── test_data_contract.py
+    ├── test_features.py
+    └── test_model_smoke.py
 ```
 
 ## Current status
@@ -100,31 +125,35 @@ aeris-machine-health-intelligence/
 - [x] Exploratory data analysis
 - [x] Binary Random Forest baseline
 - [x] 3-model comparison with held-out test set
+- [x] Engineering-derived feature evaluation
 - [x] HistGradientBoosting selected for v1
 - [x] Sigmoid-calibrated risk model
 - [x] Failure-mode feasibility analysis
 - [x] Permutation importance + SHAP explanations
 - [x] Machine Health Console
 - [x] Threshold/calibration analysis
-- [x] Subgroup audit
-- [x] Stratified bootstrap uncertainty/error audit
+- [x] Product-type subgroup audit
+- [x] Stratified bootstrap uncertainty audit
 - [x] Fixed-model split-sensitivity audit
 - [x] Held-out error analysis
 - [x] Feature-importance stability audit
 - [x] Subgroup/risk-bin calibration audit
+- [x] Model pipeline smoke test
+- [x] Engineering-feature unit test
 - [x] Data-contract tests + CI
 
-## Planned modelling sequence
+## Evaluation discipline
 
-The project will be built in the following order:
+The primary evaluation uses one stratified 80/20 seed-42 train/test split.
 
-1. Get one complete baseline model working end-to-end.
-2. Compare model families using stratified cross-validation on the training set.
-3. Select HistGradientBoosting based on cross-validated PR-AUC and held-out behaviour.
-4. Calibrate the selected model's probabilities for the risk score.
-5. Add feature-level explanations; start with permutation importance, then SHAP.
-6. Add the secondary multi-label failure-mode attribution layer only where the data supports it.
-7. Build one focused visualization.
+Model selection uses 5-fold stratified cross-validation on the training partition. The final test partition is not used to tune the model.
+
+Secondary audits are deliberately downstream robustness checks:
+- bootstrap intervals quantify sampling uncertainty around the seed-42 test metrics
+- five alternate stratified splits measure sensitivity to the test partition
+- calibration audits inspect risk behaviour by subgroup and operating regime
+- feature-stability audits measure whether importance rankings persist across splits
+- error analysis remains descriptive and does not trigger hidden threshold tuning
 
 ## Running the current pipeline
 
@@ -147,7 +176,7 @@ python src/calibration_audit.py
 pytest -q
 ```
 
-The EDA command writes six PNG figures to figures/. The threshold evaluation writes the calibration and precision-recall plots there as well.
+The threshold evaluation writes the calibration and precision-recall plots to `figures/`.
 
 ### Run the engineering console
 
@@ -155,16 +184,36 @@ The EDA command writes six PNG figures to figures/. The threshold evaluation wri
 streamlit run app.py
 ```
 
-The console lets you enter a machine operating state and inspect the calibrated failure risk, model explanation, and HDF/PWF/OSF mode scores.
+The console lets you enter a machine operating state and inspect the calibrated failure risk, model explanation, derived engineering signals, and HDF/PWF/OSF mode scores.
 
 ## Current verified results
 
-The current held-out evaluation uses an 80/20 stratified split with model selection on the training portion only. HistGradientBoosting produced PR-AUC **0.843** on the final test set. After sigmoid probability calibration, the risk model produced **0.849 PR-AUC, 0.926 precision, 0.735 recall, 0.820 F1, and 0.0108 Brier score** at the 0.50 decision threshold. A threshold study, product-type subgroup audit, stratified bootstrap intervals, and split-sensitivity audit are included so the project does not hide the precision/recall trade-off or small-sample uncertainty. The five-split robustness audit reports mean PR-AUC **0.825 ± 0.036** and mean F1 **0.762 ± 0.041** for the fixed v1 model at the 0.50 threshold; the seed-42 split remains the primary held-out evaluation for consistency.
+Primary seed-42 held-out risk-model result:
 
-See `reports/model_comparison.md`, `reports/risk_model.md`, `reports/threshold_analysis.md`, `reports/explainability.md`, `reports/subgroup_audit.md`, `reports/uncertainty_audit.md`, `reports/split_sensitivity.md`, `reports/error_analysis.md`, `reports/feature_stability.md`, and `reports/calibration_audit.md` for the full experiment record. See `docs/model_card.md` for intended use and limitations, and `docs/demo_script.md` for the recruiter/interview demo.
+- **PR-AUC: 0.899**
+- **Precision @ 0.50: 0.965**
+- **Recall @ 0.50: 0.809**
+- **F1 @ 0.50: 0.880**
+- **Brier score: 0.0075**
+
+The held-out error profile at the 0.50 threshold is **55 true positives, 2 false positives, 13 false negatives and 1,930 true negatives**.
+
+The 95% stratified bootstrap intervals are:
+- PR-AUC: **[0.835, 0.953]**
+- Precision: **[0.915, 1.000]**
+- Recall: **[0.721, 0.897]**
+- F1: **[0.817, 0.938]**
+- Brier: **[0.0050, 0.0102]**
+
+Across five fixed-model stratified splits, mean PR-AUC is **0.881 ± 0.025** and mean F1 is **0.836 ± 0.057** at the 0.50 calibrated threshold.
+
+The model comparison, threshold study, subgroup audit, explainability record, uncertainty audit, split-sensitivity audit, error analysis, feature-stability audit, and calibration audit are all retained in `reports/`.
+
+See `docs/model_card.md` for intended use and limitations, `docs/engineering_decisions.md` for the reasoning record, and `docs/demo_script.md` for the recruiter/interview demo.
 
 ## Future work
 
+- real industrial time-series validation
 - NASA C-MAPSS run-to-failure / RUL extension
 - temporal degradation modelling
 - counterfactual what-if analysis
