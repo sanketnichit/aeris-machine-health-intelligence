@@ -35,7 +35,6 @@ def build_model(features: list[str]):
 
 
 def evaluate(
-    name: str,
     df: pd.DataFrame,
     features: list[str],
     train_idx,
@@ -97,7 +96,6 @@ def main() -> None:
 
     results = {
         "Raw operating features": evaluate(
-            "raw",
             df,
             RAW_FEATURES,
             train_idx,
@@ -106,7 +104,6 @@ def main() -> None:
             y.loc[test_idx],
         ),
         "Raw + engineered features": evaluate(
-            "engineered",
             df,
             ENGINEERED_FEATURES,
             train_idx,
