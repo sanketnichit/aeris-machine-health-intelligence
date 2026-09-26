@@ -92,7 +92,8 @@ aeris-machine-health-intelligence/
 │   ├── split_sensitivity.py
 │   ├── error_analysis.py
 │   ├── feature_stability.py
-│   └── calibration_audit.py
+│   ├── calibration_audit.py
+│   └── feature_ablation.py
 ├── reports/
 │   ├── data_validation.md
 │   ├── model_comparison.md
@@ -105,7 +106,8 @@ aeris-machine-health-intelligence/
 │   ├── split_sensitivity.md
 │   ├── error_analysis.md
 │   ├── feature_stability.md
-│   └── calibration_audit.md
+│   ├── calibration_audit.md
+│   └── feature_ablation.md
 ├── docs/
 │   ├── engineering_decisions.md
 │   ├── model_card.md
@@ -126,6 +128,7 @@ aeris-machine-health-intelligence/
 - [x] Binary Random Forest baseline
 - [x] 3-model comparison with held-out test set
 - [x] Engineering-derived feature evaluation
+- [x] Raw-vs-engineered feature ablation
 - [x] HistGradientBoosting selected for v1
 - [x] Sigmoid-calibrated risk model
 - [x] Failure-mode feasibility analysis
@@ -173,6 +176,7 @@ python src/split_sensitivity.py
 python src/error_analysis.py
 python src/feature_stability.py
 python src/calibration_audit.py
+python src/feature_ablation.py
 pytest -q
 ```
 
@@ -207,7 +211,7 @@ The 95% stratified bootstrap intervals are:
 
 Across five fixed-model stratified splits, mean PR-AUC is **0.881 ± 0.025** and mean F1 is **0.836 ± 0.057** at the 0.50 calibrated threshold.
 
-The model comparison, threshold study, subgroup audit, explainability record, uncertainty audit, split-sensitivity audit, error analysis, feature-stability audit, and calibration audit are all retained in `reports/`.
+The model comparison, feature ablation, threshold study, subgroup audit, explainability record, uncertainty audit, split-sensitivity audit, error analysis, feature-stability audit, and calibration audit are all retained in `reports/`.
 
 See `docs/model_card.md` for intended use and limitations, `docs/engineering_decisions.md` for the reasoning record, and `docs/demo_script.md` for the recruiter/interview demo.
 
