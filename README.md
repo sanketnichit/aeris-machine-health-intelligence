@@ -145,6 +145,7 @@ aeris-machine-health-intelligence/
 - [x] Subgroup/risk-bin calibration audit
 - [x] Model pipeline smoke test
 - [x] Shared model-architecture contract tests
+- [x] Reproducibility audit + pinned direct dependencies
 - [x] Engineering-feature unit test
 - [x] Data-contract tests + CI
 - [x] Shared console model bundle + runtime test
@@ -217,7 +218,9 @@ Across five fixed-model stratified splits, mean PR-AUC is **0.881 ± 0.025** and
 
 The model comparison, feature ablation, threshold study, subgroup audit, explainability record, uncertainty audit, split-sensitivity audit, error analysis, feature-stability audit, and calibration audit are all retained in `reports/`.
 
-See `docs/model_card.md` for intended use and limitations, `docs/engineering_decisions.md` for the reasoning record, and `docs/demo_script.md` for the recruiter/interview demo.
+See `docs/model_card.md` for intended use and limitations, `docs/engineering_decisions.md` for the reasoning record, and `docs/reproducibility_audit.md` for the numerical reproduction audit.
+
+See `docs/demo_script.md` for the recruiter/interview demo.
 
 ## Future work
 
