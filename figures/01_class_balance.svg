@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+<rect width="720" height="420" fill="#ffffff"/>
+<text x="360" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#111827">Class balance: machine failure</text>
+<text x="360" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#6b7280">AI4I 2020 benchmark · 10,000 observations</text>
+<line x1="90" y1="345" x2="675" y2="345" stroke="#9ca3af"/>
+<line x1="90" y1="100" x2="90" y2="345" stroke="#9ca3af"/>
+<rect x="170" y="113" width="150" height="232" rx="6" fill="#0f766e"/>
+<rect x="430" y="336" width="150" height="9" rx="4" fill="#ef4444"/>
+<text x="245" y="100" text-anchor="middle" font-family="Arial,sans-serif" font-size="20" font-weight="700" fill="#111827">9,661</text>
+<text x="505" y="325" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#111827">339</text>
+<text x="245" y="375" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#374151">No failure</text>
+<text x="505" y="375" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" fill="#374151">Failure</text>
+<text x="245" y="398" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#6b7280">96.61%</text>
+<text x="505" y="398" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#6b7280">3.39%</text>
+</svg>
