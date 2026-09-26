@@ -34,7 +34,7 @@ RAW_FEATURES = [
     "Torque [Nm]",
     "Tool wear [min]",
 ]
-MODES = ["HDF", "PWF", "OSF"]
+MODES = ["hdf", "pwf", "osf"]
 RISK_THRESHOLD = 0.50
 
 # Primary seed-42 held-out evaluation for the current engineered-feature model.
@@ -74,7 +74,7 @@ def train_models():
     df = add_engineered_features(raw)
 
     X = df[MODEL_FEATURES]
-    y = df["Machine failure"]
+    y = df["machine_failure"]
 
     X_train, _, y_train, _ = train_test_split(
         X,
@@ -176,7 +176,7 @@ def local_shap(
     type_total = 0.0
 
     for name, value in zip(names, values):
-        if name.startswith("categorical__Type_"):
+        if name.startswith("categorical__type_"):
             type_total += float(value)
         else:
             rows.append(
@@ -359,7 +359,7 @@ with right:
     mode_rows = []
     for mode, model in mode_models.items():
         score = float(model.predict_proba(app_row)[0, 1])
-        mode_rows.append({"Mode": mode, "Model score": score})
+        mode_rows.append({"Mode": mode.upper(), "Model score": score})
 
     mode_frame = pd.DataFrame(mode_rows)
     st.dataframe(
