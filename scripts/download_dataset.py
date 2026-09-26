@@ -4,6 +4,7 @@ import argparse
 import csv
 import io
 import sys
+import urllib.error
 import urllib.request
 import zipfile
 from pathlib import Path
