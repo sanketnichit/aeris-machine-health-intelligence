@@ -30,7 +30,16 @@ Excluded from prediction features:
 
 The failure-mode flags are target-side information and would make the binary model unrealistically easy.
 
-## 4. Evaluation
+## 4. Engineering feature design
+
+Two deterministic transformations are added to the six observed operating inputs:
+
+- temperature delta = process temperature - air temperature
+- mechanical power = torque × rotational speed / 9549.2966
+
+These transformations use only observed inputs. They were evaluated through training-only model comparison and then checked across independent held-out splits. The improvement is treated as benchmark evidence, not proof of physical causality.
+
+## 5. Evaluation
 
 The final seed-42 test set is held out once for the primary evaluation.
 
@@ -38,39 +47,46 @@ Model selection uses stratified cross-validation on the training set. Secondary 
 
 Primary metric is average precision because the failure class is rare. Precision, recall and F1 are reported alongside it. Accuracy is intentionally not the headline metric.
 
-## 5. Model choice
+## 6. Model choice
 
-HistGradientBoosting currently gives the strongest balance of cross-validated ranking performance and held-out classification performance among the tested baseline families.
+HistGradientBoosting currently gives the strongest held-out PR-AUC and a strong cross-validated precision/recall/F1 balance among the tested model families. Random Forest is close on cross-validated PR-AUC, so the selection is not based on a single metric in isolation.
 
 XGBoost is intentionally not a dependency for v1. A strong scikit-learn implementation is enough to establish the method.
 
-## 6. Risk score
+## 7. Risk score
 
 The model output is calibrated using sigmoid calibration. This converts the raw model score into a more useful probability-like risk estimate.
 
 The risk score is still a benchmark estimate, not a physical health measurement.
 
-## 7. Explainability
+## 8. Explainability
 
-Permutation importance is used for robust global feature ranking on the held-out test set.
+Permutation importance is used for robust global feature ranking.
 
-SHAP is added only after the core model is trusted and is used for local/global explanation. SHAP values are treated as model attribution, not physical causality.
+SHAP is used for local/global explanation after the core model is established. SHAP values are treated as model attribution, not physical causality. Correlated raw and derived features can share or redistribute attribution.
 
-## 8. Failure modes
+## 9. Failure modes
 
 AI4I can contain multiple failure flags for a single row. Therefore v1 does not force a single mutually exclusive diagnosis.
 
-HDF, PWF and OSF show enough cross-validated signal to expose as separate mode likelihoods. TWF and RNF are deferred because their benchmark signal is too weak/unstable.
+HDF, PWF and OSF show enough cross-validated signal to expose as separate mode likelihoods. TWF and RNF are deferred because their benchmark signal remains too weak/unstable.
 
-## 9. What would make v2 stronger?
-
-The highest-value next dataset is a real industrial time-series benchmark such as UCI MetroPT-3. The next modelling step would be temporal degradation/RUL work on C-MAPSS.
-
-Both are deliberately outside the application-deadline v1 scope.
-
+The very strong HDF benchmark result is not presented as evidence of physical root-cause understanding.
 
 ## 10. Uncertainty, calibration and feature stability
 
-AERIS reports uncertainty around held-out metrics with stratified bootstrap intervals and checks the fixed model across five independent stratified splits. The primary seed-42 evaluation remains the headline result for consistency. Held-out error analysis is descriptive only; it does not trigger hidden threshold tuning. The current error profile shows 18 false negatives and 4 false positives at the 0.50 calibrated threshold, with many false negatives carrying the TWF flag. This is treated as a limitation and future investigation point rather than a reason to overstate the current mode layer.
+AERIS reports uncertainty around held-out metrics with stratified bootstrap intervals and checks the fixed model across five independent stratified splits. The primary seed-42 evaluation remains the headline result for consistency.
 
-AERIS now checks three additional robustness questions: (1) how much held-out metric estimates move under stratified bootstrap resampling, (2) whether the calibrated risk score behaves similarly across product types and selected operating regimes, and (3) whether permutation-importance rankings remain broadly stable across five independent stratified splits. These checks are descriptive robustness audits, not additional tuning loops. They strengthen the evidence around the v1 model without changing the primary seed-42 evaluation.
+AERIS also checks:
+1. held-out metric uncertainty,
+2. calibration by product type and selected operating regimes,
+3. held-out error profiles,
+4. feature-importance stability across five splits.
+
+These checks are descriptive robustness audits, not additional tuning loops.
+
+## 11. What would make v2 stronger?
+
+The highest-value next datasets are real industrial time-series sources such as UCI MetroPT-3, followed by C-MAPSS for temporal degradation/RUL work.
+
+These are deliberately outside the application-deadline v1 scope.
