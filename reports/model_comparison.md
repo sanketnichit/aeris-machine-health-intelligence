@@ -1,26 +1,38 @@
 # Model Comparison
 
 ## Evaluation design
-
-- 80/20 stratified train/test split, random seed 42.
-- Model selection uses only 5-fold stratified cross-validation on the training partition.
-- The final test partition is not used for model selection.
-- Primary metric: average precision (PR-AUC/AP), because machine failures are rare.
+- 80/20 stratified train/test split (random seed 42).
+- Model selection uses only 5-fold stratified cross-validation on the training set.
+- The final test set is evaluated once after model selection.
+- Primary metric: average precision (PR-AUC/AP), because failures are rare.
 - Secondary metrics: precision, recall, F1 and ROC-AUC.
-- No failure-mode flags are used as input features; they are target-side information.
+- Logistic Regression uses numeric standardization; tree models use raw numeric scales.
+
+## Feature set
+
+AERIS v1 uses the six observed operating inputs plus two deterministic engineering-derived signals:
+
+- `temp_delta_k` = process temperature - air temperature
+- `mechanical_power_kw` = torque × rotational speed / 9549.2966
+
+The derived signals use only observed input variables and do not use machine-failure or failure-mode labels.
 
 ## Results
 
 | Model | CV PR-AUC | CV Recall | CV F1 | Test PR-AUC | Test Precision | Test Recall | Test F1 |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| **HistGradientBoosting** | **0.803 ± 0.038** | 0.646 | **0.726** | **0.843** | 0.873 | 0.706 | 0.780 |
-| Random Forest | 0.758 ± 0.026 | 0.384 | 0.544 | 0.773 | **0.935** | 0.426 | 0.586 |
-| Logistic Regression | 0.435 ± 0.028 | **0.804** | 0.235 | 0.396 | 0.144 | **0.824** | 0.245 |
+| HistGradientBoosting | 0.871 ± 0.030 | 0.727 | 0.810 | 0.895 | 0.931 | 0.794 | 0.857 |
+| Random Forest | 0.872 ± 0.029 | 0.668 | 0.792 | 0.857 | 0.941 | 0.706 | 0.807 |
+| Logistic Regression | 0.484 ± 0.025 | 0.823 | 0.274 | 0.466 | 0.177 | 0.868 | 0.294 |
 
-## Interpretation
+## Selection
 
-HistGradientBoosting is the current v1 model because it provides the strongest precision-recall ranking performance and a much better balance between missed failures and false alarms than the other tested baselines.
+HistGradientBoosting is the current model to carry forward. Random Forest is nearly tied on cross-validated PR-AUC, but HGB gives the stronger held-out PR-AUC and recall/F1 balance in this experiment.
 
-Random Forest is highly precise at the default 0.50 threshold but misses many failures. Logistic Regression catches more failures but produces an unacceptable false-alarm burden at that threshold.
+## Engineering interpretation
 
-The final AERIS risk score uses the HistGradientBoosting family with probability calibration.
+The derived features materially improve the benchmark model. This should be interpreted as a benchmark result, not proof that these two transformations are physically causal or sufficient for a real machine fleet. AI4I is synthetic, and its target generation can contain structured relationships between the operating variables and failure labels.
+
+## Next step
+
+Calibrate the selected model's probabilities for the risk score, then explain the prediction. Threshold selection remains a separate deployment decision from probability calibration.
