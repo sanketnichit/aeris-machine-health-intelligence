@@ -110,3 +110,56 @@ def test_loader_reports_missing_dataset_path(tmp_path):
         assert "ai4i2020.csv" in str(exc)
     else:
         raise AssertionError("load_raw should raise FileNotFoundError for a missing dataset")
+
+
+def test_validation_report_catches_basic_contract_violations():
+    from src.validate_data import validate
+
+    frame = pd.DataFrame(
+        [
+            {
+                "udi": 1,
+                "product_id": "L1",
+                "type": "L",
+                "air_temp_k": 300.0,
+                "process_temp_k": 299.0,
+                "rot_speed_rpm": 1500,
+                "torque_nm": 40.0,
+                "tool_wear_min": 10,
+                "machine_failure": 1,
+                "twf": 0,
+                "hdf": 0,
+                "pwf": 0,
+                "osf": 0,
+                "rnf": 0,
+            },
+            {
+                "udi": 1,
+                "product_id": "L1",
+                "type": "X",
+                "air_temp_k": 298.0,
+                "process_temp_k": 308.0,
+                "rot_speed_rpm": -1,
+                "torque_nm": -2.0,
+                "tool_wear_min": -3,
+                "machine_failure": 0,
+                "twf": 0,
+                "hdf": 0,
+                "pwf": 0,
+                "osf": 0,
+                "rnf": 0,
+            },
+        ]
+    )
+
+    report = validate(frame)
+
+    assert "Fully duplicated rows: 0" in report
+    assert "Duplicate UDI values: 1" in report
+    assert "rot_speed_rpm negative: 1" in report
+    assert "torque_nm negative: 1" in report
+    assert "tool_wear_min negative: 1" in report
+    assert "process_temp < air_temp: 1" in report
+    assert "Unique type values: ['L', 'X']" in report
+    assert "Rows where machine_failure disagrees with any failure-mode flag: 1" in report
+    assert "Failure (1): 1 (50.00%)" in report
