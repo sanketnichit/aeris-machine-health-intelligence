@@ -7,14 +7,11 @@ We only promote modes whose cross-validated signal is defensible.
 from pathlib import Path
 
 import pandas as pd
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.metrics import make_scorer, precision_score
 from sklearn.model_selection import StratifiedKFold, cross_validate
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 from features import MODEL_FEATURES, add_engineered_features
+from models import build_mode_pipeline
 from load_data import load_raw
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,35 +22,7 @@ FEATURES = MODEL_FEATURES
 ALL_MODES = ["twf", "hdf", "pwf", "osf", "rnf"]
 
 
-def build_pipeline() -> Pipeline:
-    preprocessor = ColumnTransformer(
-        transformers=[
-            (
-                "categorical",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-                ["type"],
-            ),
-            ("numeric", "passthrough", FEATURES[1:]),
-        ]
-    )
-
-    return Pipeline(
-        steps=[
-            ("preprocessor", preprocessor),
-            (
-                "model",
-                HistGradientBoostingClassifier(
-                    max_iter=250,
-                    learning_rate=0.06,
-                    max_leaf_nodes=31,
-                    l2_regularization=1.0,
-                    class_weight="balanced",
-                    random_state=42,
-                ),
-            ),
-        ]
-    )
-
+build_pipeline = build_mode_pipeline
 
 def main() -> None:
     df = add_engineered_features(load_raw())
