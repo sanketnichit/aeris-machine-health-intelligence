@@ -55,13 +55,7 @@ def main() -> None:
             (
                 "numeric",
                 "passthrough",
-                [
-                    "air_temp_k",
-                    "process_temp_k",
-                    "rot_speed_rpm",
-                    "torque_nm",
-                    "tool_wear_min",
-                ],
+                BASE_FEATURES[1:],
             ),
         ]
     )
