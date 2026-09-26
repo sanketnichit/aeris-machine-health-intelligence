@@ -26,9 +26,14 @@ from sklearn.model_selection import StratifiedKFold, cross_validate, train_test_
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-from features import MODEL_FEATURES, add_engineered_features
-from load_data import load_raw
-from models import build_hgb_pipeline
+try:
+    from .features import MODEL_FEATURES, add_engineered_features
+    from .load_data import load_raw
+    from .models import build_hgb_pipeline
+except ImportError:  # direct script execution from src/
+    from features import MODEL_FEATURES, add_engineered_features
+    from load_data import load_raw
+    from models import build_hgb_pipeline
 
 
 ROOT = Path(__file__).resolve().parents[1]
