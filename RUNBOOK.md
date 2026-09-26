@@ -7,7 +7,7 @@ Recommended: Python 3.12+.
 Windows PowerShell:
 
     py -m venv .venv
-    .\\.venv\\Scripts\\Activate.ps1
+    .\.venv\Scripts\Activate.ps1
     pip install -r requirements.txt
 
 ## Dataset
@@ -28,10 +28,19 @@ The benchmark CSV is intentionally not committed to the repository.
     python src/failure_mode_attribution.py
     python src/explain_model.py
     python src/evaluate_thresholds.py
+    python src/uncertainty_audit.py
+    python src/split_sensitivity.py
+    python src/error_analysis.py
+    python src/feature_stability.py
+    python src/calibration_audit.py
+
+The current v1 model uses the shared feature contract in `src/features.py`. It adds temperature delta and mechanical power deterministically from raw operating inputs.
 
 ## Test
 
     pytest -q
+
+The repository CI also runs Python compilation checks for `src/` and `app.py`.
 
 ## Launch the console
 
