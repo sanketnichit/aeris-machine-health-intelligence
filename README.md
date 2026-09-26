@@ -76,10 +76,10 @@ aeris-machine-health-intelligence/
 - [x] Data validation
 - [x] Class-balance analysis
 - [x] Exploratory data analysis
-- [ ] Binary failure-detection baseline
+- [x] Binary failure-detection baseline
 - [ ] Imbalance-aware model comparison
 - [ ] Failure-mode classifier
-- [ ] Feature-importance explanations
+- [x] First-pass feature importance
 - [ ] Machine Health Console
 
 ## Planned modelling sequence
