@@ -40,7 +40,7 @@ def build_preprocessor() -> ColumnTransformer:
         [
             (
                 "categorical",
-                OneHotEncoder(handle_unknown="ignore"),
+                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
                 ["Type"],
             ),
             ("numeric", "passthrough", FEATURES[1:]),
