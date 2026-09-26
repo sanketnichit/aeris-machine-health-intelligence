@@ -10,9 +10,14 @@ import pandas as pd
 from sklearn.metrics import make_scorer, precision_score
 from sklearn.model_selection import StratifiedKFold, cross_validate
 
-from features import MODEL_FEATURES, add_engineered_features
-from models import build_mode_pipeline
-from load_data import load_raw
+try:
+    from .features import MODEL_FEATURES, add_engineered_features
+    from .models import build_mode_pipeline
+    from .load_data import load_raw
+except ImportError:  # direct script execution from src/
+    from features import MODEL_FEATURES, add_engineered_features
+    from models import build_mode_pipeline
+    from load_data import load_raw
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "failure_mode_attribution.md"
