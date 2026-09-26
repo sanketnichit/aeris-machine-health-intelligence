@@ -169,7 +169,7 @@ def main() -> None:
         "|---|---:|---:|---:|---:|---:|---:|---:|\n",
     ]
 
-    for _, row in result.sort_values("model").iterrows():
+    for _, row in result.sort_values("cv_pr_auc_mean", ascending=False).iterrows():
         lines.append(
             f"| {row['model']} | "
             f"{row['cv_pr_auc_mean']:.3f} ± {row['cv_pr_auc_std']:.3f} | "
