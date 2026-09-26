@@ -9,6 +9,23 @@ import pandas as pd
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 RAW_PATH = PROJECT_ROOT / "data" / "ai4i2020.csv"
 
+REQUIRED_NORMALIZED_COLUMNS = {
+    "udi",
+    "product_id",
+    "type",
+    "air_temp_k",
+    "process_temp_k",
+    "rot_speed_rpm",
+    "torque_nm",
+    "tool_wear_min",
+    "machine_failure",
+    "twf",
+    "hdf",
+    "pwf",
+    "osf",
+    "rnf",
+}
+
 RENAME_MAP = {
     "UDI": "udi",
     "Product ID": "product_id",
@@ -36,7 +53,17 @@ def load_raw(path: str | Path = RAW_PATH) -> pd.DataFrame:
         )
 
     df = pd.read_csv(path, encoding="utf-8-sig")
-    return df.rename(columns=RENAME_MAP)
+    normalized = df.rename(columns=RENAME_MAP)
+
+    missing = REQUIRED_NORMALIZED_COLUMNS.difference(normalized.columns)
+    if missing:
+        missing_list = ", ".join(sorted(missing))
+        raise ValueError(
+            "Dataset is missing required AI4I columns after normalization: "
+            f"{missing_list}"
+        )
+
+    return normalized
 
 
 if __name__ == "__main__":
