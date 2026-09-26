@@ -89,7 +89,11 @@ AERIS also checks:
 
 These checks are descriptive robustness audits, not additional tuning loops.
 
-## 12. What would make v2 stronger?
+## 12. Reproducibility
+
+The direct dependencies are pinned to the GitHub Actions validation environment, and `docs/reproducibility_audit.md` records the regenerated benchmark metrics, threshold results, calibration checks, robustness intervals and failure-mode feasibility results. The benchmark CSV remains external to the repository by design.
+
+## 13. What would make v2 stronger?
 
 The highest-value next datasets are real industrial time-series sources such as UCI MetroPT-3, followed by C-MAPSS for temporal degradation/RUL work.
 
