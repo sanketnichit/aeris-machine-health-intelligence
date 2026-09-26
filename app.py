@@ -12,14 +12,10 @@ import numpy as np
 import pandas as pd
 import shap
 import streamlit as st
-from sklearn.calibration import CalibratedClassifierCV
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 from src.features import MODEL_FEATURES, add_engineered_features
+from src.models import build_calibrated_hgb, build_mode_pipeline, build_preprocessor, build_hgb_pipeline
 from src.load_data import RENAME_MAP
 
 
@@ -42,111 +38,6 @@ MODEL_PR_AUC = 0.899
 MODEL_F1 = 0.880
 MODEL_BRIER = 0.0075
 
-
-def build_preprocessor() -> ColumnTransformer:
-    return ColumnTransformer(
-        [
-            (
-                "categorical",
-                OneHotEncoder(
-                    handle_unknown="ignore",
-                    sparse_output=False,
-                ),
-                ["type"],
-            ),
-            ("numeric", "passthrough", MODEL_FEATURES[1:]),
-        ]
-    )
-
-
-@st.cache_data
-def load_data() -> pd.DataFrame:
-    if not DATA_PATH.exists():
-        raise FileNotFoundError(
-            "AI4I dataset not found. Place ai4i2020.csv in data/."
-        )
-    return pd.read_csv(DATA_PATH, encoding="utf-8-sig").rename(columns=RENAME_MAP)
-
-
-@st.cache_resource
-def train_models():
-    raw = load_data()
-    df = add_engineered_features(raw)
-
-    X = df[MODEL_FEATURES]
-    y = df["machine_failure"]
-
-    X_train, _, y_train, _ = train_test_split(
-        X,
-        y,
-        test_size=0.20,
-        random_state=42,
-        stratify=y,
-    )
-
-    base = Pipeline(
-        [
-            ("preprocessor", build_preprocessor()),
-            (
-                "model",
-                HistGradientBoostingClassifier(
-                    max_iter=300,
-                    learning_rate=0.06,
-                    max_leaf_nodes=31,
-                    l2_regularization=1.0,
-                    random_state=42,
-                ),
-            ),
-        ]
-    )
-
-    risk_model = CalibratedClassifierCV(
-        base,
-        method="sigmoid",
-        cv=5,
-        n_jobs=-1,
-    )
-    risk_model.fit(X_train, y_train)
-
-    explainer_pre = build_preprocessor()
-    X_train_t = explainer_pre.fit_transform(X_train, y_train)
-
-    explain_model = HistGradientBoostingClassifier(
-        max_iter=300,
-        learning_rate=0.06,
-        max_leaf_nodes=31,
-        l2_regularization=1.0,
-        random_state=42,
-    )
-    explain_model.fit(X_train_t, y_train)
-
-    mode_models = {}
-    for mode in MODES:
-        mode_model = Pipeline(
-            [
-                ("preprocessor", build_preprocessor()),
-                (
-                    "model",
-                    HistGradientBoostingClassifier(
-                        max_iter=250,
-                        learning_rate=0.06,
-                        max_leaf_nodes=31,
-                        l2_regularization=1.0,
-                        class_weight="balanced",
-                        random_state=42,
-                    ),
-                ),
-            ]
-        )
-        mode_model.fit(X_train, df.loc[X_train.index, mode])
-        mode_models[mode] = mode_model
-
-    return (
-        risk_model,
-        explainer_pre,
-        explain_model,
-        mode_models,
-    )
 
 
 def risk_state(risk: float) -> tuple[str, str]:
