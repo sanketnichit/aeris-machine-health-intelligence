@@ -32,9 +32,9 @@ The failure-mode flags are target-side information and would make the binary mod
 
 ## 4. Evaluation
 
-The final test set is held out once.
+The final seed-42 test set is held out once for the primary evaluation.
 
-Model selection uses stratified cross-validation on the training set.
+Model selection uses stratified cross-validation on the training set. Secondary split-sensitivity and bootstrap audits are downstream robustness checks, not tuning loops.
 
 Primary metric is average precision because the failure class is rare. Precision, recall and F1 are reported alongside it. Accuracy is intentionally not the headline metric.
 
@@ -67,3 +67,8 @@ HDF, PWF and OSF show enough cross-validated signal to expose as separate mode l
 The highest-value next dataset is a real industrial time-series benchmark such as UCI MetroPT-3. The next modelling step would be temporal degradation/RUL work on C-MAPSS.
 
 Both are deliberately outside the application-deadline v1 scope.
+
+
+## 10. Uncertainty and error analysis
+
+AERIS reports uncertainty around held-out metrics with stratified bootstrap intervals and checks the fixed model across five independent stratified splits. The primary seed-42 evaluation remains the headline result for consistency. Held-out error analysis is descriptive only; it does not trigger hidden threshold tuning. The current error profile shows 18 false negatives and 4 false positives at the 0.50 calibrated threshold, with many false negatives carrying the TWF flag. This is treated as a limitation and future investigation point rather than a reason to overstate the current mode layer.
