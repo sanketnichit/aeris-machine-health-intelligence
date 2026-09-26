@@ -13,19 +13,13 @@ from sklearn.model_selection import StratifiedKFold, cross_validate
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder
 
+from features import MODEL_FEATURES, add_engineered_features
 from load_data import load_raw
 
 ROOT = Path(__file__).resolve().parents[1]
 REPORT = ROOT / "reports" / "failure_mode_attribution.md"
 
-FEATURES = [
-    "type",
-    "air_temp_k",
-    "process_temp_k",
-    "rot_speed_rpm",
-    "torque_nm",
-    "tool_wear_min",
-]
+FEATURES = MODEL_FEATURES
 
 ALL_MODES = ["twf", "hdf", "pwf", "osf", "rnf"]
 
@@ -61,7 +55,7 @@ def build_pipeline() -> Pipeline:
 
 
 def main() -> None:
-    df = load_raw()
+    df = add_engineered_features(load_raw())
     X = df[FEATURES]
     cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=42)
 
