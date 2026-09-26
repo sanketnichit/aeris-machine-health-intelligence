@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="420" viewBox="0 0 720 420">
+<rect width="720" height="420" fill="#ffffff"/>
+<text x="360" y="42" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" font-weight="700" fill="#111827">Failure rate by product type</text>
+<text x="360" y="72" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#6b7280">Observed machine-failure rate in the AI4I benchmark</text>
+<line x1="100" y1="340" x2="680" y2="340" stroke="#9ca3af"/>
+<line x1="100" y1="95" x2="100" y2="340" stroke="#9ca3af"/>
+<line x1="100" y1="156" x2="680" y2="156" stroke="#e5e7eb"/>
+<line x1="100" y1="218" x2="680" y2="218" stroke="#e5e7eb"/>
+<line x1="100" y1="279" x2="680" y2="279" stroke="#e5e7eb"/>
+<rect x="165" y="212" width="120" height="128" rx="6" fill="#0f766e"/>
+<rect x="300" y="96" width="120" height="244" rx="6" fill="#0f766e"/>
+<rect x="435" y="169" width="120" height="171" rx="6" fill="#0f766e"/>
+<text x="225" y="198" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#111827">2.09%</text>
+<text x="360" y="82" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#111827">3.92%</text>
+<text x="495" y="155" text-anchor="middle" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#111827">2.77%</text>
+<text x="225" y="372" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="600" fill="#374151">H</text>
+<text x="360" y="372" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="600" fill="#374151">L</text>
+<text x="495" y="372" text-anchor="middle" font-family="Arial,sans-serif" font-size="17" font-weight="600" fill="#374151">M</text>
+<text x="360" y="402" text-anchor="middle" font-family="Arial,sans-serif" font-size="12" fill="#6b7280">Failure counts: H 21 · L 235 · M 83</text>
+</svg>
