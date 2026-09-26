@@ -186,8 +186,10 @@ def main() -> None:
             "\n## Selection\n",
             "HistGradientBoosting is the current model carried forward into the calibrated risk model. "
             f"Random Forest is nearly tied on cross-validated PR-AUC ({rf['cv_pr_auc_mean']:.3f} vs "
-            f"{hgb['cv_pr_auc_mean']:.3f}), while HGB has the stronger held-out PR-AUC "
-            f"({hgb['test_pr_auc']:.3f} vs {rf['test_pr_auc']:.3f}) and higher held-out recall/F1.\n\n",
+            f"{hgb['cv_pr_auc_mean']:.3f}), while HGB has higher cross-validated recall "
+            f"({hgb['cv_recall_mean']:.3f} vs {rf['cv_recall_mean']:.3f}) and F1 "
+            f"({hgb['cv_f1_mean']:.3f} vs {rf['cv_f1_mean']:.3f}). The held-out test results "
+            "are reported for final comparison and are not used to tune or select the model.\n\n",
             "## Engineering interpretation\n",
             "The derived features materially improve the benchmark model. This should be interpreted "
             "as a benchmark result, not proof that these two transformations are physically causal or "
