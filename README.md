@@ -107,6 +107,8 @@ aeris-machine-health-intelligence/
 - [x] Machine Health Console
 - [x] Threshold/calibration analysis
 - [x] Subgroup audit
+- [x] Stratified bootstrap uncertainty/error audit
+- [x] Fixed-model split-sensitivity audit
 - [x] Data-contract tests + CI
 
 ## Planned modelling sequence
@@ -134,6 +136,8 @@ python src/risk_model.py
 python src/failure_mode_attribution.py
 python src/explain_model.py
 python src/evaluate_thresholds.py
+python src/uncertainty_audit.py
+python src/split_sensitivity.py
 pytest -q
 ```
 
@@ -149,7 +153,7 @@ The console lets you enter a machine operating state and inspect the calibrated 
 
 ## Current verified results
 
-The current held-out evaluation uses an 80/20 stratified split with model selection on the training portion only. HistGradientBoosting produced PR-AUC **0.843** on the final test set. After sigmoid probability calibration, the risk model produced **0.849 PR-AUC, 0.926 precision, 0.735 recall, 0.820 F1, and 0.0108 Brier score** at the 0.50 decision threshold. A threshold study and product-type subgroup audit are included so the project does not hide the precision/recall trade-off or small-sample uncertainty.
+The current held-out evaluation uses an 80/20 stratified split with model selection on the training portion only. HistGradientBoosting produced PR-AUC **0.843** on the final test set. After sigmoid probability calibration, the risk model produced **0.849 PR-AUC, 0.926 precision, 0.735 recall, 0.820 F1, and 0.0108 Brier score** at the 0.50 decision threshold. A threshold study, product-type subgroup audit, stratified bootstrap intervals, and split-sensitivity audit are included so the project does not hide the precision/recall trade-off or small-sample uncertainty. The five-split robustness audit reports mean PR-AUC **0.825 ± 0.036** and mean F1 **0.762 ± 0.041** for the fixed v1 model at the 0.50 threshold; the seed-42 split remains the primary held-out evaluation for consistency.
 
 See `reports/model_comparison.md`, `reports/risk_model.md`, `reports/threshold_analysis.md`, `reports/explainability.md`, and `reports/subgroup_audit.md` for the full experiment record. See `docs/model_card.md` for intended use and limitations, and `docs/demo_script.md` for the recruiter/interview demo.
 
