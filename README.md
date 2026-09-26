@@ -236,6 +236,16 @@ Model selection uses 5-fold stratified cross-validation on the training partitio
 
 The extended validation studies are downstream checks. They do not change the primary held-out result.
 
+## Dataset setup
+
+The raw benchmark CSV is intentionally not committed to GitHub. On a fresh clone, download the canonical UCI archive and place the validated CSV at `data/ai4i2020.csv`:
+
+```bash
+python scripts/download_dataset.py
+```
+
+Use `python scripts/download_dataset.py --force` to replace an existing local copy.
+
 ## Running the core pipeline
 
 From the repository root:
