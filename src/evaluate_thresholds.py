@@ -11,9 +11,7 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.calibration import CalibratedClassifierCV, calibration_curve
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
+from sklearn.calibration import calibration_curve
 from sklearn.metrics import (
     average_precision_score,
     brier_score_loss,
@@ -23,10 +21,9 @@ from sklearn.metrics import (
     recall_score,
 )
 from sklearn.model_selection import StratifiedKFold, cross_val_predict, train_test_split
-from sklearn.pipeline import Pipeline
-from sklearn.preprocessing import OneHotEncoder
 
 from features import MODEL_FEATURES, add_engineered_features
+from models import build_calibrated_hgb, build_hgb_pipeline
 from load_data import load_raw
 
 
@@ -36,26 +33,7 @@ REPORT = ROOT / "reports" / "threshold_analysis.md"
 FEATURES = MODEL_FEATURES
 
 
-def build_base_model() -> Pipeline:
-    pre = ColumnTransformer(
-        [
-            (
-                "cat",
-                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
-                ["type"],
-            ),
-            ("num", "passthrough", FEATURES[1:]),
-        ]
-    )
-    model = HistGradientBoostingClassifier(
-        max_iter=300,
-        learning_rate=0.06,
-        max_leaf_nodes=31,
-        l2_regularization=1.0,
-        random_state=42,
-    )
-    return Pipeline([("preprocessor", pre), ("model", model)])
-
+build_base_model = build_hgb_pipeline
 
 def main() -> None:
     df = add_engineered_features(load_raw())
@@ -108,12 +86,7 @@ def main() -> None:
             )
         )
 
-    calibrated = CalibratedClassifierCV(
-        build_base_model(),
-        method="sigmoid",
-        cv=5,
-        n_jobs=1,
-    )
+    calibrated = build_calibrated_hgb(cv=5, n_jobs=1)
     calibrated.fit(X_train, y_train)
     calibrated_prob = calibrated.predict_proba(X_test)[:, 1]
 
