@@ -27,7 +27,7 @@ The derived signals use only observed input variables and do not use machine-fai
 
 ## Selection
 
-HistGradientBoosting is the current model to carry forward. Random Forest is nearly tied on cross-validated PR-AUC, but HGB gives the stronger held-out PR-AUC and recall/F1 balance in this experiment.
+HistGradientBoosting is the current model carried forward based on the training-partition cross-validation record. Random Forest is nearly tied on CV PR-AUC, while HGB has higher CV recall and F1. The held-out test results are reported for final comparison only and are not used to tune or select the model.
 
 ## Engineering interpretation
 
