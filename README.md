@@ -236,7 +236,7 @@ See `extended-validation/README.md` for the purpose of each study.
 streamlit run app.py
 ```
 
-The console trains its inference bundle through `src/console_models.py), reusing the canonical calibrated HGB and model-specific explanation/mode builders.
+The console trains its inference bundle through `src/console_models.py, reusing the canonical calibrated HGB and model-specific explanation/mode builders.
 
 ## Current verified results
 
