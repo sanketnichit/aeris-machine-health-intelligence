@@ -5,3 +5,10 @@ venv/
 .env
 .ipynb_checkpoints/
 .DS_Store
+
+# Local benchmark data (intentionally not committed)
+data/ai4i2020.csv
+
+# Generated local artifacts
+figures/*.png
+.streamlit/
