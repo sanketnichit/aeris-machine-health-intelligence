@@ -75,3 +75,13 @@ def test_audits_use_canonical_engineered_features():
 
     assert ERROR_FEATURES == MODEL_FEATURES
     assert SPLIT_FEATURES == MODEL_FEATURES
+
+
+def test_model_comparison_report_keeps_test_set_out_of_selection():
+    from pathlib import Path
+
+    report = Path("reports/model_comparison.md").read_text(encoding="utf-8")
+    selection = report.split("## Selection", 1)[1].split("## Engineering interpretation", 1)[0]
+
+    assert "held-out test set is reserved for final comparison" in selection
+    assert "held-out PR-AUC and recall/F1 balance" not in selection
