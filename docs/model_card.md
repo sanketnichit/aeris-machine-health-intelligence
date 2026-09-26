@@ -83,6 +83,10 @@ AERIS includes:
 
 These are evidence about benchmark robustness, not substitutes for prospective validation on real industrial data.
 
+## Reproducibility baseline
+
+The repository pins the direct dependencies used by the GitHub Actions validation environment. The numerical reproduction record is maintained in `docs/reproducibility_audit.md`.
+
 ## Governance principle
 
 AERIS reports where the data or model is weak instead of hiding uncertainty behind a single headline accuracy number.
