@@ -51,6 +51,23 @@ def test_canonical_mode_model_contract():
     assert model.get_params()["max_iter"] == MODE_HGB_PARAMS["max_iter"]
 
 
+def test_model_feature_contract_excludes_target_side_fields():
+    from src.features import MODEL_FEATURES
+
+    forbidden = {
+        "UDI",
+        "Product ID",
+        "TWF",
+        "HDF",
+        "PWF",
+        "OSF",
+        "RNF",
+        "machine_failure",
+    }
+
+    assert forbidden.isdisjoint(MODEL_FEATURES)
+
+
 def test_audits_use_canonical_engineered_features():
     from src.error_analysis import FEATURES as ERROR_FEATURES
     from src.features import MODEL_FEATURES
