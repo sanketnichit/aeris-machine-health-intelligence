@@ -4,7 +4,7 @@
 
 **Explainable fault detection and calibrated failure-risk scoring for industrial equipment.**
 
-**Quick links:** [Model Card](docs/model_card.md) · [Engineering Decisions](docs/engineering_decisions.md) · [Reproducibility Audit](docs/reproducibility_audit.md) · [90-Second Demo](docs/demo_script.md) · [Runbook](RUNBOOK.md)
+**Quick links:** [Model Card](docs/model_card.md) · [Engineering Decisions](docs/engineering_decisions.md) · [Reproducibility Audit](docs/reproducibility_audit.md) · [90-Second Demo](docs/demo_script.md) · [Interview Walkthrough](docs/interview_walkthrough.md) · [Resume Bullets](docs/resume_bullets.md) · [Runbook](RUNBOOK.md)
 
 > **Portfolio focus:** a deliberately small predictive-maintenance system built to be auditable, reproducible and honest about uncertainty.
 
@@ -180,7 +180,7 @@ A technical reviewer can follow the project in this order:
 4. `reports/feature_ablation.md` — evidence for the engineered features.
 5. `reports/uncertainty_audit.md` and `reports/split_sensitivity.md` — robustness.
 6. `app.py` + `docs/demo_script.md` — live console and demonstration path.
-7. `docs/reproducibility_audit.md` — reproduction record.
+7. `docs/reproducibility_audit.md` — reproduction record.\n8. `docs/interview_walkthrough.md` + `docs/resume_bullets.md` — application-ready project framing.
 
 ## Current status
 
