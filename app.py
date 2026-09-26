@@ -12,8 +12,6 @@ import numpy as np
 import pandas as pd
 import shap
 import streamlit as st
-from sklearn.model_selection import train_test_split
-
 from src.features import MODEL_FEATURES, add_engineered_features
 from src.console_models import train_console_models
 
@@ -21,7 +19,6 @@ from src.console_models import train_console_models
 ROOT = Path(__file__).resolve().parent
 DATA_PATH = ROOT / "data" / "ai4i2020.csv"
 
-MODES = ["hdf", "pwf", "osf"]
 RISK_THRESHOLD = 0.50
 
 # Primary seed-42 held-out evaluation for the current engineered-feature model.
@@ -57,7 +54,10 @@ def local_shap(
 ) -> pd.DataFrame:
     transformed = preprocessor.transform(row)
     explainer = get_shap_explainer(tree_model)
-    values = np.asarray(explainer.shap_values(transformed)).reshape(-1)
+    raw_values = explainer.shap_values(transformed)
+    if isinstance(raw_values, list):
+        raw_values = raw_values[1] if len(raw_values) > 1 else raw_values[0]
+    values = np.asarray(raw_values).reshape(-1)
     names = preprocessor.get_feature_names_out()
 
     rows: list[tuple[str, float]] = []
