@@ -56,7 +56,7 @@ def main() -> None:
         transformers=[
             (
                 "categorical",
-                OneHotEncoder(handle_unknown="ignore"),
+                OneHotEncoder(handle_unknown="ignore", sparse_output=False),
                 ["type"],
             ),
             ("numeric", "passthrough", FEATURES[1:]),
