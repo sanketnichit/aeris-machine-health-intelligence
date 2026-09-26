@@ -12,11 +12,11 @@ AERIS v1 treats failure modes as a **multi-label attribution** problem rather th
 | TWF | 46 | 0.129 ± 0.081 | 0.186 | 0.156 | 0.159 |
 | RNF | 19 | 0.010 ± 0.010 | 0.000 | 0.000 | 0.000 |
 
-## Production-facing v1 decision
+## AERIS v1 exposure decision
 
 Promote **HDF, PWF and OSF** into the v1 attribution panel.
 
-TWF and RNF remain deferred because their cross-validated signal is too weak/unstable for an engineering-facing prediction layer.
+TWF and RNF remain deferred because their cross-validated signal is too weak/unstable for the v1 engineering review panel.
 
 ## Synthetic-benchmark caveat
 
