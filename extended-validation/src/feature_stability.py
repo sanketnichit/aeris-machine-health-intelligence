@@ -89,7 +89,7 @@ def main() -> None:
     lines = [
         "# Feature Stability Check\n\n",
         "This checks permutation importance across five independent "
-        "stratified 80/20 splits using the fixed HistGradientBoosting architecture. "
+        "stratified 80/20 splits using the same HistGradientBoosting setup. "
         "Importance is measured as the decrease in average precision on each "
         "held-out split. This is just a descriptive check and does not tune model "
         "hyperparameters or thresholds.\n\n",
@@ -125,7 +125,7 @@ def main() -> None:
             "Feature importance is not a causal ranking, and correlated variables "
             "can share attribution. The useful question here is whether the broad "
             "ordering is stable across plausible held-out partitions. Large movement "
-            "in rank is evidence that a feature's importance should be treated "
+            "in rank means the feature's importance should be treated "
             "cautiously rather than presented as universally dominant.\n",
         ]
     )
