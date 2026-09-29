@@ -72,8 +72,8 @@ def main() -> None:
     metrics = ["pr_auc", "precision", "recall", "f1", "brier"]
 
     lines = [
-        "# AERIS Split-Sensitivity Audit\n\n",
-        "This audit evaluates the **fixed v1 calibrated HGB model** across five "
+        "# Split Sensitivity Check\n\n",
+        "This checks the same calibrated HGB model across five "
         "independent stratified 80/20 train/test splits. The model hyperparameters "
         "and 0.50 threshold are held fixed; the alternate splits are not used to "
         "tune the model or replace the primary held-out evaluation.\n\n",
