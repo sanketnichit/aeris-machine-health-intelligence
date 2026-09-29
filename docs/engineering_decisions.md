@@ -18,7 +18,7 @@ I left things like RUL, streaming, counterfactuals and deployment for later inst
 
 I used AI4I 2020 because it is small, easy to reproduce and useful for getting the whole pipeline working.
 
-The downside is that it is synthetic. That is why the repo treats the numbers as benchmark results rather than production evidence.
+The downside is that it is synthetic, so I treat the numbers as results for this dataset rather than results from real machines.
 
 ## Leakage
 
@@ -95,4 +95,4 @@ These are there mainly because a single test split can make a project look more 
 
 ## Next step
 
-The biggest upgrade would be testing the approach on a real industrial dataset. That would say much more about whether the workflow generalizes than adding more UI features.
+The biggest next step would be testing the same approach on real industrial data. That would tell me more about whether it actually generalizes than adding more UI features.
