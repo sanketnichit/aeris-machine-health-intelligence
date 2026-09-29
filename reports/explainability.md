@@ -1,6 +1,6 @@
 # AERIS Explainability
 
-## Global feature importance: permutation importance
+## Permutation importance
 
 | Feature | Mean AP decrease |
 |---|---:|
@@ -13,11 +13,11 @@
 | Process temperature [K] | -0.0070 |
 | Air temperature [K] | -0.0076 |
 
-Permutation importance is computed on the held-out test set using average precision. A larger decrease means the model loses more ranking performance when that feature is permuted. Negative values mean the measured permutation change was slightly beneficial to AP in this particular held-out sample; they should not be interpreted as evidence that the feature is harmful or causally irrelevant.
+Permutation importance was measured on the test set using average precision. A larger drop means the model depended more on that feature for ranking the test examples. The small negative values are just what happened on this split; they should not be read as the feature being harmful.
 
-## SHAP global importance
+## SHAP
 
-Computed on an unseen 200-row test subset from the fitted underlying HistGradientBoosting model.
+These values are calculated on a 200-row test subset using the HistGradientBoosting model before probability calibration.
 
 | Encoded feature | Mean absolute SHAP |
 |---|---:|
@@ -32,8 +32,8 @@ Computed on an unseen 200-row test subset from the fitted underlying HistGradien
 | Type_H | 0.0603 |
 | Type_L | 0.0603 |
 
-## Interpretation
+## What this means
 
-Permutation importance and SHAP answer different questions. Permutation importance measures the drop in held-out average-precision performance when a feature is shuffled; SHAP describes how individual transformed features contribute to the underlying tree model's output.
+Permutation importance tells me how much the model's test-set ranking changes when a feature is shuffled. SHAP shows how the inputs moved an individual prediction in the tree model.
 
-These are model attributions, not physical root-cause measurements. Correlated raw and engineered variables can share or redistribute attribution, and the very small negative permutation changes should be treated as sampling variation rather than substantive direction.
+Neither one tells me the physical root cause of a machine problem. Also, correlated raw and derived features can share the importance between them.
