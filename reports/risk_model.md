@@ -2,13 +2,14 @@
 
 ## Model
 
-HistGradientBoostingClassifier with deterministic engineering-derived features and sigmoid probability calibration using 5-fold cross-validation on the training partition.
+HistGradientBoostingClassifier with the two derived features and sigmoid probability calibration using 5-fold cross-validation on the training data.
 
 Derived features:
-- `temp_delta_k`: process temperature minus air temperature.
-- `mechanical_power_kw`: torque × rotational speed / 9549.2966.
 
-## Held-out test results
+- temp_delta_k: process temperature minus air temperature
+- mechanical_power_kw: torque × rotational speed / 9549.2966
+
+## Test results
 
 - Precision @ 0.50: **0.965**
 - Recall @ 0.50: **0.809**
@@ -16,20 +17,18 @@ Derived features:
 - PR-AUC: **0.899**
 - Brier score: **0.0075**
 
-## Calibration choice
+## Calibration
 
-For the same held-out test set:
+For the same test set:
 
 - Sigmoid calibration Brier score: **0.00752**
 - Isotonic calibration Brier score: **0.00742**
 
-Sigmoid was retained for v1 because ranking performance is essentially unchanged while the calibration mapping remains simpler and less flexible for a small positive class.
+I kept sigmoid because the ranking is almost the same and the mapping is simpler for this small positive class.
 
-## Decision threshold
+## Thresholds
 
-A threshold is a deployment decision, not a property of the trained model.
-
-Using out-of-fold predictions from the training partition, the raw-model thresholds below produced the following untouched-test results:
+I picked the example thresholds below from out-of-fold predictions on the training data and then checked them once on the test set.
 
 | Objective | OOF threshold | Test precision | Test recall | Test F1 |
 |---|---:|---:|---:|---:|
@@ -37,10 +36,10 @@ Using out-of-fold predictions from the training partition, the raw-model thresho
 | F1 | 0.265 | 0.873 | 0.809 | 0.840 |
 | F2 | 0.106 | 0.803 | 0.838 | 0.820 |
 
-AERIS keeps **0.50 on the calibrated risk score** as the default UI decision threshold because it is simple to interpret and separates the continuous risk estimate from an application-specific alert policy.
+The Streamlit demo uses **0.50** as the default threshold. That is just the current demo setting; a real maintenance system would need its own threshold.
 
-## Interpretation
+## Notes
 
-The displayed AERIS risk is a calibrated model estimate for the positive machine-failure label under this benchmark. It is not a physical measurement of machine health and should not be represented as a guaranteed production failure probability.
+The displayed risk is a model estimate for the AI4I machine-failure label. It is not a physical measurement of machine health.
 
-The improvement from the engineered features is encouraging, but AI4I is synthetic. A real deployment would require prospective validation, calibration checks on the target population, drift monitoring, and threshold selection against explicit maintenance costs.
+The derived features improve the benchmark result, but AI4I is synthetic. Testing on real machine data would be needed before using the model for maintenance decisions.
