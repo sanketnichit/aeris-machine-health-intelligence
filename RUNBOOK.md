@@ -1,28 +1,32 @@
 # AERIS Runbook
 
-## Environment
+This file is just the quick setup/reference I use for the project.
 
-Recommended: Python 3.12.x for the pinned validation environment.
+## 1. Python environment
 
-Windows PowerShell:
+The validation environment uses Python 3.12.
+
+On Windows PowerShell:
 
     py -m venv .venv
     .\.venv\Scripts\Activate.ps1
     pip install -r requirements.txt
 
-The direct dependencies are pinned to the versions used by the CI validation environment.
+## 2. Dataset
 
-## Dataset
-
-Download the AI4I 2020 CSV from the canonical UCI source and place it at:
+The AI4I 2020 CSV should be here:
 
     data/ai4i2020.csv
 
-The benchmark CSV is intentionally not committed to the repository.
+The dataset is not committed to the repo. The easiest setup is:
 
-## Validate and reproduce the core system
+    python scripts/download_dataset.py
 
-From the repository root:
+The script checks the CSV header before saving it.
+
+## 3. Main pipeline
+
+Run these from the repository root:
 
     python src/validate_data.py
     python src/eda.py
@@ -30,11 +34,11 @@ From the repository root:
     python src/risk_model.py
     python src/explain_model.py
 
-The v1 risk model uses the shared feature contract in `src/features.py` and the canonical model builders in `src/models.py`. The Streamlit console trains through `src/console_models.py`, so the UI reuses the same model architecture rather than maintaining a second risk-model implementation.
+The main model code lives in src/. The Streamlit app uses the same feature and model definitions rather than a separate version of the pipeline.
 
-## Extended validation
+## 4. Extra experiments
 
-Additional studies live under `extended-validation/` so the core implementation remains easy to inspect:
+The extended-validation/ folder contains the experiments I used to check the main result:
 
     python extended-validation/src/model_comparison.py
     python extended-validation/src/feature_ablation.py
@@ -46,18 +50,20 @@ Additional studies live under `extended-validation/` so the core implementation 
     python extended-validation/src/calibration_audit.py
     python extended-validation/src/failure_mode_attribution.py
 
-These studies validate robustness, threshold behaviour, feature contribution and secondary attribution. They are not hidden tuning loops and do not replace the primary seed-42 evaluation.
+These are separate from the main inference path so that the core project stays easier to follow.
 
-## Test
+## 5. Tests
 
     pytest -q
 
-CI also compiles both the core `src/` package and the extended-validation Python scripts.
+GitHub Actions also checks that the Python files compile and that the tests pass.
 
-## Launch the console
+## 6. Streamlit app
 
     streamlit run app.py
 
-## Reporting rule
+The app trains the console model bundle and lets you try individual machine observations.
 
-Never report a model metric without stating the dataset, evaluation design, threshold when relevant, and major limitations. The objective is a reproducible engineering prototype, not the highest-looking metric.
+## Reporting
+
+When I record a model number, I try to include the dataset, split, threshold and the main limitation with it. The AI4I dataset is synthetic, so benchmark results should not be presented as real factory performance.
