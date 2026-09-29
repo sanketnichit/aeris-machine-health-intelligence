@@ -1,6 +1,6 @@
-# AERIS Feature-Stability Audit
+# Feature Stability
 
-This audit measures permutation importance across five independent stratified 80/20 splits using the fixed HistGradientBoosting architecture. Importance is measured as the decrease in average precision on each held-out split. The audit is descriptive and does not tune model hyperparameters or thresholds.
+I checked permutation importance across five different stratified 80/20 splits with the same HistGradientBoosting setup. The check does not tune the model or threshold.
 
 ## Stability summary
 
@@ -19,4 +19,4 @@ This audit measures permutation importance across five independent stratified 80
 
 Permutation importance is not a causal ranking, and correlated variables can share attribution. In this benchmark the engineered temperature-delta and mechanical-power features absorb information that overlaps with their component inputs, so the raw component features can show little additional permutation value once the derived signals are present.
 
-The stable part of the result is the broad ordering: rotational speed is ranked first in all five splits and temperature delta is ranked second in all five. This is evidence of model-behaviour stability on AI4I, not proof of physical causality.
+The main pattern that stayed the same was the ordering: rotational speed was first in all five splits and temperature delta was second. That shows the model behaves similarly on these splits, but it does not prove physical causality.
