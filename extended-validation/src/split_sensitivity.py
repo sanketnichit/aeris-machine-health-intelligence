@@ -116,7 +116,7 @@ def main() -> None:
             "\n## Interpretation\n",
             "The ranking and classification metrics move across splits, which is "
             "expected with a relatively small positive class. The point of this "
-            "audit is not to manufacture a single more impressive score; it is to "
+            "point here is to "
             "show that performance is sensitive to which observations land in the "
             "test partition. The seed-42 split remains the project's primary held-out "
             "evaluation for consistency with the model-selection record.\n",
