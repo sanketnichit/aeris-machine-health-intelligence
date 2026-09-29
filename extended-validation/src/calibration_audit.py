@@ -47,9 +47,9 @@ def main() -> None:
     prob = pd.Series(model.predict_proba(X_test)[:, 1], index=X_test.index)
 
     lines = [
-        "# AERIS Calibration Audit\n\n",
-        "This audit checks how the calibrated risk score behaves across selected "
-        "subgroups of the primary held-out test set. The global calibration model "
+        "# Calibration Check\n\n",
+        "This checks how the calibrated risk score behaves across selected "
+        "subgroups of the main test set. The calibration model "
         "and 0.50 threshold are unchanged.\n\n",
         "A calibration gap is **mean predicted risk minus observed failure rate**. "
         "Positive values indicate average overprediction in that subgroup; negative "
