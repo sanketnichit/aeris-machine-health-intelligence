@@ -1,11 +1,9 @@
-"""
-AERIS - feature explanation.
+"""Feature importance and SHAP checks for the AERIS model.
 
-Global permutation importance uses the canonical calibrated risk model on the
-held-out test set. SHAP explains the canonical underlying HistGradientBoosting
-model before probability calibration.
+Permutation importance is measured on the test set. SHAP is calculated from
+the underlying tree model before probability calibration.
 
-Model attribution is not physical causality.
+These values explain the model, not the physical machine.
 """
 
 from pathlib import Path
@@ -95,7 +93,7 @@ def main() -> None:
         }
     ).sort_values("importance_mean", ascending=False)
 
-    # Fit the canonical underlying tree architecture on the training partition.
+    # Fit the tree model on the training data.
     explainer_pre = build_preprocessor()
     transformed_train = explainer_pre.fit_transform(X_train, y_train)
     transformed_test = explainer_pre.transform(X_test)
