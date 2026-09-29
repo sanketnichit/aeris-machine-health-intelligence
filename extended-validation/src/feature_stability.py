@@ -87,11 +87,11 @@ def main() -> None:
     summary["top2_count"] = (rank_pivot <= 2).sum()
 
     lines = [
-        "# AERIS Feature-Stability Audit\n\n",
-        "This audit measures permutation importance across five independent "
+        "# Feature Stability Check\n\n",
+        "This checks permutation importance across five independent "
         "stratified 80/20 splits using the fixed HistGradientBoosting architecture. "
         "Importance is measured as the decrease in average precision on each "
-        "held-out split. The audit is descriptive and does not tune model "
+        "held-out split. This is just a descriptive check and does not tune model "
         "hyperparameters or thresholds.\n\n",
         "## Stability summary\n\n",
         "| Feature | Mean AP drop | Across-split SD | Mean rank | Best rank | Worst rank | Top-1 splits | Top-2 splits |\n",
