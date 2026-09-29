@@ -1,8 +1,8 @@
 """
 AERIS - calibrated machine-failure risk model.
 
-The risk score is a calibrated estimate from 0 to 1, not a physical-health
-measurement. It is evaluated on a final held-out test set.
+The risk score is a calibrated model output from 0 to 1. The final numbers are
+measured on a held-out test set.
 """
 from pathlib import Path
 
@@ -135,7 +135,7 @@ def main() -> None:
         f"- Isotonic calibration Brier score: **{isotonic_brier:.5f}**\n\n",
         "Sigmoid was retained for v1 because the mapping is simpler and less flexible for a small positive class.\n\n",
         "## Decision threshold\n\n",
-        "A threshold is a deployment decision, not a property of the trained model.\n\n",
+        "The threshold is separate from the model score. Different uses can need different thresholds.\n\n",
         "Using out-of-fold predictions from the training partition, the raw-model thresholds below produced the following untouched-test results:\n\n",
         "| Objective | OOF threshold | Test precision | Test recall | Test F1 |\n",
         "|---|---:|---:|---:|---:|\n",
