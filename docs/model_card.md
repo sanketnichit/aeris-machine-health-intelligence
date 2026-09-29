@@ -2,7 +2,7 @@
 
 ## What this project is
 
-AERIS is a BTech/portfolio project for experimenting with a complete predictive-maintenance workflow on the AI4I 2020 dataset.
+AERIS is a BTech project where I am experimenting with a small predictive-maintenance pipeline using the AI4I 2020 dataset.
 
 It currently covers:
 
