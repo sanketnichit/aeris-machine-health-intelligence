@@ -10,7 +10,11 @@ No source labels or failure-mode columns are used as predictors.
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(PROJECT_ROOT))
 
 import pandas as pd
 from sklearn.calibration import CalibratedClassifierCV
@@ -132,7 +136,7 @@ def main() -> None:
 
     summary = pd.DataFrame(summary_rows)
 
-    report_dir = Path("reports")
+    report_dir = PROJECT_ROOT / "reports"
     report_dir.mkdir(parents=True, exist_ok=True)
     results.to_csv(report_dir / "research_multiseed_ablation_results.csv", index=False)
     summary.to_csv(report_dir / "research_multiseed_ablation_summary.csv", index=False)
