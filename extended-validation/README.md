@@ -1,32 +1,33 @@
-# AERIS Extended Validation
+# Extra Validation
 
-This directory contains **additional validation and study code beyond the minimum AERIS v1 pipeline**.
+I kept the extra experiments in this folder so the main AERIS code stays fairly small.
 
-The core project deliberately stays focused on:
+The core project is:
 
-1. fault detection
-2. calibrated failure-risk scoring with model explanation
-3. the Machine Health Console
+1. machine-failure prediction
+2. calibrated risk scoring
+3. model explanation
+4. a Streamlit demo
 
-The studies below support those capabilities without making the core implementation harder to inspect.
+The scripts here are mainly for checking whether the result changes under different choices.
 
-## Studies
+## Experiments
 
-| Study | Purpose |
+| File | What I used it for |
 |---|---|
-| `model_comparison.py` | Compare model families using training-only cross-validation before final held-out evaluation. |
-| `feature_ablation.py` | Measure the incremental value of the two deterministic engineered features. |
-| `evaluate_thresholds.py` | Evaluate OOF-selected thresholds and produce calibration / PR plots. |
-| `uncertainty_audit.py` | Quantify uncertainty around the seed-42 held-out metrics with stratified bootstrap intervals. |
-| `split_sensitivity.py` | Measure how the fixed model changes across alternate stratified splits. |
-| `error_analysis.py` | Profile held-out false positives and false negatives descriptively. |
-| `feature_stability.py` | Check whether permutation-importance rankings persist across splits. |
-| `calibration_audit.py` | Inspect subgroup and operating-regime calibration. |
-| `failure_mode_attribution.py` | Test HDF/PWF/OSF/TWF/RNF feasibility as a secondary multi-label study. |
+| model_comparison.py | Compare a few model choices using training data only. |
+| feature_ablation.py | Check how much the two derived features change the result. |
+| evaluate_thresholds.py | Look at different alert thresholds. |
+| uncertainty_audit.py | Get bootstrap intervals for the held-out metrics. |
+| split_sensitivity.py | See how the fixed model changes across different splits. |
+| error_analysis.py | Look at false positives and false negatives. |
+| feature_stability.py | Check whether feature rankings stay similar across splits. |
+| calibration_audit.py | Check calibration for different groups/operating ranges. |
+| failure_mode_attribution.py | Try the AI4I failure-mode labels as separate secondary targets. |
 
-## Running the studies
+## Running them
 
-Run from the repository root after placing the AI4I CSV at `data/ai4i2020.csv`:
+From the repository root, after the CSV is in data/ai4i2020.csv:
 
     python extended-validation/src/model_comparison.py
     python extended-validation/src/feature_ablation.py
@@ -38,6 +39,6 @@ Run from the repository root after placing the AI4I CSV at `data/ai4i2020.csv`:
     python extended-validation/src/calibration_audit.py
     python extended-validation/src/failure_mode_attribution.py
 
-Generated reports are written to `extended-validation/reports/`.
+Reports are written to extended-validation/reports/.
 
-The scripts add the project `src/` directory to their import path when executed directly. This keeps the core package as the single source of truth for data loading, feature engineering and model construction.
+I kept these scripts separate from the main model because they are useful for checking the project, but they are not required just to run the app.
