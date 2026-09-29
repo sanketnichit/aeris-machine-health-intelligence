@@ -393,7 +393,7 @@ label, state_note = risk_state(risk)
 temp_delta = float(app_row["temp_delta_k"].iloc[0])
 mechanical_power = float(app_row["mechanical_power_kw"].iloc[0])
 
-st.markdown('<div class="section-label">Prediction</div>', unsafe_allow_html=True)
+st.subheader("Prediction")
 
 d1, d2, d3, d4 = st.columns(4)
 d1.metric("Failure risk", f"{risk * 100:.1f}%")
@@ -419,7 +419,7 @@ else:
         "Below the current alert threshold. This does not guarantee healthy operation."
     )
 
-st.markdown('<div class="section-label">Input values</div>', unsafe_allow_html=True)
+st.subheader("Input values")
 
 snapshot = pd.DataFrame(
     [
@@ -443,7 +443,7 @@ st.dataframe(
 left, right = st.columns([1.5, 1])
 
 with left:
-    st.markdown('<div class="section-label">Why the model predicted this</div>', unsafe_allow_html=True)
+    st.subheader("Why the model predicted this")
     explanation = local_shap(
         explainer_pre,
         explain_model,
@@ -470,7 +470,7 @@ with left:
     )
 
 with right:
-    st.markdown('<div class="section-label">Failure-mode experiments</div>', unsafe_allow_html=True)
+    st.subheader("Failure-mode experiments")
 
     mode_rows = []
     for mode, model in mode_models.items():
