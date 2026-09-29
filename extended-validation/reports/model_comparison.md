@@ -25,14 +25,14 @@ The derived signals use only observed input variables and do not use machine-fai
 | Random Forest | 0.872 ± 0.029 | 0.668 | 0.792 | 0.857 | 0.941 | 0.706 | 0.807 |
 | Logistic Regression | 0.484 ± 0.025 | 0.823 | 0.274 | 0.466 | 0.177 | 0.868 | 0.294 |
 
-## Selection
+## Which model I kept
 
-HistGradientBoosting is the current model carried forward based on the training-partition cross-validation record. Random Forest is nearly tied on CV PR-AUC, while HGB has higher CV recall and F1. The held-out test results are reported for final comparison only and are not used to tune or select the model.
+I kept HistGradientBoosting based on the training-side cross-validation results. Random Forest was close on PR-AUC, but HGB had better recall and F1. I did not use the test-set numbers to make that choice.
 
-## Engineering interpretation
+## What this means
 
-The derived features materially improve the benchmark model. This should be interpreted as a benchmark result, not proof that these two transformations are physically causal or sufficient for a real machine fleet. AI4I is synthetic, and its target generation can contain structured relationships between the operating variables and failure labels.
+The derived features improve the benchmark result. That does not prove the transformations are physically causal, and AI4I is synthetic.
 
-## Downstream use
+## Where I use it
 
-The selected HGB architecture is carried into the calibrated risk model, explainability workflow and Streamlit console. Threshold selection remains a separate deployment decision from probability calibration.
+The same HGB setup is reused for the calibrated risk model, explanations and Streamlit app. The alert threshold is kept separate from probability calibration.
