@@ -224,7 +224,7 @@ def local_shap(
 
 
 st.set_page_config(
-    page_title="AERIS | Machine Health Intelligence",
+    page_title="AERIS | Machine Failure Prediction",
     page_icon="⚙️",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -275,15 +275,15 @@ st.markdown(
 )
 
 st.markdown(
-    '<div class="main-title">⚙️ AERIS — Machine Health Intelligence</div>',
+    '<div class="main-title">AERIS — Machine Failure Prediction</div>',
     unsafe_allow_html=True,
 )
 st.markdown(
-    '<div class="subtitle">Explainable fault detection and calibrated failure-risk scoring for the AI4I 2020 benchmark.</div>',
+    '<div class="subtitle">A small Streamlit demo for the machine-failure model trained on AI4I 2020.</div>',
     unsafe_allow_html=True,
 )
 st.markdown(
-    '<span class="status-pill">MODEL READY · BENCHMARK MODE</span>',
+    '<span class="status-pill">AI4I 2020 BENCHMARK</span>',
     unsafe_allow_html=True,
 )
 st.caption(
@@ -393,7 +393,7 @@ label, state_note = risk_state(risk)
 temp_delta = float(app_row["temp_delta_k"].iloc[0])
 mechanical_power = float(app_row["mechanical_power_kw"].iloc[0])
 
-st.markdown('<div class="section-label">Decision view</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-label">Prediction</div>', unsafe_allow_html=True)
 
 d1, d2, d3, d4 = st.columns(4)
 d1.metric("Failure risk", f"{risk * 100:.1f}%")
@@ -419,7 +419,7 @@ else:
         "Below the current alert threshold. This does not guarantee healthy operation."
     )
 
-st.markdown('<div class="section-label">Operating snapshot</div>', unsafe_allow_html=True)
+st.markdown('<div class="section-label">Input values</div>', unsafe_allow_html=True)
 
 snapshot = pd.DataFrame(
     [
@@ -443,7 +443,7 @@ st.dataframe(
 left, right = st.columns([1.5, 1])
 
 with left:
-    st.markdown('<div class="section-label">Model explanation</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-label">Why the model predicted this</div>', unsafe_allow_html=True)
     explanation = local_shap(
         explainer_pre,
         explain_model,
@@ -470,7 +470,7 @@ with left:
     )
 
 with right:
-    st.markdown('<div class="section-label">Secondary benchmark signals</div>', unsafe_allow_html=True)
+    st.markdown('<div class="section-label">Failure-mode experiments</div>', unsafe_allow_html=True)
 
     mode_rows = []
     for mode, model in mode_models.items():
@@ -488,7 +488,7 @@ with right:
         "can overlap, so these scores are not unique physical diagnoses."
     )
 
-    st.markdown("**Current review context**")
+    st.markdown("**Notes**")
     st.info(
         f"The model score is {risk:.1%}. The demonstration alert threshold is "
         f"{RISK_THRESHOLD:.2f}. Any operational policy would need its own cost-based "
@@ -511,7 +511,7 @@ with st.expander("Engineering-derived signals"):
         """
     )
 
-with st.expander("Model quality & uncertainty"):
+with st.expander("Model results"):
     q1, q2, q3, q4, q5 = st.columns(5)
     q1.metric("PR-AUC", f"{MODEL_PR_AUC:.3f}")
     q2.metric("Precision", f"{MODEL_PRECISION:.3f}")
@@ -530,7 +530,7 @@ with st.expander("Model quality & uncertainty"):
         """
     )
 
-with st.expander("Engineering notes & scope"):
+with st.expander("Project notes"):
     st.markdown(
         """
         **Prediction inputs:** product type, air/process temperature, rotational speed,
