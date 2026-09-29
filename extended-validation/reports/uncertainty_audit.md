@@ -1,6 +1,6 @@
-# AERIS Uncertainty & Error Audit
+# Uncertainty Check
 
-This is a **secondary robustness audit**. It does not change the model, threshold, or held-out test split. The final 20% test partition remains untouched during training and model selection.
+This is an extra check on the main result. It does not change the model, threshold or test split.
 
 ## Held-out test composition
 
@@ -18,7 +18,7 @@ This is a **secondary robustness audit**. It does not change the model, threshol
 
 ## 95% stratified bootstrap intervals
 
-Bootstrap resamples preserve the observed number of positive and negative test examples in each resample. Intervals describe sampling uncertainty around this held-out evaluation; they are not guarantees of real-world performance.
+The bootstrap keeps the same number of positive and negative examples in each resample. The intervals show uncertainty around this test-set result; they are not guarantees for real machines.
 
 | Metric | Estimate | 95% interval |
 |---|---:|---:|
@@ -41,6 +41,6 @@ Bootstrap resamples preserve the observed number of positive and negative test e
 - False negatives: **13** — failures not flagged above the current threshold.
 - Threshold changes therefore represent an explicit precision/recall trade-off rather than a universally correct operating point.
 
-## Engineering interpretation
+## What this means
 
-The headline risk-model metrics are useful, but the confidence intervals show that they should not be treated as exact constants. The positive class is small even in the held-out test set, so uncertainty matters. A real deployment would require prospective validation, drift monitoring, and threshold selection against explicit maintenance costs.
+The main metrics look strong on this split, but the intervals show they can move. There are only 68 failures in the test set, so I would not treat the displayed numbers as fixed constants.
