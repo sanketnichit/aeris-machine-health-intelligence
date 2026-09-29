@@ -36,7 +36,7 @@ EXPECTED_DATASET_HEADER = (
 )
 
 def ensure_dataset() -> None:
-    """Ensure the benchmark CSV exists for local and Community Cloud runs."""
+    """Download the benchmark CSV if it is missing."""
     if DATA_PATH.exists():
         return
 
@@ -157,7 +157,7 @@ def format_direction(value: float) -> str:
 
 @st.cache_resource
 def train_models():
-    """Train the UI model bundle using the canonical offline architecture."""
+    """Train the model used by the Streamlit demo."""
     return train_console_models(DATA_PATH, random_state=42)
 
 
@@ -377,7 +377,7 @@ raw_row = pd.DataFrame(
     ]
 )
 
-# Use exactly the same deterministic feature engineering as the offline pipeline.
+# Use the same feature engineering as the training code.
 app_row = add_engineered_features(raw_row)[MODEL_FEATURES]
 
 with st.spinner("Preparing AERIS model bundle..."):
