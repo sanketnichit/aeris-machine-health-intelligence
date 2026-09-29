@@ -1,8 +1,7 @@
-"""Shared AERIS model-building utilities.
+"""Model-building helpers shared by the main scripts and Streamlit app.
 
-This module is the single source of truth for the v1 preprocessing and
-HistGradientBoosting architecture used by the risk model, feature ablations,
-attribution models and Streamlit console.
+Keeping the preprocessing and HGB setup here avoids having slightly different
+model definitions in different files.
 """
 
 from __future__ import annotations
@@ -38,7 +37,7 @@ MODE_HGB_PARAMS = {
 
 
 def build_preprocessor(features: list[str] | None = None) -> ColumnTransformer:
-    """Build the AERIS one-hot + passthrough preprocessor for a feature contract."""
+    """Build the preprocessor for the selected feature list."""
     resolved = MODEL_FEATURES if features is None else list(features)
     return ColumnTransformer(
         [
@@ -56,7 +55,7 @@ def build_preprocessor(features: list[str] | None = None) -> ColumnTransformer:
 
 
 def build_hgb_pipeline(features: list[str] | None = None) -> Pipeline:
-    """Build the canonical v1 HistGradientBoosting pipeline."""
+    """Build the HistGradientBoosting pipeline used by the project."""
     return Pipeline(
         [
             ("preprocessor", build_preprocessor(features)),
@@ -72,7 +71,7 @@ def build_calibrated_hgb(
     n_jobs: int = -1,
     features: list[str] | None = None,
 ) -> CalibratedClassifierCV:
-    """Build the canonical calibrated v1 risk model for a feature contract."""
+    """Build the calibrated risk model for the selected feature list."""
     return CalibratedClassifierCV(
         build_hgb_pipeline(features),
         method=calibration_method,
