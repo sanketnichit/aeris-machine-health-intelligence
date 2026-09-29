@@ -1,4 +1,4 @@
-# Subgroup Audit
+# Subgroup Check
 
 AERIS was checked separately across the three AI4I product types using the current calibrated v1 model.
 
@@ -12,4 +12,4 @@ AERIS was checked separately across the three AI4I product types using the curre
 
 The product-type results are directionally similar, but the H subgroup contains only **five positive test examples**. Its recall estimate is therefore statistically fragile and should not be treated as a meaningful production comparison.
 
-This audit is retained to demonstrate that aggregate metrics are not sufficient by themselves.
+I kept this check because the overall metric can hide what happens inside a small subgroup.
