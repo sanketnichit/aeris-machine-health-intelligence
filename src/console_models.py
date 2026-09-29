@@ -1,13 +1,8 @@
-"""Model bundle used by the AERIS Streamlit console.
+"""Models used by the Streamlit app.
 
-The console uses the same seed-42 train/test partition and canonical model
-builders as the offline evaluation pipeline. The held-out partition is never
-needed by the UI at inference time; it is used only to keep the training
-architecture consistent with the documented v1 evaluation.
-
-The trained console bundle is persisted in a local, git-ignored cache so the
-first launch trains the models once and subsequent app restarts load them
-directly.
+The app uses the same training setup as the main risk-model script. Trained
+models are saved in a local cache so the app does not retrain everything on
+every restart.
 """
 
 from __future__ import annotations
@@ -33,7 +28,7 @@ CACHE_VERSION = "2026-09-26-console-bundle-v1"
 
 
 def _cache_path(data_path: Path) -> Path:
-    """Return a cache path keyed to the dataset bytes and model contract."""
+    """Return a cache path based on the dataset and model version."""
     digest = hashlib.sha256(data_path.read_bytes()).hexdigest()[:16]
     cache_dir = data_path.parent.parent / ".aeris_cache"
     cache_dir.mkdir(parents=True, exist_ok=True)
@@ -64,7 +59,7 @@ def train_console_models(
     *,
     random_state: int = 42,
 ):
-    """Load a persisted console bundle or train the canonical UI models."""
+    """Load the cached models or train them when needed."""
     data_path = Path(data_path)
     cache_path = _cache_path(data_path)
 
