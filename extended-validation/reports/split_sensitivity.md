@@ -1,6 +1,6 @@
-# AERIS Split-Sensitivity Audit
+# Split Sensitivity
 
-This audit evaluates the **fixed v1 calibrated HGB model** across five independent stratified 80/20 train/test splits. The model hyperparameters and 0.50 threshold are held fixed; the alternate splits are not used to tune the model or replace the primary held-out evaluation.
+I ran the same calibrated HGB setup on five different stratified 80/20 splits. The model settings and 0.50 threshold stayed fixed.
 
 ## Results by split
 
@@ -24,4 +24,4 @@ This audit evaluates the **fixed v1 calibrated HGB model** across five independe
 
 ## Interpretation
 
-The ranking and classification metrics move across splits, which is expected with a relatively small positive class. The point of this audit is not to manufacture a single more impressive score; it is to show that performance is sensitive to which observations land in the test partition. The seed-42 split remains the project's primary held-out evaluation for consistency with the model-selection record.
+The scores move between splits, which is not surprising because there are only 68 positive examples in each test set. The useful part of this check is seeing how much the result depends on which rows end up in the test set. I still use seed 42 as the main result so the project stays consistent.
