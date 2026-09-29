@@ -1,6 +1,6 @@
-# AERIS Feature Ablation Study
+# Feature Ablation
 
-This experiment isolates the contribution of the two deterministic engineering-derived features used by AERIS v1. The model family, hyperparameters, random seed, train/test partition, cross-validation scheme and 0.50 calibrated decision threshold are held fixed.
+I compared the model with and without the two derived features. The model settings, seed, split and threshold were kept the same.
 
 ## Features
 
@@ -16,7 +16,7 @@ Neither engineered feature uses machine-failure or failure-mode labels.
 | Raw operating features | 0.8026 ± 0.0376 | 0.8490 | 0.9259 | 0.7353 | 0.8197 | 0.0108 |
 | Raw + engineered features | 0.8713 ± 0.0301 | 0.8986 | 0.9649 | 0.8088 | 0.8800 | 0.0075 |
 
-## Change from adding the engineered features
+## Change after adding the derived features
 
 - CV PR-AUC change: **+0.0687**
 - Test PR-AUC change: **+0.0496**
@@ -26,4 +26,4 @@ Neither engineered feature uses machine-failure or failure-mode labels.
 
 ## Interpretation
 
-The engineered features improve both ranking and thresholded detection on the AI4I benchmark under the fixed evaluation design. This supports keeping them in v1. It does not establish physical causality, and the effect should be re-tested on independent industrial data because AI4I is synthetic.
+The derived features improve both ranking and thresholded detection on this AI4I split, so I kept them in the current version. It does not establish physical causality, and the effect should be re-tested on independent industrial data because AI4I is synthetic.
