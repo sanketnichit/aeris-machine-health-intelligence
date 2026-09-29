@@ -129,8 +129,8 @@ def main() -> None:
     }
 
     lines = [
-        "# AERIS Uncertainty & Error Audit\n\n",
-        "This is a **secondary robustness audit**. It does not change the model, "
+        "# Uncertainty Check\n\n",
+        "This is an extra check. It does not change the model, "
         "threshold, or held-out test split. The final 20% test partition remains "
         "untouched during training and model selection.\n\n",
         "## Held-out test composition\n",
@@ -172,7 +172,7 @@ def main() -> None:
             "threshold.\n",
             "- Threshold changes therefore represent an explicit precision/recall "
             "trade-off rather than a universally correct operating point.\n\n",
-            "## Engineering interpretation\n",
+            "## What this means\n",
             "The headline risk-model metrics are useful, but the confidence intervals "
             "show that they should not be treated as exact constants. The positive "
             "class is small even in the held-out test set, so uncertainty matters. "
