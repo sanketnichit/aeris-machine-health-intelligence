@@ -34,7 +34,7 @@ ENGINEERED_FEATURES = MODEL_FEATURES
 
 
 def build_model(features: list[str]):
-    """Build the canonical HGB architecture for the selected feature contract."""
+    """Build the shared HGB setup for the selected feature list."""
     return build_hgb_pipeline(features)
 
 
@@ -156,7 +156,7 @@ def main() -> None:
             "(negative is better)\n\n",
             "## Interpretation\n",
             "The engineered features improve both ranking and thresholded detection on "
-            "the AI4I benchmark under the fixed evaluation design. This supports keeping "
+            "the AI4I data under the same evaluation setup. This is why I kept "
             "them in v1. It does not establish physical causality, and the effect should "
             "be re-tested on independent industrial data because AI4I is synthetic.\n",
         ]
