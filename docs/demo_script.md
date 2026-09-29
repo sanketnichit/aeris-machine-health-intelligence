@@ -1,19 +1,22 @@
-# AERIS 90-Second Demo Script
+# AERIS demo notes
 
-## Demo setup
+## Before the demo
 
-Use the Streamlit console after placing the AI4I CSV at `data/ai4i2020.csv`. The UI uses the same canonical model builders as the offline evaluation.
+Make sure the AI4I CSV is available at data/ai4i2020.csv and start the app with:
 
+    streamlit run app.py
 
-## 0-10 seconds — problem
+The app uses the same model code as the main scripts.
 
-Say:
+## Start
 
-> "AERIS is an explainable predictive-maintenance prototype. It takes a machine operating state, derives two engineering signals from those inputs, estimates failure risk, then shows which signals are driving the model and which benchmark failure modes deserve attention."
+Say something like:
 
-## 10-25 seconds — input
+> "AERIS is my machine-failure prediction project. I used the AI4I 2020 dataset and built a small pipeline that takes machine readings, predicts failure risk, and shows what the model used for that prediction."
 
-Use this held-out test-set failure example:
+## Example 1: failed machine
+
+Use this test-set row:
 
 - Product type: **L**
 - Air temperature: **300.8 K**
@@ -21,53 +24,48 @@ Use this held-out test-set failure example:
 - Rotational speed: **1312 rpm**
 - Torque: **65.3 Nm**
 - Tool wear: **192 min**
-- Derived temperature delta: **9.1 K**
-- Derived mechanical power: **9.0 kW**
+- Temperature delta: **9.1 K**
+- Mechanical power: **9.0 kW**
 
-This is an actual observation from the untouched benchmark test partition. Do not edit the values during the demo.
+This row is from the test set used for the project result, so don't change the values during the demo.
 
-## 25-45 seconds — risk
+The current model gives roughly **93.1%** risk.
 
-Point to:
+Explain it like this:
 
-- failure-risk score
-- current state
-- alert threshold
-- derived engineering signals
+> "This is the model's estimated risk for this benchmark row. It is not a real machine-health percentage."
 
-For the current v1 model, this observation scores about **93.1%** risk.
+Then point at the threshold and say:
 
-Do not present this as a real-world failure probability; it is a benchmark-calibrated model score.
+> "I kept the risk score separate from the alert threshold because the right threshold depends on how costly false alarms and missed failures are."
 
-Say:
+## Explanation
 
-> "The risk score is calibrated for the AI4I benchmark. I deliberately separate the continuous score from the alert threshold because the operating cost of false negatives versus false positives is a deployment decision."
+Show the SHAP chart.
 
-## 45-65 seconds — explanation
+A simple explanation is:
 
-Point to the SHAP chart.
+> "These values show which inputs moved the tree model toward or away from the failure class. They explain the model, not the physical machine."
 
-Say:
+## Failure modes
 
-> "This is the local explanation. Positive contributions push the underlying tree model toward the failure class; negative contributions push it away. These are model attributions, not claims of physical causality."
-
-## 65-80 seconds — failure modes
-
-Point to HDF / PWF / OSF.
+Show HDF, PWF and OSF.
 
 Say:
 
-> "The source data permits overlapping failure mechanisms, so I report separate mode scores instead of forcing the machine into one diagnosis. I also deliberately excluded sparse or unstable modes from the v1 panel."
+> "The dataset can have more than one failure flag on a row, so I show these as separate scores instead of pretending there is always one diagnosis."
 
-## 80-90 seconds — engineering judgement
+TWF and RNF are left out of the main panel because their results were much weaker in the tests.
 
-Finish with:
+## If they ask what is interesting about the project
 
-> "The interesting part is not the dashboard. It is the evaluation discipline behind it: severe class imbalance, PR-AUC as the primary metric, held-out testing, probability calibration, threshold analysis, leakage controls, engineering-derived features and explicit dataset limitations."
+Say:
+
+> "The dashboard is the easy part. I also checked the class imbalance, compared models, tested the two derived features, checked calibration, looked at errors and tried different train/test splits. The main limitation is that AI4I is synthetic."
 
 ## Backup example
 
-For a low-risk demonstration:
+Use this row if the first one is inconvenient:
 
 - Product type: **L**
 - Air temperature: **297.6 K**
@@ -75,9 +73,7 @@ For a low-risk demonstration:
 - Rotational speed: **1576 rpm**
 - Torque: **32.7 Nm**
 - Tool wear: **83 min**
-- Derived temperature delta: **11.0 K**
-- Derived mechanical power: **5.4 kW**
+- Temperature delta: **11.0 K**
+- Mechanical power: **5.4 kW**
 
-This observation is also from the untouched test partition, is labelled non-failure in the benchmark, and scores about **0.07%** risk with the current v1 model.
-
-Use the backup example only if the first example does not produce the intended UI state.
+This row is labelled non-failure in the benchmark and gives about **0.07%** risk with the current model.
