@@ -1,6 +1,6 @@
-# AERIS Calibration Audit
+# Calibration Check
 
-This audit checks how the calibrated risk score behaves across selected subgroups of the primary held-out test set. The global calibration model and 0.50 threshold are unchanged.
+I checked how the calibrated risk score behaves across a few groups in the main held-out test set. The model and 0.50 threshold are unchanged.
 
 A calibration gap is **mean predicted risk minus observed failure rate**. Positive values indicate average overprediction in that subgroup; negative values indicate average underprediction.
 
@@ -41,4 +41,4 @@ The primary test predictions are partitioned into five equal-count risk bins. Th
 
 ## Interpretation
 
-Calibration is not expected to be identical in every subgroup, especially when the positive class is rare. The useful check is whether the score retains reasonable ordering and whether large subgroup calibration gaps are visible. Any production use would require recalibration and prospective validation on the actual target population.
+Calibration is not expected to be identical in every subgroup, especially when the positive class is rare. The main thing I was checking was whether the score still has reasonable ordering and whether any group has a large calibration gap. Any production use would require recalibration and prospective validation on the actual target population.
