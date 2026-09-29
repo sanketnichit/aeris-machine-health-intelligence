@@ -1,25 +1,19 @@
 # Dataset
 
-Place the **AI4I 2020 Predictive Maintenance Dataset** CSV here as:
+Put the AI4I 2020 CSV here:
 
-`data/ai4i2020.csv`
+    data/ai4i2020.csv
 
-### Recommended setup
+From the repo root, you can download it with:
 
-From the repository root:
+    python scripts/download_dataset.py
 
-```bash
-python scripts/download_dataset.py
-```
+The script downloads the UCI file, checks the header and saves it to the path above. Use --force if you want to replace an existing copy.
 
-The setup script downloads the official UCI archive, extracts only `ai4i2020.csv`, validates its header, and writes it to the expected path. Use `--force` to replace an existing copy.
+Source:
 
-Canonical source:
-
-- UCI Machine Learning Repository, dataset ID 601
+- UCI Machine Learning Repository, dataset 601
 - DOI: https://doi.org/10.24432/C5HS5C
 - License: CC BY 4.0
 
-The project scripts intentionally do not fabricate or alter the source data. Run validation before modelling.
-
-The raw CSV is intentionally **not committed** to GitHub. A fresh clone therefore needs the setup step above before running the modelling pipeline.
+The raw CSV is not committed to GitHub, so this setup step is needed after a fresh clone.
