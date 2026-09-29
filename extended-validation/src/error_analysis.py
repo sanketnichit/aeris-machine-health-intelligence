@@ -94,10 +94,10 @@ def main() -> None:
             "## Interpretation\n",
             "False negatives are the principal miss class at the 0.50 threshold. "
             "Their model scores remain below the alert cutoff even though the "
-            "benchmark target is positive, which illustrates why a production alert "
+            "benchmark label is positive, which illustrates why a production alert "
             "policy would need an explicit cost for missed failures. The failure-mode "
             "counts are descriptive only because the AI4I mode labels are synthetic "
-            "benchmark indicators rather than physical root-cause measurements.\n\n",
+            "benchmark scores rather than physical root-cause measurements.\n\n",
             "## Ranking check\n",
             f"Overall held-out average precision remains **{average_precision_score(y_test, prob):.3f}**. "
             "Error analysis is intentionally kept downstream of the fixed evaluation "
