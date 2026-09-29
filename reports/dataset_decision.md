@@ -1,30 +1,32 @@
-# Dataset Decision
+# Dataset Choice
 
-## Why AI4I 2020 for v1?
+## Why I used AI4I 2020
 
-AI4I is intentionally used as a controlled benchmark for the first AERIS release.
+I needed a dataset that was small enough to work with during the project but still had enough information to build a proper failure-prediction pipeline.
 
-### Strengths
+AI4I gives me:
 
-- 10,000 observations.
-- Clear failure target.
-- Multiple process/sensor variables.
-- Multiple named failure mechanisms.
-- Severe class imbalance that makes precision/recall/PR-AUC meaningful.
-- Small enough to build and audit thoroughly.
+- 10,000 rows
+- a clear machine-failure target
+- temperature, speed, torque and tool-wear inputs
+- several failure-mode flags
+- a fairly imbalanced target, so accuracy alone is not very useful
+- a dataset size that is easy to reproduce locally
 
-### Important limitation
+## Main limitation
 
-AI4I 2020 is **synthetic**, not proprietary or production telemetry. UCI explicitly describes it as synthetic data intended to reflect industrial predictive-maintenance data.
+AI4I is synthetic. It is useful for building and testing the project, but its results should not be treated as results from real factory equipment.
 
-### Why not C-MAPSS yet?
+## Why I did not start with C-MAPSS
 
-C-MAPSS is a stronger benchmark for temporal degradation and remaining-useful-life research, but it requires sequence-oriented modelling and more careful RUL evaluation. It is kept as a planned extension rather than forcing it into the deadline-driven v1.
+C-MAPSS is useful for temporal degradation and remaining-useful-life work, but that would push the project into a different problem. I wanted to get the basic failure-prediction pipeline working first.
 
-### Why not a real industrial dataset yet?
+## Why not a real industrial dataset
 
-Real predictive-maintenance datasets can be substantially larger and more temporally complex. For example, UCI's MetroPT-3 dataset contains 1,516,948 observations from a metro train compressor APU and was collected specifically for predictive-maintenance/anomaly work. It is a strong future validation target, but not the right first dataset when the goal is to establish a clean, explainable pipeline quickly.
+Real predictive-maintenance data is usually larger and more complicated, especially because time and machine history matter.
 
-## Engineering principle
+MetroPT-3 is one dataset I would try next. It has much more data and is closer to a real predictive-maintenance setting, but I did not need that extra complexity for the first version.
 
-AERIS will make its dataset limitations explicit. The project does not present AI4I results as evidence about Red Bull Powertrains or any specific real-world machine fleet.
+## One thing I want to keep clear
+
+The AI4I results are only for this benchmark. I am not using them as evidence about Red Bull Powertrains or any other real machine fleet.
