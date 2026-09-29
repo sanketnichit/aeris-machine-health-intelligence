@@ -1,24 +1,28 @@
-# AERIS Engineering Decisions
+# Engineering Notes
 
-## 1. Scope before complexity
+These are the main choices I made while building AERIS.
 
-The first release deliberately limits itself to:
+## Scope
 
-- fault detection
-- calibrated failure-risk scoring
+I kept the first version to:
+
+- machine-failure detection
+- calibrated risk scoring
 - model explanation
-- one focused visualization
-- defensible secondary failure-mode attribution
+- one Streamlit interface
+- a small secondary failure-mode study
 
-RUL, counterfactual simulation, LLM reporting, streaming and deployment are future work.
+I left things like RUL, streaming, counterfactuals and deployment for later instead of adding them just to make the project larger.
 
-## 2. Dataset choice
+## Dataset
 
-AI4I 2020 is synthetic. That is a limitation, but it is small enough to audit deeply before the application deadline. AERIS explicitly documents this limitation rather than presenting benchmark scores as production evidence.
+I used AI4I 2020 because it is small, easy to reproduce and useful for getting the whole pipeline working.
 
-## 3. Leakage prevention
+The downside is that it is synthetic. That is why the repo treats the numbers as benchmark results rather than production evidence.
 
-Excluded from prediction features:
+## Leakage
+
+The main model does not use:
 
 - UDI
 - Product ID
@@ -28,73 +32,67 @@ Excluded from prediction features:
 - OSF
 - RNF
 
-The failure-mode flags are target-side information and would make the binary model unrealistically easy.
+The failure-mode flags are target information and the identifiers do not represent useful prediction inputs.
 
-## 4. Engineering feature design
+## Derived features
 
-Two deterministic transformations are added to the six observed operating inputs:
+I added two simple features:
 
-- temperature delta = process temperature - air temperature
-- mechanical power = torque × rotational speed / 9549.2966
+- temperature difference = process temperature - air temperature
+- mechanical power = torque x rotational speed / 9549.2966
 
-These transformations use only observed inputs. They were evaluated through training-only model comparison and then checked across independent held-out splits. The improvement is treated as benchmark evidence, not proof of physical causality.
+Both can be calculated from information available at prediction time.
 
-## 5. Evaluation
+The feature-ablation and split checks are there to see whether the improvement survives beyond one particular train/test split.
 
-The final seed-42 test set is held out once for the primary evaluation.
+## Evaluation
 
-Model selection uses stratified cross-validation on the training set. Secondary split-sensitivity and bootstrap audits are downstream robustness checks, not tuning loops.
+The main reported number comes from a stratified 80/20 split with seed 42.
 
-Primary metric is average precision because the failure class is rare. Precision, recall and F1 are reported alongside it. Accuracy is intentionally not the headline metric.
+Model selection happens on the training part using cross-validation. The held-out test part is kept for the final reported evaluation.
 
-## 6. Model choice
+Because failures are uncommon, PR-AUC is more useful here than using accuracy as the headline number. Precision, recall and F1 are reported as well.
 
-HistGradientBoosting is the model carried forward from the training-partition comparison because Random Forest is nearly tied on cross-validated PR-AUC while HGB has higher cross-validated recall and F1. The held-out test set is reserved for final comparison rather than model selection.
+## Model
 
-XGBoost is intentionally not a dependency for v1. A strong scikit-learn implementation is enough to establish the method.
+The main model is HistGradientBoosting with sigmoid calibration.
 
-## 7. Risk score
+I kept Random Forest as the first baseline. The gradient-boosting model was carried forward after the training-side comparison.
 
-The model output is calibrated using sigmoid calibration. This converts the raw model score into a more useful probability-like risk estimate.
+I did not add XGBoost as another dependency because the scikit-learn model was enough for this version of the project.
 
-The risk score is still a benchmark estimate, not a physical health measurement.
+## Explainability
 
-## 8. Explainability
+Permutation importance is useful for looking at overall feature ranking.
 
-Permutation importance is used for robust global feature ranking.
+SHAP is used for individual predictions and a more detailed view of what changed the model output.
 
-SHAP is used for local/global explanation after the core model is established. SHAP values are treated as model attribution, not physical causality. Correlated raw and derived features can share or redistribute attribution.
+Neither one should be described as proof of physical root cause.
 
-## 9. Failure modes
+## Failure modes
 
-AI4I can contain multiple failure flags for a single row. Therefore v1 does not force a single mutually exclusive diagnosis.
+AI4I can have more than one failure-mode flag on the same row, so I did not force everything into one mutually exclusive diagnosis.
 
-HDF, PWF and OSF show enough cross-validated signal to expose as separate mode likelihoods. TWF and RNF are deferred because their benchmark signal remains too weak/unstable.
+HDF, PWF and OSF are used as separate secondary experiments. TWF and RNF were not carried forward as main console outputs because their benchmark signal was weaker/less stable.
 
-The very strong HDF benchmark result is not presented as evidence of physical root-cause understanding.
+## Streamlit app
 
-## 10. Console architecture
+The app uses the same feature engineering and model builders as the offline scripts.
 
-The Streamlit console trains through `src/console_models.py`, which reuses the canonical model builders from `src/models.py`. The risk model, explanation tree and failure-mode models therefore share the same feature contract and documented architecture instead of having separate UI-only implementations. A runtime test exercises the bundle on a temporary benchmark-shaped dataset.
+I wanted to avoid having one model in the research code and another slightly different model hidden inside the UI.
 
-## 11. Uncertainty, calibration and feature stability
+## Extra checks
 
-AERIS reports uncertainty around held-out metrics with stratified bootstrap intervals and checks the fixed model across five independent stratified splits. The primary seed-42 evaluation remains the headline result for consistency.
+The repo also contains checks for:
 
-AERIS also checks:
-1. held-out metric uncertainty,
-2. calibration by product type and selected operating regimes,
-3. held-out error profiles,
-4. feature-importance stability across five splits.
+- bootstrap uncertainty
+- split sensitivity
+- calibration
+- error patterns
+- feature-importance stability
 
-These checks are descriptive robustness audits, not additional tuning loops.
+These are there mainly because a single test split can make a project look more certain than it really is.
 
-## 12. Reproducibility
+## Next step
 
-The direct dependencies are pinned to the GitHub Actions validation environment, and `docs/reproducibility_audit.md` records the regenerated benchmark metrics, threshold results, calibration checks, robustness intervals and failure-mode feasibility results. The benchmark CSV remains external to the repository by design.
-
-## 13. What would make v2 stronger?
-
-The highest-value next datasets are real industrial time-series sources such as UCI MetroPT-3, followed by C-MAPSS for temporal degradation/RUL work.
-
-These are deliberately outside the application-deadline v1 scope.
+The biggest upgrade would be testing the approach on a real industrial dataset. That would say much more about whether the workflow generalizes than adding more UI features.
