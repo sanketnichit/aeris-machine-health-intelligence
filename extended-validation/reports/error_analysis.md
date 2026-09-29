@@ -1,6 +1,6 @@
 # AERIS Error Analysis
 
-This analysis uses the same primary seed-42 held-out test set as the risk-model report. It is descriptive only: no threshold or model change is made from these observations.
+This uses the same seed-42 test set as the main risk-model report. I did not change the model or threshold based on these observations.
 
 ## Test-set outcome counts
 
@@ -31,9 +31,9 @@ This analysis uses the same primary seed-42 held-out test set as the risk-model 
 
 ## Interpretation
 
-False negatives are the principal miss class at the 0.50 threshold. Their model scores remain below the alert cutoff even though the benchmark target is positive, which illustrates why a production alert policy would need an explicit cost for missed failures.
+False negatives are the principal miss class at the 0.50 threshold. Their model scores remain below the alert cutoff even though the benchmark target is positive, which is why a real alert policy would need to consider the cost of missed failures.
 
-The concentration of false negatives in the TWF flag is useful diagnostic evidence for future work. It supports keeping TWF as a limitation/extension rather than presenting the current mode layer as universally strong.
+Most of the false negatives have the TWF flag. That is something to investigate later, and it is one reason I did not present the current failure-mode layer as generally reliable.
 
 ## Ranking check
 
