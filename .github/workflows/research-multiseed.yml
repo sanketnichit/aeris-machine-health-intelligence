@@ -1,0 +1,29 @@
+name: AERIS Research - Multi-Seed Ablation
+
+on:
+  push:
+    branches:
+      - "research/multiseed-ablation-2026-09-29"
+
+jobs:
+  multiseed-ablation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Download official AI4I dataset
+        run: |
+          mkdir -p data
+          curl -L --fail --silent --show-error             "https://archive.ics.uci.edu/static/public/601/ai4i%2B2020%2Bpredictive%2Bmaintenance%2Bdataset.zip"             -o /tmp/ai4i.zip
+          unzip -o /tmp/ai4i.zip -d /tmp/ai4i
+          cp /tmp/ai4i/ai4i2020.csv data/ai4i2020.csv
+
+      - name: Run multi-seed feature ablation
+        run: python research/multiseed_ablation.py
