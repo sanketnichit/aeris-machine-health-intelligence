@@ -2,7 +2,7 @@
 AERIS - failure-mode attribution feasibility study.
 
 AI4I failure-mode labels are not mutually exclusive, so this stage is multi-label.
-We only promote modes whose cross-validated signal is defensible.
+I only keep modes whose cross-validated results are useful enough to show.
 """
 from pathlib import Path
 import sys
@@ -74,11 +74,11 @@ def main() -> None:
 
     lines.extend(
         [
-            "\n## AERIS v1 exposure decision\n",
+            "\n## What I show in the app\n",
             "Promote **HDF, PWF and OSF** into the v1 attribution panel.\n\n",
             "TWF and RNF remain deferred because their cross-validated signal is too weak/unstable "
             "for the v1 engineering review panel.\n\n",
-            "## Synthetic-benchmark caveat\n",
+            "## Synthetic-data note\n",
             "The very strong HDF signal should not be interpreted as evidence of physical root-cause "
             "understanding. The AI4I benchmark is synthetic and can contain structured relationships "
             "between its generated labels and operating variables. AERIS therefore reports these mode "
