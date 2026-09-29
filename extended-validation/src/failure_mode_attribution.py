@@ -79,7 +79,7 @@ def main() -> None:
             "TWF and RNF remain deferred because their cross-validated signal is too weak/unstable "
             "for the v1 engineering review panel.\n\n",
             "## Synthetic-data note\n",
-            "The very strong HDF signal should not be interpreted as evidence of physical root-cause "
+            "The very strong HDF result should not be treated as proof of physical root-cause "
             "understanding. The AI4I benchmark is synthetic and can contain structured relationships "
             "between its generated labels and operating variables. AERIS therefore reports these mode "
             "scores as benchmark attribution signals, not physical diagnoses.\n\n",
