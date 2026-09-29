@@ -1,6 +1,6 @@
-# Threshold and Calibration Analysis
+# Threshold and Calibration Check
 
-Thresholds are selected using out-of-fold predictions from the training partition only, then evaluated once on the untouched test partition.
+I selected the thresholds from out-of-fold predictions on the training data and then checked them once on the test set.
 
 | Objective | OOF threshold | Test precision | Test recall | Test F1 |
 |---|---:|---:|---:|---:|
@@ -16,4 +16,4 @@ Thresholds are selected using out-of-fold predictions from the training partitio
 - F1 @ 0.50: **0.880**
 - Brier score: **0.0075**
 
-The visualization keeps 0.50 as the default calibrated risk threshold. Different operational costs would justify a different threshold.
+The Streamlit demo uses 0.50 by default. A real application could use a different threshold depending on the cost of false alarms and missed failures.
