@@ -1,30 +1,36 @@
-# AERIS Model Card
+# Model Notes
 
-## Intended use
+## What this project is
 
-AERIS is an educational and portfolio prototype for demonstrating an end-to-end predictive-maintenance workflow:
+AERIS is a BTech/portfolio project for experimenting with a complete predictive-maintenance workflow on the AI4I 2020 dataset.
 
-- binary machine-failure detection
-- calibrated risk scoring
-- model explanation
-- secondary failure-mode attribution
+It currently covers:
 
-## Not intended for
+- binary machine-failure prediction
+- calibrated risk scores
+- SHAP/permutation-based explanations
+- a small Streamlit interface
+- separate failure-mode experiments
+
+## What it is not
+
+I would not use this model for:
 
 - real maintenance decisions
 - safety-critical control
-- deployment on unknown production fleets
-- claims about Red Bull Powertrains or Formula 1 telemetry
+- an unknown production fleet
+- claims about any specific industrial company or Formula 1 team
 
-## Training data
+## Data
 
-AI4I 2020 Predictive Maintenance Dataset from the UCI Machine Learning Repository.
+The model is trained on the AI4I 2020 Predictive Maintenance Dataset from UCI.
 
-The dataset is synthetic. It should therefore be treated as a controlled benchmark, not a substitute for real industrial telemetry.
+The dataset is synthetic. That matters when reading the results: the model is being tested on a controlled benchmark, not on live machine telemetry.
 
-## Inputs
+## Model inputs
 
-Raw observed inputs:
+Observed inputs:
+
 - machine product type
 - air temperature
 - process temperature
@@ -33,12 +39,13 @@ Raw observed inputs:
 - tool wear
 
 Derived inputs:
-- temperature delta = process temperature - air temperature
-- mechanical power = torque × rotational speed / 9549.2966
 
-The derived inputs are deterministic transformations of observed signals. They do not use the failure labels.
+- temperature difference = process temperature - air temperature
+- mechanical power = torque x rotational speed / 9549.2966
 
-The following are deliberately excluded from binary failure prediction because they are target-side information or identifiers:
+These derived features only use the observed inputs.
+
+The following are excluded from the binary failure model:
 
 - UDI
 - Product ID
@@ -47,46 +54,41 @@ The following are deliberately excluded from binary failure prediction because t
 - PWF
 - OSF
 - RNF
+- machine_failure
 
-## Metrics
+The failure-mode flags are target-side information, so using them for the main prediction would leak the answer.
 
-Primary: average precision / PR-AUC.
+## Main metrics
 
-Secondary: precision, recall, F1, ROC-AUC and Brier score.
+The main metric is average precision / PR-AUC because the failure class is small.
 
-Primary seed-42 held-out risk-model result:
+The current seed-42 result is:
+
 - PR-AUC: 0.899
 - Precision @ 0.50: 0.965
 - Recall @ 0.50: 0.809
 - F1 @ 0.50: 0.880
 - Brier score: 0.0075
 
-## Known limitations
+## Limitations
 
-1. The benchmark is synthetic.
-2. Failure events are rare, so some subgroup and failure-mode estimates have high uncertainty.
-3. The model captures benchmark correlations, not guaranteed physical causality.
-4. The data is not a longitudinal machine fleet with realistic drift.
+1. AI4I is synthetic.
+2. The data is not a real longitudinal machine fleet.
+3. Failure events are rare, so some smaller groups have little data.
+4. Good benchmark performance does not prove physical causality.
 5. Failure-mode labels can overlap.
-6. The calibrated score is useful as a benchmark risk estimate, not a production probability without external validation.
-7. The engineering-derived features materially improve benchmark performance, but that improvement may partly reflect structure built into the synthetic data-generation process.
-8. Feature attribution is model attribution, not proof of physical root cause.
+6. The current risk score is a benchmark estimate, not a production probability.
+7. The two derived features improve benchmark performance, but that may partly come from structure built into the synthetic dataset.
+8. SHAP and permutation importance explain the model, not the physical machine.
 
-## Robustness checks
+## Checks in the repo
 
-AERIS includes:
-- stratified bootstrap intervals around the primary held-out metrics
-- fixed-model split sensitivity across five stratified 80/20 splits
-- product-type and operating-regime calibration checks
+I also included:
+
+- bootstrap intervals
+- split-sensitivity checks
+- calibration checks
 - held-out error analysis
-- feature-importance stability across five splits
+- feature-importance stability
 
-These are evidence about benchmark robustness, not substitutes for prospective validation on real industrial data.
-
-## Reproducibility baseline
-
-The repository pins the direct dependencies used by the GitHub Actions validation environment. The numerical reproduction record is maintained in `docs/reproducibility_audit.md`.
-
-## Governance principle
-
-AERIS reports where the data or model is weak instead of hiding uncertainty behind a single headline accuracy number.
+These help show how sensitive the benchmark result is, but they are not a substitute for testing on real industrial data.
