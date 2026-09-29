@@ -67,7 +67,7 @@ def build_preprocessor(scale_numeric: bool = False) -> ColumnTransformer:
 
 
 def build_comparison_models():
-    """Return comparison models, with HGB sourced from the canonical builder."""
+    """Return the comparison models, using the shared HGB setup."""
     return {
         "Logistic Regression": Pipeline(
             [
@@ -201,14 +201,14 @@ def main() -> None:
             f"({hgb['cv_recall_mean']:.3f} vs {rf['cv_recall_mean']:.3f}) and F1 "
             f"({hgb['cv_f1_mean']:.3f} vs {rf['cv_f1_mean']:.3f}). The held-out test results "
             "are reported for final comparison and are not used to tune or select the model.\n\n",
-            "## Engineering interpretation\n",
-            "The derived features materially improve the benchmark model. This should be interpreted "
-            "as a benchmark result, not proof that these two transformations are physically causal or "
+            "## What this means\n",
+            "The derived features improve the benchmark result. This should be interpreted "
+            "as a dataset result, not proof that these two transformations are physically causal or "
             "sufficient for a real machine fleet. AI4I is synthetic, and its target generation can "
             "contain structured relationships between the operating variables and failure labels.\n\n",
-            "## Downstream use\n",
-            "The selected HGB architecture is carried into the calibrated risk model, explainability "
-            "workflow and Streamlit console. Threshold selection remains a separate deployment decision "
+            "## Where it is used\n",
+            "The HGB setup is reused in the calibrated risk model, explainability "
+            "code and Streamlit console. Threshold selection remains a separate deployment decision "
             "from probability calibration.\n",
         ]
     )
