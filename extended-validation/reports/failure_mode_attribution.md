@@ -1,4 +1,4 @@
-# Failure-mode Attribution
+# Failure-mode results
 
 AERIS v1 treats failure modes as a **multi-label attribution** problem rather than forcing every failed row into exactly one class.
 
@@ -12,15 +12,13 @@ AERIS v1 treats failure modes as a **multi-label attribution** problem rather th
 | TWF | 46 | 0.129 ± 0.081 | 0.186 | 0.156 | 0.159 |
 | RNF | 19 | 0.010 ± 0.010 | 0.000 | 0.000 | 0.000 |
 
-## AERIS v1 exposure decision
+## What I show in the app
 
-Promote **HDF, PWF and OSF** into the v1 attribution panel.
+HDF, PWF and OSF are shown in the app. TWF and RNF are left out because their cross-validated results were much weaker and less stable.
 
-TWF and RNF remain deferred because their cross-validated signal is too weak/unstable for the v1 engineering review panel.
+## Synthetic-data note
 
-## Synthetic-benchmark caveat
-
-The very strong HDF signal should not be interpreted as evidence of physical root-cause understanding. The AI4I benchmark is synthetic and can contain structured relationships between its generated labels and operating variables. AERIS therefore reports these mode scores as benchmark attribution signals, not physical diagnoses.
+The very strong HDF result should not be treated as proof of physical root-cause understanding. The AI4I benchmark is synthetic and can contain structured relationships between its generated labels and operating variables. AERIS therefore reports these mode scores as benchmark attribution signals, not physical diagnoses.
 
 ## Multi-label caveat
 
