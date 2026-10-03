@@ -2,7 +2,7 @@
 
 AERIS is a BTech project I built around the AI4I 2020 Predictive Maintenance Dataset from UCI.
 
-The idea was to make a small but complete machine-failure project instead of only training a model in a notebook. The repo has data checks, a baseline model, a stronger model with a couple of derived features, evaluation scripts, explainability, tests, and a Streamlit app.
+The idea was to make a small but complete machine-failure project instead of only training a model in a notebook. The repo has data checks, a baseline model, a stronger model with a couple of derived features, evaluation scripts, explainability, tests, and a Streamlit app. I used AI tools to help implement and review the code; the scoping decisions, evaluation design and conclusions are mine, and I can walk through any part of this.
 
 **Live demo:** https://aeris-machine-health-intelligence.streamlit.app/
 
@@ -46,6 +46,18 @@ For the current seed-42 stratified 80/20 evaluation, the calibrated model report
 | Recall at 0.50 | 0.809 |
 | F1 at 0.50 | 0.880 |
 | Brier score | 0.0075 |
+
+The test set only has about 68 failures in it, so a single point estimate isn't the whole story. The 95% bootstrap interval on each metric:
+
+| Metric | 95% interval |
+|---|---:|
+| PR-AUC | [0.835, 0.953] |
+| Precision | [0.915, 1.000] |
+| Recall | [0.721, 0.897] |
+| F1 | [0.817, 0.938] |
+| Brier | [0.0050, 0.0102] |
+
+Across five different stratified splits, mean PR-AUC is 0.881 ± 0.025 and mean F1 is 0.836 ± 0.057 - so the headline numbers above hold up and aren't just a lucky split.
 
 PR-AUC is used as the main metric because failures are rare.
 
