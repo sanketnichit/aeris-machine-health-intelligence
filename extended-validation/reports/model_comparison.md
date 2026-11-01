@@ -25,11 +25,11 @@ The derived signals use only observed input variables and do not use machine-fai
 | Random Forest | 0.872 ± 0.029 | 0.668 | 0.792 | 0.857 | 0.941 | 0.706 | 0.807 |
 | Logistic Regression | 0.484 ± 0.025 | 0.823 | 0.274 | 0.466 | 0.177 | 0.868 | 0.294 |
 
-## Which model I kept
+## Selection
 
-I kept HistGradientBoosting based on the training-side cross-validation results. Random Forest was close on PR-AUC, but HGB had better recall and F1. I did not use the test-set numbers to make that choice.
+I kept HistGradientBoosting based on the training-side cross-validation results. Random Forest was close on PR-AUC, but HGB had better recall and F1. The held-out test results are reported for final comparison and were not used to tune or select the model.
 
-## What this means
+## Engineering interpretation
 
 The derived features improve the benchmark result. That does not prove the transformations are physically causal, and AI4I is synthetic.
 
