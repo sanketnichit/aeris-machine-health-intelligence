@@ -119,6 +119,12 @@ pytest -q
 
 The extra experiments are in [extended-validation/README.md](extended-validation/README.md).
 
+To reproduce the model-comparison report from the repository root (after downloading the dataset):
+
+```bash
+python extended-validation/src/model_comparison.py
+```
+
 ## Repository layout
 
 ```text
