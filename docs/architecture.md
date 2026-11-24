@@ -31,14 +31,14 @@ flowchart TD
 |---|---|
 | app.py | Workspace routing; AI4I classifier |
 | src/evidence_console.py | Nine read-only research pages, measured and simulated replay, technical report |
-| src/twin_console.py and src/digital_twin.py | Isolated virtual wear and paired maintenance simulation; separate verified measured-signal context |
+| src/twin_console.py and src/digital_twin.py | Isolated virtual wear and paired maintenance simulation; separate verified measured-signal and sensitivity context |
 | src/api.py and src/telemetry_contract.py | Local HTTP interface, bounded requests, canonical units and optional shared bearer token |
 | src/telemetry_store.py and src/monitoring.py | SQLite transactions, asset registry, deduplication, monitoring policy and events |
 | src/incidents.py and src/monitor_worker.py | Review lifecycle and optional periodic freshness scan |
 | src/anomaly.py and src/decision_engine.py | Causal deviation and explainable review assessment; operational forecasts withheld |
 | src/fleet_console.py | Fleet history, event and incident review, advisory export |
 | scripts/telemetry_backup.py | Consistent SQLite backup and integrity-checked recovery |
-| research/ | Fixed protocols, experiments, nine registered evidence files and generated technical report |
+| research/ | Fixed protocols, experiments, ten registered evidence files and generated technical report |
 
 ## Trust and deployment boundaries
 
