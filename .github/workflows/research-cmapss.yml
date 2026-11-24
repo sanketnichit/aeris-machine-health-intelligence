@@ -1,0 +1,45 @@
+name: AERIS C-MAPSS research
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/research-cmapss.yml'
+      - 'scripts/download_cmapss.py'
+      - 'research/cmapss_baseline.py'
+      - 'research/cmapss_uncertainty.py'
+      - 'src/prognostics.py'
+      - 'src/rul_uncertainty.py'
+permissions:
+  contents: read
+jobs:
+  benchmark:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python scripts/download_cmapss.py --output "$RUNNER_TEMP/cmapss"
+      - name: Run development experiments
+        run: |
+          mkdir -p evidence
+          cp "$RUNNER_TEMP/cmapss/manifest.json" evidence/dataset.json
+          python -m research.cmapss_baseline --data-dir "$RUNNER_TEMP/cmapss" > evidence/baseline.json
+          python -m research.cmapss_uncertainty --data-dir "$RUNNER_TEMP/cmapss" > evidence/uncertainty.json
+          git rev-parse HEAD > evidence/commit.txt
+          python --version > evidence/python.txt
+          python -m pip freeze > evidence/environment.txt
+          cat evidence/baseline.json
+          cat evidence/uncertainty.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmapss-development-evidence
+          path: evidence/
+          if-no-files-found: error
