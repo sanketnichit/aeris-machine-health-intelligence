@@ -43,6 +43,18 @@ def generate_report(root=ROOT):
     for name,m in independent["summary"]["stage"]["all"].items():
         lines.append(f"| {name} | {m['mae']:.3f} | {m['rmse']:.3f} |")
     lines.extend(["","The adaptive advantage over learned forecasting did not replicate. Do not select a new primary using these observed evaluation outcomes.",
+                  ""])
+    calibration=reports["twin_calibration_summary.json"]
+    summary=calibration["summary"]["all"]
+    lines.extend(["","## Measured vibration-state transition audit","",
+                  f"Six learning bearings supplied {calibration['fit']['transitions']} transitions. Eleven previously observed evaluation bearings supplied {summary['condition_drift']['endpoints']} endpoints.",
+                  "", "| Predictor | MAE | RMSE |","|---|---:|---:|"])
+    for name in ("persistence","global_drift","condition_drift"):
+        m=summary[name]
+        lines.append(f"| {name} | {m['mae']:.6f} | {m['rmse']:.6f} |")
+    band=summary["condition_band"]
+    lines.extend(["",f"Descriptive residual-band coverage {band['coverage']:.1%}; mean width {band['mean_width']:.6f} log-ratio units.",
+                  "The small MAE difference does not establish superiority. This is not physical damage or virtual maintenance cost calibration.",
                   "", "## Reliability and uncertainty","",
                   "| Split | Assessments | Accepted |","|---|---:|---:|"])
     for split,ages in review["summary"].items():
