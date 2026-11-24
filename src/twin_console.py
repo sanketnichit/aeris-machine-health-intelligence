@@ -6,9 +6,36 @@ import streamlit as st
 from src.digital_twin import Scenario, compare
 
 
+def render_measured_context():
+    from research.verify_evidence import ROOT, verify
+    with st.expander("Measured vibration-state evidence",expanded=True):
+        try:
+            verified={r["file"] for r in verify(ROOT)}
+            name="twin_calibration_summary.json"
+            if name not in verified:
+                raise ValueError("Calibration evidence not registered")
+            report=json.loads((ROOT/name).read_text(encoding="utf-8"))
+        except (OSError,ValueError,KeyError,TypeError):
+            st.error("Verified calibration evidence unavailable.")
+            return
+        summary=report["summary"]["all"]
+        st.caption(report["scope"])
+        a,b,c=st.columns(3)
+        a.metric("Learning transitions",report["fit"]["transitions"])
+        b.metric("Held-out endpoints",summary["condition_drift"]["endpoints"])
+        c.metric("Residual band mean width",f"{summary['condition_band']['mean_width']:.3f}")
+        st.dataframe(pd.DataFrame([
+            {"Predictor":key,**summary[key]} for key in ("persistence","global_drift","condition_drift")
+        ]),hide_index=True)
+        st.warning("The small improvement does not establish superiority. Residual coverage is descriptive; the virtual wear and cost model remains uncalibrated.")
+        st.markdown(f"[Execution evidence]({report['run_url']}) · revision `{report['revision']}`")
+        st.download_button("Download measured vibration audit",(ROOT/name).read_bytes(),name,"application/json")
+
+
 def render_twin():
     st.title("AERIS | Virtual degradation laboratory")
     st.warning("Synthetic digital-twin prototype. No connection to physical assets, calibrated failure predictions or real savings.")
+    render_measured_context()
     st.caption("Compare maintenance policies under identical seeded wear and observation-noise sequences.")
     with st.form("twin_scenario"):
         a,b,c=st.columns(3)
