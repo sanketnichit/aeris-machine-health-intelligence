@@ -12,6 +12,7 @@ on:
       - 'research/cmapss_landmark_audit.py'
       - 'research/cmapss_paired_analysis.py'
       - 'research/cmapss_risk_audit.py'
+      - 'research/cmapss_maintenance_replay.py'
       - 'src/prognostics.py'
       - 'src/rul_uncertainty.py'
 permissions:
@@ -45,6 +46,8 @@ jobs:
           cat evidence/paired_analysis.json
           python -m research.cmapss_risk_audit --data-dir "$RUNNER_TEMP/cmapss" > evidence/risk_audit.json
           python -c 'import json; print(json.dumps(json.load(open("evidence/risk_audit.json"))["summary"], indent=2))'
+          python -m research.cmapss_maintenance_replay --data-dir "$RUNNER_TEMP/cmapss" > evidence/maintenance_replay.json
+          python -c 'import json; print(json.dumps(json.load(open("evidence/maintenance_replay.json"))["summary"], indent=2))'
           git rev-parse HEAD > evidence/commit.txt
           python --version > evidence/python.txt
           python -m pip freeze > evidence/environment.txt
