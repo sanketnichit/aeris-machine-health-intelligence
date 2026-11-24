@@ -6,6 +6,10 @@ AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded int
 
 **Research release candidate:** 0.1.0-rc.1 · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
 
+## Local platform deployment
+
+Run the dashboard and validation-only research API together with `docker compose up --build --detach --wait`. See the [API and deployment guide](docs/api.md). Both host ports bind to localhost; this is not a public production service.
+
 ## Research capabilities
 
 | Task | Verified evidence | Limits |
