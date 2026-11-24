@@ -32,12 +32,13 @@ def connection(path):
 
 
 def initialize(path):
+    from src.incidents import initialize_incidents
     Path(path).parent.mkdir(parents=True,exist_ok=True)
     with connection(path) as db:
         db.execute("PRAGMA journal_mode=WAL")
         db.execute("BEGIN IMMEDIATE")
         version=db.execute("PRAGMA user_version").fetchone()[0]
-        if version not in (0,1,2):
+        if version not in (0,1,2,3):
             raise ValueError("Unsupported telemetry storage version")
         db.execute("""CREATE TABLE IF NOT EXISTS assets (
             asset_id TEXT PRIMARY KEY, name TEXT NOT NULL, expected TEXT NOT NULL
@@ -58,7 +59,8 @@ def initialize(path):
             kind TEXT NOT NULL, detail TEXT NOT NULL
         )""")
         db.execute("CREATE INDEX IF NOT EXISTS event_asset_idx ON events(asset_id,event_id)")
-        db.execute("PRAGMA user_version=2")
+        initialize_incidents(db)
+        db.execute("PRAGMA user_version=3")
 
 
 def canonical(value):
@@ -93,6 +95,7 @@ def register(path,payload):
 
 
 def ingest(path,payload):
+    from src.incidents import open_incident, stamp as review_time
     batch=validate_batch(payload)
     inserted=duplicates=event_count=0
     with connection(path) as db:
@@ -120,6 +123,7 @@ def ingest(path,payload):
                     db.execute("INSERT INTO events(asset_id,timestamp,policy_revision,kind,detail) VALUES (?,?,?,?,?)",
                                (asset,stamp,revision,kind,canonical(detail)))
                     event_count+=1
+                    open_incident(db,asset,kind,{"observation_timestamp":stamp,"policy_revision":revision,**detail},review_time())
     return {"status":"stored","inserted":inserted,"duplicates":duplicates,"events_created":event_count,"persisted":True,"forecast":None}
 
 
