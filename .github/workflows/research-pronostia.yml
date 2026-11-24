@@ -1,0 +1,45 @@
+name: AERIS PRONOSTIA replication v1
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/research-pronostia.yml'
+permissions:
+  contents: read
+jobs:
+  replicate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: e3926907bad6b88fc7059ca818cfeb27dd0915a5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_pronostia_replication.py
+      - name: Acquire NASA-listed FEMTO archive
+        run: |
+          df -h "$RUNNER_TEMP"
+          curl --fail --location --retry 2 --connect-timeout 30 --max-time 2400 --max-filesize 8589934592 --output "$RUNNER_TEMP/femto.zip" 'https://phm-datasets.s3.amazonaws.com/NASA/10.+FEMTO+Bearing.zip'
+          sha256sum "$RUNNER_TEMP/femto.zip"
+          python -c 'import zipfile,sys; z=zipfile.ZipFile(sys.argv[1]); print(z.namelist()[:40])' "$RUNNER_TEMP/femto.zip"
+      - name: Run frozen independent physical comparison
+        run: |
+          mkdir -p evidence
+          python -m research.pronostia_replication --archive "$RUNNER_TEMP/femto.zip" > evidence/pronostia.json
+          python -c 'import json; d=json.load(open("evidence/pronostia.json")); print(json.dumps({k:v for k,v in d.items() if k!="predictions"},indent=2))'
+          cp research/PRONOSTIA_PROTOCOL.md evidence/protocol.md
+          git rev-parse HEAD > evidence/commit.txt
+          python -m pip freeze > evidence/environment.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pronostia-replication-v1
+          path: evidence/
+          if-no-files-found: error
