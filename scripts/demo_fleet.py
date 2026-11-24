@@ -2,6 +2,7 @@
 import argparse
 import json
 import math
+import os
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 
@@ -28,8 +29,11 @@ def scenario():
 
 
 def submit(base,route,payload):
-    request=Request(base.rstrip("/")+route,data=json.dumps(payload).encode(),
-                    headers={"Content-Type":"application/json"})
+    headers={"Content-Type":"application/json"}
+    token=os.environ.get("AERIS_API_TOKEN")
+    if token:
+        headers["Authorization"]="Bearer "+token
+    request=Request(base.rstrip("/")+route,data=json.dumps(payload).encode(),headers=headers)
     with urlopen(request,timeout=15) as response:
         return json.load(response)
 
