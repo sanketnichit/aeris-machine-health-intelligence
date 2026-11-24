@@ -103,7 +103,10 @@ def render_fleet():
         st.caption("Robust deviation from prior observed values only. Not a probability, diagnosis or calibrated alarm threshold. Missing and unstable baselines are unscored.")
         deviations=pd.DataFrame(deviation_series(records,signal))
         deviations["timestamp"]=pd.to_datetime(deviations["timestamp"],utc=True)
-        st.line_chart(deviations.set_index("timestamp")[["score"]])
+        if deviations["score"].notna().any():
+            st.line_chart(deviations.set_index("timestamp")[["score"]])
+        else:
+            st.info("No deviation scores available yet.")
         st.dataframe(deviations,hide_index=True)
     st.dataframe(frame,hide_index=True)
     st.download_button("Download retrieved history",json.dumps(records,indent=2),f"{asset}_history.json","application/json")
