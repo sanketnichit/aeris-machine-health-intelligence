@@ -1,18 +1,27 @@
 # AERIS research prototype roadmap
 
-The target is a reproducible research demonstrator, not certified industrial software. The following estimates are planning judgments (not model accuracy, measured performance, or objective completion). Baseline: 78%; current estimate: 97% (equally weighted category estimates, rounded).
+**Research release v0.1.0: completed (100% of the defined release acceptance scope).**
 
-| Workstream | Estimate | Remaining completion gate |
-|---|---:|---|
-| Core ML research | 100% | Research-scope conclusions frozen; negative results and evaluation limits retained. |
-| Validation and reproducibility | 100% | All evidence registered and prior tests passed; RC3 same-revision acceptance passed; final 0.1.0 publication gate remains. |
-| Application and UX | 95% | Authenticated fleet review passed; desktop screenshots inspected and fleet presentation improved. RC3 combined desktop browser acceptance passed. Mobile testing and external user feedback are follow-on goals. |
-| Telemetry and monitoring | 100% | Concurrent authenticated workload, periodic worker, backup recovery and incident review passed. RC3 combined reliability acceptance passed; final release revision recheck pending. |
-| Twin and decision intelligence | 95% | Measured-state and sensitivity audits integrated and tested; model-form limits frozen. RC3 combined acceptance passed; physical calibration outside release scope. |
-| Packaging and documentation | 95% | RC2 fresh extracted-archive verification passed; RC3 combined archive and stack acceptance passed; independently checked archive checksums. Stable publication gate pending. |
+[Published release](https://github.com/sanketnichit/aeris-machine-health-intelligence/releases/tag/v0.1.0) · [Successful acceptance and publication](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45453539267)
 
-No arbitrary commit-count target. A failed experiment is a valid research outcome; it must be reported and not tuned into a claimed independent success. New results are published only after their execution is verified and their content registered.
+The release tag points to commit `99e9da8f8f73b80cfabbc857a4b612bffff9341d`. All 180 tests passed in both the checkout and the clean extracted archive. Both acceptance jobs and publication passed. All five published asset SHA-256 digests match the downloaded accepted bundle. This roadmap update is a post-release documentation commit; the tagged source remains unchanged.
 
-## Separate industrial readiness gate
+| Workstream | Release gate |
+|---|---|
+| Core ML research | Scientific conclusions frozen with favorable and negative results. |
+| Validation and reproducibility | Ten registered evidence reports, clean extraction, deterministic report and regression checks passed. |
+| Application and UX | Defined desktop Chromium research, virtual laboratory and populated fleet checks passed; authenticated review persisted. |
+| Telemetry and monitoring | Bounded concurrent workload, periodic worker, incident review and live backup/recovery passed. |
+| Twin and decision intelligence | Measured-state and synthetic sensitivity audits integrated; explicit forecast abstention and simulation limitations retained. |
+| Packaging and documentation | Versioned source, report, checksums, revision and environment published and verified. |
 
-The prototype does not establish prospective field performance, equipment-specific calibration, safe control, production authorization or security. Industrial deployment requires a separate validation and engineering program: authenticated encrypted transport, operational monitoring, tested recovery, equipment commissioning, external review and prospective outcomes. The research roadmap does not measure progress toward certification.
+The previous progress percentages (78%, 82%, 85%, 86%, 90%, 94%, 97%) were subjective planning estimates. Completion now refers to the explicit research release acceptance checklist, not scientific accuracy or total potential development.
+
+## Follow-on work (separate scope)
+
+- External user feedback, accessibility and mobile-device testing.
+- A genuinely new independent evaluation population and prospective physical measurements.
+- Asset-specific calibration and validation of degradation models.
+- Production authorization, encrypted transport, performance and resilience engineering, and independent safety review.
+
+The release does not establish prospective field performance, a calibrated physical twin, safe control, industrial security, or realized savings. Completion of this research demonstrator does not imply industrial deployment readiness.
