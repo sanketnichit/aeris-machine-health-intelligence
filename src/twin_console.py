@@ -32,10 +32,34 @@ def render_measured_context():
         st.download_button("Download measured vibration audit",(ROOT/name).read_bytes(),name,"application/json")
 
 
+def render_sensitivity():
+    from research.verify_evidence import ROOT, verify
+    with st.expander("Frozen simulation sensitivity audit"):
+        try:
+            verified={r["file"] for r in verify(ROOT)}
+            name="twin_sensitivity_summary.json"
+            if name not in verified:
+                raise ValueError("Sensitivity evidence not registered")
+            report=json.loads((ROOT/name).read_text(encoding="utf-8"))
+        except (OSError,ValueError,KeyError,TypeError):
+            st.error("Verified sensitivity evidence unavailable.")
+            return
+        st.caption(f"{report['scenarios']} scenarios · {report['trials_per_scenario']} trials per scenario · {report['ties']} ties")
+        st.dataframe(pd.DataFrame([{
+            "Policy":p,"Lowest mean cost (including ties)":m["lowest_mean_cost_including_ties"],
+            "Min paired cost difference":m["paired_mean_cost_difference_range"][0],
+            "Max paired cost difference":m["paired_mean_cost_difference_range"][1]
+        } for p,m in report["summary"].items()]),hide_index=True)
+        st.warning("Simulated cost ranking only. Monte Carlo precision is not physical model validity.")
+        st.markdown(f"[Execution evidence]({report['run_url']})")
+        st.download_button("Download sensitivity summary",(ROOT/name).read_bytes(),name,"application/json")
+
+
 def render_twin():
     st.title("AERIS | Virtual degradation laboratory")
     st.warning("Synthetic digital-twin prototype. No connection to physical assets, calibrated failure predictions or real savings.")
     render_measured_context()
+    render_sensitivity()
     st.caption("Compare maintenance policies under identical seeded wear and observation-noise sequences.")
     with st.form("twin_scenario"):
         a,b,c=st.columns(3)
