@@ -47,7 +47,7 @@ def render_evidence():
         st.stop()
     st.caption(f"Content integrity verified for {len(registered)} registered evidence files. This is not scientific certification.")
     st.warning("Simulated and laboratory benchmark evidence, not industrial safety certification or measured savings.")
-    overview, maintenance, official, replay, bearings, reliability = st.tabs(["Evidence map", "Maintenance replay", "Official NASA test", "Temporal replay", "Physical bearings", "Adaptive reliability"])
+    overview, maintenance, official, replay, bearings, reliability, replication = st.tabs(["Evidence map", "Maintenance replay", "Official NASA test", "Temporal replay", "Physical bearings", "Adaptive reliability", "Independent replication"])
     with overview:
         st.subheader("Research evidence")
         st.markdown(
@@ -187,3 +187,31 @@ def render_evidence():
         st.markdown(f"[Signal gate run]({gate['run_url']}) · [Reliability run]({review['run_url']})")
         st.download_button("Download adaptive evidence", json.dumps(gate, indent=2), "xjtu_gate_summary.json", "application/json")
         st.download_button("Download reliability evidence", json.dumps(review, indent=2), "xjtu_reliability_summary.json", "application/json")
+
+
+    with replication:
+        st.subheader("Independent physical method replication")
+        report = read_report("pronostia_summary.json")
+        st.caption(report["scope"])
+        a,b,c = st.columns(3)
+        a.metric("Learning bearings", len(report["fit_bearings"]))
+        b.metric("Evaluation bearings", len(report["evaluation_bearings"]))
+        c.metric("Validated recordings", sum(report["snapshot_counts"].values()))
+        st.warning("The frozen 2x switch did not reproduce its XJTU advantage over the learned comparator. No replacement primary candidate is selected.")
+        st.markdown(f"Frozen primary: **{report['primary']}**")
+        stage = report["summary"]["stage"]
+        aggregate = pd.DataFrame(stage["all"]).T
+        st.dataframe(aggregate)
+        st.bar_chart(aggregate["mae"])
+        kind = st.radio("Replication breakdown", ["stage", "landmark"], key="replication_breakdown")
+        points = report["summary"][kind]["by_point"]
+        breakdown = pd.DataFrame([
+            {"Point": float(point), "Bearings": values["bearings"],
+             **{model: metric["mae"] for model,metric in values["metrics"].items()}}
+            for point,values in points.items()
+        ]).sort_values("Point").set_index("Point")
+        st.dataframe(breakdown)
+        st.line_chart(breakdown.drop(columns=["Bearings"]))
+        st.caption("Remaining recorded snapshots; stages are retrospective, landmarks are observed ages. Do not compare raw errors across datasets with different recording cadence.")
+        st.markdown(f"[Execution evidence]({report['run_url']}) · revision `{report['revision']}`")
+        st.download_button("Download independent replication evidence", json.dumps(report, indent=2), "pronostia_summary.json", "application/json")
