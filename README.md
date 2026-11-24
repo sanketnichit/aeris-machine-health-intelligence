@@ -14,6 +14,8 @@ AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded int
 | Maintenance decisions | [Replay summary](research/evidence/maintenance_summary.json) | Hypothetical costs; not measured savings |
 | Temporal monitoring | [Verified replay traces](research/evidence/telemetry.json) | Three held-out development engines, 655 pre-failure observations |
 | Physical bearings | [XJTU-SY findings](research/XJTU_FINDINGS.md) | Physical laboratory data; 32.7% lower MAE under held-out conditions, 5.1% higher MAE under held-out bearings |
+| Sensor-driven adaptation | [XJTU adaptive findings](research/XJTU_ADAPTIVE_FINDINGS.md) | Exploratory gate improvements; reliability policy accepted zero forecasts |
+| Independent physical replication | [PRONOSTIA findings](research/PRONOSTIA_FINDINGS.md) | 11 held-out bearings; learned model outperformed fixed vibration gate, so adaptive advantage did not replicate |
 
 The research console provides offline evidence tables, cost comparisons, official benchmark metrics and cycle-by-cycle telemetry replay. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. The official FD001 test set has been observed; future model changes require new independent evaluation.
 
