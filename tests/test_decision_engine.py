@@ -40,7 +40,7 @@ def test_no_data_and_stale_data(tmp_path):
     assert result["status"]=="insufficient_evidence"
     assert any(r["code"]=="no_observations" for r in result["data_reasons"])
     withheld(result)
-    ingest(db,payload([1,2]*10))
+    ingest(db,payload([1,2,3]*7))
     result=assess_asset(db,"a",NOW+timedelta(minutes=5))
     assert any(r["code"]=="stale_observation" for r in result["data_reasons"])
     withheld(result)
@@ -48,7 +48,7 @@ def test_no_data_and_stale_data(tmp_path):
 
 def test_review_priority_and_healthy_claim_prevented(tmp_path):
     db=setup(tmp_path)
-    ingest(db,payload([1,2]*10))
+    ingest(db,payload([1,2,3]*7))
     result=assess_asset(db,"a",NOW)
     assert result["status"]=="no_current_rule_trigger"
     withheld(result)
