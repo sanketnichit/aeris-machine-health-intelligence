@@ -14,3 +14,8 @@ data/ai4i2020.csv
 
 # Local persisted AERIS console model cache
 .aeris_cache/
+
+# Private local telemetry databases
+*.sqlite3
+*.sqlite3-wal
+*.sqlite3-shm
