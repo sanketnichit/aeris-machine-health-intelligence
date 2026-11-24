@@ -1,0 +1,50 @@
+{
+  "protocol": "virtual-maintenance-sensitivity-v1",
+  "scenarios": 54,
+  "trials_per_scenario": 500,
+  "ties": 3,
+  "summary": {
+    "reactive": {
+      "lowest_mean_cost_including_ties": 0,
+      "paired_mean_cost_difference_range": [
+        0,
+        0
+      ],
+      "scenarios_entire_interval_below_zero": 0,
+      "scenarios_entire_interval_above_zero": 0,
+      "mean_downtime_range": [
+        12,
+        47.848
+      ]
+    },
+    "age_based": {
+      "lowest_mean_cost_including_ties": 9,
+      "paired_mean_cost_difference_range": [
+        -47,
+        0
+      ],
+      "scenarios_entire_interval_below_zero": 36,
+      "scenarios_entire_interval_above_zero": 0,
+      "mean_downtime_range": [
+        9,
+        47.848
+      ]
+    },
+    "condition_based": {
+      "lowest_mean_cost_including_ties": 48,
+      "paired_mean_cost_difference_range": [
+        -94,
+        -2.954
+      ],
+      "scenarios_entire_interval_below_zero": 54,
+      "scenarios_entire_interval_above_zero": 0,
+      "mean_downtime_range": [
+        3,
+        21.756
+      ]
+    }
+  },
+  "scope": "Synthetic sensitivity only; paired Monte Carlo intervals quantify numerical sampling error under the assumed model, not physical model uncertainty or real equipment outcomes.",
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45451056286",
+  "revision": "9656ce3784b3a74032cc6fbf429f67526736b312"
+}
