@@ -9,3 +9,5 @@ def test_virtual_laboratory_renders():
     assert any("Paired maintenance comparison" in t.value for t in app.subheader)
     assert any("Synthetic digital-twin prototype" in w.value for w in app.warning)
     assert app.selectbox(key="twin_trace").value=="reactive"
+    assert any(m.label=="Held-out endpoints" and int(m.value)==54 for m in app.metric)
+    assert any("does not establish superiority" in w.value for w in app.warning)
