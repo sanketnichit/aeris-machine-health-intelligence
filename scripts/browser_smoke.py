@@ -13,6 +13,7 @@ PAGES = [
     ("Physical bearings", "Physical vibration validation"),
     ("Adaptive reliability", "Adaptive forecasting and reliability"),
     ("Independent replication", "Independent physical method replication"),
+    ("Physical vibration replay", "Physical bearing vibration replay"),
     ("Technical report", "Technical evidence report"),
 ]
 
