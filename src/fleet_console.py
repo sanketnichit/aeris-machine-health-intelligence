@@ -82,6 +82,30 @@ def render_fleet():
         except (URLError,OSError,ValueError,KeyError):
             st.info("Incident history unavailable.")
     asset=st.selectbox("Asset", [r["asset_id"] for r in rows],key="fleet_asset")
+    with st.expander("Decision intelligence",expanded=True):
+        try:
+            decision=fetch("/v1/advisory",{"asset_id":asset})
+            status=decision["status"]
+            if status=="review_required":
+                st.warning(decision["recommendation"])
+            elif status=="insufficient_evidence":
+                st.info(decision["recommendation"])
+            else:
+                st.caption(decision["recommendation"])
+            st.caption(f"Policy {decision['policy_version']} · assessed {decision['assessed_at']}")
+            for reason in decision["data_reasons"]+decision["review_reasons"]:
+                st.write(reason)
+            st.markdown("**Operational forecast withheld**")
+            st.caption(", ".join(decision["forecast"]["reasons"]))
+            context=decision["benchmark_context"]
+            reliability=context["xjtu_reliability"]
+            replication=context["pronostia_replication"]
+            st.markdown("**Historical benchmark context — not asset calibration**")
+            st.write(f"XJTU accepted {reliability['accepted']}/{reliability['assessments']} reviewed forecasts; finite 90% intervals: {reliability['finite_90_percent_intervals']}.")
+            st.write(f"PRONOSTIA primary MAE {replication['primary_mae']:.2f} vs learned {replication['learned_mae']:.2f} snapshots.")
+            st.download_button("Download decision assessment",json.dumps(decision,indent=2),f"{asset}_advisory.json","application/json")
+        except (URLError,OSError,ValueError,KeyError):
+            st.info("Decision assessment unavailable. No operational forecast provided.")
     try:
         records=fetch("/v1/telemetry/history",{"asset_id":asset,"limit":1000})["records"]
     except (URLError,OSError,ValueError):
