@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.0 — research demonstrator
+
+- RC3 combined acceptance passed on revision 905c510d00cb916d656027e5e4953ef0a7f02703; packaged checksums independently verified.
+- Final demonstration guide and public research release notes.
+- Publication workflow revalidates the exact version 0.1.0 revision before creating a tag and uploading release assets; version metadata alone does not indicate publication.
+
 ## 0.1.0-rc.3 — final research acceptance candidate
 
 - Verified 54-scenario paired sensitivity study and ten registered evidence files.
