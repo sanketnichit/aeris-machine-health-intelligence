@@ -36,20 +36,21 @@ def decode_snapshot(raw):
     return vibration_features(data.iloc[:,4:6].to_numpy(dtype=float), expected_samples=2560)
 
 
-def extract_archive(archive, rows, seen, depth=0):
+def extract_archive(archive, rows, seen, depth=0, prefix=""):
+    """Carry nested archive names into the logical path, with bounded recursion."""
     for member in archive.infolist():
         if member.is_dir():
             continue
-        name=member.filename.replace("\\","/")
+        name=prefix+member.filename.replace("\\","/")
         if name.lower().endswith(".zip"):
-            if depth>=2 or member.file_size>8*1024**3:
+            if depth>=5 or member.file_size>8*1024**3:
                 raise ValueError("Unexpected nested archive")
             # Stream nested archives to disk, not RAM; never extract arbitrary paths.
             with tempfile.TemporaryFile() as temp, archive.open(member) as source:
                 shutil.copyfileobj(source,temp)
                 temp.seek(0)
                 with zipfile.ZipFile(temp) as nested:
-                    extract_archive(nested,rows,seen,depth+1)
+                    extract_archive(nested,rows,seen,depth+1,name[:-4]+"/")
             continue
         match=MEMBER.search(name)
         if not match:
