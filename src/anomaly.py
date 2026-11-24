@@ -23,9 +23,9 @@ def deviation_series(records, signal, window=30, minimum=10):
             else:
                 center=median(prior)
                 mad=median(abs(v-center) for v in prior)
-                point["baseline"]=center
+                point["baseline"]=center if math.isfinite(center) else None
                 scale=1.4826*mad
-                if not math.isfinite(scale) or scale<=max(1e-12,abs(center)*1e-12):
+                if not math.isfinite(center) or not math.isfinite(scale) or scale<=max(1e-12,abs(center)*1e-12):
                     point["status"]="unstable_scale"
                 else:
                     score=abs(value-center)/scale
