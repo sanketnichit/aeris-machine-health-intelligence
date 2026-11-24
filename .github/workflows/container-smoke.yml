@@ -11,6 +11,8 @@ on:
       - src/telemetry_contract.py
       - src/telemetry_store.py
       - src/fleet_console.py
+      - src/monitoring.py
+      - scripts/demo_fleet.py
       - app.py
       - .github/workflows/container-smoke.yml
 permissions:
@@ -41,6 +43,11 @@ jobs:
           docker compose up -d --wait --wait-timeout 90
           curl -fsS http://127.0.0.1:8080/v1/assets | python -c 'import json,sys; d=json.load(sys.stdin); assert d["assets"][0]["quality"]=="incomplete" and d["assets"][0]["observations"]==1'
           curl -fsS 'http://127.0.0.1:8080/v1/telemetry/history?asset_id=demo-bearing' | python -c 'import json,sys; assert len(json.load(sys.stdin)["records"])==1'
+      - name: Run synthetic fleet fault injection
+        run: |
+          python scripts/demo_fleet.py | python -c 'import json,sys; d=json.load(sys.stdin); assert d["inserted"]==180 and d["events_created"]>10; print(d)'
+          python scripts/demo_fleet.py | python -c 'import json,sys; d=json.load(sys.stdin); assert d["duplicates"]==180 and d["events_created"]==0'
+          curl -fsS 'http://127.0.0.1:8080/v1/events?limit=1000' | python -c 'import json,sys; e=json.load(sys.stdin)["events"]; assert len([x for x in e if x["asset_id"]=="synthetic-missing" and x["kind"]=="missing_measurements"])==10; assert any(x["asset_id"]=="synthetic-drift" and x["kind"]=="configured_bound_breach" for x in e)'
       - name: Collect logs
         if: always()
         run: |
