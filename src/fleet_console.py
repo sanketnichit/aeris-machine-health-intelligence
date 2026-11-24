@@ -4,17 +4,21 @@ import os
 from urllib.parse import urlencode
 from urllib.request import urlopen, Request
 from urllib.error import URLError
+from src.anomaly import deviation_series
 
 import pandas as pd
 import streamlit as st
 
 
-def fetch(route, params=None):
+def fetch(route, params=None, payload=None):
     # Deployment-controlled base URL, never a user-entered destination.
     base=os.environ.get("AERIS_API_URL","http://127.0.0.1:8080").rstrip("/")
     suffix="?"+urlencode(params) if params else ""
     token=os.environ.get("AERIS_API_TOKEN")
-    request=Request(base+route+suffix,headers={"Authorization":"Bearer "+token} if token else {})
+    headers={"Authorization":"Bearer "+token} if token else {}
+    if payload is not None:
+        headers["Content-Type"]="application/json"
+    request=Request(base+route+suffix,headers=headers,data=json.dumps(payload).encode() if payload is not None else None)
     with urlopen(request,timeout=4) as response:
         return json.load(response)
 
@@ -60,6 +64,19 @@ def render_fleet():
             if incidents:
                 st.dataframe(pd.DataFrame(incidents),hide_index=True)
                 st.download_button("Download incident history",json.dumps(incidents,indent=2),"incidents.json","application/json")
+                active=[i for i in incidents if i["status"] in ("open","acknowledged")]
+                if active and os.environ.get("AERIS_ENABLE_REVIEW_ACTIONS")=="1":
+                    with st.form("incident_review"):
+                        chosen=st.selectbox("Review incident",[i["incident_id"] for i in active])
+                        item=next(i for i in active if i["incident_id"]==chosen)
+                        action="acknowledge" if item["status"]=="open" else "resolve"
+                        note=st.text_input("Review note",max_chars=500)
+                        if st.form_submit_button("Submit review"):
+                            try:
+                                fetch("/v1/incidents/transition",payload={"incident_id":chosen,"action":action,"note":note})
+                                st.rerun()
+                            except (URLError,OSError,ValueError):
+                                st.error("Review action rejected or service unavailable. Refresh before retrying.")
             else:
                 st.info("No review incidents recorded.")
         except (URLError,OSError,ValueError,KeyError):
@@ -82,5 +99,11 @@ def render_fleet():
     frame=pd.DataFrame(points)
     frame["Timestamp"]=pd.to_datetime(frame["Timestamp"],utc=True)
     st.line_chart(frame.set_index("Timestamp"))
+    with st.expander("Exploratory deviation analysis"):
+        st.caption("Robust deviation from prior observed values only. Not a probability, diagnosis or calibrated alarm threshold. Missing and unstable baselines are unscored.")
+        deviations=pd.DataFrame(deviation_series(records,signal))
+        deviations["timestamp"]=pd.to_datetime(deviations["timestamp"],utc=True)
+        st.line_chart(deviations.set_index("timestamp")[["score"]])
+        st.dataframe(deviations,hide_index=True)
     st.dataframe(frame,hide_index=True)
     st.download_button("Download retrieved history",json.dumps(records,indent=2),f"{asset}_history.json","application/json")
