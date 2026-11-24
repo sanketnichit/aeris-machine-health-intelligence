@@ -52,3 +52,14 @@ def test_evaluation_isolation():
             assert all(b[7]!=row["bearing"][7] for b in row["fit_bearings"])
     for split in ("bearing","condition"):
         assert report["summary"][split]["learned"]["all"]["endpoints"]==60
+
+
+def test_published_snapshot_counts():
+    from research.xjtu_bearing_audit import EXPECTED_COUNTS, validate_counts
+    members = {(b, age): None for b, count in EXPECTED_COUNTS.items()
+               for age in range(1, count+1)}
+    assert len(members) == 9216
+    validate_counts(members)
+    members.pop(("Bearing1_1", 123))
+    with pytest.raises(ValueError, match="Snapshot counts"):
+        validate_counts(members)
