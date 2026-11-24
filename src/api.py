@@ -9,7 +9,7 @@ from urllib.parse import urlsplit, parse_qs
 from research.verify_evidence import verify, ROOT
 from src.telemetry_contract import validate_batch, SCHEMA_VERSION, UNITS
 
-from src.telemetry_store import DEFAULT_DB, initialize, register, ingest, fleet, history, Conflict, UnknownAsset
+from src.telemetry_store import DEFAULT_DB, initialize, register, ingest, fleet, history, Conflict, UnknownAsset, configure_policy, list_events
 
 MAX_BODY = 1024 * 1024
 VERSION_PATH = Path(__file__).resolve().parents[1] / "VERSION"
@@ -65,15 +65,19 @@ class Handler(BaseHTTPRequestHandler):
                 return
             self.reply(200, {"version":version,"evidence":entries,
                              "scope":"Research benchmark evidence, not industrial certification"})
-        elif path in ("/v1/assets", "/v1/telemetry/history"):
+        elif path in ("/v1/assets", "/v1/telemetry/history", "/v1/events"):
             if self.server.database is None:
                 self.reply(503, {"error":"Telemetry storage disabled"})
                 return
             try:
                 query=parse_qs(urlsplit(self.path).query,strict_parsing=True,max_num_fields=4)
                 limit=int(query.get("limit",["100" if path.endswith("history") else "200"])[0])
-                result=(fleet(self.server.database,limit) if path=="/v1/assets" else
-                        {"asset_id":query["asset_id"][0],"records":history(self.server.database,query["asset_id"][0],limit)})
+                if path=="/v1/assets":
+                    result=fleet(self.server.database,limit)
+                elif path=="/v1/events":
+                    result=list_events(self.server.database,query.get("asset_id",[None])[0],limit)
+                else:
+                    result={"asset_id":query["asset_id"][0],"records":history(self.server.database,query["asset_id"][0],limit)}
             except UnknownAsset as exc:
                 self.reply(404,{"error":str(exc)})
                 return
@@ -89,7 +93,7 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         path=urlsplit(self.path).path
-        if path not in ("/v1/telemetry/validate","/v1/assets","/v1/telemetry/ingest"):
+        if path not in ("/v1/telemetry/validate","/v1/assets","/v1/telemetry/ingest","/v1/policies"):
             self.reply(404, {"error":"Route not found"})
             return
         if path!="/v1/telemetry/validate" and self.server.database is None:
@@ -118,6 +122,10 @@ class Handler(BaseHTTPRequestHandler):
                 result=validate_batch(payload)
             elif path=="/v1/assets":
                 result=register(self.server.database,payload)
+            elif path=="/v1/policies":
+                if not isinstance(payload,dict) or set(payload)!={"asset_id","bounds"}:
+                    raise ValueError("Expected asset_id and bounds")
+                result=configure_policy(self.server.database,payload["asset_id"],{"bounds":payload["bounds"]})
             else:
                 result=ingest(self.server.database,payload)
         except Conflict as exc:
