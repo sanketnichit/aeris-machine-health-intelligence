@@ -34,6 +34,10 @@
     "pronostia_replay.json": {
       "blob_sha": "303677c82c55ff9caa1bcd033b0cd222c643dd30",
       "bytes": 104096
+    },
+    "twin_calibration_summary.json": {
+      "blob_sha": "7af8119773ece796ed0e515c5ff0afadf627dc6b",
+      "bytes": 29298
     }
   }
 }
