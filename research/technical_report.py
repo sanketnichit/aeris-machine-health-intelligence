@@ -17,6 +17,7 @@ def generate_report(root=ROOT):
     independent=reports["pronostia_summary.json"]
     replay=reports["telemetry.json"]
     maintenance=reports["maintenance_summary.json"]
+    physical_replay=reports["pronostia_replay.json"]
     lines=["# AERIS — Technical evidence report", "",
            "Research prototype | Simulated and accelerated laboratory benchmarks",
            "", "## Executive summary", "",
@@ -24,6 +25,7 @@ def generate_report(root=ROOT):
            f"- Physical bearing histories: {len(physical['snapshot_counts'])+len(independent['snapshot_counts'])}.",
            f"- Physical vibration recordings: {sum(physical['snapshot_counts'].values())+sum(independent['snapshot_counts'].values()):,}.",
            f"- Development telemetry: {sum(len(t['points']) for t in replay['traces'])} pre-failure observations.",
+           f"- Physical feature replay: {sum(len(t['points']) for t in physical_replay['traces'])} displayed observations from {len(physical_replay['traces'])} previously evaluated bearings; subsampled for presentation.",
            "- AI4I generator rules outperform the learned classifier at its fixed threshold; see AI4I_FINDINGS.md.",
            "", "## Official NASA FD001", "",
            f"Frozen primary: {official['primary']}. Errors are simulated operating cycles.",
