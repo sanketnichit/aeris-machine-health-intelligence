@@ -69,3 +69,17 @@ def test_published_physical_evidence_workspace():
     assert not app.exception
     app.radio(key="bearing_detail").set_value("by_stage").run()
     assert not app.exception
+
+
+def test_adaptive_reliability_workspace_reports_zero_acceptance():
+    gate=read_report("xjtu_gate_summary.json")
+    review=read_report("xjtu_reliability_summary.json")
+    assert gate["summary"]["bearing"]["stage"]["all"]["switch_2x"]["mae"] < gate["summary"]["bearing"]["stage"]["all"]["learned"]["mae"]
+    for split in ("bearing","condition"):
+        assert sum(v["endpoints"] for v in review["summary"][split].values())==56
+        assert all(v["accepted"]==0 and v["retained_mae"] is None for v in review["summary"][split].values())
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
+    assert not app.exception
+    app.radio(key="reliability_split").set_value("condition").run()
+    assert not app.exception
+    assert any(m.label=="Accepted forecasts" and int(m.value)==0 for m in app.metric)
