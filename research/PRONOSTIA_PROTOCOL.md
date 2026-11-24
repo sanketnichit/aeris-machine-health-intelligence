@@ -14,3 +14,7 @@ Fit once on six learning bearings only; apply the existing XJTU feature extracti
 
 ## Limits
 Only six fitting and eleven evaluation bearings; no independently calibrated uncertainty or safety guarantee. This does not validate the abstention policy or establish condition-disjoint generalization. Differences in recording intervals mean raw errors are not directly comparable with XJTU. No field or state-of-the-art claims. If the source does not supply full trajectories, fail closed rather than treat truncated recordings as failures.
+
+
+## Acquisition amendments before scoring
+NASA archive SHA256: e21bb22bd8d54fd18ebe98b4b4e094c0c40469bda19811a2a642d5cc84ebd81f. Run 45433407166 stopped at archive nesting depth; run 45433812927 stopped at a repeated learning-bearing recording path. No model evaluation occurred. Carry archive names into logical paths with bounded traversal, and deduplicate only copies with identical SHA256 of the original CSV bytes. Reject conflicting copies and continue to require exact complete recording counts. The model settings, train/evaluation population, thresholds and scoring procedure remain frozen.
