@@ -27,12 +27,12 @@ MODES = ["hdf", "pwf", "osf"]
 CACHE_VERSION = "2026-09-26-console-bundle-v1"
 
 
-def _cache_path(data_path: Path) -> Path:
-    """Return a cache path based on the dataset and model version."""
+def _cache_path(data_path: Path, *, random_state: int = 42) -> Path:
+    """Return a cache path based on the dataset, split seed and model version."""
     digest = hashlib.sha256(data_path.read_bytes()).hexdigest()[:16]
     cache_dir = data_path.parent.parent / ".aeris_cache"
     cache_dir.mkdir(parents=True, exist_ok=True)
-    return cache_dir / f"console_bundle_{CACHE_VERSION}_{digest}.pkl"
+    return cache_dir / f"console_bundle_{CACHE_VERSION}_{digest}_seed{random_state}.pkl"
 
 
 def _load_cached_bundle(cache_path: Path):
@@ -61,7 +61,7 @@ def train_console_models(
 ):
     """Load the cached models or train them when needed."""
     data_path = Path(data_path)
-    cache_path = _cache_path(data_path)
+    cache_path = _cache_path(data_path, random_state=random_state)
 
     cached_bundle = _load_cached_bundle(cache_path)
     if cached_bundle is not None:
