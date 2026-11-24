@@ -10,6 +10,7 @@ on:
       - 'research/cmapss_uncertainty.py'
       - 'research/cmapss_stage_audit.py'
       - 'research/cmapss_landmark_audit.py'
+      - 'research/cmapss_paired_analysis.py'
       - 'src/prognostics.py'
       - 'src/rul_uncertainty.py'
 permissions:
@@ -39,6 +40,8 @@ jobs:
           python -c 'import json; print(json.dumps(json.load(open("evidence/stage_audit.json"))["metrics"], indent=2))'
           python -m research.cmapss_landmark_audit --data-dir "$RUNNER_TEMP/cmapss" > evidence/landmark_audit.json
           python -c 'import json; print(json.dumps(json.load(open("evidence/landmark_audit.json"))["summary"], indent=2))'
+          python -m research.cmapss_paired_analysis evidence/stage_audit.json > evidence/paired_analysis.json
+          cat evidence/paired_analysis.json
           git rev-parse HEAD > evidence/commit.txt
           python --version > evidence/python.txt
           python -m pip freeze > evidence/environment.txt
