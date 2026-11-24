@@ -21,6 +21,8 @@ Run the dashboard and persistent local research API together with `docker compos
 
 After starting Compose, run `python scripts/demo_fleet.py` to populate explicitly synthetic assets. The advisory always withholds operational failure forecasts. The optional monitoring profile enables periodic freshness scans. See [virtual laboratory](docs/digital_twin.md), [roadmap](docs/roadmap.md) and [quickstart](docs/quickstart.md).
 
+See the [scientific conclusions](research/SCIENTIFIC_CONCLUSIONS.md) for the final cross-experiment evidence synthesis and the [release acceptance checklist](docs/release_acceptance.md) for the fixed-revision publication gate.
+
 ## Research capabilities
 
 | Task | Verified evidence | Limits |
@@ -34,6 +36,7 @@ After starting Compose, run `python scripts/demo_fleet.py` to populate explicitl
 | Sensor-driven adaptation | [XJTU adaptive findings](research/XJTU_ADAPTIVE_FINDINGS.md) | Exploratory gate improvements; reliability policy accepted zero forecasts |
 | Independent physical replication | [PRONOSTIA findings](research/PRONOSTIA_FINDINGS.md) | 11 held-out bearings; learned model outperformed fixed vibration gate, so adaptive advantage did not replicate |
 | Measured vibration-state transition | [Calibration audit](research/TWIN_CALIBRATION_FINDINGS.md) | 54 endpoints; 1.16% lower MAE than persistence, no established superiority or physical twin calibration |
+| Virtual maintenance sensitivity | [Frozen sensitivity study](research/TWIN_SENSITIVITY_FINDINGS.md) | 54 scenarios, 500 trials each; conditional simulated costs only |
 
 The research console provides nine on-demand workspaces, including offline evidence tables, cost comparisons, official benchmark metrics, simulated engine replay, measured physical vibration-feature replay and a downloadable technical report. The physical replay exposes 254 published points from three previously evaluated PRONOSTIA bearings. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. The official FD001 test set has been observed; future model changes require new independent evaluation.
 
