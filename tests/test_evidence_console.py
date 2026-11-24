@@ -1,0 +1,27 @@
+from pathlib import Path
+
+import pytest
+from streamlit.testing.v1 import AppTest
+
+from src.evidence_console import maintenance_table, read_report
+
+
+@pytest.mark.parametrize("ratio", [5,10,25])
+def test_verified_replay_table(ratio):
+    report = read_report("maintenance_summary.json")
+    table = maintenance_table(report,ratio)
+    assert len(table)==13
+    assert table.Cost.is_monotonic_increasing
+    assert (table.Planned + table.Late + table.Missed).eq(100).all()
+    baseline = table.loc[table.Model=="run_to_failure"].iloc[0]
+    assert baseline.Cost==100*ratio
+
+
+def test_research_workspace_renders_without_dataset():
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30)
+    app.run()
+    assert not app.exception
+    assert app.sidebar.radio[0].value=="Research intelligence"
+    assert any("Research Intelligence" in t.value for t in app.title)
+    app.select_slider[0].set_value(25).run()
+    assert not app.exception
