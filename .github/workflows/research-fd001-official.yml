@@ -1,0 +1,42 @@
+name: AERIS FD001 official v1
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/research-fd001-official.yml'
+permissions:
+  contents: read
+jobs:
+  official:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ca631cfa5f444cefce671f3e84878bb1f987d0d2
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_cmapss_official.py
+      - run: python scripts/download_cmapss.py --output "$RUNNER_TEMP/cmapss"
+      - name: Execute frozen official evaluation
+        run: |
+          mkdir -p evidence
+          python -m research.cmapss_official --data-dir "$RUNNER_TEMP/cmapss" > evidence/official.json
+          python -c 'import json; d=json.load(open("evidence/official.json")); print(json.dumps({k:v for k,v in d.items() if k!="predictions"},indent=2))'
+          cp "$RUNNER_TEMP/cmapss/manifest.json" evidence/dataset.json
+          cp research/FD001_OFFICIAL_PROTOCOL.md evidence/protocol.md
+          git rev-parse HEAD > evidence/commit.txt
+          python --version > evidence/python.txt
+          python -m pip freeze > evidence/environment.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fd001-official-v1-evidence
+          path: evidence/
+          if-no-files-found: error
