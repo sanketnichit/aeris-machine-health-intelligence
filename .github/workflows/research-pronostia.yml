@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: e3926907bad6b88fc7059ca818cfeb27dd0915a5
+          ref: 218f7997a623676f09ae3ac2146d949d65e62131
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
@@ -28,7 +28,7 @@ jobs:
         run: |
           df -h "$RUNNER_TEMP"
           curl --fail --location --retry 2 --connect-timeout 30 --max-time 2400 --max-filesize 8589934592 --output "$RUNNER_TEMP/femto.zip" 'https://phm-datasets.s3.amazonaws.com/NASA/10.+FEMTO+Bearing.zip'
-          sha256sum "$RUNNER_TEMP/femto.zip"
+          echo "e21bb22bd8d54fd18ebe98b4b4e094c0c40469bda19811a2a642d5cc84ebd81f  $RUNNER_TEMP/femto.zip" | sha256sum -c -
           python -c 'import zipfile,sys; z=zipfile.ZipFile(sys.argv[1]); print(z.namelist()[:40])' "$RUNNER_TEMP/femto.zip"
       - name: Run frozen independent physical comparison
         run: |
