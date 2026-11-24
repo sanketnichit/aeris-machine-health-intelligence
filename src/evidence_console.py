@@ -249,6 +249,14 @@ def render_replication():
     st.download_button("Download independent replication evidence", json.dumps(report, indent=2), "pronostia_summary.json", "application/json")
 
 
+def render_report():
+    from research.technical_report import generate_report
+    st.subheader("Technical evidence report")
+    content = generate_report(EVIDENCE)
+    st.download_button("Download technical report", content, "AERIS_technical_report.md", "text/markdown")
+    st.markdown(content)
+
+
 def render_evidence():
     st.title("AERIS | Research Intelligence")
     st.caption("Verified benchmark evidence · read-only research workspace")
@@ -267,6 +275,7 @@ def render_evidence():
         "Physical bearings": render_bearings,
         "Adaptive reliability": render_reliability,
         "Independent replication": render_replication,
+        "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
     pages[page]()
