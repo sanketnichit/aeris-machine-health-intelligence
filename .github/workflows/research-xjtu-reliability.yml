@@ -1,0 +1,46 @@
+name: AERIS XJTU reliability research
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/research-xjtu-reliability.yml'
+permissions:
+  contents: read
+jobs:
+  physical-bearing:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_forecast_reliability.py
+      - name: Acquire pinned third-party mirror
+        run: |
+          df -h "$RUNNER_TEMP"
+          curl --fail --location --retry 2 --connect-timeout 30 --max-time 2400 --max-filesize 5447931446 --output "$RUNNER_TEMP/xjtu.zip" 'https://huggingface.co/datasets/DavidNguyen/XJTU-SY_Bearing_Datasets/resolve/274226336036cd8deb2c40b4ba323af2d11a7290/XJTU-SY_Bearing_Datasets.zip'
+          test "$(stat -c %s "$RUNNER_TEMP/xjtu.zip")" = 5447931446
+          echo "3cc815649a315ac7da202980c489f33db44ca2db0317bbe3bcb9dcf415375e10  $RUNNER_TEMP/xjtu.zip" | sha256sum -c -
+          ls -lh "$RUNNER_TEMP/xjtu.zip"
+          python -c 'import zipfile,sys; z=zipfile.ZipFile(sys.argv[1]); print("Archive members:",len(z.infolist())); print(z.namelist()[:20])' "$RUNNER_TEMP/xjtu.zip"
+      - name: Execute selective reliability experiment
+        run: |
+          mkdir -p evidence
+          python -m research.xjtu_reliability_audit --archive "$RUNNER_TEMP/xjtu.zip" > evidence/xjtu_reliability.json
+          python -c 'import json; d=json.load(open("evidence/xjtu_reliability.json")); print(json.dumps({k:v for k,v in d.items() if k!="predictions"},indent=2))'
+          cp research/XJTU_RELIABILITY_PROTOCOL.md evidence/protocol.md
+          printf '%s\n' 'https://huggingface.co/datasets/DavidNguyen/XJTU-SY_Bearing_Datasets/resolve/274226336036cd8deb2c40b4ba323af2d11a7290/XJTU-SY_Bearing_Datasets.zip' > evidence/source.txt
+          git rev-parse HEAD > evidence/commit.txt
+          python -m pip freeze > evidence/environment.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: xjtu-reliability-evidence
+          path: evidence/
+          if-no-files-found: error
