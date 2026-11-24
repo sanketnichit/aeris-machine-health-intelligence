@@ -59,19 +59,26 @@ def extract_archive(archive, rows, seen, depth=0, prefix=""):
         bearing=f"Bearing{c}_{b}"
         age=int(age)
         expected=FIT if partition.lower()=="learning_set" else TEST
-        if bearing not in expected or (bearing,age) in seen or age<1 or member.file_size>1024**2:
-            raise ValueError(f"Unexpected or duplicate recording: {name}")
-        seen.add((bearing,age))
+        if bearing not in expected or age<1 or member.file_size>1024**2:
+            raise ValueError(f"Unexpected recording: {name}")
+        raw=archive.read(member)
+        key=(bearing,age)
+        fingerprint=hashlib.sha256(raw).hexdigest()
+        if key in seen:
+            if seen[key]!=fingerprint:
+                raise ValueError(f"Conflicting duplicate recording: {name}")
+            continue
+        seen[key]=fingerprint
         rows.append(dict(bearing=bearing,condition=int(c),age=age,
-                         **decode_snapshot(archive.read(member))))
+                         **decode_snapshot(raw)))
 
 
 def load_features(path):
-    rows,seen=[],set()
+    rows,seen=[],{}
     with zipfile.ZipFile(path) as archive:
         extract_archive(archive,rows,seen)
     required={(b,a) for b,n in COUNTS.items() for a in range(1,n+1)}
-    if seen!=required:
+    if set(seen)!=required:
         observed={b:sum(1 for k,_ in seen if k==b) for b in COUNTS}
         raise ValueError(f"Full-life recording contract failed: {observed}")
     return pd.DataFrame(rows)
