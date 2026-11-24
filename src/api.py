@@ -1,12 +1,15 @@
 """Local research HTTP service. Not an internet-facing production server."""
 import argparse
 import json
+import sqlite3
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from urllib.parse import urlsplit
+from urllib.parse import urlsplit, parse_qs
 
 from research.verify_evidence import verify, ROOT
 from src.telemetry_contract import validate_batch, SCHEMA_VERSION, UNITS
+
+from src.telemetry_store import DEFAULT_DB, initialize, register, ingest, fleet, history, Conflict, UnknownAsset
 
 MAX_BODY = 1024 * 1024
 VERSION_PATH = Path(__file__).resolve().parents[1] / "VERSION"
@@ -52,7 +55,7 @@ class Handler(BaseHTTPRequestHandler):
             self.reply(200, {"status":"ok","service":"aeris-research-api"})
         elif path == "/v1/schema":
             self.reply(200, {"schema_version":SCHEMA_VERSION,"units":UNITS,
-                             "scope":"validation only, not persistence or inference"})
+                             "scope":"Unit contract; ingestion is opt-in via storage routes, no inference"})
         elif path == "/v1/evidence":
             try:
                 entries = verify(ROOT)
@@ -62,12 +65,35 @@ class Handler(BaseHTTPRequestHandler):
                 return
             self.reply(200, {"version":version,"evidence":entries,
                              "scope":"Research benchmark evidence, not industrial certification"})
+        elif path in ("/v1/assets", "/v1/telemetry/history"):
+            if self.server.database is None:
+                self.reply(503, {"error":"Telemetry storage disabled"})
+                return
+            try:
+                query=parse_qs(urlsplit(self.path).query,strict_parsing=True,max_num_fields=4)
+                limit=int(query.get("limit",["100" if path.endswith("history") else "200"])[0])
+                result=(fleet(self.server.database,limit) if path=="/v1/assets" else
+                        {"asset_id":query["asset_id"][0],"records":history(self.server.database,query["asset_id"][0],limit)})
+            except UnknownAsset as exc:
+                self.reply(404,{"error":str(exc)})
+                return
+            except (ValueError,KeyError):
+                self.reply(400,{"error":"Invalid query"})
+                return
+            except sqlite3.Error:
+                self.reply(503,{"error":"Telemetry storage unavailable"})
+                return
+            self.reply(200,result)
         else:
             self.reply(404, {"error":"Route not found"})
 
     def do_POST(self):
-        if urlsplit(self.path).path != "/v1/telemetry/validate":
+        path=urlsplit(self.path).path
+        if path not in ("/v1/telemetry/validate","/v1/assets","/v1/telemetry/ingest"):
             self.reply(404, {"error":"Route not found"})
+            return
+        if path!="/v1/telemetry/validate" and self.server.database is None:
+            self.reply(503, {"error":"Telemetry storage disabled"})
             return
         if self.headers.get("Transfer-Encoding"):
             self.reply(400, {"error":"Transfer encoding unsupported"})
@@ -87,22 +113,43 @@ class Handler(BaseHTTPRequestHandler):
             raw=self.rfile.read(size)
             if len(raw)!=size:
                 raise ValueError("Incomplete body")
-            result=validate_batch(decode(raw))
+            payload=decode(raw)
+            if path=="/v1/telemetry/validate":
+                result=validate_batch(payload)
+            elif path=="/v1/assets":
+                result=register(self.server.database,payload)
+            else:
+                result=ingest(self.server.database,payload)
+        except Conflict as exc:
+            self.reply(409,{"error":str(exc)})
+            return
+        except UnknownAsset as exc:
+            self.reply(404,{"error":str(exc)})
+            return
+        except sqlite3.Error:
+            self.reply(503,{"error":"Telemetry storage unavailable"})
+            return
         except (ValueError,UnicodeError,RecursionError) as exc:
             self.reply(400, {"error":str(exc) if isinstance(exc,ValueError) else "Invalid JSON"})
             return
         self.reply(200,result)
 
 
-def make_server(host="127.0.0.1", port=8080):
-    return ThreadingHTTPServer((host,port),Handler)
+def make_server(host="127.0.0.1", port=8080, database=None):
+    if database is not None:
+        initialize(database)
+    server=ThreadingHTTPServer((host,port),Handler)
+    server.database=database
+    return server
 
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser()
     parser.add_argument("--host",default="127.0.0.1")
     parser.add_argument("--port",type=int,default=8080)
+    parser.add_argument("--database",type=Path,default=DEFAULT_DB)
+    parser.add_argument("--validation-only",action="store_true")
     args=parser.parse_args()
-    with make_server(args.host,args.port) as server:
+    with make_server(args.host,args.port,None if args.validation_only else args.database) as server:
         print(f"AERIS research API listening on {args.host}:{args.port}",flush=True)
         server.serve_forever()
