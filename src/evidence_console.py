@@ -259,18 +259,14 @@ def render_evidence():
         st.stop()
     st.caption(f"Content integrity verified for {len(registered)} registered evidence files. This is not scientific certification.")
     st.warning("Simulated and laboratory benchmark evidence, not industrial safety certification or measured savings.")
-    overview, maintenance, official, replay, bearings, reliability, replication = st.tabs(["Evidence map", "Maintenance replay", "Official NASA test", "Temporal replay", "Physical bearings", "Adaptive reliability", "Independent replication"])
-    with overview:
-        render_overview()
-    with maintenance:
-        render_maintenance()
-    with official:
-        render_official()
-    with replay:
-        render_replay()
-    with bearings:
-        render_bearings()
-    with reliability:
-        render_reliability()
-    with replication:
-        render_replication()
+    pages = {
+        "Evidence map": render_overview,
+        "Maintenance replay": render_maintenance,
+        "Official NASA test": render_official,
+        "Temporal replay": render_replay,
+        "Physical bearings": render_bearings,
+        "Adaptive reliability": render_reliability,
+        "Independent replication": render_replication,
+    }
+    page = st.sidebar.radio("Research page", list(pages), key="research_page")
+    pages[page]()
