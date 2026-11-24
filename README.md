@@ -1,10 +1,21 @@
-# AERIS - Machine Failure Prediction
+# AERIS — Machine Health Intelligence
 
-AERIS is a BTech project I built around the AI4I 2020 Predictive Maintenance Dataset from UCI.
+AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded into a reproducible machine-health research prototype. The project uses AI-assisted development; its evidence, code, limitations and experimental decisions are documented for review.
 
-The idea was to make a small but complete machine-failure project instead of only training a model in a notebook. The repo has data checks, a baseline model, a stronger model with a couple of derived features, evaluation scripts, explainability, tests, and a Streamlit app. I used AI tools to help implement and review the code; the scoping decisions, evaluation design and conclusions are mine, and I can walk through any part of this.
+**Live demo:** https://aeris-machine-health-intelligence.streamlit.app/ (deployment availability is not guaranteed by CI).
 
-**Live demo:** https://aeris-machine-health-intelligence.streamlit.app/
+## Research capabilities
+
+| Task | Verified evidence | Limits |
+|---|---|---|
+| AI4I failure classification | [Rule and stress audits](research/AI4I_FINDINGS.md) | Synthetic snapshot; generator rules outperform ML at the fixed threshold |
+| NASA FD001 forecasting | [Frozen official endpoint results](research/FD001_OFFICIAL_FINDINGS.md) | Simulated engines; primary MAE 17.35 cycles, adaptive comparator 15.33 |
+| Uncertainty and risk | [Development findings](research/CMAPSS_RISK_FINDINGS.md) | Intervals remain wide; no safety guarantee |
+| Maintenance decisions | [Replay summary](research/evidence/maintenance_summary.json) | Hypothetical costs; not measured savings |
+| Temporal monitoring | [Verified replay traces](research/evidence/telemetry.json) | Three held-out development engines, 655 pre-failure observations |
+| Physical bearings | [XJTU-SY protocol](research/XJTU_PROTOCOL.md) | Mirror acquired; analysis pending verified results |
+
+The research console provides offline evidence tables, cost comparisons, official benchmark metrics and cycle-by-cycle telemetry replay. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. The official FD001 test set has been observed; future model changes require new independent evaluation.
 
 ## What is in the project
 
@@ -23,7 +34,7 @@ The HDF, PWF and OSF failure-mode models are treated as a separate experiment be
 
 ## Dataset
 
-The project uses the [AI4I 2020 Predictive Maintenance Dataset](https://doi.org/10.24432/C5HS5C) from the UCI Machine Learning Repository.
+The original classification task uses the [AI4I 2020 Predictive Maintenance Dataset](https://doi.org/10.24432/C5HS5C) from the UCI Machine Learning Repository.
 
 The dataset has 10,000 rows and 3.39% positive machine-failure labels. It is a synthetic benchmark, so the numbers below should not be treated as expected performance on real factory machines.
 
@@ -35,7 +46,7 @@ python scripts/download_dataset.py
 
 It will be saved as `data/ai4i2020.csv`.
 
-## Main result
+## Original AI4I benchmark result
 
 For the current seed-42 stratified 80/20 evaluation, the calibrated model reports:
 
@@ -107,6 +118,8 @@ python src/explain_model.py
 
 ### Start the Streamlit app
 
+The default Research intelligence workspace reads committed evidence without downloading a dataset or training a model. Select AI4I failure prediction for the original model demo.
+
 ```bash
 streamlit run app.py
 ```
@@ -135,7 +148,8 @@ aeris-machine-health-intelligence/
 ├── tests/                # project tests
 ├── reports/              # generated model reports
 ├── docs/                 # notes and validation details
-├── extended-validation/  # extra experiments
+├── research/             # protocols, new experiments and verified evidence
+├── extended-validation/  # original extra experiments
 └── data/                 # dataset goes here locally
 ```
 
