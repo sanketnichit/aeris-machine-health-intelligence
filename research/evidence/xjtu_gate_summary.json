@@ -1,0 +1,722 @@
+{
+  "archive_sha256": "3cc815649a315ac7da202980c489f33db44ca2db0317bbe3bcb9dcf415375e10",
+  "summary": {
+    "bearing": {
+      "landmark": {
+        "by_point": {
+          "20": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.06666666666666667,
+            "gate_4x_fraction": 0,
+            "metrics": {
+              "age_reference": {
+                "mae": 548.2,
+                "rmse": 945.745596518077,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 708.6120001499869,
+                "rmse": 1078.1107064024427,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 543.9354224011926,
+                "rmse": 945.2764503349808,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 548.2,
+                "rmse": 945.745596518077,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 542.7548556851519,
+                "rmse": 945.1975444471052,
+                "endpoints": 15
+              }
+            }
+          },
+          "50": {
+            "bearings": 14,
+            "gate_2x_fraction": 0.14285714285714285,
+            "gate_4x_fraction": 0.14285714285714285,
+            "metrics": {
+              "age_reference": {
+                "mae": 617,
+                "rmse": 984.9440158129366,
+                "endpoints": 14
+              },
+              "learned": {
+                "mae": 741.4034225385639,
+                "rmse": 1108.8157549713665,
+                "endpoints": 14
+              },
+              "switch_2x": {
+                "mae": 587.0132888773034,
+                "rmse": 980.2659425234773,
+                "endpoints": 14
+              },
+              "switch_4x": {
+                "mae": 587.0132888773034,
+                "rmse": 980.2659425234773,
+                "endpoints": 14
+              },
+              "ramp_2x_4x": {
+                "mae": 587.0132888773034,
+                "rmse": 980.2659425234773,
+                "endpoints": 14
+              }
+            }
+          },
+          "100": {
+            "bearings": 13,
+            "gate_2x_fraction": 0.3076923076923077,
+            "gate_4x_fraction": 0.3076923076923077,
+            "metrics": {
+              "age_reference": {
+                "mae": 600.6153846153846,
+                "rmse": 973.4198240462097,
+                "endpoints": 13
+              },
+              "learned": {
+                "mae": 766.9519451172338,
+                "rmse": 1122.4013036489368,
+                "endpoints": 13
+              },
+              "switch_2x": {
+                "mae": 543.0971749686519,
+                "rmse": 966.2011558430087,
+                "endpoints": 13
+              },
+              "switch_4x": {
+                "mae": 543.0971749686519,
+                "rmse": 966.2011558430087,
+                "endpoints": 13
+              },
+              "ramp_2x_4x": {
+                "mae": 543.0971749686519,
+                "rmse": 966.2011558430087,
+                "endpoints": 13
+              }
+            }
+          },
+          "200": {
+            "bearings": 7,
+            "gate_2x_fraction": 0.14285714285714285,
+            "gate_4x_fraction": 0,
+            "metrics": {
+              "age_reference": {
+                "mae": 1050.5714285714287,
+                "rmse": 1221.6829142036581,
+                "endpoints": 7
+              },
+              "learned": {
+                "mae": 1134.5981530989598,
+                "rmse": 1393.790446953829,
+                "endpoints": 7
+              },
+              "switch_2x": {
+                "mae": 954.2708885534195,
+                "rmse": 1193.9405182364787,
+                "endpoints": 7
+              },
+              "switch_4x": {
+                "mae": 1050.5714285714287,
+                "rmse": 1221.6829142036581,
+                "endpoints": 7
+              },
+              "ramp_2x_4x": {
+                "mae": 959.6512884676152,
+                "rmse": 1194.074475922837,
+                "endpoints": 7
+              }
+            }
+          },
+          "500": {
+            "bearings": 4,
+            "gate_2x_fraction": 0.25,
+            "gate_4x_fraction": 0.25,
+            "metrics": {
+              "age_reference": {
+                "mae": 1237,
+                "rmse": 1306.1986832025211,
+                "endpoints": 4
+              },
+              "learned": {
+                "mae": 1174.061970192232,
+                "rmse": 1410.9389363947498,
+                "endpoints": 4
+              },
+              "switch_2x": {
+                "mae": 752.1849268526505,
+                "rmse": 861.9475874013368,
+                "endpoints": 4
+              },
+              "switch_4x": {
+                "mae": 752.1849268526505,
+                "rmse": 861.9475874013368,
+                "endpoints": 4
+              },
+              "ramp_2x_4x": {
+                "mae": 752.1849268526505,
+                "rmse": 861.9475874013368,
+                "endpoints": 4
+              }
+            }
+          },
+          "1000": {
+            "bearings": 3,
+            "gate_2x_fraction": 0,
+            "gate_4x_fraction": 0,
+            "metrics": {
+              "age_reference": {
+                "mae": 668,
+                "rmse": 708.9876585667764,
+                "endpoints": 3
+              },
+              "learned": {
+                "mae": 1051.563085299455,
+                "rmse": 1073.4951281338726,
+                "endpoints": 3
+              },
+              "switch_2x": {
+                "mae": 668,
+                "rmse": 708.9876585667764,
+                "endpoints": 3
+              },
+              "switch_4x": {
+                "mae": 668,
+                "rmse": 708.9876585667764,
+                "endpoints": 3
+              },
+              "ramp_2x_4x": {
+                "mae": 668,
+                "rmse": 708.9876585667764,
+                "endpoints": 3
+              }
+            }
+          }
+        }
+      },
+      "stage": {
+        "by_point": {
+          "0.25": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.06666666666666667,
+            "gate_4x_fraction": 0.06666666666666667,
+            "metrics": {
+              "age_reference": {
+                "mae": 170.76666666666668,
+                "rmse": 220.07267738938728,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 577.8796770792364,
+                "rmse": 798.6942907299892,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 166.5951290317522,
+                "rmse": 218.07877244296202,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 166.5951290317522,
+                "rmse": 218.07877244296202,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 166.5951290317522,
+                "rmse": 218.07877244296202,
+                "endpoints": 15
+              }
+            }
+          },
+          "0.5": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.2,
+            "gate_4x_fraction": 0.13333333333333333,
+            "metrics": {
+              "age_reference": {
+                "mae": 402.8,
+                "rmse": 467.0015346156084,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 548.80402679141,
+                "rmse": 859.1283316064527,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 367.20686653358126,
+                "rmse": 457.6504516174055,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 377.87930356744215,
+                "rmse": 460.3002582566377,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 365.4497721573568,
+                "rmse": 457.57083422146644,
+                "endpoints": 15
+              }
+            }
+          },
+          "0.75": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.5333333333333333,
+            "gate_4x_fraction": 0.4,
+            "metrics": {
+              "age_reference": {
+                "mae": 444.3666666666667,
+                "rmse": 605.652774560914,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 252.47117303024854,
+                "rmse": 400.55642415691733,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 235.09113751418107,
+                "rmse": 416.6611103126452,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 255.3568538577271,
+                "rmse": 422.8948955562943,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 249.17594696573423,
+                "rmse": 420.29184738097456,
+                "endpoints": 15
+              }
+            }
+          },
+          "0.9": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.6666666666666666,
+            "gate_4x_fraction": 0.6,
+            "metrics": {
+              "age_reference": {
+                "mae": 507,
+                "rmse": 682.4294102689303,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 224.16873808366168,
+                "rmse": 390.22156470918736,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 263.00585696833525,
+                "rmse": 504.6690058553055,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 257.0860594277577,
+                "rmse": 503.65452686712985,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 256.686218187123,
+                "rmse": 503.62356365127,
+                "endpoints": 15
+              }
+            }
+          }
+        },
+        "all": {
+          "age_reference": {
+            "mae": 381.23333333333335,
+            "rmse": 524.1773554819018,
+            "endpoints": 60
+          },
+          "learned": {
+            "mae": 400.83090374613926,
+            "rmse": 649.7561809461743,
+            "endpoints": 60
+          },
+          "switch_2x": {
+            "mae": 257.97474751196245,
+            "rmse": 413.91411342626174,
+            "endpoints": 60
+          },
+          "switch_4x": {
+            "mae": 264.22933647116974,
+            "rmse": 415.91545230451527,
+            "endpoints": 60
+          },
+          "ramp_2x_4x": {
+            "mae": 259.47676658549153,
+            "rmse": 414.4910584560526,
+            "endpoints": 60
+          }
+        }
+      }
+    },
+    "condition": {
+      "landmark": {
+        "by_point": {
+          "20": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.06666666666666667,
+            "gate_4x_fraction": 0,
+            "metrics": {
+              "age_reference": {
+                "mae": 591.3333333333334,
+                "rmse": 958.3845957304057,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 851.8420752015917,
+                "rmse": 1203.7871096914166,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 590.3170536235452,
+                "rmse": 958.3444288179853,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 591.3333333333334,
+                "rmse": 958.3845957304057,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 589.8871434817454,
+                "rmse": 958.3323025094903,
+                "endpoints": 15
+              }
+            }
+          },
+          "50": {
+            "bearings": 14,
+            "gate_2x_fraction": 0.14285714285714285,
+            "gate_4x_fraction": 0.14285714285714285,
+            "metrics": {
+              "age_reference": {
+                "mae": 646.2857142857143,
+                "rmse": 998.1300731152943,
+                "endpoints": 14
+              },
+              "learned": {
+                "mae": 770.6856649375608,
+                "rmse": 1159.1569985830524,
+                "endpoints": 14
+              },
+              "switch_2x": {
+                "mae": 618.2064668157457,
+                "rmse": 991.2879121234606,
+                "endpoints": 14
+              },
+              "switch_4x": {
+                "mae": 618.2064668157457,
+                "rmse": 991.2879121234606,
+                "endpoints": 14
+              },
+              "ramp_2x_4x": {
+                "mae": 618.2064668157457,
+                "rmse": 991.2879121234606,
+                "endpoints": 14
+              }
+            }
+          },
+          "100": {
+            "bearings": 13,
+            "gate_2x_fraction": 0.3076923076923077,
+            "gate_4x_fraction": 0.3076923076923077,
+            "metrics": {
+              "age_reference": {
+                "mae": 661.7692307692307,
+                "rmse": 1028.5284858251844,
+                "endpoints": 13
+              },
+              "learned": {
+                "mae": 694.8559734114993,
+                "rmse": 1125.4400002311054,
+                "endpoints": 13
+              },
+              "switch_2x": {
+                "mae": 613.670488094816,
+                "rmse": 1019.5715339488995,
+                "endpoints": 13
+              },
+              "switch_4x": {
+                "mae": 613.670488094816,
+                "rmse": 1019.5715339488995,
+                "endpoints": 13
+              },
+              "ramp_2x_4x": {
+                "mae": 613.670488094816,
+                "rmse": 1019.5715339488995,
+                "endpoints": 13
+              }
+            }
+          },
+          "200": {
+            "bearings": 7,
+            "gate_2x_fraction": 0.14285714285714285,
+            "gate_4x_fraction": 0,
+            "metrics": {
+              "age_reference": {
+                "mae": 1407.0714285714287,
+                "rmse": 1535.8756808878957,
+                "endpoints": 7
+              },
+              "learned": {
+                "mae": 1019.9845999965228,
+                "rmse": 1356.4687906521672,
+                "endpoints": 7
+              },
+              "switch_2x": {
+                "mae": 1178.7590784714375,
+                "rmse": 1401.012044458167,
+                "endpoints": 7
+              },
+              "switch_4x": {
+                "mae": 1407.0714285714287,
+                "rmse": 1535.8756808878957,
+                "endpoints": 7
+              },
+              "ramp_2x_4x": {
+                "mae": 1173.0874403391442,
+                "rmse": 1400.815841432504,
+                "endpoints": 7
+              }
+            }
+          },
+          "500": {
+            "bearings": 4,
+            "gate_2x_fraction": 0.25,
+            "gate_4x_fraction": 0.25,
+            "metrics": {
+              "age_reference": {
+                "mae": 1728.25,
+                "rmse": 1781.2275963503373,
+                "endpoints": 4
+              },
+              "learned": {
+                "mae": 1186.851758851406,
+                "rmse": 1436.3719297212126,
+                "endpoints": 4
+              },
+              "switch_2x": {
+                "mae": 1238.484401597344,
+                "rmse": 1486.4162863027366,
+                "endpoints": 4
+              },
+              "switch_4x": {
+                "mae": 1238.484401597344,
+                "rmse": 1486.4162863027366,
+                "endpoints": 4
+              },
+              "ramp_2x_4x": {
+                "mae": 1238.484401597344,
+                "rmse": 1486.4162863027366,
+                "endpoints": 4
+              }
+            }
+          },
+          "1000": {
+            "bearings": 3,
+            "gate_2x_fraction": 0,
+            "gate_4x_fraction": 0,
+            "metrics": {
+              "age_reference": {
+                "mae": 1183,
+                "rmse": 1273.9289619127119,
+                "endpoints": 3
+              },
+              "learned": {
+                "mae": 1142.0858441635112,
+                "rmse": 1230.3910782261255,
+                "endpoints": 3
+              },
+              "switch_2x": {
+                "mae": 1183,
+                "rmse": 1273.9289619127119,
+                "endpoints": 3
+              },
+              "switch_4x": {
+                "mae": 1183,
+                "rmse": 1273.9289619127119,
+                "endpoints": 3
+              },
+              "ramp_2x_4x": {
+                "mae": 1183,
+                "rmse": 1273.9289619127119,
+                "endpoints": 3
+              }
+            }
+          }
+        }
+      },
+      "stage": {
+        "by_point": {
+          "0.25": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.06666666666666667,
+            "gate_4x_fraction": 0.06666666666666667,
+            "metrics": {
+              "age_reference": {
+                "mae": 493.3,
+                "rmse": 769.7350085148352,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 745.1362223767654,
+                "rmse": 1114.9897548585338,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 495.0034109543705,
+                "rmse": 769.8639606212081,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 495.0034109543705,
+                "rmse": 769.8639606212081,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 495.0034109543705,
+                "rmse": 769.8639606212081,
+                "endpoints": 15
+              }
+            }
+          },
+          "0.5": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.2,
+            "gate_4x_fraction": 0.13333333333333333,
+            "metrics": {
+              "age_reference": {
+                "mae": 666.0666666666667,
+                "rmse": 881.117964103937,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 551.726812593084,
+                "rmse": 871.8410532254301,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 647.1573575818882,
+                "rmse": 877.0413476687729,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 644.0321221383475,
+                "rmse": 876.9578205774744,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 646.7959484315113,
+                "rmse": 877.0231468488593,
+                "endpoints": 15
+              }
+            }
+          },
+          "0.75": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.5333333333333333,
+            "gate_4x_fraction": 0.4,
+            "metrics": {
+              "age_reference": {
+                "mae": 599.3666666666667,
+                "rmse": 839.1940876023059,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 170.34764717580632,
+                "rmse": 281.72266441626965,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 277.71638421337235,
+                "rmse": 477.5847685963081,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 315.59885797708347,
+                "rmse": 495.0870170989742,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 305.1915399037068,
+                "rmse": 488.5139230809784,
+                "endpoints": 15
+              }
+            }
+          },
+          "0.9": {
+            "bearings": 15,
+            "gate_2x_fraction": 0.6666666666666666,
+            "gate_4x_fraction": 0.6,
+            "metrics": {
+              "age_reference": {
+                "mae": 615.6666666666666,
+                "rmse": 900.1551532930309,
+                "endpoints": 15
+              },
+              "learned": {
+                "mae": 130.3746804519241,
+                "rmse": 207.058666120802,
+                "endpoints": 15
+              },
+              "switch_2x": {
+                "mae": 232.5768999656224,
+                "rmse": 537.0093961457413,
+                "endpoints": 15
+              },
+              "switch_4x": {
+                "mae": 237.05479850536912,
+                "rmse": 538.8026646107307,
+                "endpoints": 15
+              },
+              "ramp_2x_4x": {
+                "mae": 235.0334276233731,
+                "rmse": 537.9246766937061,
+                "endpoints": 15
+              }
+            }
+          }
+        },
+        "all": {
+          "age_reference": {
+            "mae": 593.6,
+            "rmse": 849.026923405063,
+            "endpoints": 60
+          },
+          "learned": {
+            "mae": 399.39634064939503,
+            "rmse": 728.9632923526136,
+            "endpoints": 60
+          },
+          "switch_2x": {
+            "mae": 413.1135131788134,
+            "rmse": 685.2660698823547,
+            "endpoints": 60
+          },
+          "switch_4x": {
+            "mae": 422.9222973937927,
+            "rmse": 688.688064878968,
+            "endpoints": 60
+          },
+          "ramp_2x_4x": {
+            "mae": 420.5060817282404,
+            "rmse": 687.3625187650337,
+            "endpoints": 60
+          }
+        }
+      }
+    }
+  },
+  "scope": "Exploratory development on previously observed XJTU data. Gates 2x/4x are heuristic, not optimized; no model selection, independent confirmation, or operational safety claim. Landmark populations differ by survival.",
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45431336050",
+  "revision": "20118c394b7e105e706169be4f0e5861df727b87"
+}
