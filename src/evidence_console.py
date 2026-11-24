@@ -38,14 +38,53 @@ def read_report(name):
 
 
 def render_overview():
-    st.subheader("Research evidence")
-    st.markdown(
-        "- [AI4I physics rules and stress tests](https://github.com/sanketnichit/aeris-machine-health-intelligence/blob/main/research/AI4I_FINDINGS.md)\n"
-        "- [NASA stage and landmark evaluation](https://github.com/sanketnichit/aeris-machine-health-intelligence/blob/main/research/CMAPSS_STAGE_FINDINGS.md)\n"
-        "- [Paired statistics and risk evaluation](https://github.com/sanketnichit/aeris-machine-health-intelligence/blob/main/research/CMAPSS_RISK_FINDINGS.md)\n"
-        "- [Frozen official test protocol](https://github.com/sanketnichit/aeris-machine-health-intelligence/blob/main/research/FD001_OFFICIAL_PROTOCOL.md)"
-    )
-    st.info("AI4I generator rules beat ML on the synthetic snapshot benchmark. Personalized temporal forecasts improve later-life development errors on simulated FD001 engines. Early-life uncertainty remains substantial.")
+    """Executive overview derived from registered evidence, not hardcoded metrics."""
+    official = read_report("official_summary.json")
+    xjtu = read_report("xjtu_summary.json")
+    replication = read_report("pronostia_summary.json")
+    gate = read_report("xjtu_gate_summary.json")
+    review = read_report("xjtu_reliability_summary.json")
+    telemetry = read_report("telemetry.json")
+    st.subheader("Machine health research command center")
+    st.caption("Explore the evidence, inspect uncertainty, and reproduce each experiment.")
+    a, b, c, d = st.columns(4)
+    a.metric("Official NASA engines", official["engines"])
+    b.metric("Physical bearing histories", len(xjtu["snapshot_counts"])+len(replication["snapshot_counts"]))
+    c.metric("Physical vibration recordings", f"{sum(xjtu['snapshot_counts'].values())+sum(replication['snapshot_counts'].values()):,}")
+    d.metric("Replay observations", sum(len(t["points"]) for t in telemetry["traces"]))
+    st.markdown("### What the evidence says")
+    left, right = st.columns(2)
+    with left:
+        primary = official["primary"]
+        baseline = official["metrics"]["age_reference"]["mae"]
+        mae = official["metrics"][primary]["mae"]
+        st.metric("Frozen NASA primary MAE", f"{mae:.2f} cycles", f"{(1-mae/baseline)*100:.1f}% lower than age reference", delta_color="normal")
+        st.caption("Official simulated FD001 endpoints; the secondary adaptive model performed better.")
+    with right:
+        rows = gate["summary"]["bearing"]["stage"]["all"]
+        base, adapted = rows["learned"]["mae"], rows["switch_2x"]["mae"]
+        st.metric("XJTU development gate MAE", f"{adapted:.2f} snapshots", f"{(1-adapted/base)*100:.1f}% lower than learned")
+        st.caption("Held-out bearing development endpoints; not independent confirmation.")
+    st.warning("Independent replication: the frozen vibration gate did not outperform the learned comparator on PRONOSTIA.")
+    accepted = sum(v["accepted"] for split in review["summary"].values() for v in split.values())
+    total = sum(v["endpoints"] for split in review["summary"].values() for v in split.values())
+    st.warning(f"Reliability limitation: {accepted}/{total} advisory forecasts accepted in the XJTU reliability audit.")
+    st.markdown("### Research map")
+    base = "https://github.com/sanketnichit/aeris-machine-health-intelligence/blob/main/research/"
+    for title, path, note in [
+        ("AI4I classification","AI4I_FINDINGS.md","Synthetic generator rules outperform learned classification at the fixed threshold."),
+        ("NASA official prognostics","FD001_OFFICIAL_FINDINGS.md","100 simulated test engines; frozen primary and comparators."),
+        ("Uncertainty and maintenance","CMAPSS_RISK_FINDINGS.md","Development uncertainty, asymmetric risk and hypothetical costs."),
+        ("Physical vibration validation","XJTU_FINDINGS.md","15 physical laboratory bearings; mixed baseline comparisons."),
+        ("Adaptive reliability","XJTU_ADAPTIVE_FINDINGS.md","Observable switching and negative selective-forecasting result."),
+        ("Independent replication","PRONOSTIA_FINDINGS.md","Separate laboratory platform; failed replication of adaptive superiority."),
+    ]:
+        st.markdown(f"**[{title}]({base+path})** — {note}")
+    with st.expander("Evidence provenance"):
+        records = verify(EVIDENCE)
+        st.dataframe(pd.DataFrame(records), hide_index=True)
+        st.caption("Git blob fingerprints verify registered content integrity, not scientific validity.")
+    st.caption("Research prototype only. No production deployment, field safety or measured savings established.")
 
 
 def render_maintenance():
