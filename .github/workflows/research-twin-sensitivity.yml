@@ -1,0 +1,38 @@
+name: AERIS virtual maintenance sensitivity
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-twin-sensitivity.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 9656ce3784b3a74032cc6fbf429f67526736b312
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_digital_twin.py tests/test_twin_sensitivity.py
+      - name: Run frozen sensitivity grid
+        run: |
+          mkdir -p evidence
+          python -m research.twin_sensitivity > evidence/twin_sensitivity.json
+          python -c 'import json; d=json.load(open("evidence/twin_sensitivity.json")); print(json.dumps({k:v for k,v in d.items() if k!="results"},indent=2))'
+          cp research/TWIN_SENSITIVITY_PROTOCOL.md evidence/protocol.md
+          git rev-parse HEAD > evidence/revision.txt
+          python -m pip freeze > evidence/environment.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: twin-sensitivity-v1
+          path: evidence/
+          if-no-files-found: error
