@@ -13,7 +13,7 @@ AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded int
 | Uncertainty and risk | [Development findings](research/CMAPSS_RISK_FINDINGS.md) | Intervals remain wide; no safety guarantee |
 | Maintenance decisions | [Replay summary](research/evidence/maintenance_summary.json) | Hypothetical costs; not measured savings |
 | Temporal monitoring | [Verified replay traces](research/evidence/telemetry.json) | Three held-out development engines, 655 pre-failure observations |
-| Physical bearings | [XJTU-SY protocol](research/XJTU_PROTOCOL.md) | Mirror acquired; analysis pending verified results |
+| Physical bearings | [XJTU-SY findings](research/XJTU_FINDINGS.md) | Physical laboratory data; 32.7% lower MAE under held-out conditions, 5.1% higher MAE under held-out bearings |
 
 The research console provides offline evidence tables, cost comparisons, official benchmark metrics and cycle-by-cycle telemetry replay. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. The official FD001 test set has been observed; future model changes require new independent evaluation.
 
