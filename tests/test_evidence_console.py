@@ -83,3 +83,14 @@ def test_adaptive_reliability_workspace_reports_zero_acceptance():
     app.radio(key="reliability_split").set_value("condition").run()
     assert not app.exception
     assert any(m.label=="Accepted forecasts" and int(m.value)==0 for m in app.metric)
+
+
+def test_console_verifies_evidence_before_rendering(monkeypatch):
+    import src.evidence_console as console
+    def reject(_):
+        raise ValueError("test fingerprint mismatch")
+    monkeypatch.setattr(console,"verify",reject)
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
+    assert not app.exception
+    assert any("Research evidence integrity check failed" in e.value for e in app.error)
+    assert not app.tabs
