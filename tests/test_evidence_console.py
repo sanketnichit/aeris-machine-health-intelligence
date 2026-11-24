@@ -23,6 +23,8 @@ def test_research_workspace_renders_without_dataset():
     assert not app.exception
     assert app.sidebar.radio[0].value=="Research intelligence"
     assert any("Research Intelligence" in t.value for t in app.title)
+    assert not app.select_slider
+    app.sidebar.radio(key="research_page").set_value("Maintenance replay").run()
     app.select_slider[0].set_value(25).run()
     assert not app.exception
 
@@ -35,6 +37,7 @@ def test_published_telemetry_and_truth_toggle():
         assert trace["points"][-1]["cycle"] == trace["failure_cycle"]-1
     app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
     assert not app.exception
+    app.sidebar.radio(key="research_page").set_value("Temporal replay").run()
     assert not any(m.label=="Actual remaining cycles" for m in app.metric)
     app.slider(key="replay_cycle_1").set_value(10).run()
     assert not app.exception
@@ -64,6 +67,7 @@ def test_published_physical_evidence_workspace():
     assert sum(report["snapshot_counts"].values())==9216
     app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
     assert not app.exception
+    app.sidebar.radio(key="research_page").set_value("Physical bearings").run()
     assert any(m.label=="Vibration snapshots" and int(m.value)==9216 for m in app.metric)
     app.radio(key="bearing_split").set_value("condition").run()
     assert not app.exception
@@ -80,6 +84,7 @@ def test_adaptive_reliability_workspace_reports_zero_acceptance():
         assert all(v["accepted"]==0 and v["retained_mae"] is None for v in review["summary"][split].values())
     app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
     assert not app.exception
+    app.sidebar.radio(key="research_page").set_value("Adaptive reliability").run()
     app.radio(key="reliability_split").set_value("condition").run()
     assert not app.exception
     assert any(m.label=="Accepted forecasts" and int(m.value)==0 for m in app.metric)
@@ -93,7 +98,7 @@ def test_console_verifies_evidence_before_rendering(monkeypatch):
     app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
     assert not app.exception
     assert any("Research evidence integrity check failed" in e.value for e in app.error)
-    assert not app.tabs
+    assert not any(r.key=="research_page" for r in app.sidebar.radio)
 
 
 def test_independent_replication_workspace():
@@ -105,6 +110,7 @@ def test_independent_replication_workspace():
     assert report["summary"]["stage"]["all"]["switch_2x"]["endpoints"]==44
     app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
     assert not app.exception
+    app.sidebar.radio(key="research_page").set_value("Independent replication").run()
     assert any(m.label=="Evaluation bearings" and int(m.value)==11 for m in app.metric)
     app.radio(key="replication_breakdown").set_value("landmark").run()
     assert not app.exception
