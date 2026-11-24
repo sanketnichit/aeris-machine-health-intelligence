@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.0-rc.3 — final research acceptance candidate
+
+- Verified 54-scenario paired sensitivity study and ten registered evidence files.
+- Authenticated concurrent workload, periodic freshness, browser acknowledgement and live database recovery validated on earlier revisions.
+- Fleet tables and advisory explanations improved after desktop screenshot review.
+- Final scientific conclusions retain all negative and inconclusive findings.
+- Same-revision release acceptance combines clean extracted archive, Chromium research and fleet checks, concurrent workload and recovery. Publication requires successful acceptance of this exact revision.
+
+No production certification or new independent field evidence is claimed.
+
 ## 0.1.0-rc.2 — integrated research platform candidate
 
 - Local HTTP API and SQLite schema 3; asset registration, idempotent telemetry, event history and incident transitions.
