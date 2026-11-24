@@ -21,6 +21,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.ensemble import HistGradientBoostingClassifier
 
 from src.console_models import train_console_models
+from src.evidence_console import render_evidence
 from src.features import MODEL_FEATURES, add_engineered_features
 
 
@@ -73,7 +74,6 @@ def ensure_dataset() -> None:
             temp_path.unlink()
 
 
-ensure_dataset()
 RISK_THRESHOLD = 0.50
 SCREENING_THRESHOLD = 0.20
 
@@ -224,11 +224,18 @@ def local_shap(
 
 
 st.set_page_config(
-    page_title="AERIS | Machine Failure Prediction",
+    page_title="AERIS | Machine Health Intelligence",
     page_icon="⚙️",
     layout="wide",
     initial_sidebar_state="expanded",
 )
+
+workspace = st.sidebar.radio("Workspace", ["Research intelligence", "AI4I failure prediction"], index=0)
+if workspace == "Research intelligence":
+    render_evidence()
+    st.stop()
+
+ensure_dataset()
 
 st.markdown(
     """
@@ -542,8 +549,7 @@ with st.expander("Project notes"):
         **Evaluation discipline:** the final seed-42 test partition is reserved for
         evaluation; model selection is performed on the training partition.
 
-        **Future work:** independent industrial time-series validation, C-MAPSS/RUL,
-        temporal degradation modelling, counterfactual analysis and deployment/monitoring.
+        **Research workspace:** see the separate Research intelligence view for evaluated C-MAPSS/RUL experiments. Independent industrial validation remains future work.
         """
     )
 
