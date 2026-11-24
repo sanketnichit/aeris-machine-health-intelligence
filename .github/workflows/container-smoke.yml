@@ -1,0 +1,44 @@
+name: AERIS container smoke
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - Dockerfile
+      - .dockerignore
+      - compose.yaml
+      - src/api.py
+      - src/telemetry_contract.py
+      - .github/workflows/container-smoke.yml
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and start services
+        run: docker compose up --build --detach --wait --wait-timeout 180
+      - name: Check dashboard and evidence endpoints
+        run: |
+          curl -fsS http://127.0.0.1:8501/_stcore/health
+          curl -fsS http://127.0.0.1:8080/v1/evidence | python -m json.tool
+          curl -fsS http://127.0.0.1:8080/v1/schema | python -m json.tool
+      - name: Validate telemetry over HTTP
+        run: |
+          curl -fsS -H 'Content-Type: application/json' --data '{"schema_version":1,"records":[{"asset_id":"demo-bearing","timestamp":"2026-11-24T12:00:00Z","measurements":{"horizontal_vibration_rms":{"value":1.25,"unit":"m/s2"}}}]}' http://127.0.0.1:8080/v1/telemetry/validate | python -c 'import sys,json; d=json.load(sys.stdin); assert d["validated_records"]==1 and d["persisted"] is False and d["forecast"] is None; print(d)'
+      - name: Collect logs
+        if: always()
+        run: |
+          mkdir -p container-evidence
+          docker compose ps > container-evidence/status.txt
+          docker compose logs --no-color > container-evidence/services.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aeris-container-evidence
+          path: container-evidence/
+      - name: Stop services
+        if: always()
+        run: docker compose down --volumes
