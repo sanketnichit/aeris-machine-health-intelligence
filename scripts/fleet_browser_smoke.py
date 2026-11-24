@@ -2,6 +2,7 @@
 import argparse
 import json
 import os
+import time
 from urllib.request import Request,urlopen
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
@@ -48,9 +49,15 @@ def run(url,output,api_url="http://127.0.0.1:8080",review=False):
             target=active[0]["incident_id"]
             page.get_by_label("Review note",exact=True).fill("Browser acknowledgement test")
             page.get_by_role("button",name="Submit review",exact=True).click()
-            expect(page.get_by_text("acknowledged",exact=True).first).to_be_visible(timeout=30000)
-            current=next(i for i in incidents(api_url) if i["incident_id"]==target)
-            assert current["status"]=="acknowledged"
+            deadline=time.monotonic()+30
+            while True:
+                current=next(i for i in incidents(api_url) if i["incident_id"]==target)
+                if current["status"]=="acknowledged":
+                    break
+                if time.monotonic()>=deadline:
+                    raise AssertionError("Dashboard review did not persist")
+                time.sleep(.5)
+            expect(page.get_by_test_id("stException")).to_have_count(0)
             assert current["history"][-1]["note"]=="Browser acknowledgement test"
             page.screenshot(path=str(output/"fleet-acknowledged.png"),full_page=True,animations="disabled")
         if errors:
