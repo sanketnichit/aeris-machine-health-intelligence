@@ -9,6 +9,9 @@ on:
       - compose.yaml
       - src/api.py
       - src/telemetry_contract.py
+      - src/telemetry_store.py
+      - src/fleet_console.py
+      - app.py
       - .github/workflows/container-smoke.yml
 permissions:
   contents: read
@@ -28,6 +31,16 @@ jobs:
       - name: Validate telemetry over HTTP
         run: |
           curl -fsS -H 'Content-Type: application/json' --data '{"schema_version":1,"records":[{"asset_id":"demo-bearing","timestamp":"2026-11-24T12:00:00Z","measurements":{"horizontal_vibration_rms":{"value":1.25,"unit":"m/s2"}}}]}' http://127.0.0.1:8080/v1/telemetry/validate | python -c 'import sys,json; d=json.load(sys.stdin); assert d["validated_records"]==1 and d["persisted"] is False and d["forecast"] is None; print(d)'
+      - name: Verify persistent ingestion and restart
+        run: |
+          curl -fsS -H 'Content-Type: application/json' --data '{"asset_id":"demo-bearing","name":"Demo bearing","expected_measurements":["horizontal_vibration_rms","vertical_vibration_rms"]}' http://127.0.0.1:8080/v1/assets
+          payload='{"schema_version":1,"records":[{"asset_id":"demo-bearing","timestamp":"2026-11-24T12:00:00Z","measurements":{"horizontal_vibration_rms":{"value":1.25,"unit":"m/s2"}}}]}'
+          curl -fsS -H 'Content-Type: application/json' --data "$payload" http://127.0.0.1:8080/v1/telemetry/ingest | python -c 'import json,sys; assert json.load(sys.stdin)["inserted"]==1'
+          curl -fsS -H 'Content-Type: application/json' --data "$payload" http://127.0.0.1:8080/v1/telemetry/ingest | python -c 'import json,sys; assert json.load(sys.stdin)["duplicates"]==1'
+          docker compose restart api
+          docker compose up -d --wait --wait-timeout 90
+          curl -fsS http://127.0.0.1:8080/v1/assets | python -c 'import json,sys; d=json.load(sys.stdin); assert d["assets"][0]["quality"]=="incomplete" and d["assets"][0]["observations"]==1'
+          curl -fsS 'http://127.0.0.1:8080/v1/telemetry/history?asset_id=demo-bearing' | python -c 'import json,sys; assert len(json.load(sys.stdin)["records"])==1'
       - name: Collect logs
         if: always()
         run: |
