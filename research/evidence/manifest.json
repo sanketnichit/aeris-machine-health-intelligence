@@ -26,6 +26,10 @@
     "xjtu_summary.json": {
       "blob_sha": "44b6ec791e96f342e50dff0b5fa7a618a55103a9",
       "bytes": 12108
+    },
+    "pronostia_summary.json": {
+      "blob_sha": "56c81b42f8e4f016cfd2148245026bf430292921",
+      "bytes": 18110
     }
   }
 }
