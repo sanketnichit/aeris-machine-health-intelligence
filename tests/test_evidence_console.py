@@ -94,3 +94,17 @@ def test_console_verifies_evidence_before_rendering(monkeypatch):
     assert not app.exception
     assert any("Research evidence integrity check failed" in e.value for e in app.error)
     assert not app.tabs
+
+
+def test_independent_replication_workspace():
+    report=read_report("pronostia_summary.json")
+    assert len(report["fit_bearings"])==6
+    assert len(report["evaluation_bearings"])==11
+    assert not set(report["fit_bearings"]) & set(report["evaluation_bearings"])
+    assert report["primary"]=="switch_2x"
+    assert report["summary"]["stage"]["all"]["switch_2x"]["endpoints"]==44
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
+    assert not app.exception
+    assert any(m.label=="Evaluation bearings" and int(m.value)==11 for m in app.metric)
+    app.radio(key="replication_breakdown").set_value("landmark").run()
+    assert not app.exception
