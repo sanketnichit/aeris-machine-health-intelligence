@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from src.telemetry_contract import ASSET, UNITS, validate_batch
+from src.monitoring import validate_policy, evaluate
 
 DEFAULT_DB = Path(__file__).resolve().parents[1]/"data"/"telemetry.sqlite3"
 
@@ -36,7 +37,7 @@ def initialize(path):
         db.execute("PRAGMA journal_mode=WAL")
         db.execute("BEGIN IMMEDIATE")
         version=db.execute("PRAGMA user_version").fetchone()[0]
-        if version not in (0,1):
+        if version not in (0,1,2):
             raise ValueError("Unsupported telemetry storage version")
         db.execute("""CREATE TABLE IF NOT EXISTS assets (
             asset_id TEXT PRIMARY KEY, name TEXT NOT NULL, expected TEXT NOT NULL
@@ -46,7 +47,18 @@ def initialize(path):
             timestamp TEXT NOT NULL, measurements TEXT NOT NULL,
             PRIMARY KEY(asset_id,timestamp)
         )""")
-        db.execute("PRAGMA user_version=1")
+        db.execute("""CREATE TABLE IF NOT EXISTS policies (
+            asset_id TEXT PRIMARY KEY REFERENCES assets(asset_id),
+            revision INTEGER NOT NULL, bounds TEXT NOT NULL
+        )""")
+        db.execute("""CREATE TABLE IF NOT EXISTS events (
+            event_id INTEGER PRIMARY KEY,
+            asset_id TEXT NOT NULL REFERENCES assets(asset_id),
+            timestamp TEXT NOT NULL, policy_revision INTEGER NOT NULL,
+            kind TEXT NOT NULL, detail TEXT NOT NULL
+        )""")
+        db.execute("CREATE INDEX IF NOT EXISTS event_asset_idx ON events(asset_id,event_id)")
+        db.execute("PRAGMA user_version=2")
 
 
 def canonical(value):
@@ -82,12 +94,13 @@ def register(path,payload):
 
 def ingest(path,payload):
     batch=validate_batch(payload)
-    inserted=duplicates=0
+    inserted=duplicates=event_count=0
     with connection(path) as db:
         db.execute("BEGIN IMMEDIATE")
         for record in batch["records"]:
             asset=record["asset_id"]
-            if not db.execute("SELECT 1 FROM assets WHERE asset_id=?",(asset,)).fetchone():
+            asset_row=db.execute("SELECT expected FROM assets WHERE asset_id=?",(asset,)).fetchone()
+            if asset_row is None:
                 raise UnknownAsset(f"Unregistered asset: {asset}")
             # Fixed-width UTC timestamp preserves chronological string ordering.
             stamp=datetime.fromisoformat(record["timestamp"].replace("Z","+00:00")).isoformat(timespec="microseconds").replace("+00:00","Z")
@@ -100,7 +113,14 @@ def ingest(path,payload):
             else:
                 db.execute("INSERT INTO observations VALUES (?,?,?)",(asset,stamp,measurements))
                 inserted+=1
-    return {"status":"stored","inserted":inserted,"duplicates":duplicates,"persisted":True,"forecast":None}
+                policy=db.execute("SELECT revision,bounds FROM policies WHERE asset_id=?",(asset,)).fetchone()
+                revision=policy["revision"] if policy else 0
+                bounds=json.loads(policy["bounds"]) if policy else {}
+                for kind,detail in evaluate(json.loads(asset_row["expected"]),record["measurements"],bounds):
+                    db.execute("INSERT INTO events(asset_id,timestamp,policy_revision,kind,detail) VALUES (?,?,?,?,?)",
+                               (asset,stamp,revision,kind,canonical(detail)))
+                    event_count+=1
+    return {"status":"stored","inserted":inserted,"duplicates":duplicates,"events_created":event_count,"persisted":True,"forecast":None}
 
 
 def history(path,asset,limit=100):
@@ -134,3 +154,39 @@ def fleet(path,limit=200):
                            "expected_measurements":expected,"missing_latest":missing,
                            "quality":"no_data" if latest is None else ("incomplete" if missing else "complete")})
     return {"assets":result,"total_assets":total,"truncated":total>limit,"scope":"Data completeness only; not machine health."}
+
+
+def configure_policy(path,asset,payload):
+    if not isinstance(asset,str) or not ASSET.fullmatch(asset):
+        raise ValueError("Invalid asset identifier")
+    bounds=validate_policy(payload)
+    encoded=canonical(bounds)
+    with connection(path) as db:
+        db.execute("BEGIN IMMEDIATE")
+        if not db.execute("SELECT 1 FROM assets WHERE asset_id=?",(asset,)).fetchone():
+            raise UnknownAsset("Unknown asset")
+        row=db.execute("SELECT revision,bounds FROM policies WHERE asset_id=?",(asset,)).fetchone()
+        if row and row["bounds"]==encoded:
+            revision=row["revision"]
+        else:
+            revision=(row["revision"] if row else 0)+1
+            db.execute("INSERT INTO policies VALUES (?,?,?) ON CONFLICT(asset_id) DO UPDATE SET revision=excluded.revision,bounds=excluded.bounds",
+                       (asset,revision,encoded))
+    return {"asset_id":asset,"revision":revision,"bounds":bounds,
+            "scope":"Applies to newly ingested observations only; not health diagnosis."}
+
+
+def list_events(path,asset=None,limit=100):
+    if type(limit) is not int or not 1<=limit<=1000:
+        raise ValueError("Event limit must be 1 to 1000")
+    if asset is not None and (not isinstance(asset,str) or not ASSET.fullmatch(asset)):
+        raise ValueError("Invalid asset identifier")
+    with connection(path) as db:
+        if asset is None:
+            rows=db.execute("SELECT * FROM events ORDER BY event_id DESC LIMIT ?",(limit,)).fetchall()
+        else:
+            if not db.execute("SELECT 1 FROM assets WHERE asset_id=?",(asset,)).fetchone():
+                raise UnknownAsset("Unknown asset")
+            rows=db.execute("SELECT * FROM events WHERE asset_id=? ORDER BY event_id DESC LIMIT ?",(asset,limit)).fetchall()
+    return {"events":[{**dict(r),"detail":json.loads(r["detail"])} for r in rows],
+            "scope":"Observation-level policy events ordered by ingestion, not diagnosed faults or active incidents."}
