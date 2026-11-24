@@ -1,0 +1,57 @@
+name: AERIS reliability smoke
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - src/api.py
+      - src/telemetry_store.py
+      - src/incidents.py
+      - src/monitor_worker.py
+      - src/decision_engine.py
+      - src/monitoring.py
+      - src/telemetry_contract.py
+      - src/anomaly.py
+      - scripts/reliability_smoke.py
+      - scripts/telemetry_backup.py
+      - Dockerfile
+      - compose.yaml
+      - .github/workflows/reliability-smoke.yml
+permissions:
+  contents: read
+jobs:
+  reliability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate ephemeral local credential
+        run: |
+          token="$(python -c 'import secrets; print(secrets.token_hex(32))')"
+          echo "::add-mask::$token"
+          echo "AERIS_API_TOKEN=$token" >> "$GITHUB_ENV"
+      - name: Start isolated monitoring stack
+        run: docker compose --profile monitoring up --build --detach --wait --wait-timeout 180
+      - name: Exercise simultaneous clients and monitoring worker
+        run: |
+          mkdir -p reliability-evidence
+          set -o pipefail
+          python scripts/reliability_smoke.py | tee reliability-evidence/workload.json
+      - name: Backup and recover live database
+        run: |
+          docker compose exec -T api python scripts/telemetry_backup.py data/telemetry.sqlite3 data/backup.sqlite3
+          docker compose exec -T api python scripts/telemetry_backup.py data/backup.sqlite3 data/recovered.sqlite3
+          docker compose exec -T api python -c 'from src.telemetry_store import history; from src.incidents import list_incidents; a="synthetic-reliability-audit"; assert len(history("data/recovered.sqlite3",a))==1; assert any(i["asset_id"]==a and i["status"]=="resolved" for i in list_incidents("data/recovered.sqlite3")["incidents"]); print("Recovery data and review history verified")' | tee reliability-evidence/recovery.txt
+      - name: Collect service logs
+        if: always()
+        run: |
+          mkdir -p reliability-evidence
+          docker compose --profile monitoring logs --no-color > reliability-evidence/services.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reliability-evidence
+          path: reliability-evidence/
+      - name: Stop disposable stack
+        if: always()
+        run: docker compose --profile monitoring down --volumes
