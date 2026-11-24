@@ -1,15 +1,15 @@
 # AERIS research prototype roadmap
 
-The target is a reproducible research demonstrator, not certified industrial software. The following estimates are planning judgments (not model accuracy, measured performance, or objective completion). Baseline: 78% (equally weighted category estimates, rounded).
+The target is a reproducible research demonstrator, not certified industrial software. The following estimates are planning judgments (not model accuracy, measured performance, or objective completion). Baseline: 78%; current estimate: 82% (equally weighted category estimates, rounded).
 
 | Workstream | Estimate | Remaining completion gate |
 |---|---:|---|
 | Core ML research | 90% | Freeze a final model comparison and document negative results; retain independent test boundaries. |
-| Validation and reproducibility | 85% | Complete vibration-state audit, publish its exact evidence, reproduce from a clean release. |
-| Application and UX | 80% | Full browser walkthrough including populated fleet, failure states and virtual lab; visual inspection and usability review. |
+| Validation and reproducibility | 90% | Vibration-state audit completed and registered; reproduce from a clean release and verify integrated report. |
+| Application and UX | 82% | Virtual lab browser check passed; populated fleet browser workflow added, results and visual review pending. |
 | Telemetry and monitoring | 85% | Test periodic worker and incident actions in the running stack; document backup and access-control limitations. |
-| Twin and decision intelligence | 55% | Evaluate measured vibration dynamics and uncertainty; explicitly separate virtual wear scenarios from calibrated physical predictions. |
-| Packaging and documentation | 75% | Consolidated technical report, architecture and demo instructions; clean release candidate including all current modules. |
+| Twin and decision intelligence | 65% | Measured vibration dynamics audit integrated; small improvement does not establish superiority. Complete review of simulator assumptions and uncertainty; no physical calibration claim. |
+| Packaging and documentation | 78% | Updated measured-signal report and findings; consolidate architecture and demo instructions, then build clean release candidate including all current modules. |
 
 No arbitrary commit-count target. A failed experiment is a valid research outcome; it must be reported and not tuned into a claimed independent success. New results are published only after their execution is verified and their content registered.
 
