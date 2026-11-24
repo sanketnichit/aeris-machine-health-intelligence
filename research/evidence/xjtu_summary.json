@@ -1,0 +1,453 @@
+{
+  "archive_sha256": "3cc815649a315ac7da202980c489f33db44ca2db0317bbe3bcb9dcf415375e10",
+  "snapshot_counts": {
+    "Bearing1_1": 123,
+    "Bearing1_2": 161,
+    "Bearing1_3": 158,
+    "Bearing1_4": 122,
+    "Bearing1_5": 52,
+    "Bearing2_1": 491,
+    "Bearing2_2": 161,
+    "Bearing2_3": 533,
+    "Bearing2_4": 42,
+    "Bearing2_5": 339,
+    "Bearing3_1": 2538,
+    "Bearing3_2": 2496,
+    "Bearing3_3": 371,
+    "Bearing3_4": 1515,
+    "Bearing3_5": 114
+  },
+  "summary": {
+    "bearing": {
+      "age_reference": {
+        "all": {
+          "mae": 381.23333333333335,
+          "rmse": 524.1773554819018,
+          "endpoints": 60
+        },
+        "by_stage": {
+          "0.25": {
+            "mae": 170.76666666666668,
+            "rmse": 220.07267738938728,
+            "endpoints": 15
+          },
+          "0.5": {
+            "mae": 402.8,
+            "rmse": 467.0015346156084,
+            "endpoints": 15
+          },
+          "0.75": {
+            "mae": 444.3666666666667,
+            "rmse": 605.652774560914,
+            "endpoints": 15
+          },
+          "0.9": {
+            "mae": 507,
+            "rmse": 682.4294102689303,
+            "endpoints": 15
+          }
+        },
+        "by_bearing": {
+          "Bearing1_1": {
+            "mae": 205.75,
+            "rmse": 210.71366827996707,
+            "endpoints": 4
+          },
+          "Bearing1_2": {
+            "mae": 205.75,
+            "rmse": 222.79867593861505,
+            "endpoints": 4
+          },
+          "Bearing1_3": {
+            "mae": 208.75,
+            "rmse": 225.5720505736471,
+            "endpoints": 4
+          },
+          "Bearing1_4": {
+            "mae": 206.75,
+            "rmse": 211.69022178645852,
+            "endpoints": 4
+          },
+          "Bearing1_5": {
+            "mae": 220.25,
+            "rmse": 223.59617617481746,
+            "endpoints": 4
+          },
+          "Bearing2_1": {
+            "mae": 801.875,
+            "rmse": 954.5772951940561,
+            "endpoints": 4
+          },
+          "Bearing2_2": {
+            "mae": 205.75,
+            "rmse": 222.79867593861505,
+            "endpoints": 4
+          },
+          "Bearing2_3": {
+            "mae": 894.25,
+            "rmse": 1070.4737852932224,
+            "endpoints": 4
+          },
+          "Bearing2_4": {
+            "mae": 208,
+            "rmse": 208,
+            "endpoints": 4
+          },
+          "Bearing2_5": {
+            "mae": 532,
+            "rmse": 594.349223941615,
+            "endpoints": 4
+          },
+          "Bearing3_1": {
+            "mae": 287.25,
+            "rmse": 377.703752959909,
+            "endpoints": 4
+          },
+          "Bearing3_2": {
+            "mae": 255.75,
+            "rmse": 333.312353506437,
+            "endpoints": 4
+          },
+          "Bearing3_3": {
+            "mae": 520,
+            "rmse": 568.7415933444643,
+            "endpoints": 4
+          },
+          "Bearing3_4": {
+            "mae": 751.625,
+            "rmse": 867.7574906043739,
+            "endpoints": 4
+          },
+          "Bearing3_5": {
+            "mae": 214.75,
+            "rmse": 219.51025033013835,
+            "endpoints": 4
+          }
+        }
+      },
+      "learned": {
+        "all": {
+          "mae": 400.83090374613926,
+          "rmse": 649.7561809461743,
+          "endpoints": 60
+        },
+        "by_stage": {
+          "0.25": {
+            "mae": 577.8796770792364,
+            "rmse": 798.6942907299892,
+            "endpoints": 15
+          },
+          "0.5": {
+            "mae": 548.80402679141,
+            "rmse": 859.1283316064527,
+            "endpoints": 15
+          },
+          "0.75": {
+            "mae": 252.47117303024854,
+            "rmse": 400.55642415691733,
+            "endpoints": 15
+          },
+          "0.9": {
+            "mae": 224.16873808366168,
+            "rmse": 390.22156470918736,
+            "endpoints": 15
+          }
+        },
+        "by_bearing": {
+          "Bearing1_1": {
+            "mae": 73.72092831129531,
+            "rmse": 84.67071781126023,
+            "endpoints": 4
+          },
+          "Bearing1_2": {
+            "mae": 37.11992360362677,
+            "rmse": 43.58586274026936,
+            "endpoints": 4
+          },
+          "Bearing1_3": {
+            "mae": 95.78333063931535,
+            "rmse": 131.81905407679372,
+            "endpoints": 4
+          },
+          "Bearing1_4": {
+            "mae": 810.8569341393754,
+            "rmse": 1145.3984668055925,
+            "endpoints": 4
+          },
+          "Bearing1_5": {
+            "mae": 134.72896949986807,
+            "rmse": 154.87124713850977,
+            "endpoints": 4
+          },
+          "Bearing2_1": {
+            "mae": 1348.9209170314268,
+            "rmse": 1402.3830132871587,
+            "endpoints": 4
+          },
+          "Bearing2_2": {
+            "mae": 249.7618275480283,
+            "rmse": 464.2176389453431,
+            "endpoints": 4
+          },
+          "Bearing2_3": {
+            "mae": 143.8949777826574,
+            "rmse": 161.00646166198797,
+            "endpoints": 4
+          },
+          "Bearing2_4": {
+            "mae": 112.46547428595686,
+            "rmse": 150.74199090280032,
+            "endpoints": 4
+          },
+          "Bearing2_5": {
+            "mae": 290.12553456265135,
+            "rmse": 528.4219703671071,
+            "endpoints": 4
+          },
+          "Bearing3_1": {
+            "mae": 513.060643547404,
+            "rmse": 649.1756741203468,
+            "endpoints": 4
+          },
+          "Bearing3_2": {
+            "mae": 847.2775167969193,
+            "rmse": 1023.4724214305884,
+            "endpoints": 4
+          },
+          "Bearing3_3": {
+            "mae": 506.83352201498633,
+            "rmse": 542.5018487676327,
+            "endpoints": 4
+          },
+          "Bearing3_4": {
+            "mae": 823.4015202538881,
+            "rmse": 834.0779541674999,
+            "endpoints": 4
+          },
+          "Bearing3_5": {
+            "mae": 24.51153617468862,
+            "rmse": 37.51354315344517,
+            "endpoints": 4
+          }
+        }
+      }
+    },
+    "condition": {
+      "age_reference": {
+        "all": {
+          "mae": 593.6,
+          "rmse": 849.026923405063,
+          "endpoints": 60
+        },
+        "by_stage": {
+          "0.25": {
+            "mae": 493.3,
+            "rmse": 769.7350085148352,
+            "endpoints": 15
+          },
+          "0.5": {
+            "mae": 666.0666666666667,
+            "rmse": 881.117964103937,
+            "endpoints": 15
+          },
+          "0.75": {
+            "mae": 599.3666666666667,
+            "rmse": 839.1940876023059,
+            "endpoints": 15
+          },
+          "0.9": {
+            "mae": 615.6666666666666,
+            "rmse": 900.1551532930309,
+            "endpoints": 15
+          }
+        },
+        "by_bearing": {
+          "Bearing1_1": {
+            "mae": 353,
+            "rmse": 353.9547993741574,
+            "endpoints": 4
+          },
+          "Bearing1_2": {
+            "mae": 325.5,
+            "rmse": 327.18572707256044,
+            "endpoints": 4
+          },
+          "Bearing1_3": {
+            "mae": 328.5,
+            "rmse": 330.17041054582705,
+            "endpoints": 4
+          },
+          "Bearing1_4": {
+            "mae": 354,
+            "rmse": 354.95210944576735,
+            "endpoints": 4
+          },
+          "Bearing1_5": {
+            "mae": 394,
+            "rmse": 394.85566983392806,
+            "endpoints": 4
+          },
+          "Bearing2_1": {
+            "mae": 1288.5,
+            "rmse": 1468.1489621288433,
+            "endpoints": 4
+          },
+          "Bearing2_2": {
+            "mae": 222.125,
+            "rmse": 394.5095848011807,
+            "endpoints": 4
+          },
+          "Bearing2_3": {
+            "mae": 1452.125,
+            "rmse": 1584.5420671285442,
+            "endpoints": 4
+          },
+          "Bearing2_4": {
+            "mae": 117.5,
+            "rmse": 117.5,
+            "endpoints": 4
+          },
+          "Bearing2_5": {
+            "mae": 1294.375,
+            "rmse": 1445.972920735378,
+            "endpoints": 4
+          },
+          "Bearing3_1": {
+            "mae": 1014.75,
+            "rmse": 1193.496439039514,
+            "endpoints": 4
+          },
+          "Bearing3_2": {
+            "mae": 998.25,
+            "rmse": 1174.0171421235723,
+            "endpoints": 4
+          },
+          "Bearing3_3": {
+            "mae": 142.5,
+            "rmse": 147.73286702694156,
+            "endpoints": 4
+          },
+          "Bearing3_4": {
+            "mae": 572.25,
+            "rmse": 660.4436009228948,
+            "endpoints": 4
+          },
+          "Bearing3_5": {
+            "mae": 46.625,
+            "rmse": 46.62952390921443,
+            "endpoints": 4
+          }
+        }
+      },
+      "learned": {
+        "all": {
+          "mae": 399.39634064939503,
+          "rmse": 728.9632923526136,
+          "endpoints": 60
+        },
+        "by_stage": {
+          "0.25": {
+            "mae": 745.1362223767654,
+            "rmse": 1114.9897548585338,
+            "endpoints": 15
+          },
+          "0.5": {
+            "mae": 551.726812593084,
+            "rmse": 871.8410532254301,
+            "endpoints": 15
+          },
+          "0.75": {
+            "mae": 170.34764717580632,
+            "rmse": 281.72266441626965,
+            "endpoints": 15
+          },
+          "0.9": {
+            "mae": 130.3746804519241,
+            "rmse": 207.058666120802,
+            "endpoints": 15
+          }
+        },
+        "by_bearing": {
+          "Bearing1_1": {
+            "mae": 186.13204519469753,
+            "rmse": 224.79416515734374,
+            "endpoints": 4
+          },
+          "Bearing1_2": {
+            "mae": 53.96763232957639,
+            "rmse": 74.0356028262376,
+            "endpoints": 4
+          },
+          "Bearing1_3": {
+            "mae": 121.7020855088806,
+            "rmse": 128.84905927158619,
+            "endpoints": 4
+          },
+          "Bearing1_4": {
+            "mae": 982.8123236345748,
+            "rmse": 1252.2359365631762,
+            "endpoints": 4
+          },
+          "Bearing1_5": {
+            "mae": 278.0740932161771,
+            "rmse": 378.9694920516137,
+            "endpoints": 4
+          },
+          "Bearing2_1": {
+            "mae": 675.9442337722102,
+            "rmse": 1122.4103668440714,
+            "endpoints": 4
+          },
+          "Bearing2_2": {
+            "mae": 607.1936540318202,
+            "rmse": 1181.4937314449407,
+            "endpoints": 4
+          },
+          "Bearing2_3": {
+            "mae": 504.1751763474558,
+            "rmse": 813.8802320790476,
+            "endpoints": 4
+          },
+          "Bearing2_4": {
+            "mae": 112.28872742874738,
+            "rmse": 159.9337215063863,
+            "endpoints": 4
+          },
+          "Bearing2_5": {
+            "mae": 57.10561843192787,
+            "rmse": 63.677487665649195,
+            "endpoints": 4
+          },
+          "Bearing3_1": {
+            "mae": 932.6936660220033,
+            "rmse": 1123.656484131528,
+            "endpoints": 4
+          },
+          "Bearing3_2": {
+            "mae": 911.1163248749505,
+            "rmse": 1091.2779604888117,
+            "endpoints": 4
+          },
+          "Bearing3_3": {
+            "mae": 48.64472098559099,
+            "rmse": 56.78972449959261,
+            "endpoints": 4
+          },
+          "Bearing3_4": {
+            "mae": 494.80739460589956,
+            "rmse": 616.9878400391401,
+            "endpoints": 4
+          },
+          "Bearing3_5": {
+            "mae": 24.28741335641255,
+            "rmse": 36.41527318443391,
+            "endpoints": 4
+          }
+        }
+      }
+    }
+  },
+  "scope": "Physical accelerated bearing development experiment; retrospective endpoint proxy, no field or safety claim.",
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45429314185",
+  "revision": "47e84a0adc590491b6bb5bf819d9fc65cc707557"
+}
