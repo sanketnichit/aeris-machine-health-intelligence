@@ -1,0 +1,16 @@
+.git
+.github
+.venv
+venv
+**/__pycache__
+**/*.pyc
+.pytest_cache
+.env
+.env.*
+.streamlit/secrets.toml
+data
+dist
+browser-evidence
+**/*.zip
+**/*.joblib
+**/*.pkl
