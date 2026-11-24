@@ -3,6 +3,7 @@ import argparse
 import json
 import math
 import os
+import time
 from datetime import datetime, timedelta, timezone
 from urllib.request import Request, urlopen
 
@@ -38,16 +39,29 @@ def submit(base,route,payload):
         return json.load(response)
 
 
-def run(base):
+def run(base,pace=0):
+    if not math.isfinite(pace) or not 0<=pace<=60:
+        raise ValueError('Pace must be 0 to 60 seconds')
     for asset in ASSETS:
         submit(base,"/v1/assets",{"asset_id":asset,"name":"Synthetic demo: "+asset.removeprefix("synthetic-"),
                                   "expected_measurements":list(SIGNALS)})
         submit(base,"/v1/policies",{"asset_id":asset,"bounds":{SIGNALS[0]:{"max":2.0}}})
-    return submit(base,"/v1/telemetry/ingest",scenario())
+    payload=scenario()
+    if pace==0:
+        return submit(base,"/v1/telemetry/ingest",payload)
+    totals={"status":"stored","inserted":0,"duplicates":0,"events_created":0,"persisted":True,"forecast":None}
+    for offset in range(0,len(payload["records"]),len(ASSETS)):
+        if offset:
+            time.sleep(pace)
+        result=submit(base,"/v1/telemetry/ingest",{"schema_version":1,"records":payload["records"][offset:offset+len(ASSETS)]})
+        for key in ("inserted","duplicates","events_created"):
+            totals[key]+=result[key]
+    return totals
 
 
 if __name__=="__main__":
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--url",default="http://127.0.0.1:8080")
+    parser.add_argument("--pace",type=float,default=0,help="Seconds between historical synthetic batches; 0 sends all at once")
     args=parser.parse_args()
-    print(json.dumps(run(args.url),indent=2))
+    print(json.dumps(run(args.url,args.pace),indent=2))
