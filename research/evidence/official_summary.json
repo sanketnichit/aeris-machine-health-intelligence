@@ -1,0 +1,63 @@
+{
+  "protocol": "FD001 official endpoint frozen v1",
+  "dataset_sha256": {
+    "train_FD001.txt": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "test_FD001.txt": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "RUL_FD001.txt": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca"
+  },
+  "primary": "relative_hgb",
+  "engines": 100,
+  "metrics": {
+    "age_reference": {
+      "mae": 29.16,
+      "rmse": 36.122499913488824,
+      "nasa_score": 7600.144366771096,
+      "mean_signed_error": 0.83,
+      "overprediction_gt20_fraction": 0.29,
+      "underprediction_gt20_fraction": 0.25
+    },
+    "constant": {
+      "mae": 39.08,
+      "rmse": 49.81987555183172,
+      "nasa_score": 166570.54261288798,
+      "mean_signed_error": 27.48,
+      "overprediction_gt20_fraction": 0.47,
+      "underprediction_gt20_fraction": 0.12
+    },
+    "snapshot_hgb": {
+      "mae": 20.020641011439128,
+      "rmse": 27.355273973252512,
+      "nasa_score": 10445.81513004891,
+      "mean_signed_error": 10.435823747109287,
+      "overprediction_gt20_fraction": 0.3,
+      "underprediction_gt20_fraction": 0.1
+    },
+    "relative_hgb": {
+      "mae": 17.34609298302107,
+      "rmse": 25.06065992282516,
+      "nasa_score": 12852.019796453165,
+      "mean_signed_error": 8.3435097993633,
+      "overprediction_gt20_fraction": 0.24,
+      "underprediction_gt20_fraction": 0.09
+    },
+    "adaptive_mean": {
+      "mae": 15.327966668941094,
+      "rmse": 21.35818310369647,
+      "nasa_score": 1635.7131193846888,
+      "mean_signed_error": 6.762081768203953,
+      "overprediction_gt20_fraction": 0.22,
+      "underprediction_gt20_fraction": 0.08
+    }
+  },
+  "paired_primary_vs_age": {
+    "mae_delta": -11.81390701697893,
+    "percentile_95_interval": [
+      -16.81434484452695,
+      -6.877866624695276
+    ],
+    "win_fraction": 0.71
+  },
+  "scope": "Official simulated FD001 endpoints; fixed candidates; no field or safety claims.",
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45427268184",
+  "revision": "ca631cfa5f444cefce671f3e84878bb1f987d0d2"
+}
