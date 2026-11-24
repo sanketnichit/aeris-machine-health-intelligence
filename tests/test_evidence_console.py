@@ -25,3 +25,20 @@ def test_research_workspace_renders_without_dataset():
     assert any("Research Intelligence" in t.value for t in app.title)
     app.select_slider[0].set_value(25).run()
     assert not app.exception
+
+
+def test_published_telemetry_and_truth_toggle():
+    report = read_report("telemetry.json")
+    assert sum(len(t["points"]) for t in report["traces"]) == 655
+    for trace in report["traces"]:
+        assert trace["unit"] not in trace["fit_units"]
+        assert trace["points"][-1]["cycle"] == trace["failure_cycle"]-1
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
+    assert not app.exception
+    assert not any(m.label=="Actual remaining cycles" for m in app.metric)
+    app.slider(key="replay_cycle_1").set_value(10).run()
+    assert not app.exception
+    app.checkbox(key="replay_truth_1").set_value(True).run()
+    assert not app.exception
+    metric=next(m for m in app.metric if m.label=="Actual remaining cycles")
+    assert int(metric.value)==182
