@@ -38,6 +38,18 @@ def render_fleet():
         st.info("No assets registered. Use the local API to register an asset and ingest observations.")
         return
     st.dataframe(pd.DataFrame(rows),hide_index=True)
+    with st.expander("Recent monitoring events"):
+        try:
+            event_report=fetch("/v1/events",{"limit":100})
+            events=event_report["events"]
+            st.caption("Latest 100 observation-level events, ordered by ingestion. Not active incidents or machine diagnoses.")
+            if events:
+                st.dataframe(pd.DataFrame(events),hide_index=True)
+                st.download_button("Download monitoring events",json.dumps(events,indent=2),"monitoring_events.json","application/json")
+            else:
+                st.info("No monitoring events recorded.")
+        except (URLError,OSError,ValueError,KeyError):
+            st.info("Monitoring event history unavailable.")
     asset=st.selectbox("Asset", [r["asset_id"] for r in rows],key="fleet_asset")
     try:
         records=fetch("/v1/telemetry/history",{"asset_id":asset,"limit":1000})["records"]
