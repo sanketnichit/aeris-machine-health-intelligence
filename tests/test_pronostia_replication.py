@@ -28,10 +28,10 @@ def test_nested_archive_excludes_truncated_test():
     outer=io.BytesIO()
     with zipfile.ZipFile(outer,"w") as z:
         z.writestr("data.zip",inner.getvalue())
-    rows,seen=[],set()
+    rows,seen=[],{}
     with zipfile.ZipFile(outer) as z:
         extract_archive(z,rows,seen)
-    assert seen=={("Bearing1_1",1),("Bearing1_3",1)}
+    assert set(seen)=={("Bearing1_1",1),("Bearing1_3",1)}
     assert len(rows)==2
 
 
@@ -60,7 +60,24 @@ def test_partition_in_nested_archive_name():
     payload=wrap("Full_Test_Set.zip",payload)
     payload=wrap("FEMTOBearingDataSet.zip",payload)
     payload=wrap("NASA.zip",payload)
-    rows,seen=[],set()
+    rows,seen=[],{}
     with zipfile.ZipFile(io.BytesIO(payload)) as archive:
         extract_archive(archive,rows,seen)
-    assert seen=={("Bearing1_3",1)}
+    assert set(seen)=={("Bearing1_3",1)}
+
+
+def test_identical_duplicates_count_once_and_conflicts_fail():
+    raw=b"1,2,3,4,2,-3\n"*2560
+    def archive(second):
+        buffer=io.BytesIO()
+        with zipfile.ZipFile(buffer,"w") as z:
+            z.writestr("a/Learning_set/Bearing1_1/acc_00001.csv",raw)
+            z.writestr("b/Learning_set/Bearing1_1/acc_00001.csv",second)
+        return zipfile.ZipFile(io.BytesIO(buffer.getvalue()))
+    rows,seen=[],{}
+    with archive(raw) as z:
+        extract_archive(z,rows,seen)
+    assert len(rows)==len(seen)==1
+    with archive(raw.replace(b"2,-3",b"2,-4")) as z:
+        with pytest.raises(ValueError,match="Conflicting duplicate"):
+            extract_archive(z,[],{})
