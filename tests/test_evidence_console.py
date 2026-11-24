@@ -137,3 +137,21 @@ def test_technical_report_page_renders_on_demand():
     assert not app.exception
     assert any("Technical evidence report" in t.value for t in app.subheader)
     assert any("did not replicate" in m.value for m in app.markdown)
+
+
+def test_physical_replay_workspace():
+    from src.evidence_console import EVIDENCE
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
+    app.sidebar.radio(key="research_page").set_value("Physical vibration replay").run()
+    assert not app.exception
+    assert any("Physical bearing vibration replay" in s.value for s in app.subheader)
+    if not (EVIDENCE/"pronostia_replay.json").is_file():
+        assert any("not yet published" in i.value for i in app.info)
+    else:
+        assert not any(m.label=="Actual remaining recorded snapshots" for m in app.metric)
+        bearing="Bearing1_3"
+        app.select_slider(key=f"physical_replay_age_{bearing}").set_value(20).run()
+        app.radio(key="physical_replay_feature").set_value("crest").run()
+        app.checkbox(key=f"physical_replay_truth_{bearing}").set_value(True).run()
+        assert not app.exception
+        assert any(m.label=="Actual remaining recorded snapshots" for m in app.metric)
