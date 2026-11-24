@@ -75,3 +75,20 @@ The named volume survives ordinary container restarts and docker compose down. *
 No rate limiting, TLS or access control; no retention policy or production backup management. Use only locally for research integration. A production service would need a hardened server, authenticated transport, durable ingestion, asset-specific validation, monitoring and independent operational evidence.
 
 Stop containers with `docker compose down`.
+
+
+## Monitoring and synthetic demonstration
+
+POST /v1/policies with {"asset_id":"demo-bearing","bounds":{"horizontal_vibration_rms":{"max":2.0}}} to configure illustrative observation limits in the canonical measurement units. Empty bounds disable numeric limit checks, not missing-measurement checks. Each changed policy receives a new revision; identical submissions preserve the revision. GET /v1/events?limit=100 returns recent persisted observation events; optional asset_id filters the result.
+
+Ingested records and their events commit atomically. Duplicate observations create no extra events. Policy changes do not recompute historical events. Events are ordered by ingestion, including backfills, and are not active incidents. Existing databases migrate automatically to schema version 2; preexisting observations are not retrospectively evaluated.
+
+With the local service running, execute:
+
+```bash
+python scripts/demo_fleet.py
+```
+
+This inserts 180 deterministic synthetic observations for three explicitly named synthetic assets. Ten observations have an intentionally missing signal; one asset has injected vibration drift. Re-running against unchanged demo policies and data is idempotent. The fixed timestamps and illustrative 2 m/s2 bound are demo choices, not calibrated equipment limits. Use a separate local demonstration database rather than confidential production telemetry.
+
+The fleet workspace exposes recent event history and export. There is no background scheduler, notification delivery, incident lifecycle or operational health diagnosis.
