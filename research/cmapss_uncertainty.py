@@ -47,7 +47,7 @@ def support_scores(training, evaluation):
     excursion = np.maximum(low-evaluation, evaluation-high).clip(lower=0)
     positive = scale > 0
     normalized = excursion.loc[:, positive].div(scale[positive], axis=1)
-    result = normalized.max(axis=1).fillna(0).to_numpy()
+    result = normalized.max(axis=1).fillna(0).to_numpy(copy=True)
     if (~positive).any():
         result[(excursion.loc[:, ~positive] > 0).any(axis=1).to_numpy()] = np.inf
     return result
