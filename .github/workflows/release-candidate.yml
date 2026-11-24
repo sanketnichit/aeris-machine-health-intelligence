@@ -10,6 +10,8 @@ permissions:
   contents: read
 jobs:
   package:
+    outputs:
+      version: ${{ steps.bundle.outputs.version }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     env:
@@ -25,9 +27,11 @@ jobs:
       - run: python -m research.verify_evidence
       - run: python -m pytest -q
       - name: Create versioned source and evidence bundle
+        id: bundle
         run: |
           mkdir -p dist
           version="$(cat VERSION)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
           python -m research.technical_report --output dist/AERIS_technical_report.md
           git archive --format=zip --prefix="aeris-$version/" --output="dist/aeris-$version.zip" HEAD
           git rev-parse HEAD > dist/revision.txt
@@ -98,3 +102,48 @@ jobs:
       - name: Stop disposable stack
         if: always()
         run: docker compose --profile monitoring down --volumes
+  publish-research-release:
+    needs: [package, integrated-stack]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.package.outputs.version == '0.1.0'
+    permissions:
+      contents: write
+      actions: read
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    concurrency:
+      group: aeris-research-release-v0.1.0
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/download-artifact@v4
+        with:
+          name: aeris-release-candidate
+          path: dist
+      - uses: actions/download-artifact@v4
+        with:
+          name: aeris-release-acceptance
+          path: acceptance-evidence
+      - name: Verify publication revision and artifact integrity
+        run: |
+          test "$(cat VERSION)" = "0.1.0"
+          test "$(cat dist/revision.txt)" = "$GITHUB_SHA"
+          test "$(cat acceptance-evidence/revision.txt)" = "$GITHUB_SHA"
+          (cd dist && sha256sum -c SHA256SUMS)
+          test -f acceptance-evidence/workload.json
+          test -f acceptance-evidence/recovery.txt
+      - name: Publish exact accepted research revision
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh release view v0.1.0 --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "Release already exists; refusing to replace it."
+            exit 1
+          fi
+          if gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/v0.1.0" >/dev/null 2>&1; then
+            echo "Tag already exists; refusing to replace it."
+            exit 1
+          fi
+          gh release create v0.1.0 dist/aeris-0.1.0.zip dist/AERIS_technical_report.md dist/SHA256SUMS dist/revision.txt dist/environment.txt --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title "AERIS v0.1.0 — Research Demonstrator" --notes-file docs/research_release_notes.md
