@@ -35,3 +35,7 @@ The [adaptive physical findings](XJTU_ADAPTIVE_FINDINGS.md) are published, inclu
 
 ## Evidence integrity
 Run `python -m research.verify_evidence` from the repository root to check all seven registered evidence files offline. The manifest records Git blob hashes and byte counts; this is a content-integrity check, not an independent validation of scientific claims. Each evidence addition must be registered with its exact blob hash and byte count before CI can pass. The original run URLs and revisions remain in the evidence files. Preserve earlier evidence rather than replacing experimental outcomes.
+
+## Measured vibration-state transition audit
+
+[Protocol](TWIN_CALIBRATION_PROTOCOL.md) · [Findings](TWIN_CALIBRATION_FINDINGS.md) · [Evidence](evidence/twin_calibration_summary.json). Six learning bearings, eleven previously observed evaluation bearings, 54 short-horizon endpoints. Condition-specific drift improves pooled MAE by 1.16% versus persistence; broad empirical residual bands and mixed bearing-level results preclude a calibrated physical twin claim. The virtual maintenance model remains synthetic.
