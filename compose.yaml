@@ -3,6 +3,7 @@ services:
     build: .
     environment:
       AERIS_API_URL: http://api:8080
+      AERIS_ENABLE_REVIEW_ACTIONS: ${AERIS_ENABLE_REVIEW_ACTIONS:-0}
       AERIS_API_TOKEN: ${AERIS_API_TOKEN:-}
     image: aeris-research:local
     ports:
@@ -34,6 +35,21 @@ services:
       interval: 15s
       timeout: 5s
       retries: 5
+
+  monitor:
+    image: aeris-research:local
+    build: .
+    profiles: [monitoring]
+    command: ["python", "-m", "src.monitor_worker", "--interval", "30"]
+    depends_on:
+      api:
+        condition: service_healthy
+    security_opt:
+      - no-new-privileges:true
+    cap_drop: [ALL]
+    read_only: true
+    volumes:
+      - telemetry-data:/opt/aeris/data
 
 volumes:
   telemetry-data:
