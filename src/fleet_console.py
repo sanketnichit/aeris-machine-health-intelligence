@@ -2,7 +2,7 @@
 import json
 import os
 from urllib.parse import urlencode
-from urllib.request import urlopen
+from urllib.request import urlopen, Request
 from urllib.error import URLError
 
 import pandas as pd
@@ -13,7 +13,9 @@ def fetch(route, params=None):
     # Deployment-controlled base URL, never a user-entered destination.
     base=os.environ.get("AERIS_API_URL","http://127.0.0.1:8080").rstrip("/")
     suffix="?"+urlencode(params) if params else ""
-    with urlopen(base+route+suffix,timeout=4) as response:
+    token=os.environ.get("AERIS_API_TOKEN")
+    request=Request(base+route+suffix,headers={"Authorization":"Bearer "+token} if token else {})
+    with urlopen(request,timeout=4) as response:
         return json.load(response)
 
 
@@ -50,6 +52,18 @@ def render_fleet():
                 st.info("No monitoring events recorded.")
         except (URLError,OSError,ValueError,KeyError):
             st.info("Monitoring event history unavailable.")
+    with st.expander("Review incidents"):
+        try:
+            incident_report=fetch("/v1/incidents",{"limit":100})
+            incidents=incident_report["incidents"]
+            st.caption("Recent review incidents. Acknowledgement and resolution are manual API actions, not evidence of repaired equipment.")
+            if incidents:
+                st.dataframe(pd.DataFrame(incidents),hide_index=True)
+                st.download_button("Download incident history",json.dumps(incidents,indent=2),"incidents.json","application/json")
+            else:
+                st.info("No review incidents recorded.")
+        except (URLError,OSError,ValueError,KeyError):
+            st.info("Incident history unavailable.")
     asset=st.selectbox("Asset", [r["asset_id"] for r in rows],key="fleet_asset")
     try:
         records=fetch("/v1/telemetry/history",{"asset_id":asset,"limit":1000})["records"]
