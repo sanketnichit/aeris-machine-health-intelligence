@@ -3,6 +3,7 @@ import argparse
 import os
 import sqlite3
 import tempfile
+from contextlib import closing
 from pathlib import Path
 
 
@@ -15,9 +16,9 @@ def copy_verified(source, destination):
     fd,temp=tempfile.mkstemp(prefix=".aeris-backup-",dir=destination.parent)
     os.close(fd)
     try:
-        with sqlite3.connect(source.as_uri()+"?mode=ro",uri=True) as src:
+        with closing(sqlite3.connect(source.as_uri()+"?mode=ro",uri=True)) as src:
             try:
-                with sqlite3.connect(temp) as dst:
+                with closing(sqlite3.connect(temp)) as dst:
                     try:
                         src.backup(dst)
                         if dst.execute("PRAGMA integrity_check").fetchall()!=[("ok",)]:
