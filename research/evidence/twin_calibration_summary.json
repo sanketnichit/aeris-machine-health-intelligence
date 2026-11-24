@@ -1,0 +1,1079 @@
+{
+  "archive_sha256": "e21bb22bd8d54fd18ebe98b4b4e094c0c40469bda19811a2a642d5cc84ebd81f",
+  "fit": {
+    "drift": 0,
+    "residual_p05": -0.10621410989260013,
+    "residual_p95": 0.3645115760083398,
+    "fit_bearings": [
+      "Bearing1_1",
+      "Bearing1_2",
+      "Bearing2_1",
+      "Bearing2_2",
+      "Bearing3_1",
+      "Bearing3_2"
+    ],
+    "transitions": 372
+  },
+  "condition_fit": {
+    "1": {
+      "drift": 0,
+      "residual_p05": -0.2120480608685028,
+      "residual_p95": 0.3669887067341681,
+      "fit_bearings": [
+        "Bearing1_1",
+        "Bearing1_2"
+      ],
+      "transitions": 182
+    },
+    "2": {
+      "drift": 0.005905892916845956,
+      "residual_p05": -0.10142880953647171,
+      "residual_p95": 0.40118128784244966,
+      "fit_bearings": [
+        "Bearing2_1",
+        "Bearing2_2"
+      ],
+      "transitions": 84
+    },
+    "3": {
+      "drift": 0.0013418058336066851,
+      "residual_p05": -0.0667874161802144,
+      "residual_p95": 0.09498088411298726,
+      "fit_bearings": [
+        "Bearing3_1",
+        "Bearing3_2"
+      ],
+      "transitions": 106
+    }
+  },
+  "evaluation_bearings": [
+    "Bearing1_3",
+    "Bearing1_4",
+    "Bearing1_5",
+    "Bearing1_6",
+    "Bearing1_7",
+    "Bearing2_3",
+    "Bearing2_4",
+    "Bearing2_5",
+    "Bearing2_6",
+    "Bearing2_7",
+    "Bearing3_3"
+  ],
+  "horizon_recordings": 20,
+  "primary": "condition_drift",
+  "summary": {
+    "all": {
+      "persistence": {
+        "mae": 0.025677574906205355,
+        "rmse": 0.045992677009907106,
+        "endpoints": 54
+      },
+      "global_drift": {
+        "mae": 0.025677574906205355,
+        "rmse": 0.045992677009907106,
+        "endpoints": 54
+      },
+      "condition_drift": {
+        "mae": 0.025379005077436432,
+        "rmse": 0.045174711712009964,
+        "endpoints": 54
+      },
+      "condition_band": {
+        "coverage": 1,
+        "mean_width": 0.4732093845895173
+      },
+      "bearings": 11
+    },
+    "by_bearing": {
+      "Bearing1_3": {
+        "persistence": {
+          "mae": 0.04777112974901069,
+          "rmse": 0.08616960859774575,
+          "endpoints": 6
+        },
+        "global_drift": {
+          "mae": 0.04777112974901069,
+          "rmse": 0.08616960859774575,
+          "endpoints": 6
+        },
+        "condition_drift": {
+          "mae": 0.04777112974901069,
+          "rmse": 0.08616960859774575,
+          "endpoints": 6
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.5549289376450646
+        },
+        "bearings": 1
+      },
+      "Bearing1_4": {
+        "persistence": {
+          "mae": 0.01748204880270399,
+          "rmse": 0.02265374412470563,
+          "endpoints": 5
+        },
+        "global_drift": {
+          "mae": 0.01748204880270399,
+          "rmse": 0.02265374412470563,
+          "endpoints": 5
+        },
+        "condition_drift": {
+          "mae": 0.01748204880270399,
+          "rmse": 0.02265374412470563,
+          "endpoints": 5
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.5332544934119328
+        },
+        "bearings": 1
+      },
+      "Bearing1_5": {
+        "persistence": {
+          "mae": 0.025976725107582064,
+          "rmse": 0.04076880695099458,
+          "endpoints": 6
+        },
+        "global_drift": {
+          "mae": 0.025976725107582064,
+          "rmse": 0.04076880695099458,
+          "endpoints": 6
+        },
+        "condition_drift": {
+          "mae": 0.025976725107582064,
+          "rmse": 0.04076880695099458,
+          "endpoints": 6
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.5425241741681993
+        },
+        "bearings": 1
+      },
+      "Bearing1_6": {
+        "persistence": {
+          "mae": 0.010269671540064062,
+          "rmse": 0.015461592189540374,
+          "endpoints": 6
+        },
+        "global_drift": {
+          "mae": 0.010269671540064062,
+          "rmse": 0.015461592189540374,
+          "endpoints": 6
+        },
+        "condition_drift": {
+          "mae": 0.010269671540064062,
+          "rmse": 0.015461592189540374,
+          "endpoints": 6
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.40880892378445344
+        },
+        "bearings": 1
+      },
+      "Bearing1_7": {
+        "persistence": {
+          "mae": 0.01476203362738556,
+          "rmse": 0.024996140817768273,
+          "endpoints": 6
+        },
+        "global_drift": {
+          "mae": 0.01476203362738556,
+          "rmse": 0.024996140817768273,
+          "endpoints": 6
+        },
+        "condition_drift": {
+          "mae": 0.01476203362738556,
+          "rmse": 0.024996140817768273,
+          "endpoints": 6
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.48733008602324085
+        },
+        "bearings": 1
+      },
+      "Bearing2_3": {
+        "persistence": {
+          "mae": 0.0420984042085687,
+          "rmse": 0.05771370130304595,
+          "endpoints": 5
+        },
+        "global_drift": {
+          "mae": 0.0420984042085687,
+          "rmse": 0.05771370130304595,
+          "endpoints": 5
+        },
+        "condition_drift": {
+          "mae": 0.04091722562519951,
+          "rmse": 0.055914181935394665,
+          "endpoints": 5
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.48068428437478766
+        },
+        "bearings": 1
+      },
+      "Bearing2_4": {
+        "persistence": {
+          "mae": 0.01615065349519166,
+          "rmse": 0.02171751287511544,
+          "endpoints": 4
+        },
+        "global_drift": {
+          "mae": 0.01615065349519166,
+          "rmse": 0.02171751287511544,
+          "endpoints": 4
+        },
+        "condition_drift": {
+          "mae": 0.013460039226673985,
+          "rmse": 0.01801643419202072,
+          "endpoints": 4
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.5026100973789214
+        },
+        "bearings": 1
+      },
+      "Bearing2_5": {
+        "persistence": {
+          "mae": 0.04538462505095811,
+          "rmse": 0.06850399965819544,
+          "endpoints": 6
+        },
+        "global_drift": {
+          "mae": 0.04538462505095811,
+          "rmse": 0.06850399965819544,
+          "endpoints": 6
+        },
+        "condition_drift": {
+          "mae": 0.04341599407867613,
+          "rmse": 0.06560483932727816,
+          "endpoints": 6
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.5026100973789215
+        },
+        "bearings": 1
+      },
+      "Bearing2_6": {
+        "persistence": {
+          "mae": 0.014319999791090783,
+          "rmse": 0.02091122906763777,
+          "endpoints": 4
+        },
+        "global_drift": {
+          "mae": 0.014319999791090783,
+          "rmse": 0.02091122906763777,
+          "endpoints": 4
+        },
+        "condition_drift": {
+          "mae": 0.01685347824014597,
+          "rmse": 0.02043492864943076,
+          "endpoints": 4
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.44224866569516064
+        },
+        "bearings": 1
+      },
+      "Bearing2_7": {
+        "persistence": {
+          "mae": 0.004582903209122944,
+          "rmse": 0.0060295000348450775,
+          "endpoints": 3
+        },
+        "global_drift": {
+          "mae": 0.004582903209122944,
+          "rmse": 0.0060295000348450775,
+          "endpoints": 3
+        },
+        "condition_drift": {
+          "mae": 0.005771322245280625,
+          "rmse": 0.006070879859215433,
+          "endpoints": 3
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.41388653724170954
+        },
+        "bearings": 1
+      },
+      "Bearing3_3": {
+        "persistence": {
+          "mae": 0.02935678221874138,
+          "rmse": 0.033658795053181374,
+          "endpoints": 3
+        },
+        "global_drift": {
+          "mae": 0.02935678221874138,
+          "rmse": 0.033658795053181374,
+          "endpoints": 3
+        },
+        "condition_drift": {
+          "mae": 0.02890951360753916,
+          "rmse": 0.03362820705656706,
+          "endpoints": 3
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.16176830029320166
+        },
+        "bearings": 1
+      }
+    },
+    "by_landmark": {
+      "50": {
+        "persistence": {
+          "mae": 0.052327931246362876,
+          "rmse": 0.06867536571531298,
+          "endpoints": 11
+        },
+        "global_drift": {
+          "mae": 0.052327931246362876,
+          "rmse": 0.06867536571531298,
+          "endpoints": 11
+        },
+        "condition_drift": {
+          "mae": 0.050595250829622455,
+          "rmse": 0.06622129927571865,
+          "endpoints": 11
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.4808144263359999
+        },
+        "bearings": 11
+      },
+      "100": {
+        "persistence": {
+          "mae": 0.019065183905759654,
+          "rmse": 0.030037562804756376,
+          "endpoints": 11
+        },
+        "global_drift": {
+          "mae": 0.019065183905759654,
+          "rmse": 0.030037562804756376,
+          "endpoints": 11
+        },
+        "condition_drift": {
+          "mae": 0.018497733076604163,
+          "rmse": 0.028255658013071352,
+          "endpoints": 11
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.4855500164270824
+        },
+        "bearings": 11
+      },
+      "200": {
+        "persistence": {
+          "mae": 0.015249460988173997,
+          "rmse": 0.020283592383435807,
+          "endpoints": 11
+        },
+        "global_drift": {
+          "mae": 0.015249460988173997,
+          "rmse": 0.020283592383435807,
+          "endpoints": 11
+        },
+        "condition_drift": {
+          "mae": 0.01652539163440657,
+          "rmse": 0.022043619272150993,
+          "endpoints": 11
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.4670514094808016
+        },
+        "bearings": 11
+      },
+      "500": {
+        "persistence": {
+          "mae": 0.00857623611415411,
+          "rmse": 0.013355141191084262,
+          "endpoints": 9
+        },
+        "global_drift": {
+          "mae": 0.00857623611415411,
+          "rmse": 0.013355141191084262,
+          "endpoints": 9
+        },
+        "condition_drift": {
+          "mae": 0.00869282819855647,
+          "rmse": 0.012249461099648851,
+          "endpoints": 9
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.47319314084599895
+        },
+        "bearings": 9
+      },
+      "1000": {
+        "persistence": {
+          "mae": 0.015166124256453055,
+          "rmse": 0.023810183753838515,
+          "endpoints": 7
+        },
+        "global_drift": {
+          "mae": 0.015166124256453055,
+          "rmse": 0.023810183753838515,
+          "endpoints": 7
+        },
+        "condition_drift": {
+          "mae": 0.013478726280211352,
+          "rmse": 0.023394038204969658,
+          "endpoints": 7
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.4352046017355938
+        },
+        "bearings": 7
+      },
+      "2000": {
+        "persistence": {
+          "mae": 0.05003434251385377,
+          "rmse": 0.09200442756002337,
+          "endpoints": 5
+        },
+        "global_drift": {
+          "mae": 0.05003434251385377,
+          "rmse": 0.09200442756002337,
+          "endpoints": 5
+        },
+        "condition_drift": {
+          "mae": 0.05121552109722296,
+          "rmse": 0.09236247524501674,
+          "endpoints": 5
+        },
+        "condition_band": {
+          "coverage": 1,
+          "mean_width": 0.4961123826776143
+        },
+        "bearings": 5
+      }
+    },
+    "paired_bearing_mae_differences": {
+      "Bearing1_3": 0,
+      "Bearing1_4": 0,
+      "Bearing1_5": 0,
+      "Bearing1_6": 0,
+      "Bearing1_7": 0,
+      "Bearing2_3": -0.0011811785833691912,
+      "Bearing2_4": -0.0026906142685176743,
+      "Bearing2_5": -0.001968630972281983,
+      "Bearing2_6": 0.0025334784490551876,
+      "Bearing2_7": 0.0011884190361576815,
+      "Bearing3_3": -0.00044726861120222144
+    },
+    "mean_paired_bearing_mae_difference": -0.00023325408637801828
+  },
+  "predictions": [
+    {
+      "bearing": "Bearing1_3",
+      "condition": 1,
+      "age": 50,
+      "actual": 0.25600423302470593,
+      "persistence": 0.30606872839255594,
+      "global_drift": 0.30606872839255594,
+      "condition_drift": 0.30606872839255594,
+      "lower": 0.09402066752405314,
+      "upper": 0.673057435126724
+    },
+    {
+      "bearing": "Bearing1_3",
+      "condition": 1,
+      "age": 100,
+      "actual": 0.22253814210479275,
+      "persistence": 0.21781159950388812,
+      "global_drift": 0.21781159950388812,
+      "condition_drift": 0.21781159950388812,
+      "lower": 0.005763538635385312,
+      "upper": 0.5848003062380562
+    },
+    {
+      "bearing": "Bearing1_3",
+      "condition": 1,
+      "age": 200,
+      "actual": 0.2509311234771221,
+      "persistence": 0.22623907409833358,
+      "global_drift": 0.22623907409833358,
+      "condition_drift": 0.22623907409833358,
+      "lower": 0.014191013229830768,
+      "upper": 0.5932277808325017
+    },
+    {
+      "bearing": "Bearing1_3",
+      "condition": 1,
+      "age": 500,
+      "actual": 0.2118839429962493,
+      "persistence": 0.21065004518899635,
+      "global_drift": 0.21065004518899635,
+      "condition_drift": 0.21065004518899635,
+      "lower": 0,
+      "upper": 0.5776387519231645
+    },
+    {
+      "bearing": "Bearing1_3",
+      "condition": 1,
+      "age": 1000,
+      "actual": 0.06637223968166893,
+      "persistence": 0.068799096802371,
+      "global_drift": 0.068799096802371,
+      "condition_drift": 0.068799096802371,
+      "lower": 0,
+      "upper": 0.4357878035365391
+    },
+    {
+      "bearing": "Bearing1_3",
+      "condition": 1,
+      "age": 2000,
+      "actual": 1.7904097359972764,
+      "persistence": 1.5869267997787104,
+      "global_drift": 1.5869267997787104,
+      "condition_drift": 1.5869267997787104,
+      "lower": 1.3748787389102075,
+      "upper": 1.9539155065128786
+    },
+    {
+      "bearing": "Bearing1_4",
+      "condition": 1,
+      "age": 50,
+      "actual": 0.3472642044489892,
+      "persistence": 0.30257722167187934,
+      "global_drift": 0.30257722167187934,
+      "condition_drift": 0.30257722167187934,
+      "lower": 0.09052916080337653,
+      "upper": 0.6695659284060475
+    },
+    {
+      "bearing": "Bearing1_4",
+      "condition": 1,
+      "age": 100,
+      "actual": 0.3189069896627953,
+      "persistence": 0.32398723727340295,
+      "global_drift": 0.32398723727340295,
+      "condition_drift": 0.32398723727340295,
+      "lower": 0.11193917640490014,
+      "upper": 0.6909759440075711
+    },
+    {
+      "bearing": "Bearing1_4",
+      "condition": 1,
+      "age": 200,
+      "actual": 0.2940980764712259,
+      "persistence": 0.30092558213737247,
+      "global_drift": 0.30092558213737247,
+      "condition_drift": 0.30092558213737247,
+      "lower": 0.08887752126886966,
+      "upper": 0.6679142888715406
+    },
+    {
+      "bearing": "Bearing1_4",
+      "condition": 1,
+      "age": 500,
+      "actual": 0.15328786006703235,
+      "persistence": 0.1719980881046165,
+      "global_drift": 0.1719980881046165,
+      "condition_drift": 0.1719980881046165,
+      "lower": 0,
+      "upper": 0.5389867948387846
+    },
+    {
+      "bearing": "Bearing1_4",
+      "condition": 1,
+      "age": 1000,
+      "actual": 0.03529194260076988,
+      "persistence": 0.0231866626786982,
+      "global_drift": 0.0231866626786982,
+      "condition_drift": 0.0231866626786982,
+      "lower": 0,
+      "upper": 0.3901753694128663
+    },
+    {
+      "bearing": "Bearing1_5",
+      "condition": 1,
+      "age": 50,
+      "actual": 0.33756294769482553,
+      "persistence": 0.24249304834552052,
+      "global_drift": 0.24249304834552052,
+      "condition_drift": 0.24249304834552052,
+      "lower": 0.03044498747701771,
+      "upper": 0.6094817550796886
+    },
+    {
+      "bearing": "Bearing1_5",
+      "condition": 1,
+      "age": 100,
+      "actual": 0.3110652795693665,
+      "persistence": 0.3155513240462962,
+      "global_drift": 0.3155513240462962,
+      "condition_drift": 0.3155513240462962,
+      "lower": 0.1035032631777934,
+      "upper": 0.6825400307804643
+    },
+    {
+      "bearing": "Bearing1_5",
+      "condition": 1,
+      "age": 200,
+      "actual": 0.3148370219817007,
+      "persistence": 0.3355604585209639,
+      "global_drift": 0.3355604585209639,
+      "condition_drift": 0.3355604585209639,
+      "lower": 0.12351239765246108,
+      "upper": 0.702549165255132
+    },
+    {
+      "bearing": "Bearing1_5",
+      "condition": 1,
+      "age": 500,
+      "actual": 0.24965086748969734,
+      "persistence": 0.2351139655894188,
+      "global_drift": 0.2351139655894188,
+      "condition_drift": 0.2351139655894188,
+      "lower": 0.023065904720915992,
+      "upper": 0.6021026723235869
+    },
+    {
+      "bearing": "Bearing1_5",
+      "condition": 1,
+      "age": 1000,
+      "actual": 0.1347385219802301,
+      "persistence": 0.11911969379470488,
+      "global_drift": 0.11911969379470488,
+      "condition_drift": 0.11911969379470488,
+      "lower": 0,
+      "upper": 0.486108400528873
+    },
+    {
+      "bearing": "Bearing1_5",
+      "condition": 1,
+      "age": 2000,
+      "actual": 0.08047562714128097,
+      "persistence": 0.08590086733547174,
+      "global_drift": 0.08590086733547174,
+      "condition_drift": 0.08590086733547174,
+      "lower": 0,
+      "upper": 0.45288957406963987
+    },
+    {
+      "bearing": "Bearing1_6",
+      "condition": 1,
+      "age": 50,
+      "actual": 0.11353659113942233,
+      "persistence": 0.08836500895863958,
+      "global_drift": 0.08836500895863958,
+      "condition_drift": 0.08836500895863958,
+      "lower": 0,
+      "upper": 0.4553537156928077
+    },
+    {
+      "bearing": "Bearing1_6",
+      "condition": 1,
+      "age": 100,
+      "actual": 0.11480700084426823,
+      "persistence": 0.12476630589988671,
+      "global_drift": 0.12476630589988671,
+      "condition_drift": 0.12476630589988671,
+      "lower": 0,
+      "upper": 0.49175501263405486
+    },
+    {
+      "bearing": "Bearing1_6",
+      "condition": 1,
+      "age": 200,
+      "actual": 0.011302845439202283,
+      "persistence": 0.03778998744318543,
+      "global_drift": 0.03778998744318543,
+      "condition_drift": 0.03778998744318543,
+      "lower": 0,
+      "upper": 0.40477869417735357
+    },
+    {
+      "bearing": "Bearing1_6",
+      "condition": 1,
+      "age": 500,
+      "actual": 0,
+      "persistence": 0,
+      "global_drift": 0,
+      "condition_drift": 0,
+      "lower": 0,
+      "upper": 0.3669887067341681
+    },
+    {
+      "bearing": "Bearing1_6",
+      "condition": 1,
+      "age": 1000,
+      "actual": 0,
+      "persistence": 0,
+      "global_drift": 0,
+      "condition_drift": 0,
+      "lower": 0,
+      "upper": 0.3669887067341681
+    },
+    {
+      "bearing": "Bearing1_6",
+      "condition": 1,
+      "age": 2000,
+      "actual": 0,
+      "persistence": 0,
+      "global_drift": 0,
+      "condition_drift": 0,
+      "lower": 0,
+      "upper": 0.3669887067341681
+    },
+    {
+      "bearing": "Bearing1_7",
+      "condition": 1,
+      "age": 50,
+      "actual": 0.18887385911200566,
+      "persistence": 0.18747481076839867,
+      "global_drift": 0.18747481076839867,
+      "condition_drift": 0.18747481076839867,
+      "lower": 0,
+      "upper": 0.5544635175025667
+    },
+    {
+      "bearing": "Bearing1_7",
+      "condition": 1,
+      "age": 100,
+      "actual": 0.184994916000658,
+      "persistence": 0.17803700309885834,
+      "global_drift": 0.17803700309885834,
+      "condition_drift": 0.17803700309885834,
+      "lower": 0,
+      "upper": 0.5450257098330265
+    },
+    {
+      "bearing": "Bearing1_7",
+      "condition": 1,
+      "age": 200,
+      "actual": 0.12224967004391539,
+      "persistence": 0.12551523864833528,
+      "global_drift": 0.12551523864833528,
+      "condition_drift": 0.12551523864833528,
+      "lower": 0,
+      "upper": 0.4925039453825034
+    },
+    {
+      "bearing": "Bearing1_7",
+      "condition": 1,
+      "age": 500,
+      "actual": 0.007483628932986598,
+      "persistence": 0.005271624038130906,
+      "global_drift": 0.005271624038130906,
+      "condition_drift": 0.005271624038130906,
+      "lower": 0,
+      "upper": 0.37226033077229903
+    },
+    {
+      "bearing": "Bearing1_7",
+      "condition": 1,
+      "age": 1000,
+      "actual": 0.07216605984991203,
+      "persistence": 0.01370153831221077,
+      "global_drift": 0.01370153831221077,
+      "condition_drift": 0.01370153831221077,
+      "lower": 0,
+      "upper": 0.3806902450463789
+    },
+    {
+      "bearing": "Bearing1_7",
+      "condition": 1,
+      "age": 2000,
+      "actual": 0.24421435056842009,
+      "persistence": 0.22794120508649024,
+      "global_drift": 0.22794120508649024,
+      "condition_drift": 0.22794120508649024,
+      "lower": 0.01589314421798743,
+      "upper": 0.5949299118206584
+    },
+    {
+      "bearing": "Bearing2_3",
+      "condition": 2,
+      "age": 50,
+      "actual": 0.2636553135856151,
+      "persistence": 0.14822640066592488,
+      "global_drift": 0.14822640066592488,
+      "condition_drift": 0.15413229358277084,
+      "lower": 0.052703484046299126,
+      "upper": 0.5553135814252205
+    },
+    {
+      "bearing": "Bearing2_3",
+      "condition": 2,
+      "age": 100,
+      "actual": 0.2943977926527256,
+      "persistence": 0.3021290960495473,
+      "global_drift": 0.3021290960495473,
+      "condition_drift": 0.30803498896639325,
+      "lower": 0.20660617942992154,
+      "upper": 0.7092162768088429
+    },
+    {
+      "bearing": "Bearing2_3",
+      "condition": 2,
+      "age": 200,
+      "actual": 0.15303571514974826,
+      "persistence": 0.1998901853067705,
+      "global_drift": 0.1998901853067705,
+      "condition_drift": 0.20579607822361645,
+      "lower": 0.10436726868714474,
+      "upper": 0.6069773660660661
+    },
+    {
+      "bearing": "Bearing2_3",
+      "condition": 2,
+      "age": 500,
+      "actual": 0.03598917412244132,
+      "persistence": 0.004432359466469448,
+      "global_drift": 0.004432359466469448,
+      "condition_drift": 0.010338252383315403,
+      "lower": 0,
+      "upper": 0.4115195402257651
+    },
+    {
+      "bearing": "Bearing2_3",
+      "condition": 2,
+      "age": 1000,
+      "actual": 0.08590492866545078,
+      "persistence": 0.07698440875211333,
+      "global_drift": 0.07698440875211333,
+      "condition_drift": 0.08289030166895929,
+      "lower": 0,
+      "upper": 0.48407158951140894
+    },
+    {
+      "bearing": "Bearing2_4",
+      "condition": 2,
+      "age": 50,
+      "actual": 0.15979358781808176,
+      "persistence": 0.14065793346305813,
+      "global_drift": 0.14065793346305813,
+      "condition_drift": 0.1465638263799041,
+      "lower": 0.04513501684343238,
+      "upper": 0.5477451142223537
+    },
+    {
+      "bearing": "Bearing2_4",
+      "condition": 2,
+      "age": 100,
+      "actual": 0.17646372731471235,
+      "persistence": 0.1378731172268515,
+      "global_drift": 0.1378731172268515,
+      "condition_drift": 0.14377901014369746,
+      "lower": 0.042350200607225746,
+      "upper": 0.5449602979861471
+    },
+    {
+      "bearing": "Bearing2_4",
+      "condition": 2,
+      "age": 200,
+      "actual": 0.14936633275021058,
+      "persistence": 0.1508614537510574,
+      "global_drift": 0.1508614537510574,
+      "condition_drift": 0.15676734666790335,
+      "lower": 0.05533853713143164,
+      "upper": 0.557948634510353
+    },
+    {
+      "bearing": "Bearing2_4",
+      "condition": 2,
+      "age": 500,
+      "actual": 0.10432117552198815,
+      "persistence": 0.0989399469849528,
+      "global_drift": 0.0989399469849528,
+      "condition_drift": 0.10484583990179876,
+      "lower": 0.003417030365327048,
+      "upper": 0.5060271277442484
+    },
+    {
+      "bearing": "Bearing2_5",
+      "condition": 2,
+      "age": 50,
+      "actual": 0.41615889976417486,
+      "persistence": 0.2711555734883796,
+      "global_drift": 0.2711555734883796,
+      "condition_drift": 0.27706146640522555,
+      "lower": 0.17563265686875384,
+      "upper": 0.6782427542476752
+    },
+    {
+      "bearing": "Bearing2_5",
+      "condition": 2,
+      "age": 100,
+      "actual": 0.6383482958656778,
+      "persistence": 0.5589504512803357,
+      "global_drift": 0.5589504512803357,
+      "condition_drift": 0.5648563441971817,
+      "lower": 0.46342753466070996,
+      "upper": 0.9660376320396313
+    },
+    {
+      "bearing": "Bearing2_5",
+      "condition": 2,
+      "age": 200,
+      "actual": 0.8176412749088668,
+      "persistence": 0.80690699844908,
+      "global_drift": 0.80690699844908,
+      "condition_drift": 0.8128128913659259,
+      "lower": 0.7113840818294542,
+      "upper": 1.2139941792083757
+    },
+    {
+      "bearing": "Bearing2_5",
+      "condition": 2,
+      "age": 500,
+      "actual": 0.4893266024580253,
+      "persistence": 0.49288165165243375,
+      "global_drift": 0.49288165165243375,
+      "condition_drift": 0.4987875445692797,
+      "lower": 0.397358735032808,
+      "upper": 0.8999688324117294
+    },
+    {
+      "bearing": "Bearing2_5",
+      "condition": 2,
+      "age": 1000,
+      "actual": 0.47510437873259154,
+      "persistence": 0.4664775156167578,
+      "global_drift": 0.4664775156167578,
+      "condition_drift": 0.4723834085336038,
+      "lower": 0.37095459899713207,
+      "upper": 0.8735646963760535
+    },
+    {
+      "bearing": "Bearing2_5",
+      "condition": 2,
+      "age": 2000,
+      "actual": 0.4320077930112022,
+      "persistence": 0.4569981836857845,
+      "global_drift": 0.4569981836857845,
+      "condition_drift": 0.46290407660263044,
+      "lower": 0.36147526706615873,
+      "upper": 0.8640853644450801
+    },
+    {
+      "bearing": "Bearing2_6",
+      "condition": 2,
+      "age": 50,
+      "actual": 0.0846969979685506,
+      "persistence": 0.04765554279531422,
+      "global_drift": 0.04765554279531422,
+      "condition_drift": 0.053561435712160176,
+      "lower": 0,
+      "upper": 0.4547427235546098
+    },
+    {
+      "bearing": "Bearing2_6",
+      "condition": 2,
+      "age": 100,
+      "actual": 0.07442972499449027,
+      "persistence": 0.07359078897575469,
+      "global_drift": 0.07359078897575469,
+      "condition_drift": 0.07949668189260065,
+      "lower": 0,
+      "upper": 0.4806779697350503
+    },
+    {
+      "bearing": "Bearing2_6",
+      "condition": 2,
+      "age": 200,
+      "actual": 0,
+      "persistence": 0.019399607972391177,
+      "global_drift": 0.019399607972391177,
+      "condition_drift": 0.025305500889237133,
+      "lower": 0,
+      "upper": 0.4264867887316868
+    },
+    {
+      "bearing": "Bearing2_6",
+      "condition": 2,
+      "age": 500,
+      "actual": 0,
+      "persistence": 0,
+      "global_drift": 0,
+      "condition_drift": 0.005905892916845956,
+      "lower": 0,
+      "upper": 0.4070871807592956
+    },
+    {
+      "bearing": "Bearing2_7",
+      "condition": 2,
+      "age": 50,
+      "actual": 0.008094135553618487,
+      "persistence": 0.010602656948740793,
+      "global_drift": 0.010602656948740793,
+      "condition_drift": 0.01650854986558675,
+      "lower": 0,
+      "upper": 0.4176898377080364
+    },
+    {
+      "bearing": "Bearing2_7",
+      "condition": 2,
+      "age": 100,
+      "actual": 0.019865282826560877,
+      "persistence": 0.009795412498500806,
+      "global_drift": 0.009795412498500806,
+      "condition_drift": 0.015701305415346763,
+      "lower": 0,
+      "upper": 0.4168825932577964
+    },
+    {
+      "bearing": "Bearing2_7",
+      "condition": 2,
+      "age": 200,
+      "actual": 0.0011703179041864546,
+      "persistence": 0,
+      "global_drift": 0,
+      "condition_drift": 0.005905892916845956,
+      "lower": 0,
+      "upper": 0.4070871807592956
+    },
+    {
+      "bearing": "Bearing3_3",
+      "condition": 3,
+      "age": 50,
+      "actual": 0.12031947845458484,
+      "persistence": 0.08022211288211564,
+      "global_drift": 0.08022211288211564,
+      "condition_drift": 0.08156391871572233,
+      "lower": 0.014776502535507927,
+      "upper": 0.1765448028287096
+    },
+    {
+      "bearing": "Bearing3_3",
+      "condition": 3,
+      "age": 100,
+      "actual": 0.31779645774911186,
+      "persistence": 0.3596748636497877,
+      "global_drift": 0.3596748636497877,
+      "condition_drift": 0.3610166694833944,
+      "lower": 0.29422925330318,
+      "upper": 0.45599755359638167
+    },
+    {
+      "bearing": "Bearing3_3",
+      "condition": 3,
+      "age": 200,
+      "actual": 0.20667757302027215,
+      "persistence": 0.20058299783719302,
+      "global_drift": 0.20058299783719302,
+      "condition_drift": 0.2019248036707997,
+      "lower": 0.1351373874905853,
+      "upper": 0.29690568778378695
+    }
+  ],
+  "scope": "Exploratory held-out short-horizon vibration proxy prediction on previously observed PRONOSTIA populations. No calibrated damage state, RUL, physical twin or real-world coverage claim.",
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45444550319",
+  "revision": "9c5a20f69251c79d293f830648bacd603a2b654c"
+}
