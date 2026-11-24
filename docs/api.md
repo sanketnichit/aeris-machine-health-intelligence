@@ -149,3 +149,14 @@ python scripts/demo_fleet.py --pace 1
 ```
 
 Each timestamp group is sent separately. Observation timestamps remain fixed historical demo times, so do not interpret them as current freshness or hardware communication. Refresh the fleet dashboard manually to observe progress. Replay can be repeated without duplicating identical observations.
+
+
+## Decision intelligence
+
+GET /v1/advisory?asset_id=demo-bearing returns a read-only assessment from a consistent SQLite snapshot of the latest 1000 observations, registered signal expectations, current configured bounds, freshness limits and unresolved review incidents.
+
+Review policy review-v1 uses an exploratory robust deviation threshold of 6 scaled median absolute deviations (30 preceding observed values, minimum 10). This is a fixed illustrative policy, not a validated anomaly alarm. Review-required takes precedence over insufficient-evidence when both apply; both reason lists are retained. No-current-rule-trigger means no rule fired, not healthy operation. Current bounds are evaluated against the latest stored observation even when it was originally ingested under a different policy; historical events retain their original policy revision. Stale or future timestamps are flagged, and their descriptive scores are not validated current-state evidence.
+
+The response separately attaches integrity-verified historical XJTU reliability and independent PRONOSTIA replication summaries. Those summaries describe other populations and are not operational calibration. If evidence verification fails the endpoint returns HTTP 503. Operational remaining life, failure probability, asset model disagreement and calibrated intervals are always null: no asset-validated model or transfer protocol exists. No incident state or equipment action is modified by assessment.
+
+The fleet Decision intelligence panel displays the reasons, provenance context and downloadable JSON assessment. A decision is computed on request, not persisted as a new incident.
