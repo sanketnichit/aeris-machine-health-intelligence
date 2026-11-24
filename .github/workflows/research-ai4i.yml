@@ -1,0 +1,45 @@
+name: AERIS AI4I research
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/research-ai4i.yml'
+      - 'research/ai4i_rule_audit.py'
+      - 'research/sensor_stress.py'
+      - 'research/operating_regime_audit.py'
+      - 'src/**'
+permissions:
+  contents: read
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python scripts/download_dataset.py
+      - name: Execute audits
+        run: |
+          mkdir -p evidence
+          python -m research.ai4i_rule_audit > evidence/rule_audit.json
+          python -m research.sensor_stress > evidence/sensor_stress.json
+          python -m research.operating_regime_audit > evidence/regimes.json
+          git rev-parse HEAD > evidence/commit.txt
+          python --version > evidence/python.txt
+          python -m pip freeze > evidence/environment.txt
+          cat evidence/rule_audit.json
+          cat evidence/sensor_stress.json
+          cat evidence/regimes.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai4i-research-evidence
+          path: evidence/
+          if-no-files-found: error
