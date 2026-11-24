@@ -55,6 +55,15 @@ def generate_report(root=ROOT):
     band=summary["condition_band"]
     lines.extend(["",f"Descriptive residual-band coverage {band['coverage']:.1%}; mean width {band['mean_width']:.6f} log-ratio units.",
                   "The small MAE difference does not establish superiority. This is not physical damage or virtual maintenance cost calibration.",
+                  ""])
+    sensitivity=reports["twin_sensitivity_summary.json"]
+    lines.extend(["","## Virtual maintenance sensitivity","",
+                  f"Frozen grid: {sensitivity['scenarios']} scenarios with {sensitivity['trials_per_scenario']} simulated trials each; {sensitivity['ties']} tied scenarios.",
+                  "", "| Policy | Lowest mean cost (including ties) | Paired cost difference range |","|---|---:|---:|"])
+    for name,m in sensitivity["summary"].items():
+        lo,hi=m["paired_mean_cost_difference_range"]
+        lines.append(f"| {name} | {m['lowest_mean_cost_including_ties']} | {lo:.3f} to {hi:.3f} |")
+    lines.extend(["","Monte Carlo intervals quantify sampling error under this hypothetical model, not physical parameter uncertainty or field performance. No operational policy is selected.",
                   "", "## Reliability and uncertainty","",
                   "| Split | Assessments | Accepted |","|---|---:|---:|"])
     for split,ages in review["summary"].items():
