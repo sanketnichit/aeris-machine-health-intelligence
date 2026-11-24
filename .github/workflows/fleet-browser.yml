@@ -28,9 +28,15 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install playwright
       - run: python -m playwright install --with-deps chromium
+      - name: Enable local review actions with ephemeral token
+        run: |
+          token="$(python -c 'import secrets; print(secrets.token_hex(32))')"
+          echo "::add-mask::$token"
+          echo "AERIS_API_TOKEN=$token" >> "$GITHUB_ENV"
+          echo "AERIS_ENABLE_REVIEW_ACTIONS=1" >> "$GITHUB_ENV"
       - run: docker compose up --build --detach --wait --wait-timeout 180
       - run: python scripts/demo_fleet.py
-      - run: python scripts/fleet_browser_smoke.py
+      - run: python scripts/fleet_browser_smoke.py --review
       - name: Collect service logs
         if: always()
         run: |
