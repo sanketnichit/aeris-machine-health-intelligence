@@ -1,40 +1,53 @@
 # AERIS architecture
 
-AERIS is a research prototype, not a certified industrial monitoring system. Its application separates synthetic snapshot classification from read-only research evidence.
+AERIS is a local research platform, not a certified industrial monitoring system. Four application workspaces have distinct data and inference boundaries.
 
 ```mermaid
 flowchart TD
-  A[Streamlit app] --> B[AI4I classification workspace]
-  A --> C[Research command center]
-  B --> D[Canonical data and feature contract]
-  D --> E[Calibrated model bundle and explanation]
-  C --> F[Evidence integrity verification]
-  F --> G[Independent page renderers]
-  H[Versioned research protocols] --> I[Experiment workflows]
-  I --> J[Execution artifacts and provenance]
-  J --> K[Registered JSON evidence]
-  K --> F
+  A[Streamlit application] --> B[AI4I classification]
+  A --> C[Research intelligence]
+  A --> D[Telemetry fleet]
+  A --> E[Virtual degradation laboratory]
+  B --> F[Benchmark features and calibrated classifier]
+  C --> G[Evidence integrity check]
+  E --> G
+  E --> H[Isolated stochastic simulation]
+  J[External telemetry or synthetic client] --> K[Local HTTP API]
+  D --> K
+  K --> L[Validation and transactional storage]
+  L --> M[(SQLite schema 3)]
+  N[Optional freshness worker] --> M
+  K --> O[Explainable review assessment]
+  M --> O
+  G --> O
+  P[Versioned research protocols] --> Q[Experiment workflows]
+  Q --> R[Execution artifacts and registered evidence]
+  R --> G
 ```
 
-## Boundaries
+## Responsibilities
 
-- `app.py`: workspace selection and original AI4I interactive classification.
-- `src/console_models.py` and feature/data modules: canonical model preparation. The research console does not fit models or fetch datasets.
-- `src/evidence_console.py`: distinct render functions for overview, maintenance, official benchmark, telemetry replay, physical bearings, adaptive reliability and independent replication and technical report. The overview computes metrics from evidence rather than manually copying headline numbers.
-- `research/`: experiment definitions, fixed protocols, reports and evidence verification. Development and independent/official evaluation tasks are separated.
-- `research/evidence/`: seven registered reports. The manifest verifies Git blob content and byte count; provenance links identify execution revisions. This is not a signature or scientific certification.
-- `.github/workflows/`: regression CI and dedicated dataset experiments. Large raw datasets are not committed.
+| Module | Responsibility |
+|---|---|
+| app.py | Workspace routing; AI4I classifier |
+| src/evidence_console.py | Nine read-only research pages, measured and simulated replay, technical report |
+| src/twin_console.py and src/digital_twin.py | Isolated virtual wear and paired maintenance simulation; separate verified measured-signal context |
+| src/api.py and src/telemetry_contract.py | Local HTTP interface, bounded requests, canonical units and optional shared bearer token |
+| src/telemetry_store.py and src/monitoring.py | SQLite transactions, asset registry, deduplication, monitoring policy and events |
+| src/incidents.py and src/monitor_worker.py | Review lifecycle and optional periodic freshness scan |
+| src/anomaly.py and src/decision_engine.py | Causal deviation and explainable review assessment; operational forecasts withheld |
+| src/fleet_console.py | Fleet history, event and incident review, advisory export |
+| scripts/telemetry_backup.py | Consistent SQLite backup and integrity-checked recovery |
+| research/ | Fixed protocols, experiments, nine registered evidence files and generated technical report |
 
-## Change rules
+## Trust and deployment boundaries
 
-Preserve frozen official and independent evidence; append separately identified experiments rather than rewriting historical outcomes. Never use future lifetime to construct online features or select a policy. Keep units and evaluation populations visible. The review policy rejected all evaluated physical forecasts; the adaptive advantage did not replicate on PRONOSTIA. Neither is a production-ready capability.
+Docker Compose binds dashboard and API host ports to loopback. The optional monitoring profile shares the API storage volume. The API container uses a read-only root filesystem and an unprivileged user. The dashboard is read-only by default; enabling review actions grants its users the ability to change incident state through the shared service credential. Do not expose it to untrusted users. The API has no TLS, per-user identity, production rate limiting or external notification system.
 
-## Local validation
+The manifest verifies Git blob content and byte count; execution revisions provide provenance, not signatures or scientific certification. The read-only research workspace does not train models or fetch raw datasets. AI4I training is deferred. The simulation cannot write asset telemetry, and benchmark calibration does not transfer to registered assets. The decision engine withholds operational RUL and failure probability regardless of whether review rules trigger.
 
-```bash
-python -m research.verify_evidence
-python -m pytest -q
-streamlit run app.py
-```
+## Validation and change rules
 
-The Streamlit theme is native rather than injected CSS. Sidebar navigation renders only the selected page. AI4I training and SHAP imports are deferred until needed; the research console does not train models. The report generator (`python -m research.technical_report --output AERIS_technical_report.md`) verifies registered evidence before constructing a deterministic Markdown report. Actual latency and browser appearance have not yet been measured.
+Preserve frozen benchmark outcomes, report negative results and keep units and populations visible. Do not use future observations for online features or select a new primary using observed evaluation outcomes. Regression CI, experiment workflows and browser smoke tests cover separate gates; passing them does not establish field safety or independent validation.
+
+See [quickstart](quickstart.md), [API guide](api.md), [virtual laboratory](digital_twin.md), [research index](../research/README.md) and [roadmap](roadmap.md).
