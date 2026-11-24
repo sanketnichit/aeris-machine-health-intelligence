@@ -15,6 +15,8 @@ from src.telemetry_store import DEFAULT_DB, initialize, register, ingest, fleet,
 
 from src.incidents import configure_freshness, scan_freshness, transition, list_incidents
 
+from src.decision_engine import assess_asset, benchmark_context
+
 MAX_BODY = 1024 * 1024
 VERSION_PATH = Path(__file__).resolve().parents[1] / "VERSION"
 
@@ -80,7 +82,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
             self.reply(200, {"version":version,"evidence":entries,
                              "scope":"Research benchmark evidence, not industrial certification"})
-        elif path in ("/v1/assets", "/v1/telemetry/history", "/v1/events", "/v1/incidents"):
+        elif path in ("/v1/assets", "/v1/telemetry/history", "/v1/events", "/v1/incidents", "/v1/advisory"):
             if self.server.database is None:
                 self.reply(503, {"error":"Telemetry storage disabled"})
                 return
@@ -89,6 +91,13 @@ class Handler(BaseHTTPRequestHandler):
                 limit=int(query.get("limit",["100" if path.endswith("history") else "200"])[0])
                 if path=="/v1/assets":
                     result=fleet(self.server.database,limit)
+                elif path=="/v1/advisory":
+                    result=assess_asset(self.server.database,query["asset_id"][0])
+                    try:
+                        result["benchmark_context"]=benchmark_context()
+                    except (OSError,ValueError,KeyError,TypeError):
+                        self.reply(503,{"error":"Benchmark evidence integrity unavailable"})
+                        return
                 elif path=="/v1/incidents":
                     result=list_incidents(self.server.database,limit)
                 elif path=="/v1/events":
