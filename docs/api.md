@@ -1,6 +1,6 @@
 # AERIS local research API
 
-This is a versioned local research telemetry interface. It uses Python's standard-library HTTP server and is not intended for public internet exposure. SQLite persistence is local; no authentication, live model inference or equipment control is provided. Do not send confidential production telemetry.
+This is a versioned local research telemetry interface. It uses Python's standard-library HTTP server and is not intended for public internet exposure. SQLite persistence is local; optional shared-token authentication is available; no live model inference or equipment control is provided. Do not send confidential production telemetry.
 
 ## Start
 
@@ -72,7 +72,7 @@ The named volume survives ordinary container restarts and docker compose down. *
 
 ## Limits
 
-No rate limiting, TLS or access control; no retention policy or production backup management. Use only locally for research integration. A production service would need a hardened server, authenticated transport, durable ingestion, asset-specific validation, monitoring and independent operational evidence.
+No rate limiting, TLS or per-user access control; no retention policy or production backup management. Use only locally for research integration. A production service would need a hardened server, authenticated transport, durable ingestion, asset-specific validation, monitoring and independent operational evidence.
 
 Stop containers with `docker compose down`.
 
@@ -81,7 +81,7 @@ Stop containers with `docker compose down`.
 
 POST /v1/policies with {"asset_id":"demo-bearing","bounds":{"horizontal_vibration_rms":{"max":2.0}}} to configure illustrative observation limits in the canonical measurement units. Empty bounds disable numeric limit checks, not missing-measurement checks. Each changed policy receives a new revision; identical submissions preserve the revision. GET /v1/events?limit=100 returns recent persisted observation events; optional asset_id filters the result.
 
-Ingested records and their events commit atomically. Duplicate observations create no extra events. Policy changes do not recompute historical events. Events are ordered by ingestion, including backfills, and are not active incidents. Existing databases migrate automatically to schema version 2; preexisting observations are not retrospectively evaluated.
+Ingested records and their events commit atomically. Duplicate observations create no extra events. Policy changes do not recompute historical events. Events are ordered by ingestion, including backfills, and are not active incidents. Existing databases migrate automatically to schema version 3; preexisting observations are not retrospectively evaluated.
 
 With the local service running, execute:
 
@@ -91,4 +91,32 @@ python scripts/demo_fleet.py
 
 This inserts 180 deterministic synthetic observations for three explicitly named synthetic assets. Ten observations have an intentionally missing signal; one asset has injected vibration drift. Re-running against unchanged demo policies and data is idempotent. The fixed timestamps and illustrative 2 m/s2 bound are demo choices, not calibrated equipment limits. Use a separate local demonstration database rather than confidential production telemetry.
 
-The fleet workspace exposes recent event history and export. There is no background scheduler, notification delivery, incident lifecycle or operational health diagnosis.
+The fleet workspace exposes recent event history and export. There is no background scheduler, notification delivery or operational health diagnosis. Incident review is described below.
+
+
+## Incident review and freshness
+
+Schema 3 records one active review incident per asset and event kind. New observation-level events update the active incident; all individual events remain in the event table. Ingested historical backfills may also open review incidents. Previous records are not retroactively turned into incidents.
+
+- POST /v1/freshness: {"asset_id":"demo-bearing","max_age_seconds":60} configures an explicit freshness threshold.
+- POST /v1/freshness/scan: {} checks configured assets against the service UTC clock. Missing, stale, and future-dated telemetry open or update review incidents. No communication failure is inferred.
+- GET /v1/incidents?limit=100 lists incidents and review history.
+- POST /v1/incidents/transition: {"incident_id":1,"action":"acknowledge","note":"Review started"} acknowledges an open incident. Use action "resolve" with a review note after acknowledgement.
+
+Resolution is manual and is not evidence of repair. A subsequent scan or new event can open another incident. Freshness scans must be triggered explicitly; no background scheduling or external notifications are provided.
+
+## Optional local token
+
+Set AERIS_API_TOKEN to a randomly generated token of at least 32 printable non-space ASCII characters in the local process environment before starting the service. Compose passes this environment variable to both containers. The fleet dashboard and demonstration client read it from their environment. Send Authorization: Bearer TOKEN on protected routes. Health, schema and published evidence remain public. Without a token, the service remains unauthenticated and local-only. This is a shared token, not role-based access control; it does not replace TLS, network isolation or production authentication. Never commit tokens or expose the configured dashboard publicly.
+
+## Backup and recovery
+
+Use the SQLite online backup utility rather than copying a database while its WAL is active:
+
+```bash
+python scripts/telemetry_backup.py data/telemetry.sqlite3 backups/telemetry.sqlite3
+python scripts/telemetry_backup.py backups/telemetry.sqlite3 data/recovered.sqlite3
+python -m src.api --database data/recovered.sqlite3
+```
+
+Use a new destination each time; existing files are not overwritten. The utility checks database and foreign-key integrity, then publishes the backup atomically on a filesystem supporting hard links. For Docker storage, run the utility where the volume is mounted with authorized access. Backups may contain sensitive data; protect them. Automated scheduling, encrypted backups and production disaster-recovery guarantees are not provided.
