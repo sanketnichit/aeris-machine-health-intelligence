@@ -6,7 +6,7 @@ Fit only six Learning_set bearings. Evaluate the eleven Full_Test_Set bearings, 
 
 ## State and transition
 
-Use log of the maximum channel RMS ratio relative to each bearing's first five observations, with a causal trailing five-record median and lower bound one (existing vibration_ratio). This is a dimensionless signal proxy, not material damage. For nonoverlapping 20-record transitions anchored at recording 5, fit a mean increment model on learning bearings. Fit a global median drift, a median drift conditional on operating condition, and empirical residual quantiles from learning transitions. Give each learning bearing equal total weight within its respective fit group. No future lifetime or terminal normalization is used. Clip predicted log ratio to zero.
+Use log of the maximum channel RMS ratio relative to each bearing's first five observations, with a causal trailing five-record median and lower bound one (existing vibration_ratio). This is a dimensionless signal proxy, not material damage. For nonoverlapping 20-record transitions anchored at recording 5, fit a median increment model on learning bearings. Fit a global median drift, a median drift conditional on operating condition, and empirical residual quantiles from learning transitions. Give each learning bearing equal total weight within its respective fit group. No future lifetime or terminal normalization is used. Clip predicted log ratio to zero.
 
 ## Evaluation
 
