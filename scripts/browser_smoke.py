@@ -35,6 +35,10 @@ def run(url, output):
             expect(page.get_by_text("Research evidence integrity check failed", exact=False)).to_have_count(0)
             expect(page.get_by_test_id("stException")).to_have_count(0)
             page.screenshot(path=str(output / f"{number:02d}-{name.lower().replace(' ', '-')}.png"), full_page=True, animations="disabled")
+        page.get_by_text("Virtual degradation laboratory",exact=True).first.click()
+        expect(page.get_by_role("heading",name="Paired maintenance comparison")).to_be_visible(timeout=30000)
+        expect(page.get_by_test_id("stException")).to_have_count(0)
+        page.screenshot(path=str(output/"10-virtual-degradation-laboratory.png"),full_page=True,animations="disabled")
         if errors:
             raise RuntimeError(f"Browser errors: {errors}")
         browser.close()
