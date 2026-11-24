@@ -7,6 +7,7 @@ RUN python -m pip install --no-cache-dir -r requirements.txt
 COPY --chown=aeris:aeris app.py VERSION LICENSE ./
 COPY --chown=aeris:aeris src/ src/
 COPY --chown=aeris:aeris research/ research/
+COPY --chown=aeris:aeris scripts/telemetry_backup.py scripts/telemetry_backup.py
 COPY --chown=aeris:aeris .streamlit/ .streamlit/
 RUN mkdir -p data && chown aeris:aeris data
 USER aeris
