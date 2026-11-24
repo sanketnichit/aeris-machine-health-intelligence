@@ -226,9 +226,14 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-workspace = st.sidebar.radio("Workspace", ["Research intelligence", "AI4I failure prediction"], index=0)
+workspace = st.sidebar.radio("Workspace", ["Research intelligence", "AI4I failure prediction", "Telemetry fleet"], index=0)
 if workspace == "Research intelligence":
     render_evidence()
+    st.stop()
+
+if workspace == "Telemetry fleet":
+    from src.fleet_console import render_fleet
+    render_fleet()
     st.stop()
 
 from src.features import MODEL_FEATURES, add_engineered_features
