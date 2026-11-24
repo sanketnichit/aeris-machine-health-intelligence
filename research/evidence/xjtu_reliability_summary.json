@@ -1,0 +1,240 @@
+{
+  "archive_sha256": "3cc815649a315ac7da202980c489f33db44ca2db0317bbe3bcb9dcf415375e10",
+  "summary": {
+    "bearing": {
+      "20": {
+        "endpoints": 15,
+        "accepted": 0,
+        "abstained": 15,
+        "retained_fraction": 0,
+        "all_mae": 503.5274043469311,
+        "retained_mae": null,
+        "abstained_mae": 503.5274043469311,
+        "reference_mae": 501.53333333333336,
+        "interval_endpoints": 15,
+        "interval_coverage": 0.9333333333333333,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 0,
+          "wide_interval": 15,
+          "model_disagreement": 8
+        }
+      },
+      "50": {
+        "endpoints": 14,
+        "accepted": 0,
+        "abstained": 14,
+        "retained_fraction": 0,
+        "all_mae": 514.6378096111287,
+        "retained_mae": null,
+        "abstained_mae": 514.6378096111287,
+        "reference_mae": 524.4642857142857,
+        "interval_endpoints": 14,
+        "interval_coverage": 0.9285714285714286,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 0,
+          "wide_interval": 14,
+          "model_disagreement": 9
+        }
+      },
+      "100": {
+        "endpoints": 13,
+        "accepted": 0,
+        "abstained": 13,
+        "retained_fraction": 0,
+        "all_mae": 508.0484059040358,
+        "retained_mae": null,
+        "abstained_mae": 508.0484059040358,
+        "reference_mae": 553.1538461538462,
+        "interval_endpoints": 11,
+        "interval_coverage": 1,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 2,
+          "wide_interval": 11,
+          "model_disagreement": 8
+        }
+      },
+      "200": {
+        "endpoints": 7,
+        "accepted": 0,
+        "abstained": 7,
+        "retained_fraction": 0,
+        "all_mae": 1182.5921780432666,
+        "retained_mae": null,
+        "abstained_mae": 1182.5921780432666,
+        "reference_mae": 1277.857142857143,
+        "interval_endpoints": 1,
+        "interval_coverage": 1,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 6,
+          "wide_interval": 1,
+          "model_disagreement": 6
+        }
+      },
+      "500": {
+        "endpoints": 4,
+        "accepted": 0,
+        "abstained": 4,
+        "retained_fraction": 0,
+        "all_mae": 879.7447302241637,
+        "retained_mae": null,
+        "abstained_mae": 879.7447302241637,
+        "reference_mae": 1365.125,
+        "interval_endpoints": 0,
+        "interval_coverage": null,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 4,
+          "wide_interval": 0,
+          "model_disagreement": 4
+        }
+      },
+      "1000": {
+        "endpoints": 3,
+        "accepted": 0,
+        "abstained": 3,
+        "retained_fraction": 0,
+        "all_mae": 1180.6666666666667,
+        "retained_mae": null,
+        "abstained_mae": 1180.6666666666667,
+        "reference_mae": 1180.6666666666667,
+        "interval_endpoints": 0,
+        "interval_coverage": null,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 3,
+          "wide_interval": 0,
+          "model_disagreement": 3
+        }
+      }
+    },
+    "condition": {
+      "20": {
+        "endpoints": 15,
+        "accepted": 0,
+        "abstained": 15,
+        "retained_fraction": 0,
+        "all_mae": 911.7759758581233,
+        "retained_mae": null,
+        "abstained_mae": 911.7759758581233,
+        "reference_mae": 924.0666666666667,
+        "interval_endpoints": 15,
+        "interval_coverage": 0.8,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 0,
+          "wide_interval": 15,
+          "model_disagreement": 4
+        }
+      },
+      "50": {
+        "endpoints": 14,
+        "accepted": 0,
+        "abstained": 14,
+        "retained_fraction": 0,
+        "all_mae": 854.4808796178411,
+        "retained_mae": null,
+        "abstained_mae": 854.4808796178411,
+        "reference_mae": 974.2857142857143,
+        "interval_endpoints": 14,
+        "interval_coverage": 0.5714285714285714,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 0,
+          "wide_interval": 12,
+          "model_disagreement": 3
+        }
+      },
+      "100": {
+        "endpoints": 13,
+        "accepted": 0,
+        "abstained": 13,
+        "retained_fraction": 0,
+        "all_mae": 701.760674460289,
+        "retained_mae": null,
+        "abstained_mae": 701.760674460289,
+        "reference_mae": 931.3076923076923,
+        "interval_endpoints": 13,
+        "interval_coverage": 0.6153846153846154,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 0,
+          "wide_interval": 10,
+          "model_disagreement": 3
+        }
+      },
+      "200": {
+        "endpoints": 7,
+        "accepted": 0,
+        "abstained": 7,
+        "retained_fraction": 0,
+        "all_mae": 850.4552641691641,
+        "retained_mae": null,
+        "abstained_mae": 850.4552641691641,
+        "reference_mae": 851.2857142857143,
+        "interval_endpoints": 3,
+        "interval_coverage": 1,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 4,
+          "wide_interval": 3,
+          "model_disagreement": 1
+        }
+      },
+      "500": {
+        "endpoints": 4,
+        "accepted": 0,
+        "abstained": 4,
+        "retained_fraction": 0,
+        "all_mae": 1239.1986734533261,
+        "retained_mae": null,
+        "abstained_mae": 1239.1986734533261,
+        "reference_mae": 1245.75,
+        "interval_endpoints": 0,
+        "interval_coverage": null,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 4,
+          "wide_interval": 0,
+          "model_disagreement": 0
+        }
+      },
+      "1000": {
+        "endpoints": 3,
+        "accepted": 0,
+        "abstained": 3,
+        "retained_fraction": 0,
+        "all_mae": 1183,
+        "retained_mae": null,
+        "abstained_mae": 1183,
+        "reference_mae": 1183,
+        "interval_endpoints": 0,
+        "interval_coverage": null,
+        "finite_90_percent_intervals": 0,
+        "reason_counts": {
+          "insufficient_history": 0,
+          "insufficient_calibration": 3,
+          "wide_interval": 0,
+          "model_disagreement": 1
+        }
+      }
+    }
+  },
+  "scope": "Exploratory selective forecasting, nominal 80% marginal intervals only under exchangeability; no coverage guarantee across conditions or after selection. No deployment safety claim.",
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45431765221",
+  "revision": "0bcfcbe003d9e82fbc90dceeb7ed8a10b00ab8a5"
+}
