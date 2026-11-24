@@ -39,7 +39,7 @@ def render_evidence():
     st.title("AERIS | Research Intelligence")
     st.caption("Verified benchmark evidence · read-only research workspace")
     st.warning("Simulated and laboratory benchmark evidence, not industrial safety certification or measured savings.")
-    overview, maintenance, official, replay, bearings = st.tabs(["Evidence map", "Maintenance replay", "Official NASA test", "Temporal replay", "Physical bearings"])
+    overview, maintenance, official, replay, bearings, reliability = st.tabs(["Evidence map", "Maintenance replay", "Official NASA test", "Temporal replay", "Physical bearings", "Adaptive reliability"])
     with overview:
         st.subheader("Research evidence")
         st.markdown(
@@ -138,3 +138,44 @@ def render_evidence():
             st.caption("Errors are remaining recorded snapshots, not engine cycles. Stage selection is retrospective; endpoint is the last recording, not independently measured failure time.")
             st.markdown(f"[Execution evidence]({report['run_url']})")
             st.download_button("Download physical validation evidence", json.dumps(report, indent=2), "xjtu_summary.json", "application/json")
+
+
+    with reliability:
+        st.subheader("Adaptive forecasting and reliability")
+        gate = read_report("xjtu_gate_summary.json")
+        review = read_report("xjtu_reliability_summary.json")
+        st.warning("Exploratory development results; the evaluated review policy accepted no forecasts. No deployment policy has been selected.")
+        split = st.radio("Evaluation population", ["bearing", "condition"], key="reliability_split")
+        st.caption(gate["scope"])
+        aggregate = pd.DataFrame(gate["summary"][split]["stage"]["all"]).T
+        st.dataframe(aggregate)
+        st.bar_chart(aggregate["mae"])
+        ages = gate["summary"][split]["landmark"]["by_point"]
+        landmark = pd.DataFrame([
+            {"Age": int(age), "Bearings": values["bearings"],
+             "2x activation": values["gate_2x_fraction"],
+             **{model: metric["mae"] for model, metric in values["metrics"].items()}}
+            for age, values in ages.items()
+        ]).sort_values("Age").set_index("Age")
+        st.markdown("**Observable landmarks**")
+        st.dataframe(landmark)
+        st.line_chart(landmark.drop(columns=["Bearings", "2x activation"]))
+        st.caption("MAE in remaining recorded snapshots; survivor populations differ across landmarks.")
+        results = pd.DataFrame(review["summary"][split]).T
+        results.index = results.index.astype(int)
+        results = results.sort_index()
+        n = int(results["endpoints"].sum())
+        accepted = int(results["accepted"].sum())
+        a, b = st.columns(2)
+        a.metric("Review assessments", n)
+        b.metric("Accepted forecasts", accepted)
+        if accepted == 0:
+            st.error("No forecasts passed the configured review policy. Retained MAE is undefined.")
+        st.caption(review["scope"])
+        st.dataframe(results.drop(columns=["reason_counts"]))
+        reasons = pd.DataFrame(results["reason_counts"].tolist(), index=results.index)
+        st.bar_chart(reasons)
+        st.caption("Review reasons can overlap. Coverage is evaluated only where finite intervals exist, and is not guaranteed under operating-condition shift.")
+        st.markdown(f"[Signal gate run]({gate['run_url']}) · [Reliability run]({review['run_url']})")
+        st.download_button("Download adaptive evidence", json.dumps(gate, indent=2), "xjtu_gate_summary.json", "application/json")
+        st.download_button("Download reliability evidence", json.dumps(review, indent=2), "xjtu_reliability_summary.json", "application/json")
