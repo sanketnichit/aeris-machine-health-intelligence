@@ -42,8 +42,8 @@ def test_duplicate_timestamp_and_wrong_unit():
 
 
 @pytest.fixture
-def service():
-    server=make_server(port=0)
+def service(tmp_path):
+    server=make_server(port=0,database=tmp_path/"telemetry.sqlite3")
     thread=threading.Thread(target=server.serve_forever,daemon=True)
     thread.start()
     try:
@@ -73,3 +73,22 @@ def test_http_validation_and_rejection(service):
         with pytest.raises(HTTPError) as exc:
             request(raw)
         assert exc.value.code==400
+
+
+def test_http_persistent_ingestion(service):
+    def post(route,payload):
+        with urlopen(Request(service+route,data=json.dumps(payload).encode(),
+                     headers={"Content-Type":"application/json"}),timeout=5) as response:
+            return json.load(response)
+    post("/v1/assets",{"asset_id":"bearing-1","name":"Demo","expected_measurements":["horizontal_vibration_rms"]})
+    assert post("/v1/telemetry/ingest",batch())["inserted"]==1
+    assert post("/v1/telemetry/ingest",batch())["duplicates"]==1
+    with urlopen(service+"/v1/telemetry/history?asset_id=bearing-1",timeout=5) as response:
+        assert len(json.load(response)["records"])==1
+    with urlopen(service+"/v1/assets",timeout=5) as response:
+        assert json.load(response)["assets"][0]["quality"]=="complete"
+    changed=batch()
+    changed["records"][0]["measurements"]["horizontal_vibration_rms"]["value"]=2
+    with pytest.raises(HTTPError) as exc:
+        post("/v1/telemetry/ingest",changed)
+    assert exc.value.code==409
