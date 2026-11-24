@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.1.0-rc.2 — integrated research platform candidate
+
+- Local HTTP API and SQLite schema 3; asset registration, idempotent telemetry, event history and incident transitions.
+- Optional freshness worker and shared-token access; verified backup/recovery utility.
+- Populated synthetic fleet, causal deviation scores, explainable review advisory and explicit operational forecast abstention.
+- Isolated stochastic virtual degradation laboratory with paired maintenance comparisons.
+- Frozen measured vibration-state audit: 372 fit transitions, 54 evaluation endpoints, small mixed improvement and broad descriptive residual bands.
+- Nine registered evidence files, updated technical report and populated-fleet browser validation.
+- Consolidated documentation and extracted-archive validation gate.
+
+Known limits remain: no physical asset calibration, independent prospective field validation, production access control or realized savings. Candidate metadata is not a release tag.
+
 ## 0.1.0-rc.1 — research release candidate
 
 ### Research
