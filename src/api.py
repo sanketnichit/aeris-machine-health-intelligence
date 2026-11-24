@@ -1,5 +1,7 @@
 """Local research HTTP service. Not an internet-facing production server."""
 import argparse
+import hmac
+import os
 import json
 import sqlite3
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -10,6 +12,8 @@ from research.verify_evidence import verify, ROOT
 from src.telemetry_contract import validate_batch, SCHEMA_VERSION, UNITS
 
 from src.telemetry_store import DEFAULT_DB, initialize, register, ingest, fleet, history, Conflict, UnknownAsset, configure_policy, list_events
+
+from src.incidents import configure_freshness, scan_freshness, transition, list_incidents
 
 MAX_BODY = 1024 * 1024
 VERSION_PATH = Path(__file__).resolve().parents[1] / "VERSION"
@@ -49,8 +53,19 @@ class Handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(raw)
 
+    def authorized(self, path):
+        if path in ("/health","/v1/schema","/v1/evidence") or self.server.token is None:
+            return True
+        supplied=self.headers.get("Authorization","").encode("utf-8")
+        if not hmac.compare_digest(supplied,("Bearer "+self.server.token).encode("utf-8")):
+            self.reply(401,{"error":"Bearer token required"})
+            return False
+        return True
+
     def do_GET(self):
         path = urlsplit(self.path).path
+        if not self.authorized(path):
+            return
         if path == "/health":
             self.reply(200, {"status":"ok","service":"aeris-research-api"})
         elif path == "/v1/schema":
@@ -65,7 +80,7 @@ class Handler(BaseHTTPRequestHandler):
                 return
             self.reply(200, {"version":version,"evidence":entries,
                              "scope":"Research benchmark evidence, not industrial certification"})
-        elif path in ("/v1/assets", "/v1/telemetry/history", "/v1/events"):
+        elif path in ("/v1/assets", "/v1/telemetry/history", "/v1/events", "/v1/incidents"):
             if self.server.database is None:
                 self.reply(503, {"error":"Telemetry storage disabled"})
                 return
@@ -74,6 +89,8 @@ class Handler(BaseHTTPRequestHandler):
                 limit=int(query.get("limit",["100" if path.endswith("history") else "200"])[0])
                 if path=="/v1/assets":
                     result=fleet(self.server.database,limit)
+                elif path=="/v1/incidents":
+                    result=list_incidents(self.server.database,limit)
                 elif path=="/v1/events":
                     result=list_events(self.server.database,query.get("asset_id",[None])[0],limit)
                 else:
@@ -93,7 +110,9 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         path=urlsplit(self.path).path
-        if path not in ("/v1/telemetry/validate","/v1/assets","/v1/telemetry/ingest","/v1/policies"):
+        if not self.authorized(path):
+            return
+        if path not in ("/v1/telemetry/validate","/v1/assets","/v1/telemetry/ingest","/v1/policies","/v1/freshness","/v1/freshness/scan","/v1/incidents/transition"):
             self.reply(404, {"error":"Route not found"})
             return
         if path!="/v1/telemetry/validate" and self.server.database is None:
@@ -126,6 +145,18 @@ class Handler(BaseHTTPRequestHandler):
                 if not isinstance(payload,dict) or set(payload)!={"asset_id","bounds"}:
                     raise ValueError("Expected asset_id and bounds")
                 result=configure_policy(self.server.database,payload["asset_id"],{"bounds":payload["bounds"]})
+            elif path=="/v1/freshness":
+                if not isinstance(payload,dict) or set(payload)!={"asset_id","max_age_seconds"}:
+                    raise ValueError("Expected asset_id and max_age_seconds")
+                result=configure_freshness(self.server.database,payload["asset_id"],payload["max_age_seconds"])
+            elif path=="/v1/freshness/scan":
+                if payload!={}:
+                    raise ValueError("Expected empty JSON object")
+                result=scan_freshness(self.server.database)
+            elif path=="/v1/incidents/transition":
+                if not isinstance(payload,dict) or set(payload)!={"incident_id","action","note"}:
+                    raise ValueError("Expected incident_id, action and note")
+                result=transition(self.server.database,**payload)
             else:
                 result=ingest(self.server.database,payload)
         except Conflict as exc:
@@ -143,11 +174,14 @@ class Handler(BaseHTTPRequestHandler):
         self.reply(200,result)
 
 
-def make_server(host="127.0.0.1", port=8080, database=None):
+def make_server(host="127.0.0.1", port=8080, database=None, token=None):
+    if token is not None and (not isinstance(token,str) or len(token)<32 or not token.isascii() or not token.isprintable() or any(c.isspace() for c in token)):
+        raise ValueError("API token must be at least 32 printable non-space ASCII characters")
     if database is not None:
         initialize(database)
     server=ThreadingHTTPServer((host,port),Handler)
     server.database=database
+    server.token=token
     return server
 
 
@@ -158,6 +192,6 @@ if __name__=="__main__":
     parser.add_argument("--database",type=Path,default=DEFAULT_DB)
     parser.add_argument("--validation-only",action="store_true")
     args=parser.parse_args()
-    with make_server(args.host,args.port,None if args.validation_only else args.database) as server:
+    with make_server(args.host,args.port,None if args.validation_only else args.database,token=os.environ.get("AERIS_API_TOKEN") or None) as server:
         print(f"AERIS research API listening on {args.host}:{args.port}",flush=True)
         server.serve_forever()
