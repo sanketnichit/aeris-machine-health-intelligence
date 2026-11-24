@@ -108,3 +108,17 @@ def test_independent_replication_workspace():
     assert any(m.label=="Evaluation bearings" and int(m.value)==11 for m in app.metric)
     app.radio(key="replication_breakdown").set_value("landmark").run()
     assert not app.exception
+
+
+def test_command_center_uses_published_evidence():
+    official=read_report("official_summary.json")
+    xjtu=read_report("xjtu_summary.json")
+    pronostia=read_report("pronostia_summary.json")
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
+    assert not app.exception
+    metrics={m.label:m.value for m in app.metric}
+    assert int(metrics["Official NASA engines"])==official["engines"]
+    assert int(metrics["Physical bearing histories"])==len(xjtu["snapshot_counts"])+len(pronostia["snapshot_counts"])
+    assert int(metrics["Physical vibration recordings"].replace(",",""))==sum(xjtu["snapshot_counts"].values())+sum(pronostia["snapshot_counts"].values())
+    assert any("0/112 advisory forecasts" in w.value for w in app.warning)
+    assert any("did not outperform" in w.value for w in app.warning)
