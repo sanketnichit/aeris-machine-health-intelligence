@@ -29,3 +29,7 @@ Or open Virtual degradation laboratory in the Streamlit sidebar. Adjust load, ho
 ## Limits
 
 No asset-specific identification, physics calibration, component interaction, repair uncertainty, prospective validation, real cost model or operational policy selection. No claim of savings or industrial safety is warranted. Selection against this simulated model may exploit its assumptions; use a different model and independent observations before making engineering claims.
+
+## Frozen sensitivity evidence
+
+The [sensitivity protocol](../research/TWIN_SENSITIVITY_PROTOCOL.md) and [findings](../research/TWIN_SENSITIVITY_FINDINGS.md) document 54 scenarios with 500 paired trials per scenario. The condition-based policy has the lowest simulated mean cost in 48 scenarios including ties. The measured vibration-state transition audit is reported separately in [calibration findings](../research/TWIN_CALIBRATION_FINDINGS.md). Neither experiment identifies the virtual wear model's parameters from physical equipment. Monte Carlo error is not model-form or field prediction uncertainty. The virtual laboratory displays both registered summaries separately from user-configured scenarios.
