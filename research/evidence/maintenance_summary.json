@@ -1,0 +1,391 @@
+{
+  "schema_version": 1,
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45427027388",
+  "revision": "46f50240ac7dea5d5276f7a994ef7545bbc26cdf",
+  "dataset_sha256": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+  "scope": "Retrospective simulated FD001 training histories; hypothetical costs and perfect maintenance assumption; no real savings or safety claim.",
+  "cadence": 10,
+  "first_check": 20,
+  "lead": 5,
+  "planned_cost": 1,
+  "unused_cycle_cost": 0.01,
+  "summary": {
+    "adaptive_mean:10": {
+      "5": {
+        "engines": 100,
+        "planned": 44,
+        "late_alerts": 32,
+        "no_alerts": 24,
+        "mean_unused_cycles": 4.863636363636363,
+        "mean_alert_lead": 9.863636363636363,
+        "total_cost": 326.14
+      },
+      "10": {
+        "engines": 100,
+        "planned": 44,
+        "late_alerts": 32,
+        "no_alerts": 24,
+        "mean_unused_cycles": 4.863636363636363,
+        "mean_alert_lead": 9.863636363636363,
+        "total_cost": 606.14
+      },
+      "25": {
+        "engines": 100,
+        "planned": 44,
+        "late_alerts": 32,
+        "no_alerts": 24,
+        "mean_unused_cycles": 4.863636363636363,
+        "mean_alert_lead": 9.863636363636363,
+        "total_cost": 1446.14
+      }
+    },
+    "adaptive_mean:20": {
+      "5": {
+        "engines": 100,
+        "planned": 85,
+        "late_alerts": 10,
+        "no_alerts": 5,
+        "mean_unused_cycles": 9.741176470588234,
+        "mean_alert_lead": 14.741176470588234,
+        "total_cost": 168.28
+      },
+      "10": {
+        "engines": 100,
+        "planned": 85,
+        "late_alerts": 10,
+        "no_alerts": 5,
+        "mean_unused_cycles": 9.741176470588234,
+        "mean_alert_lead": 14.741176470588234,
+        "total_cost": 243.28
+      },
+      "25": {
+        "engines": 100,
+        "planned": 85,
+        "late_alerts": 10,
+        "no_alerts": 5,
+        "mean_unused_cycles": 9.741176470588234,
+        "mean_alert_lead": 14.741176470588234,
+        "total_cost": 468.28
+      }
+    },
+    "adaptive_mean:40": {
+      "5": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 27.41,
+        "mean_alert_lead": 32.41,
+        "total_cost": 127.41
+      },
+      "10": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 27.41,
+        "mean_alert_lead": 32.41,
+        "total_cost": 127.41
+      },
+      "25": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 27.41,
+        "mean_alert_lead": 32.41,
+        "total_cost": 127.41
+      }
+    },
+    "age_reference:10": {
+      "5": {
+        "engines": 100,
+        "planned": 1,
+        "late_alerts": 0,
+        "no_alerts": 99,
+        "mean_unused_cycles": 27,
+        "mean_alert_lead": 32,
+        "total_cost": 496.27
+      },
+      "10": {
+        "engines": 100,
+        "planned": 1,
+        "late_alerts": 0,
+        "no_alerts": 99,
+        "mean_unused_cycles": 27,
+        "mean_alert_lead": 32,
+        "total_cost": 991.27
+      },
+      "25": {
+        "engines": 100,
+        "planned": 1,
+        "late_alerts": 0,
+        "no_alerts": 99,
+        "mean_unused_cycles": 27,
+        "mean_alert_lead": 32,
+        "total_cost": 2476.27
+      }
+    },
+    "age_reference:20": {
+      "5": {
+        "engines": 100,
+        "planned": 8,
+        "late_alerts": 0,
+        "no_alerts": 92,
+        "mean_unused_cycles": 34,
+        "mean_alert_lead": 39,
+        "total_cost": 470.72
+      },
+      "10": {
+        "engines": 100,
+        "planned": 8,
+        "late_alerts": 0,
+        "no_alerts": 92,
+        "mean_unused_cycles": 34,
+        "mean_alert_lead": 39,
+        "total_cost": 930.72
+      },
+      "25": {
+        "engines": 100,
+        "planned": 8,
+        "late_alerts": 0,
+        "no_alerts": 92,
+        "mean_unused_cycles": 34,
+        "mean_alert_lead": 39,
+        "total_cost": 2310.72
+      }
+    },
+    "age_reference:40": {
+      "5": {
+        "engines": 100,
+        "planned": 75,
+        "late_alerts": 2,
+        "no_alerts": 23,
+        "mean_unused_cycles": 48.16,
+        "mean_alert_lead": 53.16,
+        "total_cost": 236.12
+      },
+      "10": {
+        "engines": 100,
+        "planned": 75,
+        "late_alerts": 2,
+        "no_alerts": 23,
+        "mean_unused_cycles": 48.16,
+        "mean_alert_lead": 53.16,
+        "total_cost": 361.12
+      },
+      "25": {
+        "engines": 100,
+        "planned": 75,
+        "late_alerts": 2,
+        "no_alerts": 23,
+        "mean_unused_cycles": 48.16,
+        "mean_alert_lead": 53.16,
+        "total_cost": 736.12
+      }
+    },
+    "learned_mean:10": {
+      "5": {
+        "engines": 100,
+        "planned": 47,
+        "late_alerts": 33,
+        "no_alerts": 20,
+        "mean_unused_cycles": 4.702127659574468,
+        "mean_alert_lead": 9.702127659574469,
+        "total_cost": 314.21
+      },
+      "10": {
+        "engines": 100,
+        "planned": 47,
+        "late_alerts": 33,
+        "no_alerts": 20,
+        "mean_unused_cycles": 4.702127659574468,
+        "mean_alert_lead": 9.702127659574469,
+        "total_cost": 579.21
+      },
+      "25": {
+        "engines": 100,
+        "planned": 47,
+        "late_alerts": 33,
+        "no_alerts": 20,
+        "mean_unused_cycles": 4.702127659574468,
+        "mean_alert_lead": 9.702127659574469,
+        "total_cost": 1374.21
+      }
+    },
+    "learned_mean:20": {
+      "5": {
+        "engines": 100,
+        "planned": 91,
+        "late_alerts": 7,
+        "no_alerts": 2,
+        "mean_unused_cycles": 10.164835164835164,
+        "mean_alert_lead": 15.164835164835164,
+        "total_cost": 145.25
+      },
+      "10": {
+        "engines": 100,
+        "planned": 91,
+        "late_alerts": 7,
+        "no_alerts": 2,
+        "mean_unused_cycles": 10.164835164835164,
+        "mean_alert_lead": 15.164835164835164,
+        "total_cost": 190.25
+      },
+      "25": {
+        "engines": 100,
+        "planned": 91,
+        "late_alerts": 7,
+        "no_alerts": 2,
+        "mean_unused_cycles": 10.164835164835164,
+        "mean_alert_lead": 15.164835164835164,
+        "total_cost": 325.25
+      }
+    },
+    "learned_mean:40": {
+      "5": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 28.81,
+        "mean_alert_lead": 33.81,
+        "total_cost": 128.81
+      },
+      "10": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 28.81,
+        "mean_alert_lead": 33.81,
+        "total_cost": 128.81
+      },
+      "25": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 28.81,
+        "mean_alert_lead": 33.81,
+        "total_cost": 128.81
+      }
+    },
+    "learned_q25:10": {
+      "5": {
+        "engines": 100,
+        "planned": 57,
+        "late_alerts": 34,
+        "no_alerts": 9,
+        "mean_unused_cycles": 4.771929824561403,
+        "mean_alert_lead": 9.771929824561404,
+        "total_cost": 274.72
+      },
+      "10": {
+        "engines": 100,
+        "planned": 57,
+        "late_alerts": 34,
+        "no_alerts": 9,
+        "mean_unused_cycles": 4.771929824561403,
+        "mean_alert_lead": 9.771929824561404,
+        "total_cost": 489.72
+      },
+      "25": {
+        "engines": 100,
+        "planned": 57,
+        "late_alerts": 34,
+        "no_alerts": 9,
+        "mean_unused_cycles": 4.771929824561403,
+        "mean_alert_lead": 9.771929824561404,
+        "total_cost": 1134.72
+      }
+    },
+    "learned_q25:20": {
+      "5": {
+        "engines": 100,
+        "planned": 99,
+        "late_alerts": 1,
+        "no_alerts": 0,
+        "mean_unused_cycles": 11.141414141414142,
+        "mean_alert_lead": 16.141414141414142,
+        "total_cost": 115.03
+      },
+      "10": {
+        "engines": 100,
+        "planned": 99,
+        "late_alerts": 1,
+        "no_alerts": 0,
+        "mean_unused_cycles": 11.141414141414142,
+        "mean_alert_lead": 16.141414141414142,
+        "total_cost": 120.03
+      },
+      "25": {
+        "engines": 100,
+        "planned": 99,
+        "late_alerts": 1,
+        "no_alerts": 0,
+        "mean_unused_cycles": 11.141414141414142,
+        "mean_alert_lead": 16.141414141414142,
+        "total_cost": 135.03
+      }
+    },
+    "learned_q25:40": {
+      "5": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 32.01,
+        "mean_alert_lead": 37.01,
+        "total_cost": 132.01
+      },
+      "10": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 32.01,
+        "mean_alert_lead": 37.01,
+        "total_cost": 132.01
+      },
+      "25": {
+        "engines": 100,
+        "planned": 100,
+        "late_alerts": 0,
+        "no_alerts": 0,
+        "mean_unused_cycles": 32.01,
+        "mean_alert_lead": 37.01,
+        "total_cost": 132.01
+      }
+    },
+    "run_to_failure:0": {
+      "5": {
+        "engines": 100,
+        "planned": 0,
+        "late_alerts": 0,
+        "no_alerts": 100,
+        "mean_unused_cycles": null,
+        "mean_alert_lead": null,
+        "total_cost": 500
+      },
+      "10": {
+        "engines": 100,
+        "planned": 0,
+        "late_alerts": 0,
+        "no_alerts": 100,
+        "mean_unused_cycles": null,
+        "mean_alert_lead": null,
+        "total_cost": 1000
+      },
+      "25": {
+        "engines": 100,
+        "planned": 0,
+        "late_alerts": 0,
+        "no_alerts": 100,
+        "mean_unused_cycles": null,
+        "mean_alert_lead": null,
+        "total_cost": 2500
+      }
+    }
+  }
+}
