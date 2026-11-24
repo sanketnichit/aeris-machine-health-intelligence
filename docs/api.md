@@ -91,7 +91,7 @@ python scripts/demo_fleet.py
 
 This inserts 180 deterministic synthetic observations for three explicitly named synthetic assets. Ten observations have an intentionally missing signal; one asset has injected vibration drift. Re-running against unchanged demo policies and data is idempotent. The fixed timestamps and illustrative 2 m/s2 bound are demo choices, not calibrated equipment limits. Use a separate local demonstration database rather than confidential production telemetry.
 
-The fleet workspace exposes recent event history and export. There is no background scheduler, notification delivery or operational health diagnosis. Incident review is described below.
+The fleet workspace exposes recent event history and export. Notification delivery and operational health diagnosis are not provided. Incident review is described below.
 
 
 ## Incident review and freshness
@@ -103,7 +103,7 @@ Schema 3 records one active review incident per asset and event kind. New observ
 - GET /v1/incidents?limit=100 lists incidents and review history.
 - POST /v1/incidents/transition: {"incident_id":1,"action":"acknowledge","note":"Review started"} acknowledges an open incident. Use action "resolve" with a review note after acknowledgement.
 
-Resolution is manual and is not evidence of repair. A subsequent scan or new event can open another incident. Freshness scans must be triggered explicitly; no background scheduling or external notifications are provided.
+Resolution is manual and is not evidence of repair. A subsequent scan or new event can open another incident. Freshness scans may be triggered explicitly or by the opt-in local worker below. No external notifications are provided.
 
 ## Optional local token
 
@@ -120,3 +120,32 @@ python -m src.api --database data/recovered.sqlite3
 ```
 
 Use a new destination each time; existing files are not overwritten. The utility checks database and foreign-key integrity, then publishes the backup atomically on a filesystem supporting hard links. For Docker storage, run the utility where the volume is mounted with authorized access. Backups may contain sensitive data; protect them. Automated scheduling, encrypted backups and production disaster-recovery guarantees are not provided.
+
+
+## Periodic monitoring and reviewer UI
+
+Start the optional local worker using:
+
+```bash
+docker compose --profile monitoring up --build --detach --wait
+```
+
+Or from the same local Python environment, in a separate terminal:
+
+```bash
+python -m src.monitor_worker --interval 30
+```
+
+Use --database to select the same storage path as the API, and --once for a single scan. Only configured assets are scanned. SQLite transactions serialize updates with ingestion. The worker logs scans and database failures, stops on SIGINT/SIGTERM and retries database failures on the next interval. This is a local process, not an external notification or production availability guarantee.
+
+Set AERIS_ENABLE_REVIEW_ACTIONS=1 for a trusted local dashboard to acknowledge and resolve incidents from the review form. The API still enforces transitions. The default UI is read-only. Do not enable the actions on an exposed dashboard: the shared server token is not user-level authorization.
+
+The fleet signal view includes an exploratory robust deviation score based on the median and scaled median absolute deviation of the preceding 30 available measurements (at least 10). Missing measurements and near-zero scales abstain. The current point is excluded from its own baseline; only the displayed history is used. Scores are not calibrated anomaly probabilities, failure diagnoses, or automatic incident triggers.
+
+For a paced, finite historical synthetic demonstration against an empty demo store:
+
+```bash
+python scripts/demo_fleet.py --pace 1
+```
+
+Each timestamp group is sent separately. Observation timestamps remain fixed historical demo times, so do not interpret them as current freshness or hardware communication. Refresh the fleet dashboard manually to observe progress. Replay can be repeated without duplicating identical observations.
