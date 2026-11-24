@@ -76,3 +76,27 @@ def assess_asset(path, asset, now=None):
                         "reasons":["no_asset_validated_model","no_asset_specific_calibration",
                                    "no_verified_operational_transfer"]},
             "scope":"Local research review only. No health certification, automatic maintenance action or operational failure forecast."}
+
+
+def benchmark_context(root=None):
+    """Historical reliability evidence; never treated as asset-specific calibration."""
+    from pathlib import Path
+    from research.verify_evidence import ROOT, verify
+    root=Path(root) if root is not None else ROOT
+    entries={r["file"]:r for r in verify(root)}
+    reliability=json.loads((root/"xjtu_reliability_summary.json").read_text(encoding="utf-8"))
+    replication=json.loads((root/"pronostia_summary.json").read_text(encoding="utf-8"))
+    cells=[v for split in reliability["summary"].values() for v in split.values()]
+    stage=replication["summary"]["stage"]["all"]
+    return {"scope":"Historical benchmark context only; not evidence about the registered asset.",
+            "xjtu_reliability":{
+                "assessments":sum(v["endpoints"] for v in cells),
+                "accepted":sum(v["accepted"] for v in cells),
+                "finite_90_percent_intervals":sum(v["finite_90_percent_intervals"] for v in cells),
+                "model_disagreement_assessments":sum(v["reason_counts"]["model_disagreement"] for v in cells),
+                "wide_interval_assessments":sum(v["reason_counts"]["wide_interval"] for v in cells),
+                "provenance":entries["xjtu_reliability_summary.json"]},
+            "pronostia_replication":{"primary":replication["primary"],
+                "primary_mae":stage[replication["primary"]]["mae"],
+                "learned_mae":stage["learned"]["mae"],
+                "provenance":entries["pronostia_summary.json"]}}
