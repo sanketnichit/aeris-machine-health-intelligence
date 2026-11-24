@@ -30,6 +30,10 @@
     "pronostia_summary.json": {
       "blob_sha": "56c81b42f8e4f016cfd2148245026bf430292921",
       "bytes": 18110
+    },
+    "pronostia_replay.json": {
+      "blob_sha": "303677c82c55ff9caa1bcd033b0cd222c643dd30",
+      "bytes": 104096
     }
   }
 }
