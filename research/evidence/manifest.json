@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "hash_algorithm": "git-blob-sha1",
+  "scope": "Content integrity against registered Git blobs; not proof of scientific validity, authorship, or authenticity of upstream datasets.",
+  "files": {
+    "maintenance_summary.json": {
+      "blob_sha": "1129e8318d00dba6e8742be4a6ad38b2b7d48c05",
+      "bytes": 9961
+    },
+    "official_summary.json": {
+      "blob_sha": "d1731947546078ebe5792c05186bccbb253523ed",
+      "bytes": 2150
+    },
+    "telemetry.json": {
+      "blob_sha": "3fe8da0c41ae6dfbae1680035de9252dd88d81ff",
+      "bytes": 190611
+    },
+    "xjtu_gate_summary.json": {
+      "blob_sha": "a9608f312210c63558c7307c203cdc056f69ec7b",
+      "bytes": 22209
+    },
+    "xjtu_reliability_summary.json": {
+      "blob_sha": "6330d110e92c8d76198f989389d746199d18dde1",
+      "bytes": 7399
+    },
+    "xjtu_summary.json": {
+      "blob_sha": "44b6ec791e96f342e50dff0b5fa7a618a55103a9",
+      "bytes": 12108
+    }
+  }
+}
