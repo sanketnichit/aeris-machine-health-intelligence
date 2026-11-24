@@ -23,6 +23,39 @@ def fetch(route, params=None, payload=None):
         return json.load(response)
 
 
+def readable_reason(reason):
+    code=reason.get("code","")
+    labels={
+        "freshness_not_configured":"Freshness limit not configured",
+        "no_observations":"No observations stored",
+        "future_timestamp":"Observation timestamp is in the future",
+        "stale_observation":"Latest observation exceeds configured freshness limit",
+        "missing_measurements":"Expected measurements missing",
+        "configured_bound_breach":"Configured measurement limit exceeded",
+        "deviation_unavailable":"Statistical deviation unavailable",
+        "exploratory_deviation":"Exploratory deviation above review threshold",
+        "active_review_incident":"Unresolved review incident",
+    }
+    details=[]
+    for key,value in reason.items():
+        if key=="code":
+            continue
+        if isinstance(value,list):
+            value=", ".join(str(v) for v in value)
+        if isinstance(value,float):
+            value=f"{value:.5g}"
+        details.append(f"{key.replace('_',' ')}: {value}")
+    return labels.get(code,code.replace("_"," ").capitalize())+(" — "+"; ".join(details) if details else "")
+
+
+def fleet_table(rows):
+    return pd.DataFrame([{
+        "Asset":r["asset_id"],"Latest record":r["quality"].replace("_"," ").capitalize(),
+        "Observations":r["observations"],"Latest UTC":r["latest_timestamp"] or "No data",
+        "Missing signals":", ".join(r["missing_latest"]) or "None"
+    } for r in rows])
+
+
 def render_fleet():
     st.title("AERIS | Telemetry fleet")
     st.caption("Registered machine observations · local research storage")
@@ -43,14 +76,15 @@ def render_fleet():
     if not rows:
         st.info("No assets registered. Use the local API to register an asset and ingest observations.")
         return
-    st.dataframe(pd.DataFrame(rows),hide_index=True)
+    st.dataframe(fleet_table(rows),hide_index=True)
+    st.caption("Completeness describes the latest stored record, not historical gaps or current machine health.")
     with st.expander("Recent monitoring events"):
         try:
             event_report=fetch("/v1/events",{"limit":100})
             events=event_report["events"]
             st.caption("Latest 100 observation-level events, ordered by ingestion. Not active incidents or machine diagnoses.")
             if events:
-                st.dataframe(pd.DataFrame(events),hide_index=True)
+                st.dataframe(pd.DataFrame([{"Asset":e["asset_id"],"Event":e["kind"].replace("_"," "),"Observed UTC":e["timestamp"],"Policy revision":e["policy_revision"]} for e in events]),hide_index=True)
                 st.download_button("Download monitoring events",json.dumps(events,indent=2),"monitoring_events.json","application/json")
             else:
                 st.info("No monitoring events recorded.")
@@ -62,7 +96,7 @@ def render_fleet():
             incidents=incident_report["incidents"]
             st.caption("Recent review incidents. Acknowledgement and resolution are manual API actions, not evidence of repaired equipment.")
             if incidents:
-                st.dataframe(pd.DataFrame(incidents),hide_index=True)
+                st.dataframe(pd.DataFrame([{"ID":i["incident_id"],"Asset":i["asset_id"],"Review":i["kind"].replace("_"," "),"Status":i["status"],"Updated UTC":i["updated_at"]} for i in incidents]),hide_index=True)
                 st.download_button("Download incident history",json.dumps(incidents,indent=2),"incidents.json","application/json")
                 active=[i for i in incidents if i["status"] in ("open","acknowledged")]
                 if active and os.environ.get("AERIS_ENABLE_REVIEW_ACTIONS")=="1":
@@ -94,7 +128,7 @@ def render_fleet():
                 st.caption(decision["recommendation"])
             st.caption(f"Policy {decision['policy_version']} · assessed {decision['assessed_at']}")
             for reason in decision["data_reasons"]+decision["review_reasons"]:
-                st.write(reason)
+                st.text(readable_reason(reason))
             st.markdown("**Operational forecast withheld**")
             st.caption(", ".join(decision["forecast"]["reasons"]))
             context=decision["benchmark_context"]
