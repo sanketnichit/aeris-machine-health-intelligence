@@ -128,3 +128,12 @@ def test_command_center_uses_published_evidence():
     assert int(metrics["Physical vibration recordings"].replace(",",""))==sum(xjtu["snapshot_counts"].values())+sum(pronostia["snapshot_counts"].values())
     assert any("0/112 advisory forecasts" in w.value for w in app.warning)
     assert any("did not outperform" in w.value for w in app.warning)
+
+
+def test_technical_report_page_renders_on_demand():
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
+    assert not app.exception
+    app.sidebar.radio(key="research_page").set_value("Technical report").run()
+    assert not app.exception
+    assert any("Technical evidence report" in t.value for t in app.subheader)
+    assert any("did not replicate" in m.value for m in app.markdown)
