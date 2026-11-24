@@ -14,7 +14,13 @@ from sklearn.model_selection import LeaveOneGroupOut
 from research.cmapss_stage_audit import age_conditioned
 
 SAMPLES = 32768
-EXPECTED = {f" Bearing{c}_{b}".strip() for c in range(1,4) for b in range(1,6)}
+# Published XJTU-SY snapshot counts, e.g. doi:10.3390/app14114542, Table 8.
+EXPECTED_COUNTS = {f"Bearing{c}_{b}": n
+                   for c, counts in enumerate(((123,161,158,122,52),
+                                                (491,161,533,42,339),
+                                                (2538,2496,371,1515,114)), 1)
+                   for b,n in enumerate(counts, 1)}
+EXPECTED = set(EXPECTED_COUNTS)
 STAGES = (.25,.5,.75,.9)
 MEMBER = re.compile(r"(?:^|/)Bearing([1-3])_([1-5])/(\d+)\.csv$", re.I)
 
@@ -59,10 +65,20 @@ def archive_members(archive):
     return found
 
 
+def validate_counts(members):
+    counts = {b: 0 for b in EXPECTED}
+    for b, _ in members:
+        counts[b] += 1
+    if counts != EXPECTED_COUNTS:
+        raise ValueError(f"Snapshot counts do not match published dataset: {counts}")
+
+
 def load_features(path):
     rows = []
     with zipfile.ZipFile(path) as archive:
-        for (bearing,age), member in sorted(archive_members(archive).items()):
+        members = archive_members(archive)
+        validate_counts(members)
+        for (bearing,age), member in sorted(members.items()):
             with archive.open(member) as stream:
                 raw = pd.read_csv(stream)
             rows.append(dict(bearing=bearing, condition=int(bearing[7]), age=age,
