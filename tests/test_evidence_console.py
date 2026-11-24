@@ -56,3 +56,16 @@ def test_bearing_comparison_preserves_models_and_units():
     assert table.Endpoints.tolist() == [4, 4]
     with pytest.raises(ValueError):
         bearing_comparison(report, "invalid")
+
+
+def test_published_physical_evidence_workspace():
+    report=read_report("xjtu_summary.json")
+    assert len(report["snapshot_counts"])==15
+    assert sum(report["snapshot_counts"].values())==9216
+    app=AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"),default_timeout=30).run()
+    assert not app.exception
+    assert any(m.label=="Vibration snapshots" and int(m.value)==9216 for m in app.metric)
+    app.radio(key="bearing_split").set_value("condition").run()
+    assert not app.exception
+    app.radio(key="bearing_detail").set_value("by_stage").run()
+    assert not app.exception
