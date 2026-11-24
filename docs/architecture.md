@@ -20,7 +20,7 @@ flowchart TD
 
 - `app.py`: workspace selection and original AI4I interactive classification.
 - `src/console_models.py` and feature/data modules: canonical model preparation. The research console does not fit models or fetch datasets.
-- `src/evidence_console.py`: distinct render functions for overview, maintenance, official benchmark, telemetry replay, physical bearings, adaptive reliability and independent replication. The overview computes metrics from evidence rather than manually copying headline numbers.
+- `src/evidence_console.py`: distinct render functions for overview, maintenance, official benchmark, telemetry replay, physical bearings, adaptive reliability and independent replication and technical report. The overview computes metrics from evidence rather than manually copying headline numbers.
 - `research/`: experiment definitions, fixed protocols, reports and evidence verification. Development and independent/official evaluation tasks are separated.
 - `research/evidence/`: seven registered reports. The manifest verifies Git blob content and byte count; provenance links identify execution revisions. This is not a signature or scientific certification.
 - `.github/workflows/`: regression CI and dedicated dataset experiments. Large raw datasets are not committed.
@@ -37,4 +37,4 @@ python -m pytest -q
 streamlit run app.py
 ```
 
-The Streamlit theme is native rather than injected CSS. Page rendering remains eager through Streamlit tabs; the separation allows subsequent navigation improvements without changing experiment code.
+The Streamlit theme is native rather than injected CSS. Sidebar navigation renders only the selected page. AI4I training and SHAP imports are deferred until needed; the research console does not train models. The report generator (`python -m research.technical_report --output AERIS_technical_report.md`) verifies registered evidence before constructing a deterministic Markdown report. Actual latency and browser appearance have not yet been measured.
