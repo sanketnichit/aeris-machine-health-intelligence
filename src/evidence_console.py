@@ -20,6 +20,17 @@ def maintenance_table(report, ratio):
     return pd.DataFrame(rows).sort_values(["Cost", "Model", "Threshold"]).reset_index(drop=True)
 
 
+def bearing_comparison(report, split, detail="by_bearing"):
+    if split not in ("bearing", "condition") or detail not in ("by_bearing", "by_stage"):
+        raise ValueError("Unknown bearing comparison")
+    rows = []
+    for model in ("age_reference", "learned"):
+        for group, metrics in report["summary"][split][model][detail].items():
+            rows.append({"Group": group, "Model": model, "MAE": metrics["mae"],
+                         "RMSE": metrics["rmse"], "Endpoints": metrics["endpoints"]})
+    return pd.DataFrame(rows)
+
+
 def read_report(name):
     return json.loads((EVIDENCE / name).read_text(encoding="utf-8"))
 
@@ -27,8 +38,8 @@ def read_report(name):
 def render_evidence():
     st.title("AERIS | Research Intelligence")
     st.caption("Verified benchmark evidence · read-only research workspace")
-    st.warning("Simulated benchmark results, not industrial safety certification or measured savings.")
-    overview, maintenance, official, replay = st.tabs(["Evidence map", "Maintenance replay", "Official NASA test", "Temporal replay"])
+    st.warning("Simulated and laboratory benchmark evidence, not industrial safety certification or measured savings.")
+    overview, maintenance, official, replay, bearings = st.tabs(["Evidence map", "Maintenance replay", "Official NASA test", "Temporal replay", "Physical bearings"])
     with overview:
         st.subheader("Research evidence")
         st.markdown(
@@ -99,3 +110,31 @@ def render_evidence():
             st.caption(f"Evaluation fold {trace['fold']} · engine excluded from fitting")
             if "run_url" in report:
                 st.markdown(f"[Execution evidence]({report['run_url']})")
+
+
+    with bearings:
+        st.subheader("Physical vibration validation")
+        st.caption("XJTU-SY accelerated laboratory bearing experiments; a distinct task from NASA engine forecasting.")
+        st.markdown("[Physical validation protocol](https://github.com/sanketnichit/aeris-machine-health-intelligence/blob/main/research/XJTU_PROTOCOL.md)")
+        path = EVIDENCE / "xjtu_summary.json"
+        if not path.is_file():
+            st.info("Physical-bearing results are not yet published. No empirical claim is made.")
+            st.markdown("[Physical research workflow](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/workflows/research-xjtu.yml)")
+        else:
+            report = read_report("xjtu_summary.json")
+            st.caption(report["scope"])
+            cols = st.columns(2)
+            cols[0].metric("Laboratory bearings", len(report["snapshot_counts"]))
+            cols[1].metric("Vibration snapshots", sum(report["snapshot_counts"].values()))
+            split = st.radio("Held-out population", ["bearing", "condition"],
+                             format_func=lambda x: "Unseen bearing" if x == "bearing" else "Unseen operating condition",
+                             key="bearing_split")
+            metrics = pd.DataFrame({m: r["all"] for m,r in report["summary"][split].items()}).T
+            st.dataframe(metrics)
+            detail = st.radio("Comparison breakdown", ["by_bearing", "by_stage"], key="bearing_detail")
+            table = bearing_comparison(report, split, detail)
+            st.bar_chart(table, x="Group", y="MAE", color="Model", stack=False)
+            st.dataframe(table, hide_index=True)
+            st.caption("Errors are remaining recorded snapshots, not engine cycles. Stage selection is retrospective; endpoint is the last recording, not independently measured failure time.")
+            st.markdown(f"[Execution evidence]({report['run_url']})")
+            st.download_button("Download physical validation evidence", json.dumps(report, indent=2), "xjtu_summary.json", "application/json")
