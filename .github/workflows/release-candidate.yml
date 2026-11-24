@@ -1,0 +1,40 @@
+name: AERIS release candidate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - VERSION
+      - .github/workflows/release-candidate.yml
+permissions:
+  contents: read
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m research.verify_evidence
+      - run: python -m pytest -q
+      - name: Create versioned source and evidence bundle
+        run: |
+          mkdir -p dist
+          version="$(cat VERSION)"
+          python -m research.technical_report --output dist/AERIS_technical_report.md
+          git archive --format=zip --prefix="aeris-$version/" --output="dist/aeris-$version.zip" HEAD
+          git rev-parse HEAD > dist/revision.txt
+          python -m pip freeze > dist/environment.txt
+          (cd dist && sha256sum *.zip *.md revision.txt environment.txt > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aeris-release-candidate
+          path: dist/
+          if-no-files-found: error
