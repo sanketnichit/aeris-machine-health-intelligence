@@ -12,6 +12,10 @@ on:
       - src/telemetry_store.py
       - src/fleet_console.py
       - src/monitoring.py
+      - src/decision_engine.py
+      - src/anomaly.py
+      - src/incidents.py
+      - src/monitor_worker.py
       - scripts/demo_fleet.py
       - app.py
       - .github/workflows/container-smoke.yml
@@ -48,6 +52,9 @@ jobs:
           python scripts/demo_fleet.py | python -c 'import json,sys; d=json.load(sys.stdin); assert d["inserted"]==180 and d["events_created"]>10; print(d)'
           python scripts/demo_fleet.py | python -c 'import json,sys; d=json.load(sys.stdin); assert d["duplicates"]==180 and d["events_created"]==0'
           curl -fsS 'http://127.0.0.1:8080/v1/events?limit=1000' | python -c 'import json,sys; e=json.load(sys.stdin)["events"]; assert len([x for x in e if x["asset_id"]=="synthetic-missing" and x["kind"]=="missing_measurements"])==10; assert any(x["asset_id"]=="synthetic-drift" and x["kind"]=="configured_bound_breach" for x in e)'
+      - name: Check decision engine over HTTP
+        run: |
+          curl -fsS 'http://127.0.0.1:8080/v1/advisory?asset_id=synthetic-drift' | python -c 'import json,sys; d=json.load(sys.stdin); assert d["status"]=="review_required"; assert d["forecast"]["remaining_life"] is None; assert d["benchmark_context"]["xjtu_reliability"]["accepted"]==0; print(d)'
       - name: Collect logs
         if: always()
         run: |
