@@ -17,5 +17,18 @@ Can physics-informed temporal representations and uncertainty-aware abstention i
 ## Experiment contract
 Record dataset source/version/hash, license, unit IDs and split hashes, configuration, seed, code commit, dependency versions, metrics and uncertainty. Keep negative findings. Never tune on final test labels. Report baselines and limitations alongside improvements. Any publication claim requires literature review and independent reproduction.
 
+## Evidence index (2026-11-24)
+
+| Experiment | Evidence | Scope |
+|---|---|---|
+| AI4I generator-rule and stress audits | [Findings](AI4I_FINDINGS.md) | Synthetic snapshot; rules beat ML at fixed threshold |
+| FD001 initial baselines | [Findings](CMAPSS_FINDINGS.md) | Development; constant beats learned models on middle-life prefixes |
+| FD001 stages and landmarks | [Findings](CMAPSS_STAGE_FINDINGS.md) | Development; personalized model improves late-life forecasting |
+| FD001 paired and risk audits | [Findings](CMAPSS_RISK_FINDINGS.md) | Exploratory engine-cluster bootstrap and quantile calibration |
+| FD001 maintenance replay | [Implementation](cmapss_maintenance_replay.py) | Hypothetical costs and lead times; execution pending verification |
+| FD001 official endpoint v1 | [Frozen protocol](FD001_OFFICIAL_PROTOCOL.md) | Fixed candidates and untouched official endpoints at protocol freeze; execution pending verification |
+
+The development workflow is [research-cmapss.yml](../.github/workflows/research-cmapss.yml). The official workflow is separate, pinned to its frozen implementation revision. See [research-fd001-official.yml](../.github/workflows/research-fd001-official.yml). Do not use official test outcomes to optimize or select candidates.
+
 ## Current milestone
-Cache correctness and regression tests; no new empirical performance claim.
+Verify and publish the maintenance replay and frozen official endpoint results. Integrate a user-facing evidence console only after distinguishing evaluated capabilities from proposed features. Experimental bearing replication remains pending; no claim of field safety or independent replication.
