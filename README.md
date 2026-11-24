@@ -4,11 +4,22 @@ AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded int
 
 **Live demo:** https://aeris-machine-health-intelligence.streamlit.app/ (deployment availability is not guaranteed by CI).
 
-**Research release candidate:** 0.1.0-rc.1 · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
+**Research release candidate:** see [VERSION](VERSION) · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
 
 ## Local platform deployment
 
-Run the dashboard and validation-only research API together with `docker compose up --build --detach --wait`. See the [API and deployment guide](docs/api.md). Both host ports bind to localhost; this is not a public production service.
+Run the dashboard and persistent local research API together with `docker compose up --build --detach --wait`. See the [API and deployment guide](docs/api.md). Both host ports bind to localhost; this is not a public production service.
+
+## Application workspaces
+
+| Workspace | What it demonstrates |
+|---|---|
+| Research intelligence | Nine evidence-linked pages, benchmark comparisons, replay and technical report |
+| AI4I failure prediction | Synthetic classification and model explanations |
+| Telemetry fleet | Persistent ingestion, monitoring events, review incidents, freshness and explainable advisory |
+| Virtual degradation laboratory | Seeded maintenance counterfactuals and separate measured-signal evidence |
+
+After starting Compose, run `python scripts/demo_fleet.py` to populate explicitly synthetic assets. The advisory always withholds operational failure forecasts. The optional monitoring profile enables periodic freshness scans. See [virtual laboratory](docs/digital_twin.md), [roadmap](docs/roadmap.md) and [quickstart](docs/quickstart.md).
 
 ## Research capabilities
 
@@ -22,6 +33,7 @@ Run the dashboard and validation-only research API together with `docker compose
 | Physical bearings | [XJTU-SY findings](research/XJTU_FINDINGS.md) | Physical laboratory data; 32.7% lower MAE under held-out conditions, 5.1% higher MAE under held-out bearings |
 | Sensor-driven adaptation | [XJTU adaptive findings](research/XJTU_ADAPTIVE_FINDINGS.md) | Exploratory gate improvements; reliability policy accepted zero forecasts |
 | Independent physical replication | [PRONOSTIA findings](research/PRONOSTIA_FINDINGS.md) | 11 held-out bearings; learned model outperformed fixed vibration gate, so adaptive advantage did not replicate |
+| Measured vibration-state transition | [Calibration audit](research/TWIN_CALIBRATION_FINDINGS.md) | 54 endpoints; 1.16% lower MAE than persistence, no established superiority or physical twin calibration |
 
 The research console provides nine on-demand workspaces, including offline evidence tables, cost comparisons, official benchmark metrics, simulated engine replay, measured physical vibration-feature replay and a downloadable technical report. The physical replay exposes 254 published points from three previously evaluated PRONOSTIA bearings. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. The official FD001 test set has been observed; future model changes require new independent evaluation.
 
