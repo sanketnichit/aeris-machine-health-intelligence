@@ -3,6 +3,7 @@ services:
     build: .
     environment:
       AERIS_API_URL: http://api:8080
+      AERIS_API_TOKEN: ${AERIS_API_TOKEN:-}
     image: aeris-research:local
     ports:
       - "127.0.0.1:8501:8501"
@@ -16,6 +17,8 @@ services:
       retries: 5
   api:
     build: .
+    environment:
+      AERIS_API_TOKEN: ${AERIS_API_TOKEN:-}
     image: aeris-research:local
     command: ["python", "-m", "src.api", "--host", "0.0.0.0"]
     ports:
