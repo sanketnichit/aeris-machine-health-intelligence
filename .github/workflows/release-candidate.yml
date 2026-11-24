@@ -33,6 +33,18 @@ jobs:
           git rev-parse HEAD > dist/revision.txt
           python -m pip freeze > dist/environment.txt
           (cd dist && sha256sum *.zip *.md revision.txt environment.txt > SHA256SUMS)
+      - name: Validate extracted release archive in fresh environment
+        run: |
+          (cd dist && sha256sum -c SHA256SUMS)
+          version="$(cat VERSION)"
+          unzip -q "dist/aeris-$version.zip" -d "$RUNNER_TEMP/aeris-release"
+          python -m venv "$RUNNER_TEMP/release-venv"
+          "$RUNNER_TEMP/release-venv/bin/python" -m pip install -r dist/environment.txt
+          cd "$RUNNER_TEMP/aeris-release/aeris-$version"
+          "$RUNNER_TEMP/release-venv/bin/python" -m research.verify_evidence
+          "$RUNNER_TEMP/release-venv/bin/python" -m pytest -q
+          "$RUNNER_TEMP/release-venv/bin/python" -m research.technical_report --output "$RUNNER_TEMP/extracted-report.md"
+          cmp "$RUNNER_TEMP/extracted-report.md" "$GITHUB_WORKSPACE/dist/AERIS_technical_report.md"
       - uses: actions/upload-artifact@v4
         with:
           name: aeris-release-candidate
