@@ -249,6 +249,41 @@ def render_replication():
     st.download_button("Download independent replication evidence", json.dumps(report, indent=2), "pronostia_summary.json", "application/json")
 
 
+def render_physical_replay():
+    st.subheader("Physical bearing vibration replay")
+    st.caption("Measured vibration-feature histories; not a live machine connection or a raw waveform display.")
+    if not (EVIDENCE / "pronostia_replay.json").is_file():
+        st.info("Verified physical replay traces are not yet published.")
+        st.markdown("[Replay execution workflow](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/workflows/research-pronostia-replay.yml)")
+        return
+    report = read_report("pronostia_replay.json")
+    st.caption(report["scope"])
+    traces = {t["bearing"]:t for t in report["traces"]}
+    bearing = st.selectbox("Physical bearing", sorted(traces), key="physical_replay_bearing")
+    trace = traces[bearing]
+    points = pd.DataFrame(trace["points"]).set_index("age")
+    age = st.select_slider("Observed recording", options=points.index.tolist(), key=f"physical_replay_age_{bearing}")
+    history = points.loc[:age]
+    current = history.iloc[-1]
+    st.caption(f"Condition {trace['condition']} · recording interval {report['recording_interval_seconds']} seconds · display cadence {report['display_cadence_snapshots']} recordings")
+    a,b,c = st.columns(3)
+    a.metric("Observed vibration ratio", f"{current['ratio']:.2f}x")
+    b.metric("Statistical remaining snapshots", f"{current['age_reference']:.1f}")
+    c.metric("Learned remaining snapshots", f"{current['learned']:.1f}")
+    st.markdown("**Observed vibration features**")
+    feature = st.radio("Vibration feature", ["rms","crest"], key="physical_replay_feature")
+    st.line_chart(history[[f"horizontal_{feature}",f"vertical_{feature}"]])
+    st.markdown("**Forecast comparison**")
+    st.line_chart(history[["age_reference","learned","switch_2x","ramp_2x_4x"]])
+    st.caption("Forecasts are in remaining recorded snapshots. The gate is computed from all observations available at the selected age, not only displayed samples.")
+    st.info("2x gate uses learned forecast." if current["ratio"]>=2 else "2x gate uses statistical reference.")
+    if st.checkbox("Reveal retrospective endpoint", key=f"physical_replay_truth_{bearing}"):
+        st.metric("Actual remaining recorded snapshots", trace["last_recorded_age"]-age)
+        st.caption("Last recorded observation is an endpoint proxy, not independently timed failure. It was not used by the forecast.")
+    st.markdown(f"[Execution evidence]({report['run_url']})")
+    st.download_button("Download physical replay evidence", json.dumps(report, indent=2), "pronostia_replay.json", "application/json")
+
+
 def render_report():
     from research.technical_report import generate_report
     st.subheader("Technical evidence report")
@@ -275,6 +310,7 @@ def render_evidence():
         "Physical bearings": render_bearings,
         "Adaptive reliability": render_reliability,
         "Independent replication": render_replication,
+        "Physical vibration replay": render_physical_replay,
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
