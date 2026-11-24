@@ -160,3 +160,12 @@ Review policy review-v1 uses an exploratory robust deviation threshold of 6 scal
 The response separately attaches integrity-verified historical XJTU reliability and independent PRONOSTIA replication summaries. Those summaries describe other populations and are not operational calibration. If evidence verification fails the endpoint returns HTTP 503. Operational remaining life, failure probability, asset model disagreement and calibrated intervals are always null: no asset-validated model or transfer protocol exists. No incident state or equipment action is modified by assessment.
 
 The fleet Decision intelligence panel displays the reasons, provenance context and downloadable JSON assessment. A decision is computed on request, not persisted as a new incident.
+
+
+## Disposable reliability validation
+
+The reliability-smoke workflow starts the authenticated Compose monitoring profile and runs scripts/reliability_smoke.py against a fresh synthetic database. It checks concurrent idempotent submissions, conflicting-record rejection, unauthorized route access, stale-data detection by the actual periodic worker, and concurrent incident acknowledgement. It then backs up and recovers the live SQLite volume using the runtime backup utility and checks recovered observations and review history.
+
+The browser workflow also exercises opt-in acknowledgement from the trusted local dashboard. It verifies the persisted API state rather than reading rendered table text. These are bounded regression workloads, not throughput, denial-of-service resilience, production security or disaster-recovery certification. Do not run the integration script against existing user data.
+
+Inside an authorized local Compose deployment, the backup utility is included in the API image. For example, use docker compose exec -T api python scripts/telemetry_backup.py data/telemetry.sqlite3 data/backup.sqlite3. Copy the verified backup to protected storage outside the volume before deleting or replacing the volume. Keep recovery destinations separate; the utility never overwrites an existing file.
