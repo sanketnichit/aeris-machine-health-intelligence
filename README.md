@@ -4,6 +4,8 @@ AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded int
 
 **Live demo:** https://aeris-machine-health-intelligence.streamlit.app/ (deployment availability is not guaranteed by CI).
 
+**Research release candidate:** 0.1.0-rc.1 · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
+
 ## Research capabilities
 
 | Task | Verified evidence | Limits |
@@ -17,7 +19,7 @@ AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded int
 | Sensor-driven adaptation | [XJTU adaptive findings](research/XJTU_ADAPTIVE_FINDINGS.md) | Exploratory gate improvements; reliability policy accepted zero forecasts |
 | Independent physical replication | [PRONOSTIA findings](research/PRONOSTIA_FINDINGS.md) | 11 held-out bearings; learned model outperformed fixed vibration gate, so adaptive advantage did not replicate |
 
-The research console provides offline evidence tables, cost comparisons, official benchmark metrics and cycle-by-cycle telemetry replay. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. The official FD001 test set has been observed; future model changes require new independent evaluation.
+The research console provides nine on-demand workspaces, including offline evidence tables, cost comparisons, official benchmark metrics, simulated engine replay, measured physical vibration-feature replay and a downloadable technical report. The physical replay exposes 254 published points from three previously evaluated PRONOSTIA bearings. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. The official FD001 test set has been observed; future model changes require new independent evaluation.
 
 ## What is in the project
 
