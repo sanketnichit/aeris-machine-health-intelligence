@@ -47,3 +47,20 @@ def test_independent_bearings():
     assert set(report["evaluation_bearings"])==TEST
     assert {r["bearing"] for r in report["predictions"]}==TEST
     assert report["summary"]["stage"]["all"]["switch_2x"]["endpoints"]==44
+
+
+def test_partition_in_nested_archive_name():
+    raw=b"1,2,3,4,2,-3\n"*2560
+    def wrap(name, payload):
+        buffer=io.BytesIO()
+        with zipfile.ZipFile(buffer,"w") as z:
+            z.writestr(name,payload)
+        return buffer.getvalue()
+    payload=wrap("Bearing1_3/acc_00001.csv",raw)
+    payload=wrap("Full_Test_Set.zip",payload)
+    payload=wrap("FEMTOBearingDataSet.zip",payload)
+    payload=wrap("NASA.zip",payload)
+    rows,seen=[],set()
+    with zipfile.ZipFile(io.BytesIO(payload)) as archive:
+        extract_archive(archive,rows,seen)
+    assert seen=={("Bearing1_3",1)}
