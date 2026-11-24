@@ -42,3 +42,17 @@ def test_published_telemetry_and_truth_toggle():
     assert not app.exception
     metric=next(m for m in app.metric if m.label=="Actual remaining cycles")
     assert int(metric.value)==182
+
+
+def test_bearing_comparison_preserves_models_and_units():
+    from src.evidence_console import bearing_comparison
+    report = {"summary": {"condition": {
+        "age_reference": {"by_bearing": {"Bearing1_1": {"mae": 8., "rmse": 9., "endpoints": 4}}},
+        "learned": {"by_bearing": {"Bearing1_1": {"mae": 5., "rmse": 6., "endpoints": 4}}},
+    }}}
+    table = bearing_comparison(report, "condition")
+    assert table.Model.tolist() == ["age_reference", "learned"]
+    assert table.MAE.tolist() == [8., 5.]
+    assert table.Endpoints.tolist() == [4, 4]
+    with pytest.raises(ValueError):
+        bearing_comparison(report, "invalid")
