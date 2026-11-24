@@ -15,14 +15,8 @@ import urllib.request
 
 import numpy as np
 import pandas as pd
-import shap
 import streamlit as st
-from sklearn.compose import ColumnTransformer
-from sklearn.ensemble import HistGradientBoostingClassifier
-
-from src.console_models import train_console_models
 from src.evidence_console import render_evidence
-from src.features import MODEL_FEATURES, add_engineered_features
 
 
 ROOT = Path(__file__).resolve().parent
@@ -158,6 +152,7 @@ def format_direction(value: float) -> str:
 @st.cache_resource
 def train_models():
     """Train the model used by the Streamlit demo."""
+    from src.console_models import train_console_models
     return train_console_models(DATA_PATH, random_state=42)
 
 
@@ -170,6 +165,7 @@ def get_shap_explainer(_model: HistGradientBoostingClassifier):
     model from cache-key hashing while retaining the explainer across reruns.
     The console model bundle is fixed for the running AERIS process.
     """
+    import shap
     return shap.TreeExplainer(_model)
 
 
@@ -235,6 +231,8 @@ if workspace == "Research intelligence":
     render_evidence()
     st.stop()
 
+from src.features import MODEL_FEATURES, add_engineered_features
+
 ensure_dataset()
 
 st.markdown(
@@ -246,7 +244,7 @@ st.markdown(
             margin-bottom: 0.1rem;
         }
         .subtitle {
-            color: #6b7280;
+            color: #9CAFC1;
             font-size: 1rem;
             margin-bottom: 0.7rem;
         }
@@ -268,9 +266,9 @@ st.markdown(
         }
         .decision-card {
             padding: 0.9rem 1rem;
-            border: 1px solid #e5e7eb;
+            border: 1px solid #405569;
             border-radius: 0.8rem;
-            background: #fafafa;
+            background: #1C2938;
         }
         .small-muted {
             color: #6b7280;
