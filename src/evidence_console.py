@@ -5,6 +5,8 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+from research.verify_evidence import verify
+
 EVIDENCE = Path(__file__).resolve().parents[1] / "research" / "evidence"
 
 
@@ -38,6 +40,12 @@ def read_report(name):
 def render_evidence():
     st.title("AERIS | Research Intelligence")
     st.caption("Verified benchmark evidence · read-only research workspace")
+    try:
+        registered = verify(EVIDENCE)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        st.error(f"Research evidence integrity check failed: {exc}")
+        st.stop()
+    st.caption(f"Content integrity verified for {len(registered)} registered evidence files. This is not scientific certification.")
     st.warning("Simulated and laboratory benchmark evidence, not industrial safety certification or measured savings.")
     overview, maintenance, official, replay, bearings, reliability = st.tabs(["Evidence map", "Maintenance replay", "Official NASA test", "Temporal replay", "Physical bearings", "Adaptive reliability"])
     with overview:
