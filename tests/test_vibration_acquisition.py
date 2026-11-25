@@ -74,3 +74,39 @@ def test_invalid_capture(raw):
 def test_invalid_metadata(overrides):
     with pytest.raises(ValueError):
         analyze(**overrides)
+
+
+def test_capture_to_authenticated_api(tmp_path, monkeypatch):
+    from threading import Thread
+    from scripts.demo_fleet import submit
+    from src.api import make_server
+    from src.edge_buffer import drain
+    from src.telemetry_store import history
+
+    token = "capture-test-" + "x" * 32
+    monkeypatch.setenv("AERIS_API_TOKEN", token)
+    database = tmp_path / "telemetry.sqlite3"
+    queue = tmp_path / "edge.sqlite3"
+    analysis = analyze()
+    queue_capture(queue, analysis)
+    server = make_server(port=0, database=database, token=token)
+    thread = Thread(target=server.serve_forever, daemon=True)
+    thread.start()
+    base = f"http://127.0.0.1:{server.server_port}"
+    try:
+        submit(base, "/v1/assets", {"asset_id": "capture-test", "name": "Capture test",
+            "expected_measurements": ["horizontal_vibration_rms", "vertical_vibration_rms"]})
+        result = drain(queue, base)
+        assert result["blocked"] is None
+        assert result["pending_batches"] == 0
+        stored = history(database, "capture-test")
+        expected = analysis["batch"]["records"]
+        assert len(stored) == len(expected) == 2
+        for record, source in zip(stored, expected):
+            assert datetime.fromisoformat(record["timestamp"]) == datetime.fromisoformat(source["timestamp"])
+            assert record["measurements"] == source["measurements"]
+    finally:
+        server.shutdown()
+        server.server_close()
+        thread.join(timeout=10)
+    assert not thread.is_alive()
