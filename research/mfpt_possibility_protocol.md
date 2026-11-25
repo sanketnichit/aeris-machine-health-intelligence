@@ -1,0 +1,7 @@
+# MFPT possible-suggestion outer-set protocol
+
+Research-only extension of the frozen three-order point decision. For each closed cell, lower and upper median score bounds enclose the computed order fractions with numerical slack. A label is retained if its upper score could exceed the floor and its advantage over every rival's lower score could meet the margin. Union over all cells and intersect with global necessary conditions. Budget overflow returns the broader global set, not a sparse-grid guess.
+
+These necessary conditions may retain unattainable labels. An empty set means the bound excludes all accepted point labels under the modeled scale uncertainty, not that the bearing is healthy. A singleton is NOT a stable suggestion: abstention may occur at another scale. No new single-suggestion authorization is introduced. The computation is floating-point, not formal interval arithmetic.
+
+The experiment reuses the 17 MFPT records and 10 scenarios, fingerprints, thresholds, previous point/global/refined and counterexample aggregates. It checks that every observed nominal, refined and witnessed non-null suggestion is in the outer set. Report set sizes, withheld set sizes, fault-label membership, normal records with nonempty sets, narrowing versus global bounds and budget fallback counts. Membership is neither accuracy nor calibrated coverage; all scenarios are retrospective and repeated on the same recordings. No model tuning or independent external validation.
