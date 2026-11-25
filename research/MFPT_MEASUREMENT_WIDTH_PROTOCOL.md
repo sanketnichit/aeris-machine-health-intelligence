@@ -1,0 +1,7 @@
+# MFPT measurement-width sweep — frozen development protocol
+
+Retain the same 17 MFPT recordings, source hashes, spectrum construction, decision thresholds, five declared speed errors (-5%, -1%, 0%, +1%, +5%) and sufficient closed-cell verifier. Sweep declared relative error bounds of 0.1%, 0.25%, 0.5%, 1%, 2% and 5% at each fixed speed center, yielding 510 repeated recording-scenario comparisons. Reproduce the previous 1% and 5% point/global/refined aggregates. Do not tune thresholds or select a preferred sensor specification.
+
+Report accepted correct/incorrect and withheld suggestions, normal false suggestions, and whether the reference speed is inside each modeled interval. Per record and fixed center, report the largest tested accepted/correct width, accepted counts outside reference containment, and unresolved narrower grid points. Conflicting accepted labels on nested intervals are an invariant failure. Do not assume acceptance is monotonic for a sufficient numerical verifier. No interpolation or continuous maximum-width claim.
+
+A narrower declared bound does not correct bias. An accepted label outside reference containment has no modeled guarantee at the reference speed. This is a retrospective synthetic perturbation of metadata, not a measured tachometer accuracy requirement, independent external validation or field safety assessment. A hardware requirement would need independently measured speed, clock, geometry and operational uncertainty.

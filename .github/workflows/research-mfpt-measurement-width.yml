@@ -1,0 +1,48 @@
+name: AERIS MFPT measurement width sweep
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-mfpt-measurement-width.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_mfpt_measurement_width.py tests/test_order_counterexamples.py tests/test_order_breakpoints.py tests/test_order_uncertainty.py
+      - name: Verify registered evidence before data acquisition
+        run: python -m research.verify_evidence
+      - name: Acquire pinned recordings
+        run: |
+          mkdir -p "$RUNNER_TEMP/mfpt" mfpt-measurement-width-evidence
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+          from research.mfpt_transfer import FILES, BASE
+          for name,kind in FILES:
+              path=Path(os.environ["RUNNER_TEMP"])/"mfpt"/name
+              path.parent.mkdir(parents=True,exist_ok=True)
+              subprocess.run(["curl","--fail","--location","--retry","2","--max-time","60","--max-filesize","20000000",BASE+name,"-o",str(path)],check=True)
+          PY
+      - name: Execute frozen measurement width audit
+        run: |
+          python -m research.mfpt_measurement_width "$RUNNER_TEMP/mfpt" --output mfpt-measurement-width-evidence/summary.json
+          python -m pip freeze > mfpt-measurement-width-evidence/environment.txt
+          git rev-parse HEAD > mfpt-measurement-width-evidence/revision.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mfpt-measurement-width-evidence
+          path: mfpt-measurement-width-evidence/
+          if-no-files-found: error
