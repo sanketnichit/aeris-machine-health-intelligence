@@ -308,6 +308,31 @@ def render_cwru():
     st.download_button("Download CWRU evidence summary", json.dumps(report, indent=2), "cwru_spectral_summary.json", "application/json")
 
 
+def render_cwru_extension():
+    st.subheader("Expanded bearing diagnostic audit")
+    report = read_report("cwru_extension_summary.json")
+    st.caption("Same-platform extension with normal controls; post-v0.1.0 evidence.")
+    raw, env = (report["representations"][m] for m in ("raw", "envelope"))
+    a, b, c = st.columns(3)
+    a.metric("Recordings", report["record_count"])
+    b.metric("Envelope expected order first", f'{env["expected_first_count"]}/{report["fault_records"]}')
+    c.metric("Envelope descriptive AUC", f'{env["normal_fault_pairwise_auc"]:.2f}')
+    rows = pd.DataFrame([{"Fault group": g, "Raw": raw["by_group"][g]["expected_first"],
+                          "Envelope": m["expected_first"], "Recordings": m["records"]}
+                         for g,m in env["by_group"].items()])
+    st.dataframe(rows, hide_index=True)
+    st.bar_chart(rows.set_index("Fault group")[["Raw", "Envelope"]])
+    st.markdown(f'Normal/fault pairwise AUC: raw **{raw["normal_fault_pairwise_auc"]:.2f}**, envelope **{env["normal_fault_pairwise_auc"]:.2f}**.')
+    st.warning("Small ball defect: 0/4 expected-order wins. No classification threshold selected; AUC is descriptive, not diagnostic accuracy. Different acquisition rates may confound separation.")
+    scores = pd.DataFrame([{"File": str(r["file_id"]), "Condition": r["fault"], "Diameter (inch)": r["diameter_in"],
+                            "Load (HP)": r["load_hp"], "Raw max": max(r["median_fractions"]["raw"].values()),
+                            "Envelope max": max(r["median_fractions"]["envelope"].values())}
+                           for r in report["records"]])
+    st.dataframe(scores, hide_index=True)
+    st.markdown(f"[Execution evidence]({report['run_url']}) · revision `{report['revision']}`")
+    st.download_button("Download extension evidence", json.dumps(report, indent=2), "cwru_extension_summary.json", "application/json")
+
+
 def render_report():
     from research.technical_report import generate_report
     st.subheader("Technical evidence report")
@@ -336,6 +361,7 @@ def render_evidence():
         "Independent replication": render_replication,
         "Physical vibration replay": render_physical_replay,
         "CWRU spectral audit": render_cwru,
+        "CWRU diagnostic extension": render_cwru_extension,
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
