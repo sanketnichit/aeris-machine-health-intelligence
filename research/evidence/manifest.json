@@ -78,6 +78,10 @@
     "mfpt_possibility_summary.json": {
       "blob_sha": "fe429da81b06fb778454582109582edab98bcce6",
       "bytes": 19172
+    },
+    "mfpt_measurement_width_summary.json": {
+      "blob_sha": "3da00313f8a1eaea73d589b5d1807f129984a8f0",
+      "bytes": 38677
     }
   }
 }
