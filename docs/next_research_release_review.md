@@ -1,6 +1,6 @@
 # Expanded research candidate — release review draft
 
-**Not published.** Original v0.1.0, its tag and DOI remain unchanged. This draft is for review of a later immutable candidate. Do not treat an accepted development revision as approval to publish a different revision.
+**Not published.** Original v0.1.0, its tag and DOI remain unchanged. The final research revision passed [acceptance](candidate_3d1450ed780f.md); this draft prepares the v0.2.0 metadata revision for separate immutable acceptance. Do not treat an accepted development revision as approval to publish a different revision.
 
 Post-release work includes frozen all-subset C-MAPSS forecasting and negative transfer evidence, engine-disjoint development of applicability and abstention, independent MFPT laboratory transfer and retrospective uncertainty/fusion/common-mode studies, pinned calibration enrollment, offline capture advisory and review journal, expanded read-only research dashboards, and Paderborn source acquisition and timing audits. The [Paderborn terminal conditional transfer](../research/PADERBORN_CONDITIONAL_FINDINGS.md) is registered: 6/44 correct fault suggestions, 38/44 fault abstentions, 3/24 healthy false suggestions per timing hypothesis; 68/68 decision agreement. Reliable transfer is not established. Actual geometry and clock calibration remain unresolved.
 

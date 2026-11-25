@@ -8,6 +8,7 @@ on:
       - research/evidence/cmapss_regime_development_summary.json
       - research/evidence/paderborn_cohort_summary.json
       - research/evidence/paderborn_conditional_summary.json
+      - VERSION
 permissions:
   contents: read
 jobs:

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.2.0 — expanded research release (candidate; not published)
+
+- Registered 30 evidence reports covering all four legacy C-MAPSS subsets, training-only regime development, MFPT measurement uncertainty, calibration enrollment, common-mode error, and Paderborn source acquisition and conditional transfer.
+- Added persistent local capture and advisory review, bounded telemetry and expanded research dashboards.
+- Preserved negative results: NASA direct cross-regime transfer failed to beat age-only on three new subsets, the illustrative RUL acceptance policy retained only 52 of 418 within-subset landmark assessments, and Paderborn accepted six of 44 damaged recordings correctly but produced three healthy false suggestions per timing hypothesis.
+- The final research revision passed 434 tests in checkout and clean extraction and integrated acceptance on retry; see [acceptance record](docs/candidate_3d1450ed780f.md). The release metadata revision requires a fresh acceptance.
+- No field-calibrated diagnostic or operational authorization, and no new DOI or release claimed.
+
 ## 0.1.0 — research demonstrator
 
 - RC3 combined acceptance passed on revision 905c510d00cb916d656027e5e4953ef0a7f02703; packaged checksums independently verified.

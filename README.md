@@ -8,6 +8,8 @@ AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded int
 
 **Archived research release:** [v0.1.0](https://github.com/sanketnichit/aeris-machine-health-intelligence/releases/tag/v0.1.0) · [Zenodo DOI](https://doi.org/10.5281/zenodo.24522637) · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
 
+**Proposed v0.2.0:** research is complete and the accepted research revision is [documented](docs/candidate_3d1450ed780f.md). Release metadata is prepared but this version is not published. The DOI below refers only to v0.1.0.
+
 ## Cite AERIS
 
 Nichit, S. (2026). *AERIS: Machine Health Intelligence* (Version 0.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.24522637

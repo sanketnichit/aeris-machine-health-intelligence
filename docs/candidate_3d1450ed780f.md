@@ -1,0 +1,7 @@
+# Accepted final research candidate: 3d1450ed780f
+
+[Successful campaign](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45619822323), attempt 2, for exact revision `3d1450ed780f05c346a57e965044cd8cb61c0002`. Both checkout and extracted archive passed 434 tests; all 30 registered reports verified; offline bundle verification, report reproduction, integrated research and fleet browser review, concurrent workload and recovery passed. The first attempt's integration job timed out on the initial heading; the unchanged revision passed on retry. The cause of the initial timeout was not established. No tests were relaxed.
+
+[Package artifact](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45619822323/artifacts/15024421105) and [successful integration artifact](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45619822323/artifacts/15024128381). The package ZIP digest and all five internal checksums were independently checked after download. Its source archive has 403 members; it still contains VERSION 0.1.0. The integration digest is recorded from the successful workflow logs. [Machine-readable record](candidate_3d1450ed780f.json).
+
+This closes all planned research and software acceptance for this exact candidate. The release-metadata revision for proposed v0.2.0 must pass its own acceptance. No tag, release or DOI is created by this record.

@@ -17,4 +17,4 @@ This is a proposed scope adopted for planning, not a universal percentage of an 
 
 A completed bounded release may report failed or blocked scientific hypotheses; it need not report favorable results. Do not add new dataset branches (e.g. N-CMAPSS), new dashboard features or further threshold sweeps to this release scope unless necessary to close the two gates. Prospective physical calibration, independent fleet evaluation, security hardening, accessibility/mobile validation and real deployment remain separate follow-on work. They cannot be estimated as a reliable single percentage from this repository.
 
-Current gate count: nine of ten complete (90%); final revision acceptance and explicit publication decision remain. No additional experiments are required for this bounded research release.
+Current gate count: nine of ten complete (90%). The frozen research revision passed final integrated acceptance on attempt 2; see [acceptance record](candidate_3d1450ed780f.md). Proposed v0.2.0 metadata requires a separate exact-revision acceptance, redistribution review and publication decision. No additional experiments are required.

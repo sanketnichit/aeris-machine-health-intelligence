@@ -1,0 +1,37 @@
+{
+  "scope": "research_candidate_acceptance_not_publication_or_field_certification",
+  "revision": "3d1450ed780f05c346a57e965044cd8cb61c0002",
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45619822323",
+  "workflow_conclusion": "success",
+  "successful_attempt": 2,
+  "first_attempt": {
+    "integrated_stack": "browser_startup_heading_timeout",
+    "cause": "not_established",
+    "source_changed": false
+  },
+  "package": {
+    "job_id": 139227711904,
+    "checkout_tests_passed": 434,
+    "extracted_archive_tests_passed": 434,
+    "registered_evidence": 30,
+    "offline_bundle_verifier": true,
+    "checksums_verified": true,
+    "report_reproduced": true,
+    "source_archive_members": 403,
+    "artifact_id": 15024421105,
+    "artifact_sha256": "05d2e8bbfcd24045236db71f51729d56476a9428b7f8f2c166d02a20eb4b2e96"
+  },
+  "integrated_stack": {
+    "job_id": 139227708252,
+    "all_research_pages_browser": true,
+    "authenticated_review": true,
+    "concurrent_workload": true,
+    "concurrent_ingest_requests": 16,
+    "concurrent_acknowledgements": 4,
+    "successful_acknowledgements": 1,
+    "backup_recovery": true,
+    "artifact_id": 15024128381,
+    "artifact_sha256": "fc97abdaa2b4d114bd5b125cc7d8ff2fe3c0f8e849e1fd8df1db65cc35beaed2"
+  },
+  "publication_authorized": false
+}
