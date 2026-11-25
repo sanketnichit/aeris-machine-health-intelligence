@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "This file identifies the proposed v0.2.0 software. For the published v0.1.0 archive, use DOI 10.5281/zenodo.24522637."
+message: "If you use AERIS v0.2.0, please cite this archived research software release."
 title: "AERIS: Machine Health Intelligence"
 type: software
 authors:
@@ -7,8 +7,10 @@ authors:
     given-names: Sanket
     orcid: "https://orcid.org/0009-0000-6993-7561"
 version: "0.2.0"
+date-released: 2026-11-25
+doi: "10.5281/zenodo.24533914"
 repository-code: "https://github.com/sanketnichit/aeris-machine-health-intelligence"
-url: "https://github.com/sanketnichit/aeris-machine-health-intelligence"
+url: "https://zenodo.org/records/24533914"
 license: MIT
 keywords:
   - predictive maintenance

@@ -1,5 +1,7 @@
 # AERIS research prototype roadmap
 
+**Research release v0.2.0: completed (10/10 defined gates).** [GitHub](https://github.com/sanketnichit/aeris-machine-health-intelligence/releases/tag/v0.2.0) · [Zenodo DOI](https://doi.org/10.5281/zenodo.24533914) · [Closure checklist](next_research_release_closure.md). The v0.1.0 milestone and intermediate candidate history below are retained as historical context. No additional research is required for v0.2.0.
+
 **Research release v0.1.0: completed (100% of the defined release acceptance scope).**
 
 [Published release](https://github.com/sanketnichit/aeris-machine-health-intelligence/releases/tag/v0.1.0) · [Successful acceptance and publication](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45453539267)
@@ -28,7 +30,7 @@ The release does not establish prospective field performance, a calibrated physi
 
 ## Post-release measurement reliability milestone
 
-Completed research on fixed MFPT recordings identifies uncertainty-induced abstention, instability, false precision and false sensor agreement. The new common-mode model, pinned calibration enrollment, synthetic advisory lab and offline archived-capture advisory join this evidence to a testable decision-support path. See [protocol and physical validation acceptance plan](../research/MFPT_COMMON_MODE_PROTOCOL.md) and [offline workflow](capture_advisory.md). Completion of implementation is distinct from passing CI, finishing the new experiment, or meeting field validation requirements. No new release is claimed.
+Completed research on fixed MFPT recordings identifies uncertainty-induced abstention, instability, false precision and false sensor agreement. The new common-mode model, pinned calibration enrollment, synthetic advisory lab and offline archived-capture advisory join this evidence to a testable decision-support path. See [protocol and physical validation acceptance plan](../research/MFPT_COMMON_MODE_PROTOCOL.md) and [offline workflow](capture_advisory.md). Completion of implementation is distinct from passing CI, finishing the new experiment, or meeting field validation requirements. At that historical milestone no new release was claimed.
 
 ## Next candidate acceptance
 
@@ -40,4 +42,4 @@ The second [accepted candidate](candidate_45fd9e8413fc.md) covers the registered
 
 ## Bounded next research release
 
-See [closure checklist](next_research_release_closure.md) for a proposed finite ten-gate scope: eight complete, two pending at adoption. This is a gate-count planning indicator, not an effort estimate or industrial readiness score. Do not extend this candidate with unrelated datasets or new features before resolving the final research and acceptance gates.
+See [closure checklist](next_research_release_closure.md) for the finite ten-gate scope, now complete. This is a gate-count planning indicator, not an effort estimate or industrial readiness score. Do not extend the completed release without a new explicit scope.

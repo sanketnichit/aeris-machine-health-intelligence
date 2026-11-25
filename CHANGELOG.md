@@ -1,12 +1,12 @@
 # Changelog
 
-## 0.2.0 — expanded research release (candidate; not published)
+## 0.2.0 — expanded research release (2026-11-25)
 
 - Registered 30 evidence reports covering all four legacy C-MAPSS subsets, training-only regime development, MFPT measurement uncertainty, calibration enrollment, common-mode error, and Paderborn source acquisition and conditional transfer.
 - Added persistent local capture and advisory review, bounded telemetry and expanded research dashboards.
 - Preserved negative results: NASA direct cross-regime transfer failed to beat age-only on three new subsets, the illustrative RUL acceptance policy retained only 52 of 418 within-subset landmark assessments, and Paderborn accepted six of 44 damaged recordings correctly but produced three healthy false suggestions per timing hypothesis.
-- The final research revision passed 434 tests in checkout and clean extraction and integrated acceptance on retry; see [acceptance record](docs/candidate_3d1450ed780f.md). The release metadata revision requires a fresh acceptance.
-- No field-calibrated diagnostic or operational authorization, and no new DOI or release claimed.
+- The final research revision passed 434 tests in checkout and clean extraction and integrated acceptance on retry; see [acceptance record](docs/candidate_3d1450ed780f.md). The exact released revision passed [fresh acceptance](https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45621480240) and versioned package validation, with 434 tests in each environment.
+- Published on [GitHub](https://github.com/sanketnichit/aeris-machine-health-intelligence/releases/tag/v0.2.0) and [Zenodo](https://doi.org/10.5281/zenodo.24533914). No field-calibrated diagnostic or operational authorization is claimed.
 
 ## 0.1.0 — research demonstrator
 

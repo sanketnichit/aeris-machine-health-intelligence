@@ -1,22 +1,22 @@
 # AERIS — Machine Health Intelligence
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24522637.svg)](https://doi.org/10.5281/zenodo.24522637) [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24533914.svg)](https://doi.org/10.5281/zenodo.24533914) [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded into a reproducible machine-health research prototype. The project uses AI-assisted development; its evidence, code, limitations and experimental decisions are documented for review.
 
 **Live demo:** https://aeris-machine-health-intelligence.streamlit.app/ (deployment availability is not guaranteed by CI).
 
-**Archived research release:** [v0.1.0](https://github.com/sanketnichit/aeris-machine-health-intelligence/releases/tag/v0.1.0) · [Zenodo DOI](https://doi.org/10.5281/zenodo.24522637) · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
+**Latest archived research release:** [v0.2.0](https://github.com/sanketnichit/aeris-machine-health-intelligence/releases/tag/v0.2.0) · [Zenodo DOI](https://doi.org/10.5281/zenodo.24533914) · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
 
-**Proposed v0.2.0:** research is complete and the accepted research revision is [documented](docs/candidate_3d1450ed780f.md). Release metadata is prepared but this version is not published. The DOI below refers only to v0.1.0.
+**Release closure:** v0.2.0 is published on GitHub and Zenodo. The defined ten-gate research-release scope is complete. See [publication details](docs/publication.md) and [closure checklist](docs/next_research_release_closure.md). The original [v0.1.0 archive](https://doi.org/10.5281/zenodo.24522637) is preserved.
 
 ## Cite AERIS
 
-Nichit, S. (2026). *AERIS: Machine Health Intelligence* (Version 0.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.24522637
+Nichit, S. (2026). *AERIS: Machine Health Intelligence* (Version 0.2.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.24533914
 
 [ORCID](https://orcid.org/0009-0000-6993-7561) · [Citation metadata](CITATION.cff) · [All versions DOI](https://doi.org/10.5281/zenodo.24522636)
 
-The DOI identifies the archived software release, not a peer-reviewed article. The development branch main includes later work that is not part of the archived revision. See [publication documentation](docs/publication.md).
+The DOI identifies the archived software release, not a peer-reviewed article. The main branch includes post-publication metadata that is not part of the archived revision. See [publication documentation](docs/publication.md).
 
 ## Local platform deployment
 
@@ -53,7 +53,7 @@ See the [scientific conclusions](research/SCIENTIFIC_CONCLUSIONS.md) for the fin
 | Measured vibration-state transition | [Calibration audit](research/TWIN_CALIBRATION_FINDINGS.md) | 54 endpoints; 1.16% lower MAE than persistence, no established superiority or physical twin calibration |
 | Virtual maintenance sensitivity | [Frozen sensitivity study](research/TWIN_SENSITIVITY_FINDINGS.md) | 54 scenarios, 500 trials each; conditional simulated costs only |
 
-The research console provides on-demand workspaces, including offline evidence tables, cost comparisons, official benchmark metrics, simulated engine replay, measured physical vibration-feature replay and a downloadable technical report. The physical replay exposes 254 published points from three previously evaluated PRONOSTIA bearings. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. All four official legacy C-MAPSS test populations have been observed; future model changes require new independent evaluation. See the post-release [NASA multi-regime findings](research/CMAPSS_MULTIREGIME_FINDINGS.md), [regime-development findings](research/CMAPSS_REGIME_DEVELOPMENT_FINDINGS.md), [measurement reliability](research/MFPT_COMMON_MODE_FINDINGS.md), [capture advisory](docs/capture_advisory.md), [Paderborn physical cohort](research/PADERBORN_COHORT_FINDINGS.md), and [bounded release closure](docs/next_research_release_closure.md).
+The research console provides on-demand workspaces, including offline evidence tables, cost comparisons, official benchmark metrics, simulated engine replay, measured physical vibration-feature replay and a downloadable technical report. The physical replay exposes 254 published points from three previously evaluated PRONOSTIA bearings. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. All four official legacy C-MAPSS test populations have been observed; future model changes require new independent evaluation. See the [NASA multi-regime findings](research/CMAPSS_MULTIREGIME_FINDINGS.md), [regime-development findings](research/CMAPSS_REGIME_DEVELOPMENT_FINDINGS.md), [measurement reliability](research/MFPT_COMMON_MODE_FINDINGS.md), [capture advisory](docs/capture_advisory.md), [Paderborn physical cohort](research/PADERBORN_COHORT_FINDINGS.md), and [bounded release closure](docs/next_research_release_closure.md).
 
 ## What is in the project
 
