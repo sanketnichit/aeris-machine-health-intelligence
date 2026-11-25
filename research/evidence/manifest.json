@@ -98,6 +98,10 @@
     "cmapss_multiregime_summary.json": {
       "blob_sha": "37103bb6dc31480bef5dcc230b64af73604d99ef",
       "bytes": 16018
+    },
+    "cmapss_regime_development_summary.json": {
+      "blob_sha": "76083afad8e8b598502f68efe12cb90d71e1496a",
+      "bytes": 41932
     }
   }
 }

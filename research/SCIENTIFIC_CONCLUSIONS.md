@@ -31,3 +31,7 @@ A separate program must establish asset-specific sensing and calibration, prospe
 ## Post-release NASA multi-regime evidence
 
 The [frozen evaluation](CMAPSS_MULTIREGIME_FINDINGS.md) adds 607 simulated official endpoints. Direct FD001 relative-HGB transfer is worse than the age reference in MAE on FD002, FD003 and FD004, with large asymmetric errors on multi-condition subsets. The fixed within-subset training procedure improves MAE versus age-only in each new subset, but does not establish a universally superior model. No candidate selection on the official test labels; all four populations are now observed. This is evidence against unqualified cross-regime deployment, not independent physical validation.
+
+## Training-only regime development
+
+The [development findings](CMAPSS_REGIME_DEVELOPMENT_FINDINGS.md) show settings support cannot identify all domain shifts. The illustrative 80-cycle width gate accepts only 52 within-subset landmark forecasts, two with overprediction greater than 20 cycles. No selective coverage guarantee or physical validation is established.

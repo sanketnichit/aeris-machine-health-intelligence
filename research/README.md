@@ -60,3 +60,7 @@ The research dashboard and generated technical report expose the registered stud
 ## NASA multi-regime official endpoints
 
 [Protocol](CMAPSS_MULTIREGIME_PROTOCOL.md) | [Findings](CMAPSS_MULTIREGIME_FINDINGS.md) | [Evidence](evidence/cmapss_multiregime_summary.json). The frozen FD001 control reproduced exactly; direct primary transfer was worse than the age reference on all three new subsets. All four official populations are now observed. No post-test tuning or field claims.
+
+## Regime-aware development
+
+[Findings](CMAPSS_REGIME_DEVELOPMENT_FINDINGS.md). Setting support detects multi-condition transfer but misses the FD003 domain difference; the fixed selective policy has low coverage. All official labels remain excluded from this development audit.
