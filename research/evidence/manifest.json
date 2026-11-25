@@ -94,6 +94,10 @@
     "mfpt_common_mode_summary.json": {
       "blob_sha": "244657a91f59fce5a4b334490cb1ff66c43e2cdb",
       "bytes": 132563
+    },
+    "cmapss_multiregime_summary.json": {
+      "blob_sha": "37103bb6dc31480bef5dcc230b64af73604d99ef",
+      "bytes": 16018
     }
   }
 }

@@ -28,6 +28,9 @@ def render_multiregime(read_report,registered):
         st.info("Frozen multi-regime protocol committed; numerical evidence is not yet registered.")
         return
     report=read_report(NAME)
+    transfer=[s for s in report["scenarios"] if s["subset"]!="FD001" and s["mode"]=="fd001_transfer"]
+    worse=sum(s["metrics"][report["primary"]]["mae"]>s["metrics"]["age_reference"]["mae"] for s in transfer)
+    st.warning(f"Direct FD001 transfer is worse than the age reference on {worse}/{len(transfer)} new subsets by MAE. Do not assume regime applicability.")
     a,b,c=st.columns(3)
     a.metric("Distinct official endpoints",report["unique_test_engines"])
     b.metric("New subset endpoints",report["new_subset_test_engines"])

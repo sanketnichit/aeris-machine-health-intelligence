@@ -27,3 +27,7 @@ The registered JSON reports, integrity manifest, execution links and frozen prot
 ## Beyond the research release
 
 A separate program must establish asset-specific sensing and calibration, prospective outcomes, operational safety, encrypted and role-based access, scale and resilience, and independent engineering review. None is a condition for honestly presenting the current research prototype, but each is necessary before claiming production readiness.
+
+## Post-release NASA multi-regime evidence
+
+The [frozen evaluation](CMAPSS_MULTIREGIME_FINDINGS.md) adds 607 simulated official endpoints. Direct FD001 relative-HGB transfer is worse than the age reference in MAE on FD002, FD003 and FD004, with large asymmetric errors on multi-condition subsets. The fixed within-subset training procedure improves MAE versus age-only in each new subset, but does not establish a universally superior model. No candidate selection on the official test labels; all four populations are now observed. This is evidence against unqualified cross-regime deployment, not independent physical validation.

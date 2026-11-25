@@ -1,0 +1,436 @@
+{
+  "scope": "official_simulated_cmapss_multiregime_endpoint_transfer_not_field_validation",
+  "revision": "ef291fb079bb3e8fcd15a239bb85540cdadd52a3",
+  "official_fd001_blob_sha": "d1731947546078ebe5792c05186bccbb253523ed",
+  "archive_sha256": "74bef434a34db25c7bf72e668ea4cd52afe5f2cf8e44367c55a82bfd91a5a34f",
+  "dataset_sha256": {
+    "train_FD001.txt": "963b5e22825b34d8b21c69e1aeb4af3e647050eb672ee8834ba4b5d91d2de0f8",
+    "test_FD001.txt": "3cda7109ce17bafb5443f2ac926cfcf88154b941b8c4cf95eb55d1ddd6f52851",
+    "RUL_FD001.txt": "a19c8ec94931949d0485bdc35118206e9c81c4547b422efb9cf86f4ceddbceca",
+    "train_FD002.txt": "dac6c4dbc4e7c1bdeb5747da3d313d05c395bb99801b44a002b26a2ba13d788f",
+    "test_FD002.txt": "de7b5bf7e998a985c378488480528b7c02cff1406a46740def362dda8d9b4e02",
+    "RUL_FD002.txt": "c851dd96a6ea6998d3c4a8f834d3c8013aa90e93a6ed950dc826ad0655b2906b",
+    "train_FD003.txt": "2abbe9968cc5e8eb091980f51b20f62bb4127336d3482cb52071d53bf23329e2",
+    "test_FD003.txt": "299babd63c8d987cef079c4a425429f33b3a34797d803bbe2ad48c29dbd0d790",
+    "RUL_FD003.txt": "df1e0566306b174a2de41c67a3e7a51877889598b78643fc3e5685259091b7cb",
+    "train_FD004.txt": "27ef6160b6a1dcb2613a88de9c239f763b223f02cdc41dc5cdedc5dc189b6218",
+    "test_FD004.txt": "1dc675fff0624bac10786927c6715b37d1297657137400d2b1a3138d777a3ba5",
+    "RUL_FD004.txt": "196b836b85a95ac7fdbbf29c5fdf1657382eafa445644d114ffaaf50dc2975e1"
+  },
+  "primary": "relative_hgb",
+  "fd001_mae_drift": {
+    "age_reference": 0,
+    "constant": 0,
+    "snapshot_hgb": 0,
+    "relative_hgb": 0,
+    "adaptive_mean": 0
+  },
+  "unique_test_engines": 707,
+  "new_subset_test_engines": 607,
+  "endpoint_evaluations": 1314,
+  "scenarios": [
+    {
+      "subset": "FD001",
+      "mode": "fd001_transfer",
+      "training_subset": "FD001",
+      "train_engines": 100,
+      "test_engines": 100,
+      "metrics": {
+        "age_reference": {
+          "mae": 29.16,
+          "rmse": 36.122499913488824,
+          "nasa_score": 7600.144366771096,
+          "mean_signed_error": 0.83,
+          "overprediction_gt20_fraction": 0.29,
+          "underprediction_gt20_fraction": 0.25
+        },
+        "constant": {
+          "mae": 39.08,
+          "rmse": 49.81987555183172,
+          "nasa_score": 166570.54261288798,
+          "mean_signed_error": 27.48,
+          "overprediction_gt20_fraction": 0.47,
+          "underprediction_gt20_fraction": 0.12
+        },
+        "snapshot_hgb": {
+          "mae": 20.020641011439128,
+          "rmse": 27.355273973252512,
+          "nasa_score": 10445.81513004891,
+          "mean_signed_error": 10.435823747109287,
+          "overprediction_gt20_fraction": 0.3,
+          "underprediction_gt20_fraction": 0.1
+        },
+        "relative_hgb": {
+          "mae": 17.34609298302107,
+          "rmse": 25.06065992282516,
+          "nasa_score": 12852.019796453165,
+          "mean_signed_error": 8.3435097993633,
+          "overprediction_gt20_fraction": 0.24,
+          "underprediction_gt20_fraction": 0.09
+        },
+        "adaptive_mean": {
+          "mae": 15.327966668941094,
+          "rmse": 21.35818310369647,
+          "nasa_score": 1635.7131193846888,
+          "mean_signed_error": 6.762081768203953,
+          "overprediction_gt20_fraction": 0.22,
+          "underprediction_gt20_fraction": 0.08
+        }
+      },
+      "paired_primary_vs_age": {
+        "mae_delta": -11.81390701697893,
+        "percentile_95_interval": [
+          -16.81434484452695,
+          -6.877866624695276
+        ],
+        "win_fraction": 0.71
+      }
+    },
+    {
+      "subset": "FD002",
+      "mode": "fd001_transfer",
+      "training_subset": "FD001",
+      "train_engines": 100,
+      "test_engines": 259,
+      "metrics": {
+        "age_reference": {
+          "mae": 30.667953667953668,
+          "rmse": 37.98999055329419,
+          "nasa_score": 66837.8282523612,
+          "mean_signed_error": -1.8416988416988418,
+          "overprediction_gt20_fraction": 0.3088803088803089,
+          "underprediction_gt20_fraction": 0.305019305019305
+        },
+        "constant": {
+          "mae": 49.003861003861005,
+          "rmse": 58.03480516068448,
+          "nasa_score": 582920.7734347718,
+          "mean_signed_error": 21.814671814671815,
+          "overprediction_gt20_fraction": 0.5173745173745173,
+          "underprediction_gt20_fraction": 0.22393822393822393
+        },
+        "snapshot_hgb": {
+          "mae": 53.19496215303015,
+          "rmse": 64.07976535822861,
+          "nasa_score": 4453647.753928894,
+          "mean_signed_error": 47.01758239732562,
+          "overprediction_gt20_fraction": 0.722007722007722,
+          "underprediction_gt20_fraction": 0.04633204633204633
+        },
+        "relative_hgb": {
+          "mae": 66.74681334804635,
+          "rmse": 77.85475216562136,
+          "nasa_score": 65804619.038877465,
+          "mean_signed_error": 62.068955816031334,
+          "overprediction_gt20_fraction": 0.806949806949807,
+          "underprediction_gt20_fraction": 0.03474903474903475
+        },
+        "adaptive_mean": {
+          "mae": 57.28880546115206,
+          "rmse": 70.01408449664079,
+          "nasa_score": 54934495.54463675,
+          "mean_signed_error": 47.41072666285905,
+          "overprediction_gt20_fraction": 0.6988416988416989,
+          "underprediction_gt20_fraction": 0.08494208494208494
+        }
+      },
+      "paired_primary_vs_age": {
+        "mae_delta": 36.07885968009267,
+        "percentile_95_interval": [
+          29.955140947363024,
+          42.015508031908915
+        ],
+        "win_fraction": 0.24324324324324326
+      }
+    },
+    {
+      "subset": "FD002",
+      "mode": "within_subset",
+      "training_subset": "FD002",
+      "train_engines": 260,
+      "test_engines": 259,
+      "metrics": {
+        "age_reference": {
+          "mae": 30.83976833976834,
+          "rmse": 37.89437413038498,
+          "nasa_score": 66910.53529833702,
+          "mean_signed_error": -1.028957528957529,
+          "overprediction_gt20_fraction": 0.3281853281853282,
+          "underprediction_gt20_fraction": 0.305019305019305
+        },
+        "constant": {
+          "mae": 49.003861003861005,
+          "rmse": 58.03480516068448,
+          "nasa_score": 582920.7734347718,
+          "mean_signed_error": 21.814671814671815,
+          "overprediction_gt20_fraction": 0.5173745173745173,
+          "underprediction_gt20_fraction": 0.22393822393822393
+        },
+        "snapshot_hgb": {
+          "mae": 20.027698513736382,
+          "rmse": 27.35956116963826,
+          "nasa_score": 24391.17053462817,
+          "mean_signed_error": 3.7030199165180697,
+          "overprediction_gt20_fraction": 0.25868725868725867,
+          "underprediction_gt20_fraction": 0.138996138996139
+        },
+        "relative_hgb": {
+          "mae": 21.246692657377665,
+          "rmse": 29.498829241624957,
+          "nasa_score": 66126.94683225433,
+          "mean_signed_error": 3.3310286100763866,
+          "overprediction_gt20_fraction": 0.23938223938223938,
+          "underprediction_gt20_fraction": 0.15444015444015444
+        },
+        "adaptive_mean": {
+          "mae": 20.611824641043,
+          "rmse": 27.853199391384784,
+          "nasa_score": 11878.447230259535,
+          "mean_signed_error": 1.181758058708002,
+          "overprediction_gt20_fraction": 0.2277992277992278,
+          "underprediction_gt20_fraction": 0.18146718146718147
+        }
+      },
+      "paired_primary_vs_age": {
+        "mae_delta": -9.59307568239068,
+        "percentile_95_interval": [
+          -12.133262365924654,
+          -6.940431230710421
+        ],
+        "win_fraction": 0.6756756756756757
+      }
+    },
+    {
+      "subset": "FD003",
+      "mode": "fd001_transfer",
+      "training_subset": "FD001",
+      "train_engines": 100,
+      "test_engines": 100,
+      "metrics": {
+        "age_reference": {
+          "mae": 30.095,
+          "rmse": 40.40454801133159,
+          "nasa_score": 22123.80593691519,
+          "mean_signed_error": -11.255,
+          "overprediction_gt20_fraction": 0.18,
+          "underprediction_gt20_fraction": 0.35
+        },
+        "constant": {
+          "mae": 41.22,
+          "rmse": 49.797389489811614,
+          "nasa_score": 154266.2617824055,
+          "mean_signed_error": 27.68,
+          "overprediction_gt20_fraction": 0.54,
+          "underprediction_gt20_fraction": 0.16
+        },
+        "snapshot_hgb": {
+          "mae": 36.46104915378507,
+          "rmse": 44.35207871317177,
+          "nasa_score": 156563.8603064304,
+          "mean_signed_error": 31.64861254115894,
+          "overprediction_gt20_fraction": 0.63,
+          "underprediction_gt20_fraction": 0.05
+        },
+        "relative_hgb": {
+          "mae": 33.20916700425412,
+          "rmse": 41.900595101765894,
+          "nasa_score": 37971.77818455855,
+          "mean_signed_error": 30.000966685566194,
+          "overprediction_gt20_fraction": 0.57,
+          "underprediction_gt20_fraction": 0
+        },
+        "adaptive_mean": {
+          "mae": 28.876087612596194,
+          "rmse": 38.23094212484688,
+          "nasa_score": 32142.719074699522,
+          "mean_signed_error": 25.482393475059098,
+          "overprediction_gt20_fraction": 0.44,
+          "underprediction_gt20_fraction": 0.02
+        }
+      },
+      "paired_primary_vs_age": {
+        "mae_delta": 3.114167004254124,
+        "percentile_95_interval": [
+          -4.564138795606417,
+          11.051028900252604
+        ],
+        "win_fraction": 0.51
+      }
+    },
+    {
+      "subset": "FD003",
+      "mode": "within_subset",
+      "training_subset": "FD003",
+      "train_engines": 100,
+      "test_engines": 100,
+      "metrics": {
+        "age_reference": {
+          "mae": 32.725,
+          "rmse": 39.28399801445877,
+          "nasa_score": 21468.55490467465,
+          "mean_signed_error": 16.635,
+          "overprediction_gt20_fraction": 0.52,
+          "underprediction_gt20_fraction": 0.13
+        },
+        "constant": {
+          "mae": 51.42,
+          "rmse": 63.14253716790291,
+          "nasa_score": 1138771.6351639999,
+          "mean_signed_error": 47.68,
+          "overprediction_gt20_fraction": 0.69,
+          "underprediction_gt20_fraction": 0.04
+        },
+        "snapshot_hgb": {
+          "mae": 25.18477104031381,
+          "rmse": 36.79482550419401,
+          "nasa_score": 471141.0072501595,
+          "mean_signed_error": 18.999947972046535,
+          "overprediction_gt20_fraction": 0.42,
+          "underprediction_gt20_fraction": 0.05
+        },
+        "relative_hgb": {
+          "mae": 20.69165161874181,
+          "rmse": 31.835617845354527,
+          "nasa_score": 290348.4834423909,
+          "mean_signed_error": 12.886403846325116,
+          "overprediction_gt20_fraction": 0.24,
+          "underprediction_gt20_fraction": 0.06
+        },
+        "adaptive_mean": {
+          "mae": 18.758893445952403,
+          "rmse": 26.234488428664662,
+          "nasa_score": 11122.836051882761,
+          "mean_signed_error": 12.873922057497252,
+          "overprediction_gt20_fraction": 0.29,
+          "underprediction_gt20_fraction": 0.04
+        }
+      },
+      "paired_primary_vs_age": {
+        "mae_delta": -12.033348381258193,
+        "percentile_95_interval": [
+          -18.267329012646336,
+          -5.2811625321550375
+        ],
+        "win_fraction": 0.71
+      }
+    },
+    {
+      "subset": "FD004",
+      "mode": "fd001_transfer",
+      "training_subset": "FD001",
+      "train_engines": 100,
+      "test_engines": 248,
+      "metrics": {
+        "age_reference": {
+          "mae": 41.421370967741936,
+          "rmse": 53.59711001176186,
+          "nasa_score": 1970276.0710923583,
+          "mean_signed_error": -19.760080645161292,
+          "overprediction_gt20_fraction": 0.22983870967741934,
+          "underprediction_gt20_fraction": 0.43548387096774194
+        },
+        "constant": {
+          "mae": 48.29435483870968,
+          "rmse": 56.95056571697836,
+          "nasa_score": 458126.7858405757,
+          "mean_signed_error": 16.447580645161292,
+          "overprediction_gt20_fraction": 0.46774193548387094,
+          "underprediction_gt20_fraction": 0.2782258064516129
+        },
+        "snapshot_hgb": {
+          "mae": 51.488512270561145,
+          "rmse": 61.15238880692656,
+          "nasa_score": 3514276.6331513664,
+          "mean_signed_error": 40.0767712236006,
+          "overprediction_gt20_fraction": 0.6814516129032258,
+          "underprediction_gt20_fraction": 0.10887096774193548
+        },
+        "relative_hgb": {
+          "mae": 63.277681909676105,
+          "rmse": 74.61328024969744,
+          "nasa_score": 46971540.86215584,
+          "mean_signed_error": 52.4603369490805,
+          "overprediction_gt20_fraction": 0.7379032258064516,
+          "underprediction_gt20_fraction": 0.10483870967741936
+        },
+        "adaptive_mean": {
+          "mae": 55.236255793568475,
+          "rmse": 67.83018053441883,
+          "nasa_score": 30841052.059791833,
+          "mean_signed_error": 40.61192758440273,
+          "overprediction_gt20_fraction": 0.6209677419354839,
+          "underprediction_gt20_fraction": 0.13306451612903225
+        }
+      },
+      "paired_primary_vs_age": {
+        "mae_delta": 21.856310941934172,
+        "percentile_95_interval": [
+          14.427751084718173,
+          29.14073454465291
+        ],
+        "win_fraction": 0.34274193548387094
+      }
+    },
+    {
+      "subset": "FD004",
+      "mode": "within_subset",
+      "training_subset": "FD004",
+      "train_engines": 249,
+      "test_engines": 248,
+      "metrics": {
+        "age_reference": {
+          "mae": 44.28225806451613,
+          "rmse": 52.97658110109872,
+          "nasa_score": 673659.7907254165,
+          "mean_signed_error": 13.19758064516129,
+          "overprediction_gt20_fraction": 0.5040322580645161,
+          "underprediction_gt20_fraction": 0.24596774193548387
+        },
+        "constant": {
+          "mae": 54.49596774193548,
+          "rmse": 65.03364513849735,
+          "nasa_score": 2986938.87579491,
+          "mean_signed_error": 35.44758064516129,
+          "overprediction_gt20_fraction": 0.6008064516129032,
+          "underprediction_gt20_fraction": 0.1975806451612903
+        },
+        "snapshot_hgb": {
+          "mae": 27.300898991954632,
+          "rmse": 38.2184845713239,
+          "nasa_score": 1261025.9363412154,
+          "mean_signed_error": 15.776624421039246,
+          "overprediction_gt20_fraction": 0.3709677419354839,
+          "underprediction_gt20_fraction": 0.10483870967741936
+        },
+        "relative_hgb": {
+          "mae": 27.696782230904926,
+          "rmse": 37.59103276444305,
+          "nasa_score": 610462.5082783735,
+          "mean_signed_error": 12.577898150051183,
+          "overprediction_gt20_fraction": 0.3629032258064516,
+          "underprediction_gt20_fraction": 0.12096774193548387
+        },
+        "adaptive_mean": {
+          "mae": 27.552650690006843,
+          "rmse": 35.52275900481953,
+          "nasa_score": 78701.45551237183,
+          "mean_signed_error": 12.842745979740629,
+          "overprediction_gt20_fraction": 0.3911290322580645,
+          "underprediction_gt20_fraction": 0.125
+        }
+      },
+      "paired_primary_vs_age": {
+        "mae_delta": -16.585475833611202,
+        "percentile_95_interval": [
+          -20.969358272043152,
+          -12.342572853291971
+        ],
+        "win_fraction": 0.7056451612903226
+      }
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45614582324",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45614582324/artifacts/15021358622",
+  "artifact_sha256": "a68d21a88664883a93d48161d5b2d80a9cc6bad85045ebea3003f41165a0d6bc",
+  "data_attribution": "NASA C-MAPSS simulated turbofan engine degradation data; original NASA catalog archive https://data.nasa.gov/docs/legacy/CMAPSSData.zip. Numerical results only."
+}

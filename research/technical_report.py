@@ -174,7 +174,7 @@ def generate_report(root=ROOT):
         for s in audit["scenarios"]:
             m=s["metrics"]
             lines.append(f"| {s['subset']} | {s['mode']} | {s['test_engines']} | {m['age_reference']['mae']:.3f} | {m[audit['primary']]['mae']:.3f} | {m['adaptive_mean']['mae']:.3f} | {m[audit['primary']]['nasa_score']:.3f} |")
-        lines.extend(["","The primary candidate was frozen before the new official evaluation. No model was selected on the new test labels. These are simulated cycles; no hardware or field claims.",""])
+        lines.extend(["","Direct FD001 transfer is worse than the age reference by MAE on all three new subsets; the fixed within-subset procedure improves on age MAE. The new official labels are observed; no model was selected on them. These are simulated cycles; no hardware or field claims.",""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
