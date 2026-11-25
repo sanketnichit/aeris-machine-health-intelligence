@@ -1,0 +1,722 @@
+{
+  "scope": "independent_rig_transfer_research_only_not_operational_validation",
+  "revision": "bbd64f5badbdf50651159edfc44e5326c5d6c1db",
+  "source_revision": "d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d",
+  "source_license": "CC BY-NC-SA 4.0",
+  "policy_source_blob_sha": "beed82d6bc07020eef0fbe50b15e60a9d461d812",
+  "score_floor": 0.00974446327636002,
+  "margin_threshold": 0.8,
+  "sample_rate_hz": 12000,
+  "window_samples": 8192,
+  "windows_per_record": 4,
+  "record_count": 17,
+  "fault_assessment": {
+    "records": 14,
+    "accepted": 14,
+    "incorrect_accepted": 0,
+    "abstained": 0,
+    "coverage": 1,
+    "retained_error": 0,
+    "forced_errors": 0,
+    "decisions": [
+      {
+        "file_id": "train_data/InnerRaceFault_vload_1.mat",
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.3449057969461518,
+        "margin": 0.9627856354748602,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/InnerRaceFault_vload_2.mat",
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.2861161330317684,
+        "margin": 0.9575284182009153,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/InnerRaceFault_vload_3.mat",
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.2753215105232599,
+        "margin": 0.9456272241812594,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/InnerRaceFault_vload_4.mat",
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.21468585508818117,
+        "margin": 0.9511684585226792,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/InnerRaceFault_vload_5.mat",
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.16723396338210259,
+        "margin": 0.9491657305581939,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "test_data/InnerRaceFault_vload_6.mat",
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.18164049738612847,
+        "margin": 0.9382965482904871,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "test_data/InnerRaceFault_vload_7.mat",
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.2397016461882715,
+        "margin": 0.9653297003863424,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/OuterRaceFault_vload_1.mat",
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.23734462890050795,
+        "margin": 0.9447282531241462,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/OuterRaceFault_vload_2.mat",
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.24772020993075933,
+        "margin": 0.9816561545585178,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/OuterRaceFault_vload_3.mat",
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.2777525143911353,
+        "margin": 0.9674370228097273,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/OuterRaceFault_vload_4.mat",
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.2258058977630062,
+        "margin": 0.9459044993139754,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "train_data/OuterRaceFault_vload_5.mat",
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.3041687312315474,
+        "margin": 0.9616021120166623,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "test_data/OuterRaceFault_vload_6.mat",
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.3269549535625358,
+        "margin": 0.9741380542218478,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": "test_data/OuterRaceFault_vload_7.mat",
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.49775342588692767,
+        "margin": 0.9923491347104252,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      }
+    ]
+  },
+  "normal_assessment": [
+    {
+      "file_id": "train_data/baseline_1.mat",
+      "candidate": "outer",
+      "top": 0.01766874041940808,
+      "margin": 0.09290382594723375,
+      "suggestion": null,
+      "reason": "competing_orders"
+    },
+    {
+      "file_id": "train_data/baseline_2.mat",
+      "candidate": "inner",
+      "top": 0.012890824612952252,
+      "margin": 0.23110276118005718,
+      "suggestion": null,
+      "reason": "competing_orders"
+    },
+    {
+      "file_id": "test_data/baseline_3.mat",
+      "candidate": "ball",
+      "top": 0.018528159869393497,
+      "margin": 0.38742629552268126,
+      "suggestion": null,
+      "reason": "competing_orders"
+    }
+  ],
+  "normal_incorrect_accepted": 0,
+  "records": [
+    {
+      "file_id": "train_data/baseline_1.mat",
+      "fault": "normal",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/baseline_1.mat",
+      "sha256": "23f63a29f61c398e930fc69221beb729bd931656508fdda41aa63a0809cf4d8f",
+      "source_git_blob": "d46daf6c6f4a43b4f22b9067d1c76add642eecb5",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 97656,
+      "shaft_rate_hz": 25,
+      "source_samples": 585936,
+      "effective_samples": 72000,
+      "load": 270,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0009610706542983677,
+          "outer": 0.000888378103998728,
+          "ball": 0.0008341522009047332
+        },
+        "envelope": {
+          "inner": 0.016027246834776538,
+          "outer": 0.01766874041940808,
+          "ball": 0.01575124852243521
+        }
+      }
+    },
+    {
+      "file_id": "train_data/baseline_2.mat",
+      "fault": "normal",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/baseline_2.mat",
+      "sha256": "5949a1330d7846c3052853d6f8248f78398713de43c250e1c978dbf9bdef11b8",
+      "source_git_blob": "6d60d2ae99630a6d6259563671534520e7f2643b",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 97656,
+      "shaft_rate_hz": 25,
+      "source_samples": 585936,
+      "effective_samples": 72000,
+      "load": 270,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0009523490932536443,
+          "outer": 0.001166158904427608,
+          "ball": 0.0006650186234892638
+        },
+        "envelope": {
+          "inner": 0.012890824612952252,
+          "outer": 0.009245997722181971,
+          "ball": 0.009911719451011144
+        }
+      }
+    },
+    {
+      "file_id": "test_data/baseline_3.mat",
+      "fault": "normal",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/test_data/baseline_3.mat",
+      "sha256": "d4b7c69d9f9ef4e9e7b4f5e9964c2dd58bc09a2787b3e3d89877ec27400eb003",
+      "source_git_blob": "9c5bcc53b1a180ce8d1da89c27d6f30be30c55ba",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 97656,
+      "shaft_rate_hz": 25,
+      "source_samples": 585936,
+      "effective_samples": 72000,
+      "load": 270,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0009436937696583888,
+          "outer": 0.0007243833894418346,
+          "ball": 0.0007110824538929189
+        },
+        "envelope": {
+          "inner": 0.009448066250082203,
+          "outer": 0.011349863528342368,
+          "ball": 0.018528159869393497
+        }
+      }
+    },
+    {
+      "file_id": "train_data/InnerRaceFault_vload_1.mat",
+      "fault": "inner",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/InnerRaceFault_vload_1.mat",
+      "sha256": "943e1f0ecef2496ee5233063765d40b8a3aab480044b36a9feaa3483e5331db9",
+      "source_git_blob": "33a65bdefdcba6d2126b4a064007a19a3c077526",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 0,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00043732877581351457,
+          "outer": 0.0002894578078498583,
+          "ball": 0.00030535894911214406
+        },
+        "envelope": {
+          "inner": 0.3449057969461518,
+          "outer": 0.012835450054387968,
+          "ball": 0.0027115241448272803
+        }
+      }
+    },
+    {
+      "file_id": "train_data/InnerRaceFault_vload_2.mat",
+      "fault": "inner",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/InnerRaceFault_vload_2.mat",
+      "sha256": "4e85dc145f230db5b687d032ba94e849d58adb85fd1c00e605efba0bc14edc92",
+      "source_git_blob": "20bf52f0be0e9d7c09c0067ba310ace3f97da9d3",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 50,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0027027493462787816,
+          "outer": 0.00016921525321364803,
+          "ball": 0.0003326963539484945
+        },
+        "envelope": {
+          "inner": 0.2861161330317684,
+          "outer": 0.012151804748096547,
+          "ball": 0.0020824316865351695
+        }
+      }
+    },
+    {
+      "file_id": "train_data/InnerRaceFault_vload_3.mat",
+      "fault": "inner",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/InnerRaceFault_vload_3.mat",
+      "sha256": "f4b100c59db948212f1603112952af332967497db66c6ebe5b4f799ac62dd4bf",
+      "source_git_blob": "b399822bfea8ef74a44ad176be5bed0846085c05",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 100,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0036336499837897993,
+          "outer": 0.00020874582949654695,
+          "ball": 0.00045030495368292707
+        },
+        "envelope": {
+          "inner": 0.2753215105232599,
+          "outer": 0.01496999476975825,
+          "ball": 0.0017262882267153525
+        }
+      }
+    },
+    {
+      "file_id": "train_data/InnerRaceFault_vload_4.mat",
+      "fault": "inner",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/InnerRaceFault_vload_4.mat",
+      "sha256": "3826a49dcac630176b82569a0b923ef16fa13db5a667171066ffac62949d498b",
+      "source_git_blob": "f041b51c34e0ee449a895328ba8f9a84f140c4e3",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 150,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.002567425187716409,
+          "outer": 0.0001381179366287313,
+          "ball": 0.0002867083081451454
+        },
+        "envelope": {
+          "inner": 0.21468585508818117,
+          "outer": 0.010483441237332615,
+          "ball": 0.003100780169073861
+        }
+      }
+    },
+    {
+      "file_id": "train_data/InnerRaceFault_vload_5.mat",
+      "fault": "inner",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/InnerRaceFault_vload_5.mat",
+      "sha256": "5eb0c3b88f4abab2d00f17f12170a25e51946adf05ff95ee79844360ccce2e92",
+      "source_git_blob": "e863248287c384dcbef2fa9bf11e12fcce1f4197",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 200,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.002270654998143877,
+          "outer": 0.00014100659066849523,
+          "ball": 0.000299498055941024
+        },
+        "envelope": {
+          "inner": 0.16723396338210259,
+          "outer": 0.008501216354386953,
+          "ball": 0.0015145279215170923
+        }
+      }
+    },
+    {
+      "file_id": "test_data/InnerRaceFault_vload_6.mat",
+      "fault": "inner",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/test_data/InnerRaceFault_vload_6.mat",
+      "sha256": "51ace00de918012668beae944442588004655f40447497944ac63d71b3aa9e64",
+      "source_git_blob": "93e30f284d707ee11747127ab90eb9ee434d957c",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 250,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0014318569821556888,
+          "outer": 0.0001300060470659649,
+          "ball": 0.00017886182099518803
+        },
+        "envelope": {
+          "inner": 0.18164049738612847,
+          "outer": 0.01120784565895687,
+          "ball": 0.002630355399459325
+        }
+      }
+    },
+    {
+      "file_id": "test_data/InnerRaceFault_vload_7.mat",
+      "fault": "inner",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/test_data/InnerRaceFault_vload_7.mat",
+      "sha256": "f9b0131045d8b05cd410fb72e8c2db06ee2eab16177cbc09657a63fef3110ef6",
+      "source_git_blob": "9547e4db77b1adc86e14697a07bae8bd5982eb27",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 300,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00109565604682816,
+          "outer": 0.00012741962592697635,
+          "ball": 0.00019241379955345939
+        },
+        "envelope": {
+          "inner": 0.2397016461882715,
+          "outer": 0.008310527891234334,
+          "ball": 0.0035127425731060645
+        }
+      }
+    },
+    {
+      "file_id": "train_data/OuterRaceFault_vload_1.mat",
+      "fault": "outer",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/OuterRaceFault_vload_1.mat",
+      "sha256": "8a1977da6f1c8dd74c7826b66e75cf9d52e1cdcf6000c1348d1b356a06781af0",
+      "source_git_blob": "a1b836d47a99be22da67682b256ec401d1391f3c",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 25,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0005011882009089643,
+          "outer": 0.0005712507321652262,
+          "ball": 0.00047351152538012897
+        },
+        "envelope": {
+          "inner": 0.013118452250932326,
+          "outer": 0.23734462890050795,
+          "ball": 0.007347496287663697
+        }
+      }
+    },
+    {
+      "file_id": "train_data/OuterRaceFault_vload_2.mat",
+      "fault": "outer",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/OuterRaceFault_vload_2.mat",
+      "sha256": "1883793fc865e10c6ddebe8a8241dd4924bfd4b4fd0ba6284affc697d2b29e6d",
+      "source_git_blob": "6584cc001790de41443800a03374e1dd0a763ad2",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 50,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0006354118286445164,
+          "outer": 0.0005891484510780743,
+          "ball": 0.0003568927980951874
+        },
+        "envelope": {
+          "inner": 0.004544141243701366,
+          "outer": 0.24772020993075933,
+          "ball": 0.003628336186487138
+        }
+      }
+    },
+    {
+      "file_id": "train_data/OuterRaceFault_vload_3.mat",
+      "fault": "outer",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/OuterRaceFault_vload_3.mat",
+      "sha256": "52410e466c71413e70b9da800d8c1fa4d74ada9bfcf14e45bbe455e1a073296d",
+      "source_git_blob": "c99ec0c3ed6f74f2da5e0f67c7fc1efad86c5af4",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 100,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.000917863984005839,
+          "outer": 0.0006476405820795572,
+          "ball": 0.00038882909955700136
+        },
+        "envelope": {
+          "inner": 0.00904444879065939,
+          "outer": 0.2777525143911353,
+          "ball": 0.004296809661193434
+        }
+      }
+    },
+    {
+      "file_id": "train_data/OuterRaceFault_vload_4.mat",
+      "fault": "outer",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/OuterRaceFault_vload_4.mat",
+      "sha256": "81b4b1dde9340774c9170633d564fdc08b8a55e38676c3033a8088a0121c6191",
+      "source_git_blob": "78486170b3d9137e58c4c7b61628d6d1308498ec",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 150,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0004021588757440267,
+          "outer": 0.0007455790983240766,
+          "ball": 0.0004929868493502127
+        },
+        "envelope": {
+          "inner": 0.012215083097347115,
+          "outer": 0.2258058977630062,
+          "ball": 0.005017789870270519
+        }
+      }
+    },
+    {
+      "file_id": "train_data/OuterRaceFault_vload_5.mat",
+      "fault": "outer",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/train_data/OuterRaceFault_vload_5.mat",
+      "sha256": "8f5b43ae668518165cd65fcb3cf30cd9e32e6f69b3c5192b4ebb93ff42c47689",
+      "source_git_blob": "ab38c83ee88650f9fb7170f7a8d3e3c1176b732a",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 200,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00031383693356383546,
+          "outer": 0.0004640570271004554,
+          "ball": 0.00034353162925998776
+        },
+        "envelope": {
+          "inner": 0.011679436869862888,
+          "outer": 0.3041687312315474,
+          "ball": 0.007049592510248621
+        }
+      }
+    },
+    {
+      "file_id": "test_data/OuterRaceFault_vload_6.mat",
+      "fault": "outer",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/test_data/OuterRaceFault_vload_6.mat",
+      "sha256": "ea167417e39b7481a9ea422fdc5f5b67b96d8521f27cf703e46c4f8cbb8cd995",
+      "source_git_blob": "be3573835a11ab1c89d667142ff2d4ed62f08751",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 250,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00030852182273283804,
+          "outer": 0.0003855545835305832,
+          "ball": 0.00035975244353120695
+        },
+        "envelope": {
+          "inner": 0.008455691280932553,
+          "outer": 0.3269549535625358,
+          "ball": 0.0055931707511812385
+        }
+      }
+    },
+    {
+      "file_id": "test_data/OuterRaceFault_vload_7.mat",
+      "fault": "outer",
+      "url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/test_data/OuterRaceFault_vload_7.mat",
+      "sha256": "38ef59f7fea41d4839d89dd9aa7ad3cab783f2e5f10960e34c81c83d3328105e",
+      "source_git_blob": "931e5ee4053c8890c4d1208b121a985dac70f5d4",
+      "centers_hz": {
+        "inner": 118.875,
+        "outer": 81.125,
+        "ball": 127.82
+      },
+      "source_rate_hz": 48828,
+      "shaft_rate_hz": 25,
+      "source_samples": 146484,
+      "effective_samples": 36000,
+      "load": 300,
+      "analyzed_samples": 32768,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0002885870551506323,
+          "outer": 0.00029820794545615096,
+          "ball": 0.00014069212410558978
+        },
+        "envelope": {
+          "inner": 0.003808244408885212,
+          "outer": 0.49775342588692767,
+          "ball": 0.0019728644289805602
+        }
+      }
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45562653072",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45562653072/artifacts/14998143379",
+  "artifact_sha256": "798b52008ac33dd46cff50cfb7e39335bbd461b373737b0a8efe4ea34c0327d2",
+  "data_attribution": "Eric Bechhoefer, Condition Based Maintenance Fault Database for Testing Diagnostics and Prognostic Algorithms (2013); MathWorks redistribution, CC BY-NC-SA 4.0. Derived numerical results, no raw waveforms.",
+  "source_url": "https://github.com/mathworks/RollingElementBearingFaultDiagnosis-Data/tree/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d"
+}
