@@ -1,0 +1,1583 @@
+{
+  "scope": "paderborn_conditional_timing_transfer_not_calibrated_validation",
+  "revision": "288e43d890a5fa56375308e24d254c8ce98691bd",
+  "cohort_blob_sha": "861030cf4f88364da14887b26b24f252ebfc09a4",
+  "documents_blob_sha": "afe874cf7b457c020d66f7ffeef0fddee06a8028",
+  "intake_blob_sha": "8debeed6066b9d90f2d562f88c4772da820ae70c",
+  "policy_blob_sha": "ed136331c413517a3d7477e0ff90a080c866d183",
+  "score_floor": 0.00974446327636002,
+  "margin_threshold": 0.8,
+  "specimens": 17,
+  "recordings": 68,
+  "nonpilot_recordings": 56,
+  "complete_geometry_candidates": 17,
+  "geometry_visually_verified": false,
+  "clock_verified": false,
+  "operational_authorization": false,
+  "overall": {
+    "nominal": {
+      "fault_records": 44,
+      "correct_accepted": 6,
+      "incorrect_accepted": 0,
+      "fault_abstained": 38,
+      "normal_records": 24,
+      "normal_incorrect_accepted": 3,
+      "reasons": {
+        "competing_orders": 59,
+        "accepted_research_suggestion": 9
+      }
+    },
+    "stored_time": {
+      "fault_records": 44,
+      "correct_accepted": 6,
+      "incorrect_accepted": 0,
+      "fault_abstained": 38,
+      "normal_records": 24,
+      "normal_incorrect_accepted": 3,
+      "reasons": {
+        "competing_orders": 59,
+        "accepted_research_suggestion": 9
+      }
+    }
+  },
+  "nonpilot": {
+    "nominal": {
+      "fault_records": 36,
+      "correct_accepted": 3,
+      "incorrect_accepted": 0,
+      "fault_abstained": 33,
+      "normal_records": 20,
+      "normal_incorrect_accepted": 3,
+      "reasons": {
+        "competing_orders": 50,
+        "accepted_research_suggestion": 6
+      }
+    },
+    "stored_time": {
+      "fault_records": 36,
+      "correct_accepted": 3,
+      "incorrect_accepted": 0,
+      "fault_abstained": 33,
+      "normal_records": 20,
+      "normal_incorrect_accepted": 3,
+      "reasons": {
+        "competing_orders": 50,
+        "accepted_research_suggestion": 6
+      }
+    }
+  },
+  "by_condition": {
+    "N15_M07_F10": {
+      "nominal": {
+        "fault_records": 11,
+        "correct_accepted": 2,
+        "incorrect_accepted": 0,
+        "fault_abstained": 9,
+        "normal_records": 6,
+        "normal_incorrect_accepted": 1,
+        "reasons": {
+          "competing_orders": 14,
+          "accepted_research_suggestion": 3
+        }
+      },
+      "stored_time": {
+        "fault_records": 11,
+        "correct_accepted": 2,
+        "incorrect_accepted": 0,
+        "fault_abstained": 9,
+        "normal_records": 6,
+        "normal_incorrect_accepted": 1,
+        "reasons": {
+          "competing_orders": 14,
+          "accepted_research_suggestion": 3
+        }
+      }
+    },
+    "N09_M07_F10": {
+      "nominal": {
+        "fault_records": 11,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "fault_abstained": 11,
+        "normal_records": 6,
+        "normal_incorrect_accepted": 0,
+        "reasons": {
+          "competing_orders": 17
+        }
+      },
+      "stored_time": {
+        "fault_records": 11,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "fault_abstained": 11,
+        "normal_records": 6,
+        "normal_incorrect_accepted": 0,
+        "reasons": {
+          "competing_orders": 17
+        }
+      }
+    },
+    "N15_M01_F10": {
+      "nominal": {
+        "fault_records": 11,
+        "correct_accepted": 3,
+        "incorrect_accepted": 0,
+        "fault_abstained": 8,
+        "normal_records": 6,
+        "normal_incorrect_accepted": 1,
+        "reasons": {
+          "competing_orders": 13,
+          "accepted_research_suggestion": 4
+        }
+      },
+      "stored_time": {
+        "fault_records": 11,
+        "correct_accepted": 3,
+        "incorrect_accepted": 0,
+        "fault_abstained": 8,
+        "normal_records": 6,
+        "normal_incorrect_accepted": 1,
+        "reasons": {
+          "competing_orders": 13,
+          "accepted_research_suggestion": 4
+        }
+      }
+    },
+    "N15_M07_F04": {
+      "nominal": {
+        "fault_records": 11,
+        "correct_accepted": 1,
+        "incorrect_accepted": 0,
+        "fault_abstained": 10,
+        "normal_records": 6,
+        "normal_incorrect_accepted": 1,
+        "reasons": {
+          "competing_orders": 15,
+          "accepted_research_suggestion": 2
+        }
+      },
+      "stored_time": {
+        "fault_records": 11,
+        "correct_accepted": 1,
+        "incorrect_accepted": 0,
+        "fault_abstained": 10,
+        "normal_records": 6,
+        "normal_incorrect_accepted": 1,
+        "reasons": {
+          "competing_orders": 15,
+          "accepted_research_suggestion": 2
+        }
+      }
+    }
+  },
+  "agreement": 68,
+  "both_accept_same": 9,
+  "specimen_summaries": [
+    {
+      "specimen": "K001",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                     pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                         mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                      mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                          \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "K002",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                     pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                         mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                      mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                          \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "K003",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                     pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                         mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                      mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                          \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 3,
+          "reasons": {
+            "accepted_research_suggestion": 3,
+            "competing_orders": 1
+          }
+        },
+        "stored_time": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 3,
+          "reasons": {
+            "accepted_research_suggestion": 3,
+            "competing_orders": 1
+          }
+        }
+      }
+    },
+    {
+      "specimen": "K004",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                     pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                         mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                      mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                          \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "K005",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                     pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                         mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                      mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                          \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "K006",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                     pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                         mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                      mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                          \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 0,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 0,
+          "normal_records": 4,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KA04",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 28.55,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 28.55,
+              "label": "Pitch circle diameter                        mm             28.55"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.945709281961471,
+        "outer": 3.054290718038529,
+        "ball": 3.993202309139262
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 3,
+          "incorrect_accepted": 0,
+          "fault_abstained": 1,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "accepted_research_suggestion": 3,
+            "competing_orders": 1
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 3,
+          "incorrect_accepted": 0,
+          "fault_abstained": 1,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "accepted_research_suggestion": 3,
+            "competing_orders": 1
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KA15",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 28.55,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 28.55,
+              "label": "Pitch circle diameter                        mm             28.55"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.945709281961471,
+        "outer": 3.054290718038529,
+        "ball": 3.993202309139262
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KA16",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                        mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 2,
+          "incorrect_accepted": 0,
+          "fault_abstained": 2,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "accepted_research_suggestion": 2,
+            "competing_orders": 2
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 2,
+          "incorrect_accepted": 0,
+          "fault_abstained": 2,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "accepted_research_suggestion": 2,
+            "competing_orders": 2
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KA22",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                        mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KA30",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                        mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KI04",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                     pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                         mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                      mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                          \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KI14",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                        mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KI16",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 28.55,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 28.55,
+              "label": "Pitch circle diameter                        mm             28.55"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.945709281961471,
+        "outer": 3.054290718038529,
+        "ball": 3.993202309139262
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KI17",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 29.05,
+              "label": "Pitch circle diameter                        mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KI18",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 29.05,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 29.05,
+              "label": "Pitch circle diameter                        mm             29.05"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 24,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 26,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.929432013769363,
+        "outer": 3.0705679862306368,
+        "ball": 4.0713457002613636
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 1,
+          "incorrect_accepted": 0,
+          "fault_abstained": 3,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 3,
+            "accepted_research_suggestion": 1
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 1,
+          "incorrect_accepted": 0,
+          "fault_abstained": 3,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 3,
+            "accepted_research_suggestion": 1
+          }
+        }
+      }
+    },
+    {
+      "specimen": "KI21",
+      "geometry_candidates": {
+        "rolling_elements": {
+          "status": "unique_candidate",
+          "value": 8,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 22,
+              "value": 8,
+              "label": "Number of rolling elements                    pc.           8"
+            }
+          ]
+        },
+        "pitch_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 28.55,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 21,
+              "value": 28.55,
+              "label": "Pitch circle diameter                        mm             28.55"
+            }
+          ]
+        },
+        "element_diameter_mm": {
+          "status": "unique_candidate",
+          "value": 6.75,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 23,
+              "value": 6.75,
+              "label": "Rolling element diameter                     mm             6.75"
+            }
+          ]
+        },
+        "angle_deg": {
+          "status": "unique_candidate",
+          "value": 0,
+          "candidates": [
+            {
+              "page": 1,
+              "line": 25,
+              "value": 0,
+              "label": "pressure angle                         \u00b0            0"
+            }
+          ]
+        }
+      },
+      "orders": {
+        "inner": 4.945709281961471,
+        "outer": 3.054290718038529,
+        "ball": 3.993202309139262
+      },
+      "metrics": {
+        "nominal": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        },
+        "stored_time": {
+          "fault_records": 4,
+          "correct_accepted": 0,
+          "incorrect_accepted": 0,
+          "fault_abstained": 4,
+          "normal_records": 0,
+          "normal_incorrect_accepted": 0,
+          "reasons": {
+            "competing_orders": 4
+          }
+        }
+      }
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45619064703",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45619064703/artifacts/15022373895",
+  "artifact_sha256": "5cad201a54c398e488dd5f2e054f35a67ec3d5daa920729582a15be70646e4c2",
+  "data_attribution": "Christian Lessmeier et al., KAt-DataCenter, Chair of Design and Drive Technology, Paderborn University, PHM Europe 2016; original publisher CC BY-NC 4.0. Structural metadata only. https://mb.uni-paderborn.de/en/kat/research/bearing-datacenter"
+}

@@ -31,7 +31,7 @@ def timebase_rows(report):
 
 def render_paderborn(read_report,registered):
     st.subheader("Paderborn physical acquisition and timing")
-    st.warning("Structural evidence only. Nominal sampling rate is not a calibrated timebase; uniform-FFT diagnostic scoring remains blocked. No physical performance is claimed.")
+    st.warning("Structural and conditional research evidence only. Nominal sampling rate is not a calibrated timebase; unqualified diagnostic scoring remains blocked. No operational performance is claimed.")
     if INTAKE not in registered:
         st.info("Structural acquisition pending.")
         return
@@ -58,3 +58,21 @@ def render_paderborn(read_report,registered):
         st.markdown(f"[Cohort execution]({cohort['run_url']})")
     else:
         st.info("Primary cohort archive inventory pending; 17 specimens predeclared.")
+
+    if "paderborn_conditional_summary.json" in registered:
+        terminal=read_report("paderborn_conditional_summary.json")
+        st.subheader("Frozen conditional diagnostic transfer")
+        st.warning("Negative transfer result: low fault coverage and false suggestions on healthy recordings. Geometry and clock remain unverified; no operational authorization.")
+        st.dataframe(conditional_rows(terminal),hide_index=True)
+        st.metric("Decision agreement",f"{terminal['agreement']}/{terminal['recordings']}")
+        st.caption("Paired timing hypotheses on the same recordings; agreement is not clock calibration.")
+        st.markdown(f"[Conditional experiment execution]({terminal['run_url']})")
+        st.download_button("Download conditional evidence",json.dumps(terminal,indent=2),"paderborn_conditional_summary.json","application/json")
+
+
+def conditional_rows(report):
+    return pd.DataFrame([{"Timing hypothesis":mode,"Fault recordings":row["fault_records"],
+                          "Correct fault":row["correct_accepted"],"Incorrect fault":row["incorrect_accepted"],
+                          "Fault abstention":row["fault_abstained"],"Healthy recordings":row["normal_records"],
+                          "Healthy false suggestions":row["normal_incorrect_accepted"]}
+                         for mode,row in report["overall"].items()])

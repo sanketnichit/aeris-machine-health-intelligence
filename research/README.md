@@ -74,3 +74,5 @@ The research dashboard and generated technical report expose the registered stud
 [Primary cohort inventory findings](PADERBORN_COHORT_FINDINGS.md): 17 specimens, 1,360 recording names, 34 fingerprinted fact sheets and measurement logs; no waveform scoring.
 
 [Specimen document findings](PADERBORN_DOCUMENTS_FINDINGS.md): all 34 PDFs inspected; initial geometry extraction incomplete and no timebase calibration.
+
+[Terminal conditional Paderborn findings](PADERBORN_CONDITIONAL_FINDINGS.md): low coverage and healthy false suggestions under both timing hypotheses; negative result registered.

@@ -208,6 +208,16 @@ def generate_report(root=ROOT):
         lines.extend(["","## Paderborn specimen document audit","",
                       f"{audit['documents']} pinned PDFs from {audit['specimens']} specimens. The initial parser found three geometry candidates per specimen but no rolling-element count.",
                       "Text candidates are not visually verified geometry or calibrated measurement metadata.",""])
+    if "paderborn_conditional_summary.json" in reports:
+        audit=reports["paderborn_conditional_summary.json"]
+        lines.extend(["","## Paderborn terminal conditional transfer","",
+                      f"{audit['specimens']} physical specimens, {audit['recordings']} recordings, two paired timing hypotheses.",
+                      "| Timing | Correct fault | Incorrect fault | Fault abstention | Healthy false suggestions |",
+                      "|---|---:|---:|---:|---:|"])
+        for mode,row in audit["overall"].items():
+            lines.append(f"| {mode} | {row['correct_accepted']}/{row['fault_records']} | {row['incorrect_accepted']} | {row['fault_abstained']} | {row['normal_incorrect_accepted']}/{row['normal_records']} |")
+        lines.extend(["",f"Decision agreement: {audit['agreement']}/{audit['recordings']}. Low coverage and healthy false suggestions: reliable transfer is not established.",
+                      "Geometry candidates are text-derived, physical clock unverified; conditional results only. No operational authorization.",""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",

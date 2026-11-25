@@ -35,3 +35,7 @@ The [frozen evaluation](CMAPSS_MULTIREGIME_FINDINGS.md) adds 607 simulated offic
 ## Training-only regime development
 
 The [development findings](CMAPSS_REGIME_DEVELOPMENT_FINDINGS.md) show settings support cannot identify all domain shifts. The illustrative 80-cycle width gate accepts only 52 within-subset landmark forecasts, two with overprediction greater than 20 cycles. No selective coverage guarantee or physical validation is established.
+
+## Terminal Paderborn conditional transfer
+
+The [conditional study](PADERBORN_CONDITIONAL_FINDINGS.md) does not establish reliable cross-platform diagnostic performance. Both timing hypotheses accepted six of 44 damaged recordings correctly and produced three false suggestions on 24 healthy recordings. All 68 decisions agreed, but physical geometry and clock calibration are not verified. No retuning was performed. The bounded research scope is closed with this negative outcome.

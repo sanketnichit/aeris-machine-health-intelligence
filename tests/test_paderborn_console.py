@@ -1,7 +1,7 @@
 from pathlib import Path
 from streamlit.testing.v1 import AppTest
 from src.evidence_console import read_report
-from src.paderborn_console import timebase_rows
+from src.paderborn_console import timebase_rows, conditional_rows
 
 
 def test_registered_timebase_is_structural_only():
@@ -20,3 +20,10 @@ def test_paderborn_workspace_renders_verified_evidence():
     assert not app.exception
     assert any(m.label=="Internally consistent channel links" and m.value=="12" for m in app.metric)
     assert any("remains blocked" in w.value for w in app.warning)
+
+
+def test_conditional_result_includes_healthy_false_suggestions():
+    rows=conditional_rows(read_report("paderborn_conditional_summary.json"))
+    assert rows["Correct fault"].tolist()==[6,6]
+    assert rows["Healthy false suggestions"].tolist()==[3,3]
+    assert rows["Fault abstention"].tolist()==[38,38]
