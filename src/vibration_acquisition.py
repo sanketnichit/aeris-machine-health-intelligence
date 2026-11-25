@@ -57,7 +57,7 @@ def statistics(values, clipping_limit):
 
 
 def analyze_capture(raw, *, asset_id, start, sample_rate_hz, window_samples, unit,
-                    clipping_limit=None):
+                    clipping_limit=None, spectrum=False):
     if not isinstance(asset_id, str) or not ASSET.fullmatch(asset_id):
         raise ValueError("Invalid asset identifier")
     if type(sample_rate_hz) is not int or not 1 <= sample_rate_hz <= 100_000:
@@ -73,6 +73,8 @@ def analyze_capture(raw, *, asset_id, start, sample_rate_hz, window_samples, uni
         origin = origin.astimezone(timezone.utc)
     except (ValueError, OverflowError) as exc:
         raise ValueError("Invalid capture start timestamp") from exc
+    if type(spectrum) is not bool or (spectrum and window_samples < 16):
+        raise ValueError("Spectral analysis requires windows of at least 16 samples")
     samples = read_capture(raw, unit)
     if not samples or len(samples) % window_samples or len(samples) // window_samples > 1000:
         raise ValueError("Expected 1 to 1000 complete nonoverlapping windows; no partial discard")
@@ -96,6 +98,11 @@ def analyze_capture(raw, *, asset_id, start, sample_rate_hz, window_samples, uni
             raise ValueError("Capture timestamp exceeds supported range") from exc
         summary = {axis: statistics([r[j] for r in samples[offset:offset + window_samples]], clipping_limit)
                    for j, axis in enumerate(AXES)}
+        if spectrum:
+            from src.vibration_spectrum import spectral_summary
+            for j, axis in enumerate(AXES):
+                summary[axis]["spectrum"] = (None if summary[axis]["quality_flags"] else
+                    spectral_summary([r[j] for r in samples[offset:offset + window_samples]], sample_rate_hz))
         windows.append({"first_sample_index": offset, "last_sample_index": index,
                         "timestamp": timestamp, "axes": summary})
         records.append({"asset_id": asset_id, "timestamp": timestamp, "measurements": {
@@ -109,7 +116,8 @@ def analyze_capture(raw, *, asset_id, start, sample_rate_hz, window_samples, uni
             "sample_count": len(samples), "window_count": len(windows), "flagged_windows": flagged,
             "declared_clipping_limit_m_s2": clipping_limit,
             "clock_basis": "declared_uniform_sampling_unverified", "rms_basis": "includes_dc",
-            "eligible_for_queue": flagged == 0, "windows": windows, "batch": batch}
+            "eligible_for_queue": flagged == 0, "spectral_analysis_requested": spectrum,
+            "windows": windows, "batch": batch}
 
 
 def queue_capture(path, analysis):
@@ -129,13 +137,14 @@ def main():
     parser.add_argument("--unit", choices=tuple(UNIT_SCALE), required=True)
     parser.add_argument("--clip-limit", type=float)
     parser.add_argument("--queue", type=Path)
+    parser.add_argument("--spectrum", action="store_true", help="Include descriptive FFT features (at least 16 samples per window)")
     args = parser.parse_args()
     with args.capture.open("rb") as source:
         raw = source.read(MAX_CAPTURE_BYTES + 1)
     try:
         analysis = analyze_capture(raw, asset_id=args.asset, start=args.start,
                                    sample_rate_hz=args.rate, window_samples=args.window,
-                                   unit=args.unit, clipping_limit=args.clip_limit)
+                                   unit=args.unit, clipping_limit=args.clip_limit, spectrum=args.spectrum)
         result = None
         if args.queue is not None and analysis["eligible_for_queue"]:
             result = queue_capture(args.queue, analysis)
