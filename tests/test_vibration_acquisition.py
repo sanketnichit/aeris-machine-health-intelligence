@@ -110,3 +110,27 @@ def test_capture_to_authenticated_api(tmp_path, monkeypatch):
         server.server_close()
         thread.join(timeout=10)
     assert not thread.is_alive()
+
+
+def test_optional_spectrum_keeps_telemetry_contract():
+    import math
+    rows = ["horizontal,vertical"]
+    for i in range(64):
+        rows.append(f"{math.sin(2 * math.pi * 8 * i / 64)},{math.sin(2 * math.pi * 12 * i / 64)}")
+    raw = ("\n".join(rows) + "\n").encode()
+    plain = analyze(raw, sample_rate_hz=64, window_samples=64, unit="m/s2")
+    extended = analyze(raw, sample_rate_hz=64, window_samples=64, unit="m/s2", spectrum=True)
+    assert plain["batch"] == extended["batch"]
+    assert plain["eligible_for_queue"] == extended["eligible_for_queue"]
+    assert extended["windows"][0]["axes"]["horizontal"]["spectrum"]["dominant_frequency_hz"] == 8
+    assert extended["windows"][0]["axes"]["vertical"]["spectrum"]["dominant_frequency_hz"] == 12
+
+
+def test_spectrum_quality_withholding():
+    raw = ("horizontal,vertical\n" + "1,-1\n1,1\n" * 16).encode()
+    result = analyze(raw, sample_rate_hz=32, window_samples=32, spectrum=True)
+    assert result["windows"][0]["axes"]["horizontal"]["spectrum"] is None
+    assert result["windows"][0]["axes"]["vertical"]["spectrum"] is not None
+    assert not result["eligible_for_queue"]
+    with pytest.raises(ValueError, match="at least 16"):
+        analyze(spectrum=True)
