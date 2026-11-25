@@ -147,6 +147,15 @@ def generate_report(root=ROOT):
             rows = [s["composed"] for s in audit["scenarios"] if s["assumed_bias_bound"] == bound]
             lines.append(f"| {bound:.0%} | {sum(s['correct_accepted'] for s in rows)} | {sum(s['incorrect_accepted'] for s in rows)} | {sum(s['abstained'] for s in rows)} |")
         lines.extend(["", "Externally declared bounds are not sensor calibration. The same 17 physical recordings recur across synthetic metadata perturbations; these studies are not independent population validation.", ""])
+    if "mfpt_measurement_fusion_summary.json" in reports:
+        audit = reports["mfpt_measurement_fusion_summary.json"]
+        lines.extend(["", "## MFPT two-channel measurement fusion", "",
+                      f"{audit['record_scenario_count']} repeated recording-scenario comparisons.",
+                      "| Secondary mode | Primary correct | Fused correct | Fused incorrect | Accepted outside reference |", "|---|---:|---:|---:|---:|"])
+        for mode in sorted({s["secondary_mode"] for s in audit["scenarios"]}):
+            rows = [s for s in audit["scenarios"] if s["secondary_mode"] == mode]
+            lines.append(f"| {mode} | {sum(s['primary']['correct_accepted'] for s in rows)} | {sum(s['fused']['correct_accepted'] for s in rows)} | {sum(s['fused']['incorrect_accepted'] for s in rows)} | {sum(s['accepted_without_reference'] for s in rows)} |")
+        lines.extend(["", "Compatible intervals can exclude the reference speed under shared bias. The second channel is simulated, not physically measured; agreement is not calibration.", ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",

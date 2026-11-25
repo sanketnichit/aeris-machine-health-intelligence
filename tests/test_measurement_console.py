@@ -3,7 +3,7 @@ from pathlib import Path
 from streamlit.testing.v1 import AppTest
 
 from src.evidence_console import read_report
-from src.measurement_console import measurement_rows, bias_rows, possibility_rows, witness_counts
+from src.measurement_console import measurement_rows, bias_rows, possibility_rows, witness_counts, fusion_rows
 
 
 def test_measurement_width_rows_preserve_counts_and_containment():
@@ -39,10 +39,20 @@ def test_measurement_workspace_all_audits():
     app.sidebar.radio(key="research_page").set_value("MFPT measurement reliability").run()
     assert not app.exception
     assert any(m.label == "Recovered correct suggestions" and m.value == "6" for m in app.metric)
-    for choice in ("Counterexamples", "Diagnostic possibilities", "Measurement width", "Systematic bias"):
+    for choice in ("Counterexamples", "Diagnostic possibilities", "Measurement width", "Systematic bias", "Two-channel fusion"):
         app.radio(key="mfpt_measurement_audit").set_value(choice).run()
         assert not app.exception
     app.radio(key="mfpt_measurement_audit").set_value("Measurement width").run()
     app.selectbox(key="mfpt_measurement_error").set_value(-.05).run()
     assert not app.exception
     assert any("biased reading" in w.value for w in app.warning)
+
+
+def test_fusion_rows_expose_false_agreement():
+    rows = fusion_rows(read_report("mfpt_measurement_fusion_summary.json"))
+    assert rows["Fused correct"].sum() == 348
+    assert rows["Fused incorrect"].sum() == 0
+    assert rows["Accepted outside reference"].sum() == 74
+    shared = rows.loc[rows["Secondary mode"] == "shared_bias"].iloc[0]
+    assert shared["Compatible outside reference"] == 136
+    assert shared["Conflicts"] == 0

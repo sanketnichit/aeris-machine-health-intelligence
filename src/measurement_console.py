@@ -53,6 +53,21 @@ def witness_counts(report):
     return groups
 
 
+def fusion_rows(report):
+    rows = []
+    for mode in sorted({s["secondary_mode"] for s in report["scenarios"]}):
+        selected = [s for s in report["scenarios"] if s["secondary_mode"] == mode]
+        rows.append({"Secondary mode": mode,
+                     "Fault assessments": sum(s["fused"]["fault_records"] for s in selected),
+                     "Primary correct": sum(s["primary"]["correct_accepted"] for s in selected),
+                     "Fused correct": sum(s["fused"]["correct_accepted"] for s in selected),
+                     "Fused incorrect": sum(s["fused"]["incorrect_accepted"] for s in selected),
+                     "Conflicts": sum(s["conflicts"] for s in selected),
+                     "Compatible outside reference": sum(s["nonempty_without_reference"] for s in selected),
+                     "Accepted outside reference": sum(s["accepted_without_reference"] for s in selected)})
+    return pd.DataFrame(rows)
+
+
 def evidence_link(report, filename):
     st.caption(report["scope"])
     st.markdown(f"[Execution evidence]({report['run_url']}) | revision `{report['revision']}`")
@@ -64,7 +79,7 @@ def render_measurement_reliability(read_report):
     st.subheader("MFPT diagnostic measurement reliability")
     st.warning("The same 17 physical recordings recur across these retrospective synthetic metadata scenarios. Counts are not independent field samples. No safe sensor specification is established.")
     choice = st.radio("Audit", ["Stability refinement", "Counterexamples", "Diagnostic possibilities",
-                                "Measurement width", "Systematic bias"], key="mfpt_measurement_audit")
+                                "Measurement width", "Systematic bias", "Two-channel fusion"], key="mfpt_measurement_audit")
     if choice == "Stability refinement":
         name = "mfpt_breakpoint_summary.json"
         report = read_report(name)
@@ -105,11 +120,19 @@ def render_measurement_reliability(read_report):
         st.bar_chart(rows.set_index("Width (%)")[["Correct", "Incorrect", "Withheld"]])
         st.dataframe(rows, hide_index=True)
         st.warning("Narrowing uncertainty does not correct a biased reading; accepted suggestions outside reference containment can be wrong.")
-    else:
+    elif choice == "Systematic bias":
         name = "mfpt_bias_budget_summary.json"
         report = read_report(name)
         rows = bias_rows(report)
         st.bar_chart(rows.set_index("Bias bound (%)")[["Correct", "Incorrect", "Withheld"]])
         st.dataframe(rows, hide_index=True)
         st.warning("An assumed bias bound is not a calibrated sensor specification. Unknown bias fails closed in the research guard.")
+    else:
+        name = "mfpt_measurement_fusion_summary.json"
+        report = read_report(name)
+        rows = fusion_rows(report)
+        st.bar_chart(rows.set_index("Secondary mode")[["Primary correct", "Fused correct"]])
+        st.dataframe(rows, hide_index=True)
+        st.metric("Accepted outside reference containment", int(rows["Accepted outside reference"].sum()))
+        st.warning("Agreement is not calibration. Shared bias can yield compatible measurements that exclude the reference speed. The second channel is simulated.")
     evidence_link(report, name)
