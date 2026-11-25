@@ -165,6 +165,16 @@ def generate_report(root=ROOT):
             rows = [s for s in audit["scenarios"] if s["assumed_common_bound"] == bound]
             lines.append(f"| {bound:.0%} | {sum(s['common_guard']['correct_accepted'] for s in rows)} | {sum(s['common_guard']['incorrect_accepted'] for s in rows)} | {sum(s['nonempty_without_reference'] for s in rows)} | {sum(s['accepted_without_reference'] for s in rows)} |")
         lines.extend(["", "A shared-error bound requires independently established calibration. Repeated metadata perturbations are not independent field observations.", ""])
+    if "cmapss_multiregime_summary.json" in reports:
+        audit=reports["cmapss_multiregime_summary.json"]
+        lines.extend(["","## NASA C-MAPSS multi-regime evaluation","",
+                      f"{audit['unique_test_engines']} distinct official simulated endpoints, including {audit['new_subset_test_engines']} new subset endpoints; {audit['endpoint_evaluations']} scenario endpoint comparisons.",
+                      "| Subset | Training mode | Test engines | Age MAE | Frozen primary MAE | Adaptive MAE | Primary NASA score |",
+                      "|---|---|---:|---:|---:|---:|---:|"])
+        for s in audit["scenarios"]:
+            m=s["metrics"]
+            lines.append(f"| {s['subset']} | {s['mode']} | {s['test_engines']} | {m['age_reference']['mae']:.3f} | {m[audit['primary']]['mae']:.3f} | {m['adaptive_mean']['mae']:.3f} | {m[audit['primary']]['nasa_score']:.3f} |")
+        lines.extend(["","The primary candidate was frozen before the new official evaluation. No model was selected on the new test labels. These are simulated cycles; no hardware or field claims.",""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",

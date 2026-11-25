@@ -6,6 +6,10 @@ on:
     paths:
       - app.py
       - src/evidence_console.py
+      - src/measurement_console.py
+      - src/calibration_console.py
+      - src/multiregime_console.py
+      - research/evidence/**
       - src/vibration_console.py
       - src/vibration_acquisition.py
       - src/vibration_spectrum.py

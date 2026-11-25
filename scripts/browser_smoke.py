@@ -14,6 +14,15 @@ PAGES = [
     ("Adaptive reliability", "Adaptive forecasting and reliability"),
     ("Independent replication", "Independent physical method replication"),
     ("Physical vibration replay", "Physical bearing vibration replay"),
+    ("CWRU spectral audit", "Measured bearing spectral audit"),
+    ("CWRU diagnostic extension", "Expanded bearing diagnostic audit"),
+    ("CWRU selective diagnosis", "Selective bearing diagnosis audit"),
+    ("MFPT cross-platform transfer", "Independent MFPT cross-platform transfer"),
+    ("MFPT sensor robustness", "MFPT sensor robustness audit"),
+    ("MFPT order uncertainty", "Continuous frequency uncertainty audit"),
+    ("MFPT measurement reliability", "MFPT diagnostic measurement reliability"),
+    ("Calibration decision lab", "Calibration and common-mode decision lab"),
+    ("NASA multi-regime evaluation", "NASA C-MAPSS multi-regime evaluation"),
     ("Technical report", "Technical evidence report"),
 ]
 
@@ -35,16 +44,24 @@ def run(url, output):
             expect(page.get_by_text("Research evidence integrity check failed", exact=False)).to_have_count(0)
             expect(page.get_by_test_id("stException")).to_have_count(0)
             page.screenshot(path=str(output / f"{number:02d}-{name.lower().replace(' ', '-')}.png"), full_page=True, animations="disabled")
+        page.get_by_text("MFPT measurement reliability", exact=True).first.click()
+        page.get_by_text("Common-mode error", exact=True).first.click()
+        expect(page.get_by_text("A shared-error bound must come from independent calibration", exact=False)).to_be_visible(timeout=30000)
+        expect(page.get_by_test_id("stException")).to_have_count(0)
+        page.get_by_text("Calibration decision lab", exact=True).first.click()
+        page.get_by_text("Altered enrollment", exact=True).first.click()
+        expect(page.get_by_text("calibration_enrollment_mismatch", exact=False).first).to_be_visible(timeout=30000)
+        expect(page.get_by_test_id("stException")).to_have_count(0)
         page.get_by_text("Virtual degradation laboratory",exact=True).first.click()
         expect(page.get_by_role("heading",name="Paired maintenance comparison")).to_be_visible(timeout=30000)
         expect(page.get_by_test_id("stException")).to_have_count(0)
-        page.screenshot(path=str(output/"10-virtual-degradation-laboratory.png"),full_page=True,animations="disabled")
+        page.screenshot(path=str(output/f"{len(PAGES)+1:02d}-virtual-degradation-laboratory.png"),full_page=True,animations="disabled")
         page.get_by_text("Vibration laboratory", exact=True).first.click()
         expect(page.get_by_role("heading", name="AERIS | Vibration Laboratory", exact=True)).to_be_visible(timeout=30000)
         expect(page.get_by_text("48 Hz", exact=True)).to_be_visible()
         expect(page.get_by_role("heading", name="Frequency spectrum")).to_be_visible()
         expect(page.get_by_test_id("stException")).to_have_count(0)
-        page.screenshot(path=str(output/"11-vibration-laboratory.png"), full_page=True, animations="disabled")
+        page.screenshot(path=str(output/f"{len(PAGES)+2:02d}-vibration-laboratory.png"), full_page=True, animations="disabled")
         page.get_by_text("vertical", exact=True).first.click()
         expect(page.get_by_text("80 Hz", exact=True)).to_be_visible(timeout=30000)
         expect(page.get_by_test_id("stException")).to_have_count(0)

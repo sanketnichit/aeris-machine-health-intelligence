@@ -8,6 +8,7 @@ import streamlit as st
 from research.verify_evidence import verify
 from src.measurement_console import render_measurement_reliability
 from src.calibration_console import render_calibration_lab
+from src.multiregime_console import render_multiregime
 
 EVIDENCE = Path(__file__).resolve().parents[1] / "research" / "evidence"
 
@@ -456,6 +457,7 @@ def render_evidence():
         "MFPT order uncertainty": render_mfpt_order_uncertainty,
         "MFPT measurement reliability": lambda: render_measurement_reliability(read_report),
         "Calibration decision lab": render_calibration_lab,
+        "NASA multi-regime evaluation": lambda: render_multiregime(read_report, {r["file"] for r in registered}),
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
