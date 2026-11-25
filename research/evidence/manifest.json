@@ -74,6 +74,10 @@
     "mfpt_counterexample_summary.json": {
       "blob_sha": "6a4bd88383cbd014128d6661041fbbd04b507cda",
       "bytes": 15449
+    },
+    "mfpt_possibility_summary.json": {
+      "blob_sha": "fe429da81b06fb778454582109582edab98bcce6",
+      "bytes": 19172
     }
   }
 }
