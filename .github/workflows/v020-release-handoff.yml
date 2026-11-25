@@ -1,0 +1,107 @@
+name: AERIS v0.2.0 approved draft and branch archival
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/v020-release-handoff.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: aeris-v020-handoff
+  cancel-in-progress: false
+jobs:
+  release-draft:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      ACCEPTED_SHA: 5e6aba8f01f0a35347698c4c45661b09db7a92ca
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 5e6aba8f01f0a35347698c4c45661b09db7a92ca
+          persist-credentials: false
+      - name: Validate exact accepted release and package
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$REPO" = sanketnichit/aeris-machine-health-intelligence
+          test "$(git rev-parse HEAD)" = "$ACCEPTED_SHA"
+          test "$(cat VERSION)" = 0.2.0
+          for run in 45621480183 45621480240 45621480466; do
+            test "$(gh run view "$run" --repo "$REPO" --json headSha --jq .headSha)" = "$ACCEPTED_SHA"
+            test "$(gh run view "$run" --repo "$REPO" --json conclusion --jq .conclusion)" = success
+          done
+          gh api "repos/$REPO/actions/artifacts/15025206458/zip" > release-artifact.zip
+          echo "9ff2b1f242abf44130c74a805124be647a07061e7bf4a83e785537dbffaab9bd  release-artifact.zip" | sha256sum -c -
+          mkdir dist
+          unzip -q release-artifact.zip -d dist
+          test "$(cat dist/revision.txt)" = "$ACCEPTED_SHA"
+          test "$(unzip -p dist/aeris-0.2.0.zip aeris-0.2.0/VERSION)" = 0.2.0
+          (cd dist && sha256sum -c SHA256SUMS)
+          test -f dist/aeris-0.2.0.zip
+          test -f dist/AERIS_technical_report.md
+          test -f dist/environment.txt
+          test -f dist/SHA256SUMS
+      - name: Create draft only; never replace a tag or release
+        shell: bash
+        run: |
+          set -euo pipefail
+          if gh release view v0.2.0 --repo "$REPO" >/dev/null 2>&1; then
+            echo "Release exists; refusing replacement."
+            exit 1
+          fi
+          if gh api "repos/$REPO/git/ref/tags/v0.2.0" >/dev/null 2>&1; then
+            echo "Tag exists; refusing replacement."
+            exit 1
+          fi
+          gh release create v0.2.0 dist/aeris-0.2.0.zip dist/AERIS_technical_report.md dist/SHA256SUMS dist/revision.txt dist/environment.txt --repo "$REPO" --target "$ACCEPTED_SHA" --draft --title "AERIS v0.2.0 — Expanded Research Release" --notes-file docs/next_research_release_review.md
+          gh release view v0.2.0 --repo "$REPO" --json isDraft,tagName,targetCommitish,url,assets
+  archive-branches:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Archive divergent tips and delete only reviewed obsolete branches atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$REPO" = sanketnichit/aeris-machine-health-intelligence
+          test "$(gh api "repos/$REPO" --jq .default_branch)" = main
+          gh api --paginate "repos/$REPO/pulls?state=open&per_page=100" --jq '.[] | [.head.ref,.base.ref] | @tsv' > open-pr-refs.txt
+          for branch in aeris-v1.0-freeze research/aeris-next reorg-core-extended-validation research/multiseed-ablation-2026-09-29; do
+            if awk -F '\t' -v b="$branch" '$1==b || $2==b {found=1} END {exit !found}' open-pr-refs.txt; then
+              echo "Open pull request references $branch; refusing cleanup."
+              exit 1
+            fi
+          done
+          git fetch origin --prune
+          test "$(git rev-parse refs/remotes/origin/aeris-v1.0-freeze)" = 3e2614a563e7c027d34c2ca747bdaa98def81708
+          test "$(git rev-parse refs/remotes/origin/research/aeris-next)" = 3babed76c07990b7fc4a89bb7a8d6bfc9217f9c0
+          test "$(git rev-parse refs/remotes/origin/reorg-core-extended-validation)" = 13182c8325a523f12bba4c482bea9f7e40da9afa
+          test "$(git rev-parse refs/remotes/origin/research/multiseed-ablation-2026-09-29)" = b18262e73fb3e129495106e181fee8739b9f0499
+          git merge-base --is-ancestor 3e2614a563e7c027d34c2ca747bdaa98def81708 refs/remotes/origin/main
+          git merge-base --is-ancestor 3babed76c07990b7fc4a89bb7a8d6bfc9217f9c0 refs/remotes/origin/main
+          test -z "$(git ls-remote --tags origin refs/tags/archive/reorg-validation refs/tags/archive/multiseed-ablation)"
+          git tag archive/reorg-validation 13182c8325a523f12bba4c482bea9f7e40da9afa
+          git tag archive/multiseed-ablation b18262e73fb3e129495106e181fee8739b9f0499
+          git push --atomic \
+            --force-with-lease=refs/heads/aeris-v1.0-freeze:3e2614a563e7c027d34c2ca747bdaa98def81708 \
+            --force-with-lease=refs/heads/research/aeris-next:3babed76c07990b7fc4a89bb7a8d6bfc9217f9c0 \
+            --force-with-lease=refs/heads/reorg-core-extended-validation:13182c8325a523f12bba4c482bea9f7e40da9afa \
+            --force-with-lease=refs/heads/research/multiseed-ablation-2026-09-29:b18262e73fb3e129495106e181fee8739b9f0499 \
+            origin refs/tags/archive/reorg-validation refs/tags/archive/multiseed-ablation \
+            :refs/heads/aeris-v1.0-freeze :refs/heads/research/aeris-next :refs/heads/reorg-core-extended-validation :refs/heads/research/multiseed-ablation-2026-09-29
+          git ls-remote --heads origin
+          git ls-remote --tags origin refs/tags/archive/reorg-validation refs/tags/archive/multiseed-ablation
