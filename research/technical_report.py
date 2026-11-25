@@ -68,6 +68,13 @@ def generate_report(root=ROOT):
         for group, metrics in env["by_group"].items():
             lines.append(f"| {group} | {raw['by_group'][group]['expected_first']}/{metrics['records']} | {metrics['expected_first']}/{metrics['records']} |")
         lines.extend(["", "No threshold selected. Small rolling-element defects fail all four envelope rankings. Correlated same-rig recordings and differing acquisition rates constrain interpretation; no diagnostic accuracy or field validation claim.", ""])
+    if "cwru_selective_summary.json" in reports:
+        selective = reports["cwru_selective_summary.json"]
+        e = selective["evaluation"]
+        lines.extend(["", "## CWRU selective diagnosis (post-v0.1.0)", "",
+                      f"Development-selected margin threshold {selective['policy']['margin_threshold']:.2f}; evaluation coverage {e['coverage']:.0%}.",
+                      f"Accepted {e['accepted']}/{e['records']}, incorrect accepted {e['incorrect_accepted']}, withheld {e['abstained']}; forced ranking errors {e['forced_errors']}.",
+                      "All four rolling-element cases remain unresolved. Zero observed retained errors does not establish zero risk. Same-rig severity transfer, no held-out normal controls or operational calibration.", ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
