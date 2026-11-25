@@ -27,3 +27,5 @@ python -m src.advisory_review --journal review.sqlite review --advisory-id <id> 
 ```
 
 No advice is injected into fleet incidents, threshold policies or equipment controls. The production-adjacent telemetry API is unchanged. Do not treat the local review status as permission to operate equipment.
+
+For optional read-only dashboard inspection, set `AERIS_ADVISORY_JOURNAL_PATH` to the trusted local journal before launching Streamlit. The calibration decision lab then displays stored records and review notes. It cannot create a journal or change a review. Do not expose this local dashboard to unauthorized users.

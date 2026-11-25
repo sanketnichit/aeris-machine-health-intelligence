@@ -1,11 +1,16 @@
 """Synthetic, non-operational decision-support demonstration."""
 import hashlib
 import json
+import os
+import sqlite3
+
+import pandas as pd
 
 import numpy as np
 import streamlit as st
 
 from src.calibration_provenance import advisory
+from src.advisory_review import list_advisories
 
 
 def example_records(common_bound, missing=False, expired=False):
@@ -60,3 +65,29 @@ def render_calibration_lab():
         st.caption("The modeled reference scale is displayed only for this synthetic demonstration.")
         st.write(f"Reference contained in this fixture: {lo-1e-12 <= 1/(1+primary/100) <= hi+1e-12}")
     st.caption("Operational authorization: false. No machine or real sensor is connected.")
+
+
+    with st.expander("Local capture-advisory review journal"):
+        path=os.environ.get("AERIS_ADVISORY_JOURNAL_PATH")
+        if not path:
+            st.info("Local review journal is disabled. Configure a trusted local database explicitly.")
+        else:
+            st.warning("Read-only local research review journal. Anyone with dashboard access can inspect configured records. Review does not authorize operation.")
+            try:
+                rows=list_advisories(path)
+            except (OSError,sqlite3.Error,ValueError,TypeError,KeyError):
+                st.error("Advisory journal integrity or availability check failed.")
+                return
+            if not rows:
+                st.info("No capture advisories recorded.")
+                return
+            table=pd.DataFrame([{"Asset":r["asset_id"],"Advisory":r["advisory_id"],
+                                 "Suggestion":r["report"]["suggestion"] or "Withheld",
+                                 "Reason":r["report"]["reason"],
+                                 "Review":r["review_status"],"Recorded":r["created_at"]} for r in rows])
+            st.dataframe(table,hide_index=True)
+            ident=st.selectbox("Inspect recorded advisory",list(table["Advisory"]),key="capture_review_id")
+            record=next(r for r in rows if r["advisory_id"]==ident)
+            st.json(record,expanded=False)
+            st.download_button("Download advisory record",json.dumps(record,indent=2),
+                               f"advisory-{ident}.json","application/json")
