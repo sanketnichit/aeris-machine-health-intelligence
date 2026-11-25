@@ -6,9 +6,10 @@ import os
 import sqlite3
 from contextlib import closing
 from pathlib import Path
+from http.client import HTTPException
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
-from urllib.request import HTTPRedirectHandler, Request, build_opener
+from urllib.request import HTTPRedirectHandler, ProxyHandler, Request, build_opener
 
 from src.telemetry_contract import validate_batch
 
@@ -80,7 +81,7 @@ def drain(path, base="http://127.0.0.1:8080", limit=100):
     token = os.environ.get("AERIS_API_TOKEN")
     if token:
         headers["Authorization"] = "Bearer " + token
-    opener = build_opener(NoRedirect())
+    opener = build_opener(ProxyHandler({}), NoRedirect())
     delivered = 0
     blocked = None
     with closing(connect(path)) as db:
@@ -108,7 +109,7 @@ def drain(path, base="http://127.0.0.1:8080", limit=100):
                 blocked = f"http_{exc.code}"
                 exc.close()
                 break
-            except (URLError, OSError, ValueError):
+            except (URLError, OSError, ValueError, HTTPException):
                 blocked = "unconfirmed_delivery"
                 break
             with db:
