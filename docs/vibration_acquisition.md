@@ -36,6 +36,14 @@ An exactly constant axis or an axis reaching an optional declared absolute clipp
 
 Save the JSON analysis separately if provenance is required; only the normalized RMS measurements and timestamps are persisted in the queue and API. Raw samples, quality diagnostics and capture digest are not attached to the telemetry schema. No operational life estimate or equipment control is provided.
 
+## Optional spectral intelligence
+
+Add `--spectrum` with a window of at least 16 samples to include per-axis FFT features in the JSON analysis report. The periodic Hann taper uses a window-weighted mean subtraction and mean-square normalization; the standalone `spectral_summary` function also supports rectangular weighting. The one-sided spectrum doubles positive-frequency interior bins, not DC or an even-length Nyquist bin. Frequency resolution is bin spacing (sample rate divided by sample count), not a guarantee of resolving nearby physical tones. The reported dominant frequency is a discrete maximum-power bin without interpolation.
+
+Default band edges are 0, one-quarter Nyquist, one-half Nyquist and Nyquist. Bands partition FFT bins, with lower-inclusive/upper-exclusive boundaries except the final inclusive Nyquist endpoint. Band powers sum to the reported window-normalized AC mean square; fractions, centroid and entropy are undefined when power is zero. Hann weighting changes the estimand relative to ordinary AC RMS. No amplitude correction or calibrated fault-frequency interpretation is performed.
+
+Spectra are withheld for flagged axes. Optional spectral analysis does not change the telemetry contract or queue eligibility; these diagnostics are not persisted by the API. They do not establish physical bearing fault types, measured sensor bandwidth, anti-alias filtering or predictive accuracy.
+
 ## Next gates
 
-Validate complete capture-to-queue-to-API replay, frequency-domain processing against known synthetic signals, provenance retention and independent measured sensor captures. The published v0.1.0 archive is unchanged.
+Validate complete capture-to-queue-to-API replay, independent spectral validation beyond synthetic regression signals, provenance retention and independent measured sensor captures. The published v0.1.0 archive is unchanged.
