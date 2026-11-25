@@ -1,0 +1,39 @@
+name: AERIS CWRU selective diagnosis
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-cwru-selective.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_cwru_selective.py tests/test_cwru_extension.py
+      - name: Acquire fixed severity-held-out files
+        run: |
+          mkdir -p "$RUNNER_TEMP/cwru" cwru-selective-evidence
+          for id in 209 210 211 212 222 223 224 225 234 235 236 237; do
+            curl --fail --location --retry 2 --max-time 60 --max-filesize 20000000 "https://engineering.case.edu/sites/default/files/$id.mat" -o "$RUNNER_TEMP/cwru/$id.mat"
+          done
+      - name: Execute frozen selective audit
+        run: |
+          python -m research.cwru_selective "$RUNNER_TEMP/cwru" --output cwru-selective-evidence/summary.json
+          python -m pip freeze > cwru-selective-evidence/environment.txt
+          git rev-parse HEAD > cwru-selective-evidence/revision.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cwru-selective-evidence
+          path: cwru-selective-evidence/
+          if-no-files-found: error
