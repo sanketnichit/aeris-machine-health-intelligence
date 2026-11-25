@@ -1,0 +1,7 @@
+# Paderborn specimen document audit
+
+The 17 primary archives contain 34 registered PDFs. Reacquire exact archive bytes and verify each PDF against its registered SHA-256 and size before extracting layout text using Poppler. Inspect every specimen fact sheet for explicitly named rolling-element count, pitch diameter, rolling-element diameter and pressure/contact angle with expected units. Report candidate values and page/line positions, missing fields and conflicting candidates. Measurement log keyword page indices are discovery pointers only, not extracted clock semantics. No full text, figures, waveforms or raw PDFs are redistributed.
+
+Text extraction alone does not establish geometry: visually review the actual source tables, verify the labels/units and applicability to each bearing. Missing or conflicting values remain unresolved. No sample rate, clock calibration or RPM interpretation is inferred from keywords. No scoring and no threshold changes. The publisher's fact-sheet taxonomy explicitly distinguishes manufacturer-specific geometry: https://mb.uni-paderborn.de/en/kat/research/bearing-datacenter/bearing-damage.
+
+If candidate geometry is available, the next phase will require source-backed geometry review and a frozen conditional sensitivity protocol comparing nominal sample indices with a time-aware method. That comparison must not be represented as a calibrated clock or deployed diagnosis.
