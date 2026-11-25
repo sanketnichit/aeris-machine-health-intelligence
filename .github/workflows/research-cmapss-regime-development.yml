@@ -1,0 +1,39 @@
+name: AERIS training-only regime development
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-cmapss-regime-development.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_regime_prognostics.py
+      - run: python -m research.verify_evidence
+      - run: python -m scripts.download_cmapss_all --output "$RUNNER_TEMP/cmapss-all"
+      - name: Isolate training files and execute
+        run: |
+          mkdir -p "$RUNNER_TEMP/training-only" regime-evidence
+          cp "$RUNNER_TEMP/cmapss-all"/train_FD*.txt "$RUNNER_TEMP/training-only/"
+          python -m research.cmapss_regime_development --data-dir "$RUNNER_TEMP/training-only" --output regime-evidence/summary.json
+          cp research/CMAPSS_REGIME_DEVELOPMENT_PROTOCOL.md regime-evidence/protocol.md
+          git rev-parse HEAD > regime-evidence/revision.txt
+          python -m pip freeze > regime-evidence/environment.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cmapss-regime-development-evidence
+          path: regime-evidence/
+          if-no-files-found: error
