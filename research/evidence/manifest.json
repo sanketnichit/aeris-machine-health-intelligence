@@ -54,6 +54,10 @@
     "cwru_selective_summary.json": {
       "blob_sha": "beed82d6bc07020eef0fbe50b15e60a9d461d812",
       "bytes": 22708
+    },
+    "mfpt_transfer_summary.json": {
+      "blob_sha": "ed136331c413517a3d7477e0ff90a080c866d183",
+      "bytes": 24818
     }
   }
 }
