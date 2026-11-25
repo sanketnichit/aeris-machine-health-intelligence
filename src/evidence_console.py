@@ -284,6 +284,30 @@ def render_physical_replay():
     st.download_button("Download physical replay evidence", json.dumps(report, indent=2), "pronostia_replay.json", "application/json")
 
 
+def render_cwru():
+    st.subheader("Measured bearing spectral audit")
+    report = read_report("cwru_spectral_summary.json")
+    st.caption("Post-v0.1.0 CWRU seeded-fault recordings; descriptive spectral comparison, not classification accuracy.")
+    a, b, c = st.columns(3)
+    a.metric("Recordings", report["record_count"])
+    b.metric("Envelope improves expected order", f'{report["envelope_improves_expected_count"]}/{report["record_count"]}')
+    c.metric("Analyzed samples", f'{sum(r["analyzed_samples"] for r in report["records"]):,}')
+    rows = pd.DataFrame([
+        {"Recording": str(r["file_id"]), "Defect": r["fault"], "Load (HP)": r["load_hp"],
+         "Raw FFT (%)": 100*r["median_fractions"]["raw"][r["fault"]],
+         "Envelope (%)": 100*r["median_fractions"]["envelope"][r["fault"]]}
+        for r in report["records"]
+    ])
+    st.dataframe(rows, hide_index=True)
+    st.bar_chart(rows.set_index("Recording")[["Raw FFT (%)", "Envelope (%)"]])
+    st.caption("Median share of representation-specific non-DC spectral power in the first three expected-order harmonics.")
+    counts = report["expected_exceeds_alternative_count"]
+    st.markdown(f'Expected order exceeded alternative: raw **{counts["raw"]}/8**, envelope **{counts["envelope"]}/8**.')
+    st.warning("No normal controls or competing ball defects; repeated windows and loads are correlated. No RUL, physical calibration, or field diagnosis established.")
+    st.markdown(f"[Execution evidence]({report['run_url']}) · revision `{report['revision']}`")
+    st.download_button("Download CWRU evidence summary", json.dumps(report, indent=2), "cwru_spectral_summary.json", "application/json")
+
+
 def render_report():
     from research.technical_report import generate_report
     st.subheader("Technical evidence report")
@@ -311,6 +335,7 @@ def render_evidence():
         "Adaptive reliability": render_reliability,
         "Independent replication": render_replication,
         "Physical vibration replay": render_physical_replay,
+        "CWRU spectral audit": render_cwru,
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
