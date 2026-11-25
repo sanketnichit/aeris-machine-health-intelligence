@@ -90,6 +90,10 @@
     "mfpt_measurement_fusion_summary.json": {
       "blob_sha": "333272d5cd35ef96847b8321fe033a7e8fa6b203",
       "bytes": 43213
+    },
+    "mfpt_common_mode_summary.json": {
+      "blob_sha": "244657a91f59fce5a4b334490cb1ff66c43e2cdb",
+      "bytes": 132563
     }
   }
 }

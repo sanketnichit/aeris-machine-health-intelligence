@@ -156,6 +156,15 @@ def generate_report(root=ROOT):
             rows = [s for s in audit["scenarios"] if s["secondary_mode"] == mode]
             lines.append(f"| {mode} | {sum(s['primary']['correct_accepted'] for s in rows)} | {sum(s['fused']['correct_accepted'] for s in rows)} | {sum(s['fused']['incorrect_accepted'] for s in rows)} | {sum(s['accepted_without_reference'] for s in rows)} |")
         lines.extend(["", "Compatible intervals can exclude the reference speed under shared bias. The second channel is simulated, not physically measured; agreement is not calibration.", ""])
+    if "mfpt_common_mode_summary.json" in reports:
+        audit = reports["mfpt_common_mode_summary.json"]
+        lines.extend(["", "## MFPT common-mode measurement error", "",
+                      f"{audit['record_scenario_count']} repeated recording-scenario assessments.",
+                      "| Common bound | Correct accepted | Incorrect accepted | Compatible outside reference | Accepted outside reference |", "|---|---:|---:|---:|---:|"])
+        for bound in audit["common_bounds"]:
+            rows = [s for s in audit["scenarios"] if s["assumed_common_bound"] == bound]
+            lines.append(f"| {bound:.0%} | {sum(s['common_guard']['correct_accepted'] for s in rows)} | {sum(s['common_guard']['incorrect_accepted'] for s in rows)} | {sum(s['nonempty_without_reference'] for s in rows)} | {sum(s['accepted_without_reference'] for s in rows)} |")
+        lines.extend(["", "A shared-error bound requires independently established calibration. Repeated metadata perturbations are not independent field observations.", ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",

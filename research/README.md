@@ -53,6 +53,6 @@ The CWRU/MFPT transfer is a selected laboratory diagnostic result, distinct from
 | Measurement width | [Precision versus bias](MFPT_MEASUREMENT_WIDTH_FINDINGS.md) |
 | Bias budget | [Coverage trade-off](MFPT_BIAS_BUDGET_FINDINGS.md) |
 | Two-channel fusion | [False agreement](MFPT_MEASUREMENT_FUSION_FINDINGS.md) |
-| Common-mode model | [Frozen protocol](MFPT_COMMON_MODE_PROTOCOL.md) (results pending validation) |
+| Common-mode model | [Findings](MFPT_COMMON_MODE_FINDINGS.md) and [frozen protocol](MFPT_COMMON_MODE_PROTOCOL.md) |
 
 The research dashboard and generated technical report expose the registered studies. The [offline capture advisory](../docs/capture_advisory.md) provides a guarded research integration path, not a production decision API. Real instrumentation and independent prospective validation remain required.

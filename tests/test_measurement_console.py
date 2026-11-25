@@ -3,7 +3,7 @@ from pathlib import Path
 from streamlit.testing.v1 import AppTest
 
 from src.evidence_console import read_report
-from src.measurement_console import measurement_rows, bias_rows, possibility_rows, witness_counts, fusion_rows
+from src.measurement_console import measurement_rows, bias_rows, possibility_rows, witness_counts, fusion_rows, common_mode_rows
 
 
 def test_measurement_width_rows_preserve_counts_and_containment():
@@ -39,7 +39,7 @@ def test_measurement_workspace_all_audits():
     app.sidebar.radio(key="research_page").set_value("MFPT measurement reliability").run()
     assert not app.exception
     assert any(m.label == "Recovered correct suggestions" and m.value == "6" for m in app.metric)
-    for choice in ("Counterexamples", "Diagnostic possibilities", "Measurement width", "Systematic bias", "Two-channel fusion"):
+    for choice in ("Counterexamples", "Diagnostic possibilities", "Measurement width", "Systematic bias", "Two-channel fusion", "Common-mode error"):
         app.radio(key="mfpt_measurement_audit").set_value(choice).run()
         assert not app.exception
     app.radio(key="mfpt_measurement_audit").set_value("Measurement width").run()
@@ -56,3 +56,11 @@ def test_fusion_rows_expose_false_agreement():
     shared = rows.loc[rows["Secondary mode"] == "shared_bias"].iloc[0]
     assert shared["Compatible outside reference"] == 136
     assert shared["Conflicts"] == 0
+
+
+def test_common_mode_rows_preserve_false_agreement_and_coverage():
+    rows = common_mode_rows(read_report("mfpt_common_mode_summary.json"))
+    assert rows["Correct"].tolist() == [348, 205, 0]
+    assert rows["Accepted outside reference"].tolist() == [74, 0, 0]
+    assert rows["Compatible outside reference"].tolist() == [170, 68, 0]
+    assert (rows.Correct + rows.Incorrect + rows.Withheld == 560).all()
