@@ -37,3 +37,7 @@ The frozen [NASA multi-regime protocol](../research/CMAPSS_MULTIREGIME_PROTOCOL.
 The first post-release candidate [acceptance record](candidate_851f08901e5a.md) confirms the exact 851f08901e5a revision passed both jobs. New regime-development changes are a separate candidate.
 
 The second [accepted candidate](candidate_45fd9e8413fc.md) covers the registered NASA regime-development results and passed 390 tests in both package environments. Paderborn timing and the offline verifier are later changes. The [frozen cohort](../research/PADERBORN_COHORT_PROTOCOL.md) will trigger a fresh acceptance campaign on evidence registration.
+
+## Bounded next research release
+
+See [closure checklist](next_research_release_closure.md) for a proposed finite ten-gate scope: eight complete, two pending at adoption. This is a gate-count planning indicator, not an effort estimate or industrial readiness score. Do not extend this candidate with unrelated datasets or new features before resolving the final research and acceptance gates.
