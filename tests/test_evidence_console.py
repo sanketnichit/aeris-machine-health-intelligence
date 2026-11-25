@@ -197,3 +197,18 @@ def test_cwru_selective_workspace():
     assert not app.exception
     assert any(m.label == "Coverage" and m.value == "50%" for m in app.metric)
     assert any("not a zero-risk guarantee" in w.value for w in app.warning)
+
+
+def test_mfpt_transfer_workspace():
+    report = read_report("mfpt_transfer_summary.json")
+    assert report["margin_threshold"] == .8
+    assert sum(r["analyzed_samples"] for r in report["records"]) == 557056
+    e = report["fault_assessment"]
+    assert (e["accepted"], e["incorrect_accepted"], e["forced_errors"]) == (14, 0, 0)
+    assert len(report["normal_assessment"]) == 3
+    assert report["normal_incorrect_accepted"] == 0
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"), default_timeout=30).run()
+    app.sidebar.radio(key="research_page").set_value("MFPT cross-platform transfer").run()
+    assert not app.exception
+    assert any(m.label == "Fault coverage" and m.value == "100%" for m in app.metric)
+    assert any("not a healthy diagnosis" in w.value for w in app.warning)
