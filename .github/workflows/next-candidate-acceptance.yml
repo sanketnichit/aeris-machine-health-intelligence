@@ -1,0 +1,105 @@
+name: AERIS next candidate acceptance (no publication)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - research/evidence/cmapss_multiregime_summary.json
+permissions:
+  contents: read
+jobs:
+  package:
+    outputs:
+      version: ${{ steps.bundle.outputs.version }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+      MKL_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m research.verify_evidence
+      - run: python -m research.candidate_readiness --require-evaluation --output candidate-readiness.json
+      - run: python -m pytest -q
+      - name: Create versioned source and evidence bundle
+        id: bundle
+        run: |
+          mkdir -p dist
+          cp candidate-readiness.json dist/readiness.json
+          version="candidate-$(git rev-parse --short=12 HEAD)"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          python -m research.technical_report --output dist/AERIS_technical_report.md
+          git archive --format=zip --prefix="aeris-$version/" --output="dist/aeris-$version.zip" HEAD
+          git rev-parse HEAD > dist/revision.txt
+          python -m pip freeze > dist/environment.txt
+          (cd dist && sha256sum *.zip *.md revision.txt environment.txt readiness.json > SHA256SUMS)
+      - name: Validate extracted release archive in fresh environment
+        run: |
+          (cd dist && sha256sum -c SHA256SUMS)
+          version="candidate-$(git rev-parse --short=12 HEAD)"
+          unzip -q "dist/aeris-$version.zip" -d "$RUNNER_TEMP/aeris-release"
+          python -m venv "$RUNNER_TEMP/release-venv"
+          "$RUNNER_TEMP/release-venv/bin/python" -m pip install -r dist/environment.txt
+          cd "$RUNNER_TEMP/aeris-release/aeris-$version"
+          "$RUNNER_TEMP/release-venv/bin/python" -m research.verify_evidence
+          "$RUNNER_TEMP/release-venv/bin/python" -m pytest -q
+          "$RUNNER_TEMP/release-venv/bin/python" -m research.technical_report --output "$RUNNER_TEMP/extracted-report.md"
+          cmp "$RUNNER_TEMP/extracted-report.md" "$GITHUB_WORKSPACE/dist/AERIS_technical_report.md"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aeris-next-candidate
+          path: dist/
+          if-no-files-found: error
+  integrated-stack:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Configure isolated local review credential
+        run: |
+          token="$(python -c 'import secrets; print(secrets.token_hex(32))')"
+          echo "::add-mask::$token"
+          echo "AERIS_API_TOKEN=$token" >> "$GITHUB_ENV"
+          echo "AERIS_ENABLE_REVIEW_ACTIONS=1" >> "$GITHUB_ENV"
+      - name: Start candidate stack
+        run: docker compose --profile monitoring up --build --detach --wait --wait-timeout 180
+      - name: Render research and virtual laboratory
+        run: python scripts/browser_smoke.py --output acceptance-evidence/research
+      - name: Populate synthetic fleet and review incident
+        run: |
+          python scripts/demo_fleet.py
+          python scripts/fleet_browser_smoke.py --review --output acceptance-evidence/fleet
+      - name: Exercise concurrent authenticated workload
+        run: |
+          mkdir -p acceptance-evidence
+          set -o pipefail
+          python scripts/reliability_smoke.py | tee acceptance-evidence/workload.json
+      - name: Verify recovered observations and incident history
+        run: |
+          docker compose exec -T api python scripts/telemetry_backup.py data/telemetry.sqlite3 data/backup.sqlite3
+          docker compose exec -T api python scripts/telemetry_backup.py data/backup.sqlite3 data/recovered.sqlite3
+          docker compose exec -T api python -c 'from src.telemetry_store import history; from src.incidents import list_incidents; a="synthetic-reliability-audit"; assert len(history("data/recovered.sqlite3",a))==1; assert any(i["asset_id"]==a and i["status"]=="resolved" for i in list_incidents("data/recovered.sqlite3",limit=1000)["incidents"]); print("Recovery verified")' | tee acceptance-evidence/recovery.txt
+      - name: Collect acceptance evidence
+        if: always()
+        run: |
+          mkdir -p acceptance-evidence
+          git rev-parse HEAD > acceptance-evidence/revision.txt
+          docker compose --profile monitoring logs --no-color > acceptance-evidence/services.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aeris-next-acceptance
+          path: acceptance-evidence/
+      - name: Stop disposable stack
+        if: always()
+        run: docker compose --profile monitoring down --volumes

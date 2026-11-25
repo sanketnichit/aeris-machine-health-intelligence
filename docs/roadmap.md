@@ -29,3 +29,7 @@ The release does not establish prospective field performance, a calibrated physi
 ## Post-release measurement reliability milestone
 
 Completed research on fixed MFPT recordings identifies uncertainty-induced abstention, instability, false precision and false sensor agreement. The new common-mode model, pinned calibration enrollment, synthetic advisory lab and offline archived-capture advisory join this evidence to a testable decision-support path. See [protocol and physical validation acceptance plan](../research/MFPT_COMMON_MODE_PROTOCOL.md) and [offline workflow](capture_advisory.md). Completion of implementation is distinct from passing CI, finishing the new experiment, or meeting field validation requirements. No new release is claimed.
+
+## Next candidate acceptance
+
+The frozen [NASA multi-regime protocol](../research/CMAPSS_MULTIREGIME_PROTOCOL.md) extends evaluation beyond FD001. A separate [non-publishing candidate gate](next_candidate_acceptance.md) covers the expanded application and integrated reliability stack. No release tag or DOI is changed.
