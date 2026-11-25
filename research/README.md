@@ -70,3 +70,5 @@ The research dashboard and generated technical report expose the registered stud
 [Structural intake findings](PADERBORN_INTAKE_FINDINGS.md). All 12 inspected waveforms differ from the nominal sample count. No diagnostic performance claim.
 
 [Stored timing findings](PADERBORN_TIMEBASE_FINDINGS.md) and [pre-scoring cohort](PADERBORN_COHORT_PROTOCOL.md). Nonuniform timestamp vectors do not establish ADC clock jitter; scoring remains blocked.
+
+[Primary cohort inventory findings](PADERBORN_COHORT_FINDINGS.md): 17 specimens, 1,360 recording names, 34 fingerprinted fact sheets and measurement logs; no waveform scoring.

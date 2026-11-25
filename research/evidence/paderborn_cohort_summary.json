@@ -1,0 +1,474 @@
+{
+  "scope": "paderborn_primary_cohort_archive_inventory_not_diagnostic_validation",
+  "revision": "6ebca200095bc2fde85ce7f7a0c745fe5abfe525",
+  "registry_sha256": "a3fca3e44e9ddbce260fcce3a3010efbdfb0b5975ebc6ebcb5e17d064104877f",
+  "specimens": 17,
+  "previous_structural_pilot": 3,
+  "inventory_measurements": 1360,
+  "diagnostic_scoring_performed": false,
+  "archives": [
+    {
+      "specimen": "K001",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "af6dc58283d356cd438e7738a2d525b8",
+      "structural_pilot": true,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K001.rar",
+      "sha256": "0f119ebdb28fb2f4d9fac1beb1319429f63f7ae1256c23c872f280f3560918e5",
+      "md5": "af6dc58283d356cd438e7738a2d525b8",
+      "bytes": 173881721,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "K001/K001.pdf",
+          "bytes": 41046,
+          "sha256": "b6ef87e2fc60c7fdd50b6a8762c8a099d16d5242f897c60d5425c0e69478348a"
+        },
+        {
+          "name": "K001/measuring_log_K001.pdf",
+          "bytes": 139011,
+          "sha256": "827f5ae9eec40ed96b2078fc4529bf0f07f4ffe063fceeb2a5a569d1ac809cb2"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "K002",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "88631bc0081a6470846d18189d46381d",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K002.rar",
+      "sha256": "1040da8b74d169c4e8c8545afa335d7a3a320bcaf36a471250c3e434bc4caffd",
+      "md5": "88631bc0081a6470846d18189d46381d",
+      "bytes": 161981588,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "K002/measuring_log_K002.pdf",
+          "bytes": 138900,
+          "sha256": "10f28fd84743afdb49e8665164a01b75892afd74cbd869f959d2b7f3b9239427"
+        },
+        {
+          "name": "K002/K002.pdf",
+          "bytes": 40999,
+          "sha256": "118e2c0ba5ed42f867896762287beeb7233580ca5061aeef5427a0595bde81dc"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "K003",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "08b61792e1058dc47dd21071666bca2c",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K003.rar",
+      "sha256": "d7d1edf6047fac088efe118198abd0856c5280dd8653496fbac9a5d877180f1e",
+      "md5": "08b61792e1058dc47dd21071666bca2c",
+      "bytes": 173194389,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "K003/measuring_log_K003.pdf",
+          "bytes": 139017,
+          "sha256": "482a417a559c465a31083a7f724e763ace14d8fdb143e143e85afeb7a59f0440"
+        },
+        {
+          "name": "K003/K003.pdf",
+          "bytes": 40786,
+          "sha256": "b68b8ee1fde1f261a33afb32d5f63c6b725d10df0460d26a474f27a304bad6e5"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "K004",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "5b9fde1c6d754806539f9a890ee6bbdd",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K004.rar",
+      "sha256": "97242542046cf3ce286c13e12d8df11f618a53365efe592750e2047256345333",
+      "md5": "5b9fde1c6d754806539f9a890ee6bbdd",
+      "bytes": 163337851,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "K004/K004.pdf",
+          "bytes": 40786,
+          "sha256": "12e2200935856df7a291dcf56fde983c52b47183a72ed19f6236909e0133f634"
+        },
+        {
+          "name": "K004/measuring_log_K004.pdf",
+          "bytes": 139113,
+          "sha256": "4806097aa9577b87a46ab124959ed4bc85b267af81666b69826d926418574bf0"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "K005",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "28d91412ad14583fbdfda958b64a8267",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K005.rar",
+      "sha256": "2faf0ee4ee66055bcc066e5b6d9ed9fc44638b2c1ea397a279261103aa83caaa",
+      "md5": "28d91412ad14583fbdfda958b64a8267",
+      "bytes": 167366765,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "K005/K005.pdf",
+          "bytes": 40792,
+          "sha256": "73a5b793e7b09380e92718665705a7e756bc0d5d1cad0df829f5bbe7e6ee62d8"
+        },
+        {
+          "name": "K005/measuring_log_K005.pdf",
+          "bytes": 139123,
+          "sha256": "bd7cd9725dbd9c113aeee5dd3d347859ce62d3a3e1c8f3de0ac74aa85f7adbb0"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "K006",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "b36389294fc5a21539d9fcfacfa3604a",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K006.rar",
+      "sha256": "250b8e0ef18082163ae4003cd7f50e6daa3061b3a095e226378910da55b78b94",
+      "md5": "b36389294fc5a21539d9fcfacfa3604a",
+      "bytes": 175997605,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "K006/measuring_log_K006.pdf",
+          "bytes": 139040,
+          "sha256": "624de609ea9b42ca1b5f124fe2a56c460744e029e02748a476b5b626c851ec43"
+        },
+        {
+          "name": "K006/K006.pdf",
+          "bytes": 40914,
+          "sha256": "157e355b31baec8063691aa17b291bb81969917d10e4beea0d76f11eb3c6ed0b"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KA04",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "f87503ed69a624ba6e1d9e573e6c09fb",
+      "structural_pilot": true,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA04.rar",
+      "sha256": "6fc317157e2cd4cb55bc54d6fac1b1753f8ab31abcccd1ac68cbfb78e5e8299d",
+      "md5": "f87503ed69a624ba6e1d9e573e6c09fb",
+      "bytes": 180920703,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KA04/measuring_log_KA04.pdf",
+          "bytes": 139310,
+          "sha256": "eaf9df99b2aae037c95f1ccf26abea4c7877ee8d73fa53a79672da7139a0d8d7"
+        },
+        {
+          "name": "KA04/KA04.pdf",
+          "bytes": 56380,
+          "sha256": "3f66eb5cb2df479c9f3cb16dd07e13bb8f662dab2289d445359a8cc58f824913"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KA15",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "db518f97ba5bcaedb09c648a317431e0",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA15.rar",
+      "sha256": "2914d003a7a7a23425a825f03f09b2dede8e0f53c266e0b3ad90aa6b98958b7b",
+      "md5": "db518f97ba5bcaedb09c648a317431e0",
+      "bytes": 164268273,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KA15/measuring_log_KA15.pdf",
+          "bytes": 139030,
+          "sha256": "ce14deb79e8cca48691cca540bc7d74675680b68fcc107f10fe217883373add6"
+        },
+        {
+          "name": "KA15/KA15.pdf",
+          "bytes": 56499,
+          "sha256": "6954e6549fed0b5f6aa9b88d13ec7ca7a5197ffa04235ed6799843d196cfd6d8"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KA16",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "ef848f5621f9c10523c313131d1a4c21",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA16.rar",
+      "sha256": "3e300d2e3402b47a18ce9c75694d3146f6e4b5f86bcd1d159f4938221fb261b6",
+      "md5": "ef848f5621f9c10523c313131d1a4c21",
+      "bytes": 167165704,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KA16/measuring_log_KA16.pdf",
+          "bytes": 139144,
+          "sha256": "6235f7947fe01072e34d0e7b62bb67608d62030e56d686dd0f5d0030bc06a952"
+        },
+        {
+          "name": "KA16/KA16.pdf",
+          "bytes": 56383,
+          "sha256": "a32c7a7a5e8234728e3faf695981f13d32dfc2068ae8d52ea436c79d202161e6"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KA22",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "7a16a5bc88d5fe1d83d169f88f0709e8",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA22.rar",
+      "sha256": "95790035ebe5a69bb298f93a7f4fc64769f0baeffd04a2cbb3ff5b4af8608642",
+      "md5": "7a16a5bc88d5fe1d83d169f88f0709e8",
+      "bytes": 159054470,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KA22/measuring_log_KA22.pdf",
+          "bytes": 139042,
+          "sha256": "58a20e4ea94cd5228f6811f34a6858e0fd75b3a4ac2f54de8eefa7f9006bbb1a"
+        },
+        {
+          "name": "KA22/KA22.pdf",
+          "bytes": 56408,
+          "sha256": "629b287d6a206174e806afaa185d7f9d696e89cbf19c4aca0bfd59fb9a5ecc52"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KA30",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "715c0cf7862a7ba83e7c6a6fb5c91a61",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA30.rar",
+      "sha256": "cbe1810281a7cbd28d5ad0372cc392c910744709d46d4db501a45eeea18dd518",
+      "md5": "715c0cf7862a7ba83e7c6a6fb5c91a61",
+      "bytes": 163625195,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KA30/KA30.pdf",
+          "bytes": 56457,
+          "sha256": "cdf2204bf71188f365bac1d2e7932dc8ccdba951743ee240846fa234f76310d8"
+        },
+        {
+          "name": "KA30/measuring_log_KA30.pdf",
+          "bytes": 138864,
+          "sha256": "6e7d644a059da2cb048ffdc68f94236e3caf2478fb690bca4c9d4f0031226e73"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KI04",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "a5a634fcdcb33a8501e7411d30441c6d",
+      "structural_pilot": true,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI04.rar",
+      "sha256": "8fde861a9ceac4b41fe8a030b4c5bbb4b9b9af0590d9338a8de0150b4661be77",
+      "md5": "a5a634fcdcb33a8501e7411d30441c6d",
+      "bytes": 172644279,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KI04/measuring_log_KI04.pdf",
+          "bytes": 211800,
+          "sha256": "55018d7406a006a850484ee49f562c97c256df6c58fc4f99c8d9f64afd8a2e9e"
+        },
+        {
+          "name": "KI04/KI04.pdf",
+          "bytes": 56607,
+          "sha256": "89d141542651a64c803c0f989905d2b22ad1a79448ec3485299656b084d5297a"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KI14",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "13603834975435ca10eb08de6d1840dc",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI14.rar",
+      "sha256": "16911b5f8c723b568b6aa69397b00796fea41e43bf627a1a0158a7294f2b7a60",
+      "md5": "13603834975435ca10eb08de6d1840dc",
+      "bytes": 163581312,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KI14/KI14.pdf",
+          "bytes": 56735,
+          "sha256": "61c6da9af925d5a637073832414ea9c8dfe6d6b8a43f9d3d87129afb8980a0b2"
+        },
+        {
+          "name": "KI14/measuring_log_KI14.pdf",
+          "bytes": 138864,
+          "sha256": "1546d8e6536d01017396128ebee94fca29c8f266e63692c121681e0ae56bc0ae"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KI16",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "db14eae04a213afd0d1ca99d3d850342",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI16.rar",
+      "sha256": "f7f4ce4feffc3ae799f92289cdea7708d2cf6e154ad5382f9f4c2c8bed890c44",
+      "md5": "db14eae04a213afd0d1ca99d3d850342",
+      "bytes": 166348305,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KI16/KI16.pdf",
+          "bytes": 56374,
+          "sha256": "ca3588d7d5583af88f6969c94f8f40f9a6f2df9bb2b1920464466d95502755dd"
+        },
+        {
+          "name": "KI16/measuring_log_KI16.pdf",
+          "bytes": 139098,
+          "sha256": "8002dcd777684a2ca855f44ddcc351f61ad0b275c2f2c33b8a6d2d41998f2a20"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KI17",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "d1055fe5cc44948e5d3a39f2e0db9dbe",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI17.rar",
+      "sha256": "d80dbdb612cfaeb7ba1ffe6387c52c4d938084b2466e55d96a5528aff4d8b084",
+      "md5": "d1055fe5cc44948e5d3a39f2e0db9dbe",
+      "bytes": 167363476,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KI17/KI17.pdf",
+          "bytes": 56280,
+          "sha256": "7b4efe0291ddc57c4adfbc0d38829b2cb6e2c45e74cb4e05b00773f0a03eebfd"
+        },
+        {
+          "name": "KI17/measuring_log_KI17.pdf",
+          "bytes": 139042,
+          "sha256": "b97c137076d039946a7f62427bfb7f904f960c418e8015e800c80d04c0813b6b"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KI18",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "db5da511e9240dbc56ec1e850fd91699",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI18.rar",
+      "sha256": "37b9b17c392d033f0b14c35bf0fd19ea878909299cdc8c517e2226f794048615",
+      "md5": "db5da511e9240dbc56ec1e850fd91699",
+      "bytes": 161226797,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KI18/KI18.pdf",
+          "bytes": 232205,
+          "sha256": "39e36b4d110a3fe25ea10bc97be2e6c4a6d688923554e621f4e02d740c8d1ab2"
+        },
+        {
+          "name": "KI18/measuring_log_KI18.pdf",
+          "bytes": 139030,
+          "sha256": "70732989af77cf384382501d98607b1480e4173154de4b907c727b8cbc9a6022"
+        }
+      ],
+      "geometry_verified": false
+    },
+    {
+      "specimen": "KI21",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "911ce3e37a86d258818e3e93274752a2",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI21.rar",
+      "sha256": "1e3c563fa1d1564e3586736189b2e0807688389b549944af4a06908485c1d5bf",
+      "md5": "911ce3e37a86d258818e3e93274752a2",
+      "bytes": 164882839,
+      "inventory_measurements": 80,
+      "non_mat_members": [
+        {
+          "name": "KI21/KI21.pdf",
+          "bytes": 56427,
+          "sha256": "8a674661919f3e2bd7a86f7411c4bb6f57972249deca0ab1df0430db6d8a6d91"
+        },
+        {
+          "name": "KI21/measuring_log_KI21.pdf",
+          "bytes": 139047,
+          "sha256": "3d812ed331cc52375fb7c7c1403ebdc60d45ce6969fe201f057597223e5a4d79"
+        }
+      ],
+      "geometry_verified": false
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45617406307",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45617406307/artifacts/15022473682",
+  "artifact_sha256": "18d7dd0a28e570959d15e985f9da7d0f04b4aba31866deef9c8877976c5e317b",
+  "data_attribution": "Christian Lessmeier et al., KAt-DataCenter, Chair of Design and Drive Technology, Paderborn University, PHM Europe 2016; original publisher CC BY-NC 4.0. Structural metadata only. https://mb.uni-paderborn.de/en/kat/research/bearing-datacenter"
+}

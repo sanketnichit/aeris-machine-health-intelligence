@@ -197,6 +197,12 @@ def generate_report(root=ROOT):
         lines.extend(["","## Paderborn stored timebase audit","",
                       f"{audit['recordings']} exact pilot recordings rechecked.",
                       "Stored vibration time axes are nonuniform. Internal raster/count/index agreement is not physical clock calibration. No uniform-FFT diagnostic validation or field claim.",""])
+    if "paderborn_cohort_summary.json" in reports:
+        audit=reports["paderborn_cohort_summary.json"]
+        documents=sum(len(a["non_mat_members"]) for a in audit["archives"])
+        lines.extend(["","## Paderborn primary cohort inventory","",
+                      f"{audit['specimens']} primary specimens, {audit['inventory_measurements']} recording filenames, {documents} non-MAT members.",
+                      "Archive identity verified; no waveform scoring or specimen geometry interpretation in this inventory.",""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
