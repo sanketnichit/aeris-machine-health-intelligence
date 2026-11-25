@@ -1,0 +1,48 @@
+name: AERIS MFPT common mode
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-mfpt-common-mode.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_common_mode.py tests/test_measurement_fusion.py tests/test_measurement_budget.py tests/test_order_counterexamples.py tests/test_order_breakpoints.py tests/test_order_uncertainty.py
+      - name: Verify registered evidence before data acquisition
+        run: python -m research.verify_evidence
+      - name: Acquire pinned recordings
+        run: |
+          mkdir -p "$RUNNER_TEMP/mfpt" mfpt-common-mode-evidence
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          import subprocess
+          from research.mfpt_transfer import FILES, BASE
+          for name,kind in FILES:
+              path=Path(os.environ["RUNNER_TEMP"])/"mfpt"/name
+              path.parent.mkdir(parents=True,exist_ok=True)
+              subprocess.run(["curl","--fail","--location","--retry","2","--max-time","60","--max-filesize","20000000",BASE+name,"-o",str(path)],check=True)
+          PY
+      - name: Execute frozen common-mode audit
+        run: |
+          python -m research.mfpt_common_mode "$RUNNER_TEMP/mfpt" --output mfpt-common-mode-evidence/summary.json
+          python -m pip freeze > mfpt-common-mode-evidence/environment.txt
+          git rev-parse HEAD > mfpt-common-mode-evidence/revision.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mfpt-common-mode-evidence
+          path: mfpt-common-mode-evidence/
+          if-no-files-found: error
