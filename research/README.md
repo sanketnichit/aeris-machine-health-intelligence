@@ -34,8 +34,25 @@ The development workflow is [research-cmapss.yml](../.github/workflows/research-
 The [adaptive physical findings](XJTU_ADAPTIVE_FINDINGS.md) are published, including the failed selective forecasting policy (zero accepted forecasts). The [PRONOSTIA independent replication](PRONOSTIA_FINDINGS.md) is complete. The frozen 2x gate improves MAE over the age reference by 4.0%, but loses to the learned comparator; the XJTU adaptive advantage did not replicate. The evaluation population is now observed. No field safety claim.
 
 ## Evidence integrity
-Run `python -m research.verify_evidence` from the repository root to check all seven registered evidence files offline. The manifest records Git blob hashes and byte counts; this is a content-integrity check, not an independent validation of scientific claims. Each evidence addition must be registered with its exact blob hash and byte count before CI can pass. The original run URLs and revisions remain in the evidence files. Preserve earlier evidence rather than replacing experimental outcomes.
+Run `python -m research.verify_evidence` from the repository root to check all registered evidence files offline. The manifest records Git blob hashes and byte counts; this is a content-integrity check, not an independent validation of scientific claims. Each evidence addition must be registered with its exact blob hash and byte count before CI can pass. The original run URLs and revisions remain in the evidence files. Preserve earlier evidence rather than replacing experimental outcomes.
 
 ## Measured vibration-state transition audit
 
 [Protocol](TWIN_CALIBRATION_PROTOCOL.md) · [Findings](TWIN_CALIBRATION_FINDINGS.md) · [Evidence](evidence/twin_calibration_summary.json). Six learning bearings, eleven previously observed evaluation bearings, 54 short-horizon endpoints. Condition-specific drift improves pooled MAE by 1.16% versus persistence; broad empirical residual bands and mixed bearing-level results preclude a calibrated physical twin claim. The virtual maintenance model remains synthetic.
+
+## Post-release measurement reliability program
+
+The CWRU/MFPT transfer is a selected laboratory diagnostic result, distinct from prognostic forecasting. Subsequent MFPT experiments reuse the same 17 recordings and are retrospective, not new independent samples.
+
+| Audit | Findings |
+|---|---|
+| Continuous uncertainty | [Interval guard](MFPT_ORDER_UNCERTAINTY_FINDINGS.md) |
+| Closed-cell refinement | [Breakpoint results](MFPT_BREAKPOINT_FINDINGS.md) |
+| Counterexamples | [Decision instability](mfpt_counterexample_findings.md) |
+| Diagnostic possibility sets | [Outer sets](mfpt_possibility_findings.md) |
+| Measurement width | [Precision versus bias](MFPT_MEASUREMENT_WIDTH_FINDINGS.md) |
+| Bias budget | [Coverage trade-off](MFPT_BIAS_BUDGET_FINDINGS.md) |
+| Two-channel fusion | [False agreement](MFPT_MEASUREMENT_FUSION_FINDINGS.md) |
+| Common-mode model | [Frozen protocol](MFPT_COMMON_MODE_PROTOCOL.md) (results pending validation) |
+
+The research dashboard and generated technical report expose the registered studies. The [offline capture advisory](../docs/capture_advisory.md) provides a guarded research integration path, not a production decision API. Real instrumentation and independent prospective validation remain required.

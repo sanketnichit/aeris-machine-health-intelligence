@@ -25,3 +25,7 @@ The previous progress percentages (78%, 82%, 85%, 86%, 90%, 94%, 97%) were subje
 - Production authorization, encrypted transport, performance and resilience engineering, and independent safety review.
 
 The release does not establish prospective field performance, a calibrated physical twin, safe control, industrial security, or realized savings. Completion of this research demonstrator does not imply industrial deployment readiness.
+
+## Post-release measurement reliability milestone
+
+Completed research on fixed MFPT recordings identifies uncertainty-induced abstention, instability, false precision and false sensor agreement. The new common-mode model, pinned calibration enrollment, synthetic advisory lab and offline archived-capture advisory join this evidence to a testable decision-support path. See [protocol and physical validation acceptance plan](../research/MFPT_COMMON_MODE_PROTOCOL.md) and [offline workflow](capture_advisory.md). Completion of implementation is distinct from passing CI, finishing the new experiment, or meeting field validation requirements. No new release is claimed.
