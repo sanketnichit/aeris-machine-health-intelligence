@@ -75,6 +75,15 @@ def generate_report(root=ROOT):
                       f"Development-selected margin threshold {selective['policy']['margin_threshold']:.2f}; evaluation coverage {e['coverage']:.0%}.",
                       f"Accepted {e['accepted']}/{e['records']}, incorrect accepted {e['incorrect_accepted']}, withheld {e['abstained']}; forced ranking errors {e['forced_errors']}.",
                       "All four rolling-element cases remain unresolved. Zero observed retained errors does not establish zero risk. Same-rig severity transfer, no held-out normal controls or operational calibration.", ""])
+    if "mfpt_transfer_summary.json" in reports:
+        mfpt = reports["mfpt_transfer_summary.json"]
+        e = mfpt["fault_assessment"]
+        lines.extend(["", "## Independent MFPT transfer (post-v0.1.0)", "",
+                      f"Frozen CWRU thresholds: floor {mfpt['score_floor']:.6f}, margin {mfpt['margin_threshold']:.2f}.",
+                      f"Fault recordings: {e['accepted']}/{e['records']} accepted, {e['incorrect_accepted']} incorrect accepted; forced errors {e['forced_errors']}.",
+                      f"Normal controls receiving a fault suggestion: {mfpt['normal_incorrect_accepted']}/{len(mfpt['normal_assessment'])}.",
+                      "Positive selected laboratory cross-rig transfer, not a healthy-state diagnosis or field validation. No rolling-element controls; repeated loads may share physical hardware.",
+                      mfpt["data_attribution"], ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
