@@ -1,0 +1,226 @@
+{
+  "scope": "seeded_lab_fault_descriptive_not_independent_assets_or_RUL",
+  "revision": "cd45e93a8344e1b1c119344cab9a8d17c0708f37",
+  "sample_rate_hz": 12000,
+  "window_samples": 8192,
+  "windows_per_record": 12,
+  "record_count": 8,
+  "envelope_improves_expected_count": 8,
+  "expected_exceeds_alternative_count": {
+    "raw": 4,
+    "envelope": 8
+  },
+  "records": [
+    {
+      "file_id": 105,
+      "url": "https://engineering.case.edu/sites/default/files/105.mat",
+      "sha256": "f80b0ea04fd06b372a0eaec7c056543ea37e4bb4727a5b173d2a5bacd2aa9cab",
+      "channel": "X105_DE_time",
+      "recorded_samples": 121265,
+      "analyzed_samples": 98304,
+      "fault": "inner",
+      "load_hp": 0,
+      "nominal_rpm": 1797,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00206205455181611,
+          "outer": 0.00008924656568212028
+        },
+        "envelope": {
+          "inner": 0.41163783549507127,
+          "outer": 0.042081618100344775
+        }
+      },
+      "envelope_improves_expected": true,
+      "expected_exceeds_alternative": {
+        "raw": true,
+        "envelope": true
+      }
+    },
+    {
+      "file_id": 106,
+      "url": "https://engineering.case.edu/sites/default/files/106.mat",
+      "sha256": "e5cec7cdd138e6cd1deb9ed8634e5aaa9bc1bd7094ddc075bff606580eb6e883",
+      "channel": "X106_DE_time",
+      "recorded_samples": 121991,
+      "analyzed_samples": 98304,
+      "fault": "inner",
+      "load_hp": 1,
+      "nominal_rpm": 1772,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0015239274274989733,
+          "outer": 0.0001172132181592569
+        },
+        "envelope": {
+          "inner": 0.44802827248211585,
+          "outer": 0.05064400356800051
+        }
+      },
+      "envelope_improves_expected": true,
+      "expected_exceeds_alternative": {
+        "raw": true,
+        "envelope": true
+      }
+    },
+    {
+      "file_id": 107,
+      "url": "https://engineering.case.edu/sites/default/files/107.mat",
+      "sha256": "111ba8996a115684661a13c913bd74d8029a59294492f88aec7b03e175fdd388",
+      "channel": "X107_DE_time",
+      "recorded_samples": 122136,
+      "analyzed_samples": 98304,
+      "fault": "inner",
+      "load_hp": 2,
+      "nominal_rpm": 1750,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0015824889707017392,
+          "outer": 0.00013330730016006338
+        },
+        "envelope": {
+          "inner": 0.41160333730606186,
+          "outer": 0.05311718479408171
+        }
+      },
+      "envelope_improves_expected": true,
+      "expected_exceeds_alternative": {
+        "raw": true,
+        "envelope": true
+      }
+    },
+    {
+      "file_id": 108,
+      "url": "https://engineering.case.edu/sites/default/files/108.mat",
+      "sha256": "d415f0e65128bfa0b118c2051c988fb0dc6ce3e4c8aa45fdc5ad1d0967462e7d",
+      "channel": "X108_DE_time",
+      "recorded_samples": 122917,
+      "analyzed_samples": 98304,
+      "fault": "inner",
+      "load_hp": 3,
+      "nominal_rpm": 1730,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00046760752865863617,
+          "outer": 0.0001305870653936377
+        },
+        "envelope": {
+          "inner": 0.3992436915736216,
+          "outer": 0.07663005613128507
+        }
+      },
+      "envelope_improves_expected": true,
+      "expected_exceeds_alternative": {
+        "raw": true,
+        "envelope": true
+      }
+    },
+    {
+      "file_id": 130,
+      "url": "https://engineering.case.edu/sites/default/files/130.mat",
+      "sha256": "35a095307d0971477049b343a1b5981dde465a58fb7f233ad89b035068c1717d",
+      "channel": "X130_DE_time",
+      "recorded_samples": 121991,
+      "analyzed_samples": 98304,
+      "fault": "outer",
+      "load_hp": 0,
+      "nominal_rpm": 1797,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00022325776338900417,
+          "outer": 0.00003045373417953766
+        },
+        "envelope": {
+          "inner": 0.040378513903934495,
+          "outer": 0.6618193264080529
+        }
+      },
+      "envelope_improves_expected": true,
+      "expected_exceeds_alternative": {
+        "raw": false,
+        "envelope": true
+      }
+    },
+    {
+      "file_id": 131,
+      "url": "https://engineering.case.edu/sites/default/files/131.mat",
+      "sha256": "7883f7b83beadc54b2f301767f9145ce07055707182fb0278fdf0a6bb53ce3cb",
+      "channel": "X131_DE_time",
+      "recorded_samples": 122426,
+      "analyzed_samples": 98304,
+      "fault": "outer",
+      "load_hp": 1,
+      "nominal_rpm": 1772,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0003354011143902714,
+          "outer": 0.000026629894111900043
+        },
+        "envelope": {
+          "inner": 0.048650194584407266,
+          "outer": 0.6312127263603269
+        }
+      },
+      "envelope_improves_expected": true,
+      "expected_exceeds_alternative": {
+        "raw": false,
+        "envelope": true
+      }
+    },
+    {
+      "file_id": 132,
+      "url": "https://engineering.case.edu/sites/default/files/132.mat",
+      "sha256": "17a69ed5d2270b42532e678e35bbe2fa04a2cc413cf2bf9e88c7692de8662d18",
+      "channel": "X132_DE_time",
+      "recorded_samples": 121410,
+      "analyzed_samples": 98304,
+      "fault": "outer",
+      "load_hp": 2,
+      "nominal_rpm": 1750,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0001997351357934404,
+          "outer": 0.00002653129774745114
+        },
+        "envelope": {
+          "inner": 0.07623155838828036,
+          "outer": 0.6603928346390682
+        }
+      },
+      "envelope_improves_expected": true,
+      "expected_exceeds_alternative": {
+        "raw": false,
+        "envelope": true
+      }
+    },
+    {
+      "file_id": 133,
+      "url": "https://engineering.case.edu/sites/default/files/133.mat",
+      "sha256": "53f076cb0d905cf46bffaee7736abce8224ffed777deed03c0c863d762a90c71",
+      "channel": "X133_DE_time",
+      "recorded_samples": 122571,
+      "analyzed_samples": 98304,
+      "fault": "outer",
+      "load_hp": 3,
+      "nominal_rpm": 1730,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00019062713047571846,
+          "outer": 0.00002382073863929914
+        },
+        "envelope": {
+          "inner": 0.06561447730177249,
+          "outer": 0.6653470134517407
+        }
+      },
+      "envelope_improves_expected": true,
+      "expected_exceeds_alternative": {
+        "raw": false,
+        "envelope": true
+      }
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45560311529",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45560311529/artifacts/14997219127",
+  "artifact_sha256": "ead2cecfae6e0f3d01900b98ac5301207880e1f455758b1e00c3e7f210115a55"
+}
