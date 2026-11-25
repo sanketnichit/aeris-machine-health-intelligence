@@ -1,0 +1,328 @@
+{
+  "scope": "retrospective_continuous_frequency_scale_bounds_not_independent_validation",
+  "revision": "dadb3053d944b1fbfc4b648acfa4a4c70dbde005",
+  "source_revision": "d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d",
+  "reference_blob_sha": "ed136331c413517a3d7477e0ff90a080c866d183",
+  "source_license": "CC BY-NC-SA 4.0",
+  "score_floor": 0.00974446327636002,
+  "margin_threshold": 0.8,
+  "scenario_count": 10,
+  "record_count": 17,
+  "record_scenario_count": 170,
+  "scenarios": [
+    {
+      "declared_speed_error": -0.05,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": false,
+      "point": {
+        "fault_records": 14,
+        "accepted": 9,
+        "correct_accepted": 4,
+        "incorrect_accepted": 5,
+        "abstained": 5,
+        "coverage": 0.6428571428571429,
+        "retained_error": 0.5555555555555556,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 1,
+        "correct_accepted": 1,
+        "incorrect_accepted": 0,
+        "abstained": 13,
+        "coverage": 0.07142857142857142,
+        "retained_error": 0,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 3,
+      "prevented_incorrect": 5
+    },
+    {
+      "declared_speed_error": -0.05,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 9,
+        "correct_accepted": 4,
+        "incorrect_accepted": 5,
+        "abstained": 5,
+        "coverage": 0.6428571428571429,
+        "retained_error": 0.5555555555555556,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 4,
+      "prevented_incorrect": 5
+    },
+    {
+      "declared_speed_error": -0.01,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 8,
+        "correct_accepted": 8,
+        "incorrect_accepted": 0,
+        "abstained": 6,
+        "coverage": 0.5714285714285714,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 6,
+      "prevented_incorrect": 0
+    },
+    {
+      "declared_speed_error": -0.01,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 14,
+      "prevented_incorrect": 0
+    },
+    {
+      "declared_speed_error": 0,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 11,
+        "correct_accepted": 11,
+        "incorrect_accepted": 0,
+        "abstained": 3,
+        "coverage": 0.7857142857142857,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 3,
+      "prevented_incorrect": 0
+    },
+    {
+      "declared_speed_error": 0,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 14,
+      "prevented_incorrect": 0
+    },
+    {
+      "declared_speed_error": 0.01,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 7,
+        "correct_accepted": 7,
+        "incorrect_accepted": 0,
+        "abstained": 7,
+        "coverage": 0.5,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 6,
+      "prevented_incorrect": 0
+    },
+    {
+      "declared_speed_error": 0.01,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 13,
+      "prevented_incorrect": 0
+    },
+    {
+      "declared_speed_error": 0.05,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": false,
+      "point": {
+        "fault_records": 14,
+        "accepted": 1,
+        "correct_accepted": 0,
+        "incorrect_accepted": 1,
+        "abstained": 13,
+        "coverage": 0.07142857142857142,
+        "retained_error": 1,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 0,
+      "prevented_incorrect": 1
+    },
+    {
+      "declared_speed_error": 0.05,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 1,
+        "correct_accepted": 0,
+        "incorrect_accepted": 1,
+        "abstained": 13,
+        "coverage": 0.07142857142857142,
+        "retained_error": 1,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "interval": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "lost_correct": 0,
+      "prevented_incorrect": 1
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45577604589",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45577604589/artifacts/15005326329",
+  "artifact_sha256": "daa10e77751a0d0a74bdf048388af150a63c2d1d14e493b73b662a3f8578bb84",
+  "data_attribution": "Eric Bechhoefer, Condition Based Maintenance Fault Database for Testing Diagnostics and Prognostic Algorithms (2013); MathWorks redistribution, CC BY-NC-SA 4.0. Derived numerical results, no raw waveforms."
+}
