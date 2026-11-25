@@ -46,6 +46,10 @@
     "cwru_spectral_summary.json": {
       "blob_sha": "bb600f51dde0d6d27a57f5176a8208ddf8ce60e6",
       "bytes": 6784
+    },
+    "cwru_extension_summary.json": {
+      "blob_sha": "8fb0a389ffb3716676492fc85c6d40e5d73e89d3",
+      "bytes": 17963
     }
   }
 }
