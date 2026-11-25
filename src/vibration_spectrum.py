@@ -7,7 +7,7 @@ MAX_SAMPLES = 8192
 MAX_MAGNITUDE = 1e6
 
 
-def spectral_summary(values, sample_rate_hz, *, taper="hann", band_edges_hz=None):
+def spectral_summary(values, sample_rate_hz, *, taper="hann", band_edges_hz=None, include_bins=False):
     """Estimate one-sided AC mean-square spectrum; bands partition FFT bins.
 
     Hann weighting uses mean-square window normalization, not amplitude
@@ -15,6 +15,8 @@ def spectral_summary(values, sample_rate_hz, *, taper="hann", band_edges_hz=None
     """
     if type(sample_rate_hz) is not int or not 1 <= sample_rate_hz <= 100_000:
         raise ValueError("Invalid declared sample rate")
+    if type(include_bins) is not bool:
+        raise ValueError("include_bins must be boolean")
     if taper not in ("hann", "rectangular"):
         raise ValueError("Unsupported taper")
     try:
@@ -71,9 +73,13 @@ def spectral_summary(values, sample_rate_hz, *, taper="hann", band_edges_hz=None
         amount = float(power[mask].sum())
         bands.append({"low_hz": low, "high_hz": high, "bin_count": int(mask.sum()),
                       "mean_square_m2_s4": amount, "fraction": amount / total if total else None})
-    return {"taper": taper, "sample_count": n, "sample_rate_hz": sample_rate_hz,
+    result = {"taper": taper, "sample_count": n, "sample_rate_hz": sample_rate_hz,
             "bin_spacing_hz": sample_rate_hz / n, "nyquist_hz": nyquist,
             "mean_square_m2_s4": total, "spectral_rms_m_s2": math.sqrt(total),
             "dominant_frequency_hz": peak, "centroid_hz": centroid,
             "normalized_entropy": entropy, "bands": bands,
             "scope": "descriptive_spectrum_not_fault_diagnosis"}
+    if include_bins:
+        result["frequency_bins_hz"] = frequencies.tolist()
+        result["bin_mean_square_m2_s4"] = power.tolist()
+    return result
