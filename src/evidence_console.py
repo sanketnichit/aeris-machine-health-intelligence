@@ -6,6 +6,7 @@ import pandas as pd
 import streamlit as st
 
 from research.verify_evidence import verify
+from src.measurement_console import render_measurement_reliability
 
 EVIDENCE = Path(__file__).resolve().parents[1] / "research" / "evidence"
 
@@ -452,6 +453,7 @@ def render_evidence():
         "MFPT cross-platform transfer": render_mfpt_transfer,
         "MFPT sensor robustness": render_mfpt_robustness,
         "MFPT order uncertainty": render_mfpt_order_uncertainty,
+        "MFPT measurement reliability": lambda: render_measurement_reliability(read_report),
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
