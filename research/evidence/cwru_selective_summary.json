@@ -1,0 +1,800 @@
+{
+  "scope": "same_platform_severity_transfer_selective_research_suggestions_not_calibrated",
+  "revision": "e4b75b4c5efbafc72d2b23b2a4f681ad410da070",
+  "development_blob_sha": "8fb0a389ffb3716676492fc85c6d40e5d73e89d3",
+  "sample_rate_hz": 12000,
+  "window_samples": 8192,
+  "windows_per_record": 6,
+  "policy": {
+    "score_floor": 0.00974446327636002,
+    "margin_threshold": 0.8,
+    "candidates": [
+      {
+        "threshold": 0,
+        "accepted": 16,
+        "incorrect_accepted": 8
+      },
+      {
+        "threshold": 0.05,
+        "accepted": 16,
+        "incorrect_accepted": 8
+      },
+      {
+        "threshold": 0.1,
+        "accepted": 13,
+        "incorrect_accepted": 7
+      },
+      {
+        "threshold": 0.15,
+        "accepted": 13,
+        "incorrect_accepted": 7
+      },
+      {
+        "threshold": 0.2,
+        "accepted": 12,
+        "incorrect_accepted": 6
+      },
+      {
+        "threshold": 0.25,
+        "accepted": 11,
+        "incorrect_accepted": 5
+      },
+      {
+        "threshold": 0.3,
+        "accepted": 10,
+        "incorrect_accepted": 4
+      },
+      {
+        "threshold": 0.35,
+        "accepted": 8,
+        "incorrect_accepted": 2
+      },
+      {
+        "threshold": 0.4,
+        "accepted": 7,
+        "incorrect_accepted": 2
+      },
+      {
+        "threshold": 0.45,
+        "accepted": 7,
+        "incorrect_accepted": 2
+      },
+      {
+        "threshold": 0.5,
+        "accepted": 7,
+        "incorrect_accepted": 2
+      },
+      {
+        "threshold": 0.55,
+        "accepted": 6,
+        "incorrect_accepted": 1
+      },
+      {
+        "threshold": 0.6,
+        "accepted": 4,
+        "incorrect_accepted": 0
+      },
+      {
+        "threshold": 0.65,
+        "accepted": 4,
+        "incorrect_accepted": 0
+      },
+      {
+        "threshold": 0.7,
+        "accepted": 4,
+        "incorrect_accepted": 0
+      },
+      {
+        "threshold": 0.75,
+        "accepted": 4,
+        "incorrect_accepted": 0
+      },
+      {
+        "threshold": 0.8,
+        "accepted": 4,
+        "incorrect_accepted": 0
+      },
+      {
+        "threshold": 0.85,
+        "accepted": 2,
+        "incorrect_accepted": 0
+      },
+      {
+        "threshold": 0.9,
+        "accepted": 0,
+        "incorrect_accepted": 0
+      },
+      {
+        "threshold": 0.95,
+        "accepted": 0,
+        "incorrect_accepted": 0
+      },
+      {
+        "threshold": 1,
+        "accepted": 0,
+        "incorrect_accepted": 0
+      }
+    ],
+    "development_fault_assessment": {
+      "records": 16,
+      "accepted": 4,
+      "incorrect_accepted": 0,
+      "abstained": 12,
+      "coverage": 0.25,
+      "retained_error": 0,
+      "forced_errors": 8,
+      "decisions": [
+        {
+          "file_id": 118,
+          "truth": "ball",
+          "candidate": "outer",
+          "top": 0.04934790474656295,
+          "margin": 0.5242803233220296,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": false,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 119,
+          "truth": "ball",
+          "candidate": "outer",
+          "top": 0.07313549318863741,
+          "margin": 0.5785638856390172,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": false,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 120,
+          "truth": "ball",
+          "candidate": "outer",
+          "top": 0.045501616356251544,
+          "margin": 0.28278850137921696,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": false,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 121,
+          "truth": "ball",
+          "candidate": "outer",
+          "top": 0.04971970418733404,
+          "margin": 0.33568685167036566,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": false,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 169,
+          "truth": "inner",
+          "candidate": "inner",
+          "top": 0.13588486287694507,
+          "margin": 0.8759803226055378,
+          "suggestion": "inner",
+          "reason": "accepted_research_suggestion",
+          "forced_correct": true,
+          "accepted_correct": true
+        },
+        {
+          "file_id": 170,
+          "truth": "inner",
+          "candidate": "inner",
+          "top": 0.1477983191287146,
+          "margin": 0.8886886425268347,
+          "suggestion": "inner",
+          "reason": "accepted_research_suggestion",
+          "forced_correct": true,
+          "accepted_correct": true
+        },
+        {
+          "file_id": 171,
+          "truth": "inner",
+          "candidate": "inner",
+          "top": 0.1265402299724002,
+          "margin": 0.836120517374971,
+          "suggestion": "inner",
+          "reason": "accepted_research_suggestion",
+          "forced_correct": true,
+          "accepted_correct": true
+        },
+        {
+          "file_id": 172,
+          "truth": "inner",
+          "candidate": "inner",
+          "top": 0.11794591732814944,
+          "margin": 0.8348930757539194,
+          "suggestion": "inner",
+          "reason": "accepted_research_suggestion",
+          "forced_correct": true,
+          "accepted_correct": true
+        },
+        {
+          "file_id": 185,
+          "truth": "ball",
+          "candidate": "ball",
+          "top": 0.029542351318011542,
+          "margin": 0.09989084438848507,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": true,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 186,
+          "truth": "ball",
+          "candidate": "outer",
+          "top": 0.03666973984555099,
+          "margin": 0.20937381713639108,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": false,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 187,
+          "truth": "ball",
+          "candidate": "ball",
+          "top": 0.03882521675476944,
+          "margin": 0.5875686173745999,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": true,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 188,
+          "truth": "ball",
+          "candidate": "ball",
+          "top": 0.03989991523584696,
+          "margin": 0.386822211235134,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": true,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 197,
+          "truth": "outer",
+          "candidate": "inner",
+          "top": 0.05073471630773167,
+          "margin": 0.0681034705142704,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": false,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 198,
+          "truth": "outer",
+          "candidate": "inner",
+          "top": 0.0627545269622764,
+          "margin": 0.3140661211044985,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": false,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 199,
+          "truth": "outer",
+          "candidate": "outer",
+          "top": 0.04981965895913895,
+          "margin": 0.06080858561595078,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": true,
+          "accepted_correct": null
+        },
+        {
+          "file_id": 200,
+          "truth": "outer",
+          "candidate": "inner",
+          "top": 0.04107981631522509,
+          "margin": 0.16549005199279548,
+          "suggestion": null,
+          "reason": "competing_orders",
+          "forced_correct": false,
+          "accepted_correct": null
+        }
+      ]
+    },
+    "development_normal_assessment": [
+      {
+        "file_id": 97,
+        "candidate": "outer",
+        "top": 0.004724080162162062,
+        "margin": 0.09115574328357184,
+        "suggestion": null,
+        "reason": "weak_order_evidence"
+      },
+      {
+        "file_id": 98,
+        "candidate": "inner",
+        "top": 0.006420388541640637,
+        "margin": 0.1379050595013373,
+        "suggestion": null,
+        "reason": "weak_order_evidence"
+      },
+      {
+        "file_id": 99,
+        "candidate": "outer",
+        "top": 0.00974446327636002,
+        "margin": 0.20638477348388004,
+        "suggestion": null,
+        "reason": "weak_order_evidence"
+      },
+      {
+        "file_id": 100,
+        "candidate": "ball",
+        "top": 0.009613684079016959,
+        "margin": 0.09338774030189559,
+        "suggestion": null,
+        "reason": "weak_order_evidence"
+      }
+    ]
+  },
+  "evaluation": {
+    "records": 12,
+    "accepted": 6,
+    "incorrect_accepted": 0,
+    "abstained": 6,
+    "coverage": 0.5,
+    "retained_error": 0,
+    "forced_errors": 4,
+    "decisions": [
+      {
+        "file_id": 209,
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.3627790647827534,
+        "margin": 0.8294155841035618,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": 210,
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.3679472869451431,
+        "margin": 0.8518431793592626,
+        "suggestion": "inner",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": 211,
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.38018194849221837,
+        "margin": 0.7836082397658936,
+        "suggestion": null,
+        "reason": "competing_orders",
+        "forced_correct": true,
+        "accepted_correct": null
+      },
+      {
+        "file_id": 212,
+        "truth": "inner",
+        "candidate": "inner",
+        "top": 0.3397685622837199,
+        "margin": 0.7108599160565762,
+        "suggestion": null,
+        "reason": "competing_orders",
+        "forced_correct": true,
+        "accepted_correct": null
+      },
+      {
+        "file_id": 222,
+        "truth": "ball",
+        "candidate": "inner",
+        "top": 0.09616033827356427,
+        "margin": 0.5839428695215927,
+        "suggestion": null,
+        "reason": "competing_orders",
+        "forced_correct": false,
+        "accepted_correct": null
+      },
+      {
+        "file_id": 223,
+        "truth": "ball",
+        "candidate": "inner",
+        "top": 0.06665684374399986,
+        "margin": 0.4129507526500462,
+        "suggestion": null,
+        "reason": "competing_orders",
+        "forced_correct": false,
+        "accepted_correct": null
+      },
+      {
+        "file_id": 224,
+        "truth": "ball",
+        "candidate": "inner",
+        "top": 0.09476811513189175,
+        "margin": 0.5512710619971248,
+        "suggestion": null,
+        "reason": "competing_orders",
+        "forced_correct": false,
+        "accepted_correct": null
+      },
+      {
+        "file_id": 225,
+        "truth": "ball",
+        "candidate": "inner",
+        "top": 0.07466718211974724,
+        "margin": 0.35285493657709494,
+        "suggestion": null,
+        "reason": "competing_orders",
+        "forced_correct": false,
+        "accepted_correct": null
+      },
+      {
+        "file_id": 234,
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.24620551967842125,
+        "margin": 0.9668261236405602,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": 235,
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.24621560369428563,
+        "margin": 0.9649451474607565,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": 236,
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.24084991963282093,
+        "margin": 0.9071404503085685,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      },
+      {
+        "file_id": 237,
+        "truth": "outer",
+        "candidate": "outer",
+        "top": 0.2559795460114127,
+        "margin": 0.964971371479526,
+        "suggestion": "outer",
+        "reason": "accepted_research_suggestion",
+        "forced_correct": true,
+        "accepted_correct": true
+      }
+    ]
+  },
+  "records": [
+    {
+      "file_id": 209,
+      "url": "https://engineering.case.edu/sites/default/files/209.mat",
+      "sha256": "9f723d6d9d2eba714c6dc50f99321dffa73d8b1e4d3605675b2c2251511eff80",
+      "channel": "X209_DE_time",
+      "fault": "inner",
+      "diameter_in": 0.021,
+      "load_hp": 0,
+      "nominal_rpm": 1797,
+      "source_rate_hz": 12000,
+      "recorded_samples": 122136,
+      "effective_samples": 122136,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0015744158831034892,
+          "outer": 0.00002495116362460469,
+          "ball": 0.001332824450009984
+        },
+        "envelope": {
+          "inner": 0.3627790647827534,
+          "outer": 0.06188445486542207,
+          "ball": 0.013299879452181003
+        }
+      }
+    },
+    {
+      "file_id": 210,
+      "url": "https://engineering.case.edu/sites/default/files/210.mat",
+      "sha256": "596692397e77e129a00f7b7a61c4c3ffd6c7a59979b89039e7f70a7431cce1c7",
+      "channel": "X210_DE_time",
+      "fault": "inner",
+      "diameter_in": 0.021,
+      "load_hp": 1,
+      "nominal_rpm": 1772,
+      "source_rate_hz": 12000,
+      "recorded_samples": 121556,
+      "effective_samples": 121556,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00096598844980891,
+          "outer": 0.000019253488794212273,
+          "ball": 0.0012771666725638173
+        },
+        "envelope": {
+          "inner": 0.3679472869451431,
+          "outer": 0.05451390019717749,
+          "ball": 0.0073049708096292465
+        }
+      }
+    },
+    {
+      "file_id": 211,
+      "url": "https://engineering.case.edu/sites/default/files/211.mat",
+      "sha256": "8296a02ee489c2d16cbd9fc278ca2e29b22475cec70ebe840558c78b6b743dc1",
+      "channel": "X211_DE_time",
+      "fault": "inner",
+      "diameter_in": 0.021,
+      "load_hp": 2,
+      "nominal_rpm": 1750,
+      "source_rate_hz": 12000,
+      "recorded_samples": 121846,
+      "effective_samples": 121846,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0010211764484952882,
+          "outer": 0.00002301524168931293,
+          "ball": 0.0004918779011339502
+        },
+        "envelope": {
+          "inner": 0.38018194849221837,
+          "outer": 0.08226824104346354,
+          "ball": 0.0067283436399000075
+        }
+      }
+    },
+    {
+      "file_id": 212,
+      "url": "https://engineering.case.edu/sites/default/files/212.mat",
+      "sha256": "bfe13761f545a26b217db897a12d27e16fec74306aa86ade8dbdc8ebe587c253",
+      "channel": "X212_DE_time",
+      "fault": "inner",
+      "diameter_in": 0.021,
+      "load_hp": 3,
+      "nominal_rpm": 1730,
+      "source_rate_hz": 12000,
+      "recorded_samples": 121991,
+      "effective_samples": 121991,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0011025392344703806,
+          "outer": 0.00001855073533521424,
+          "ball": 0.0006054898631331001
+        },
+        "envelope": {
+          "inner": 0.3397685622837199,
+          "outer": 0.09824071062005119,
+          "ball": 0.007302465645261184
+        }
+      }
+    },
+    {
+      "file_id": 222,
+      "url": "https://engineering.case.edu/sites/default/files/222.mat",
+      "sha256": "fcc0ee740fa123b1f4683f555458891719efb2857afd9fdee63e8fde0ed14469",
+      "channel": "X222_DE_time",
+      "fault": "ball",
+      "diameter_in": 0.021,
+      "load_hp": 0,
+      "nominal_rpm": 1797,
+      "source_rate_hz": 12000,
+      "recorded_samples": 121991,
+      "effective_samples": 121991,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.004719760068397168,
+          "outer": 0.00021213704952310696,
+          "ball": 0.00018136857430382425
+        },
+        "envelope": {
+          "inner": 0.09616033827356427,
+          "outer": 0.040008194407932116,
+          "ball": 0.011603149826036538
+        }
+      }
+    },
+    {
+      "file_id": 223,
+      "url": "https://engineering.case.edu/sites/default/files/223.mat",
+      "sha256": "7287410fd2217e3b332c5ab4732a68963be046d7d17bd40efa41cabe6a0514e5",
+      "channel": "X223_DE_time",
+      "fault": "ball",
+      "diameter_in": 0.021,
+      "load_hp": 1,
+      "nominal_rpm": 1772,
+      "source_rate_hz": 12000,
+      "recorded_samples": 121701,
+      "effective_samples": 121701,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.010500986796906885,
+          "outer": 0.00013646026041569354,
+          "ball": 0.003195336381737075
+        },
+        "envelope": {
+          "inner": 0.06665684374399986,
+          "outer": 0.03913084995063859,
+          "ball": 0.011949197453120812
+        }
+      }
+    },
+    {
+      "file_id": 224,
+      "url": "https://engineering.case.edu/sites/default/files/224.mat",
+      "sha256": "8a16894c2ff4d6bcdb9f4c345c0d5f13737b3bd6d15015d6b566c86e7a3ee7b7",
+      "channel": "X224_DE_time",
+      "fault": "ball",
+      "diameter_in": 0.021,
+      "load_hp": 2,
+      "nominal_rpm": 1750,
+      "source_rate_hz": 12000,
+      "recorded_samples": 122136,
+      "effective_samples": 122136,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.010394845841737475,
+          "outer": 0.0002464537343194506,
+          "ball": 0.00014530644559609165
+        },
+        "envelope": {
+          "inner": 0.09476811513189175,
+          "outer": 0.04252519565966799,
+          "ball": 0.014398119297091817
+        }
+      }
+    },
+    {
+      "file_id": 225,
+      "url": "https://engineering.case.edu/sites/default/files/225.mat",
+      "sha256": "ece92fa141af03473fdfca80d00d9112472a20340224514e79979c6ddc97a6cf",
+      "channel": "X225_DE_time",
+      "fault": "ball",
+      "diameter_in": 0.021,
+      "load_hp": 3,
+      "nominal_rpm": 1730,
+      "source_rate_hz": 12000,
+      "recorded_samples": 122136,
+      "effective_samples": 122136,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.007728948559306307,
+          "outer": 0.00005532890994441643,
+          "ball": 0.00012979685621705662
+        },
+        "envelope": {
+          "inner": 0.07466718211974724,
+          "outer": 0.04832049830849343,
+          "ball": 0.013483505931592681
+        }
+      }
+    },
+    {
+      "file_id": 234,
+      "url": "https://engineering.case.edu/sites/default/files/234.mat",
+      "sha256": "ebcbdb96612e8085bbdbf81f0e5e8e8a8d1a693d1ec559c4894f7792771aa9b2",
+      "channel": "X234_DE_time",
+      "fault": "outer",
+      "diameter_in": 0.021,
+      "load_hp": 0,
+      "nominal_rpm": 1797,
+      "source_rate_hz": 12000,
+      "recorded_samples": 122426,
+      "effective_samples": 122426,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0001507831472138521,
+          "outer": 0.00008267513120103839,
+          "ball": 0.00000949541106997072
+        },
+        "envelope": {
+          "inner": 0.008167591468823572,
+          "outer": 0.24620551967842125,
+          "ball": 0.00723521588352645
+        }
+      }
+    },
+    {
+      "file_id": 235,
+      "url": "https://engineering.case.edu/sites/default/files/235.mat",
+      "sha256": "667e4bf1f213f92d10dca71d494ad002d8fd22bfd8004b31a4c71ccf0d764b66",
+      "channel": "X235_DE_time",
+      "fault": "outer",
+      "diameter_in": 0.021,
+      "load_hp": 1,
+      "nominal_rpm": 1772,
+      "source_rate_hz": 12000,
+      "recorded_samples": 121991,
+      "effective_samples": 121991,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00018891375355353454,
+          "outer": 0.000055824595405168555,
+          "ball": 0.00017330410989263096
+        },
+        "envelope": {
+          "inner": 0.008631051680364,
+          "outer": 0.24621560369428563,
+          "ball": 0.0038813328324076085
+        }
+      }
+    },
+    {
+      "file_id": 236,
+      "url": "https://engineering.case.edu/sites/default/files/236.mat",
+      "sha256": "c411d6d9826cba8073430555dc833e05fcbe4c38535f3eb7f03c525ea6797589",
+      "channel": "X236_DE_time",
+      "fault": "outer",
+      "diameter_in": 0.021,
+      "load_hp": 2,
+      "nominal_rpm": 1750,
+      "source_rate_hz": 12000,
+      "recorded_samples": 122281,
+      "effective_samples": 122281,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.00027758441442662734,
+          "outer": 0.00005457067668303328,
+          "ball": 0.000020230970512407507
+        },
+        "envelope": {
+          "inner": 0.008624587845801727,
+          "outer": 0.24084991963282093,
+          "ball": 0.022365215080321223
+        }
+      }
+    },
+    {
+      "file_id": 237,
+      "url": "https://engineering.case.edu/sites/default/files/237.mat",
+      "sha256": "233d1edb2daa963658369119e389e30f02aca551dd7bb028ab33e7ba63edfd20",
+      "channel": "X237_DE_time",
+      "fault": "outer",
+      "diameter_in": 0.021,
+      "load_hp": 3,
+      "nominal_rpm": 1730,
+      "source_rate_hz": 12000,
+      "recorded_samples": 121991,
+      "effective_samples": 121991,
+      "analyzed_samples": 49152,
+      "median_fractions": {
+        "raw": {
+          "inner": 0.0004008712283086008,
+          "outer": 0.00005967455122648976,
+          "ball": 0.00006426476688751045
+        },
+        "envelope": {
+          "inner": 0.0033485692510685804,
+          "outer": 0.2559795460114127,
+          "ball": 0.008966612426073368
+        }
+      }
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45561620601",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45561620601/artifacts/14998201605",
+  "artifact_sha256": "80d4e1c6393cd390b49c44254bcac9097413284b204c88e67efbd76b69f5c3c3"
+}
