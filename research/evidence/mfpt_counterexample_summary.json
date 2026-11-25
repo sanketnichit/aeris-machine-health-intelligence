@@ -539,5 +539,9 @@
   ],
   "workflow_run_id": 45610868043,
   "workflow_artifact_id": 15018544298,
-  "workflow_artifact_sha256": "74f0226a8c893754485fdf3fee8545a1424be06c34a8241523eb54526a845b03"
+  "workflow_artifact_sha256": "74f0226a8c893754485fdf3fee8545a1424be06c34a8241523eb54526a845b03",
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45610868043",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45610868043/artifacts/15018544298",
+  "artifact_sha256": "74f0226a8c893754485fdf3fee8545a1424be06c34a8241523eb54526a845b03",
+  "data_attribution": "Eric Bechhoefer, Condition Based Maintenance Fault Database for Testing Diagnostics and Prognostic Algorithms (2013); MathWorks redistribution, CC BY-NC-SA 4.0. Derived numerical results, no raw waveforms."
 }
