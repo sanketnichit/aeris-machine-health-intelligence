@@ -170,3 +170,16 @@ def test_cwru_measured_spectral_workspace():
     assert not app.exception
     assert any(m.label == "Envelope improves expected order" and m.value == "8/8" for m in app.metric)
     assert any("No normal controls" in w.value for w in app.warning)
+
+
+def test_cwru_extension_workspace():
+    report = read_report("cwru_extension_summary.json")
+    assert sum(r["analyzed_samples"] for r in report["records"]) == 983040
+    assert report["representations"]["envelope"]["expected_first_count"] == 8
+    assert report["representations"]["envelope"]["normal_fault_pairwise_auc"] == 1
+    assert report["representations"]["raw"]["normal_fault_pairwise_auc"] == 0
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"), default_timeout=30).run()
+    app.sidebar.radio(key="research_page").set_value("CWRU diagnostic extension").run()
+    assert not app.exception
+    assert any(m.label == "Envelope expected order first" and m.value == "8/16" for m in app.metric)
+    assert any("0/4" in w.value for w in app.warning)
