@@ -1,5 +1,6 @@
 import hashlib
 import itertools
+import json
 
 import numpy as np
 import pytest
@@ -47,17 +48,25 @@ def fixture():
     primary = {**base,"channel_id":"primary","individual_bound":.005}
     secondary = {**base,"channel_id":"secondary","individual_bound":.005}
     common = {**base,"common_bound":.01}
-    return primary, secondary, common, "2026-06-01T00:00:00Z", {digest:payload}
+    artifacts = {digest:payload}
+    def enroll(record):
+        raw = json.dumps(record,sort_keys=True,separators=(",",":"),allow_nan=False).encode()
+        pin = hashlib.sha256(raw).hexdigest()
+        artifacts[pin] = raw
+        return {**record,"enrollment_sha256":pin}
+    return enroll(primary), enroll(secondary), enroll(common), "2026-06-01T00:00:00Z", artifacts
 
 
 @pytest.mark.parametrize("change,expected", [
     ("expired","calibration_outside_validity"),
     ("missing","calibration_metadata_missing"),
     ("tampered","calibration_artifact_unverified"),
-    ("duplicate","duplicate_measurement_channel"),
-    ("scope","calibration_scope_mismatch"),
+    ("duplicate","calibration_enrollment_mismatch"),
+    ("scope","calibration_enrollment_mismatch"),
     ("badtime","observation_timestamp_invalid"),
-    ("badbound","calibration_metadata_invalid")])
+    ("badbound","calibration_metadata_invalid"),
+    ("alteredbound","calibration_enrollment_mismatch"),
+    ("missingpin","calibration_enrollment_unverified")])
 def test_provenance_rejections(change,expected):
     p,s,c,t,artifacts = fixture()
     if change=="expired": t="2027-01-01T00:00:00Z"
@@ -67,6 +76,8 @@ def test_provenance_rejections(change,expected):
     if change=="scope": c["asset_id"]="different"
     if change=="badtime": t="2026-06-01"
     if change=="badbound": p["individual_bound"]=float("nan")
+    if change=="alteredbound": p["individual_bound"]=.0001
+    if change=="missingpin": artifacts.pop(p["enrollment_sha256"])
     assert provenance_status(p,s,c,t,artifacts)==expected
     out=advisory(None,None,None,1.,p,s,c,t,artifacts,1.,.5,.8)
     assert out["suggestion"] is None and not out["operational_authorization"]
@@ -83,3 +94,19 @@ def test_valid_provenance_only_authorizes_review():
     assert out["suggestion"]=="outer"
     assert out["next_action"]=="engineering_review_of_conditional_suggestion"
     assert not out["operational_authorization"]
+
+
+def reenroll(record, artifacts):
+    record = {k:v for k,v in record.items() if k!="enrollment_sha256"}
+    raw = json.dumps(record,sort_keys=True,separators=(",",":"),allow_nan=False).encode()
+    digest = hashlib.sha256(raw).hexdigest()
+    artifacts[digest] = raw
+    return {**record,"enrollment_sha256":digest}
+
+
+def test_distinct_pinned_metadata_still_requires_matching_scope_and_channels():
+    p,s,c,t,artifacts=fixture()
+    duplicate=reenroll({**s,"channel_id":p["channel_id"]},artifacts)
+    assert provenance_status(p,duplicate,c,t,artifacts)=="duplicate_measurement_channel"
+    other=reenroll({**c,"asset_id":"other"},artifacts)
+    assert provenance_status(p,s,other,t,artifacts)=="calibration_scope_mismatch"

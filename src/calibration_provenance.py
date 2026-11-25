@@ -6,7 +6,7 @@ No machine actuation or operational authorization is provided.
 """
 import datetime as dt
 import hashlib
-import math
+import json
 import re
 
 from src.measurement_budget import _bound
@@ -14,9 +14,9 @@ from src.common_mode import common_mode_guard
 
 HEX = re.compile(r"[0-9a-f]{64}")
 FIELDS = {"channel_id", "asset_id", "reference_id", "common_group",
-          "valid_from", "valid_until", "individual_bound", "certificate_sha256"}
+          "valid_from", "valid_until", "individual_bound", "certificate_sha256", "enrollment_sha256"}
 COMMON_FIELDS = {"asset_id", "reference_id", "common_group",
-                 "valid_from", "valid_until", "common_bound", "certificate_sha256"}
+                 "valid_from", "valid_until", "common_bound", "certificate_sha256", "enrollment_sha256"}
 
 
 def timestamp(value):
@@ -51,6 +51,18 @@ def _certificate(record, fields, bound_key, when, trusted):
     payload = trusted.get(digest)
     if not isinstance(payload, bytes) or not payload or len(payload) > 1_000_000 or hashlib.sha256(payload).hexdigest() != digest:
         return "calibration_artifact_unverified"
+    enrollment = record["enrollment_sha256"]
+    if not isinstance(enrollment, str) or not HEX.fullmatch(enrollment):
+        return "calibration_metadata_invalid"
+    pinned = trusted.get(enrollment)
+    if not isinstance(pinned, bytes) or not pinned or len(pinned)>1_000_000 or hashlib.sha256(pinned).hexdigest()!=enrollment:
+        return "calibration_enrollment_unverified"
+    # Require a canonical enrollment containing the complete metadata and
+    # certificate digest. A certificate alone cannot pin an arbitrary bound.
+    expected = {k:v for k,v in record.items() if k!="enrollment_sha256"}
+    canonical = json.dumps(expected, sort_keys=True, separators=(",",":"), allow_nan=False).encode("utf-8")
+    if pinned != canonical:
+        return "calibration_enrollment_mismatch"
     return None
 
 

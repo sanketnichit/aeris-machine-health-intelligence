@@ -7,6 +7,7 @@ import streamlit as st
 
 from research.verify_evidence import verify
 from src.measurement_console import render_measurement_reliability
+from src.calibration_console import render_calibration_lab
 
 EVIDENCE = Path(__file__).resolve().parents[1] / "research" / "evidence"
 
@@ -454,6 +455,7 @@ def render_evidence():
         "MFPT sensor robustness": render_mfpt_robustness,
         "MFPT order uncertainty": render_mfpt_order_uncertainty,
         "MFPT measurement reliability": lambda: render_measurement_reliability(read_report),
+        "Calibration decision lab": render_calibration_lab,
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
