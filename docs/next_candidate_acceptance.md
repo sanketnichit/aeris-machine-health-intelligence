@@ -7,3 +7,7 @@ Required gates: registered evidence integrity and preflight, full regression in 
 No new field or safety claim is implied. The offline capture advisory is separate from fleet monitoring decisions; real calibration enrollment, authenticated external sensors, prospective physical validation and production security review are outstanding.
 
 A later registered training-only regime-development report also triggers the acceptance campaign, so the exact newer revision is independently tested. An earlier accepted revision is not evidence that a later revision passes.
+
+## Offline candidate verification
+
+Extract the uploaded candidate artifact into its own directory, then from a trusted checkout run `python -m scripts.verify_candidate_bundle <directory> --expected-revision <full-commit-sha>`. The verifier checks the exact five checksum entries, revision, preflight report fingerprint, required source paths, archive path safety and CRC without extracting source files. It checks internal consistency, not authenticity or workflow success. Obtain the artifact and expected revision independently from the successful GitHub run. The verifier does not publish anything.

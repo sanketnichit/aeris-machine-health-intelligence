@@ -39,6 +39,8 @@ jobs:
           git rev-parse HEAD > dist/revision.txt
           python -m pip freeze > dist/environment.txt
           (cd dist && sha256sum *.zip *.md revision.txt environment.txt readiness.json > SHA256SUMS)
+      - name: Independently verify candidate package contract
+        run: python -m scripts.verify_candidate_bundle dist --expected-revision "$GITHUB_SHA"
       - name: Validate extracted release archive in fresh environment
         run: |
           (cd dist && sha256sum -c SHA256SUMS)
