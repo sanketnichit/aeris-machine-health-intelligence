@@ -350,6 +350,24 @@ def render_cwru_selective():
     st.download_button("Download selective evidence", json.dumps(report, indent=2), "cwru_selective_summary.json", "application/json")
 
 
+def render_mfpt_transfer():
+    st.subheader("Independent MFPT cross-platform transfer")
+    report = read_report("mfpt_transfer_summary.json")
+    e = report["fault_assessment"]
+    st.caption("Frozen CWRU thresholds transferred to a separate laboratory rig with documented frequency geometry.")
+    a, b, c = st.columns(3)
+    a.metric("Fault coverage", f'{e["coverage"]:.0%}')
+    b.metric("Incorrect accepted fault suggestions", f'{e["incorrect_accepted"]}/{e["accepted"]}')
+    c.metric("Normal controls with fault suggestions", f'{report["normal_incorrect_accepted"]}/{len(report["normal_assessment"])}')
+    st.dataframe(pd.DataFrame(e["decisions"]), hide_index=True)
+    st.markdown("**Normal controls**")
+    st.dataframe(pd.DataFrame(report["normal_assessment"]), hide_index=True)
+    st.warning("Forced ranking was also correct on all 14 faults. Normal abstention is not a healthy diagnosis. No rolling-element fault controls or field calibration; repeated loads may share physical hardware.")
+    st.caption(report["data_attribution"])
+    st.markdown(f"[Source dataset]({report['source_url']}) · [Execution evidence]({report['run_url']})")
+    st.download_button("Download MFPT numerical evidence", json.dumps(report, indent=2), "mfpt_transfer_summary.json", "application/json")
+
+
 def render_report():
     from research.technical_report import generate_report
     st.subheader("Technical evidence report")
@@ -380,6 +398,7 @@ def render_evidence():
         "CWRU spectral audit": render_cwru,
         "CWRU diagnostic extension": render_cwru_extension,
         "CWRU selective diagnosis": render_cwru_selective,
+        "MFPT cross-platform transfer": render_mfpt_transfer,
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
