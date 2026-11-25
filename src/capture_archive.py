@@ -28,6 +28,11 @@ def connect(path):
         raise
 
 
+def connect_readonly(path):
+    """Open an existing archive without creating or modifying it."""
+    return sqlite3.connect(Path(path).resolve().as_uri() + "?mode=ro", uri=True, timeout=10)
+
+
 def report_bytes(analysis):
     return json.dumps({"archive_version": ARCHIVE_VERSION, "analysis": analysis},
                       sort_keys=True, separators=(",", ":"), allow_nan=False).encode("utf-8")
@@ -71,7 +76,7 @@ def archive_capture(path, raw, **settings):
 def load_capture(path, capture_id):
     if not isinstance(capture_id, str) or not CAPTURE_ID.fullmatch(capture_id):
         raise ValueError("Invalid capture identifier")
-    with closing(connect(path)) as db:
+    with closing(connect_readonly(path)) as db:
         row = db.execute("SELECT raw,report FROM captures WHERE capture_id=?", (capture_id,)).fetchone()
     if row is None:
         raise ValueError("Unknown capture identifier")
@@ -80,7 +85,7 @@ def load_capture(path, capture_id):
 
 
 def list_captures(path):
-    with closing(connect(path)) as db:
+    with closing(connect_readonly(path)) as db:
         rows = db.execute("SELECT capture_id,raw,report FROM captures ORDER BY capture_id").fetchall()
     result = []
     for ident, raw, report in rows:
