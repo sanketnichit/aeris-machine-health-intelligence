@@ -18,7 +18,7 @@ The DOI identifies the archived software release, not a peer-reviewed article. T
 
 ## Local platform deployment
 
-**Development add-on:** [Durable edge telemetry buffer](docs/edge_buffer.md) stages observations locally and replays them after an API outage. This is post-v0.1.0 development, not a validated physical hardware connector.
+**Development add-on:** [Durable edge telemetry buffer](docs/edge_buffer.md) stages observations locally and replays them after an API outage. This is post-v0.1.0 development, not a validated physical hardware connector. See [vibration acquisition](docs/vibration_acquisition.md) and [capture archive](docs/capture_archive.md). The vibration laboratory uses a synthetic demonstration by default. Only trusted local deployments should set AERIS_CAPTURE_ARCHIVE_PATH to an existing nonconfidential archive; all dashboard viewers can read its contents.
 
 Run the dashboard and persistent local research API together with `docker compose up --build --detach --wait`. See the [API and deployment guide](docs/api.md). Both host ports bind to localhost; this is not a public production service.
 
@@ -30,6 +30,7 @@ Run the dashboard and persistent local research API together with `docker compos
 | AI4I failure prediction | Synthetic classification and model explanations |
 | Telemetry fleet | Persistent ingestion, monitoring events, review incidents, freshness and explainable advisory |
 | Virtual degradation laboratory | Seeded maintenance counterfactuals and separate measured-signal evidence |
+| Vibration laboratory (development) | Synthetic waveform and FFT exploration; opt-in read-only local capture archive |
 
 After starting Compose, run `python scripts/demo_fleet.py` to populate explicitly synthetic assets. The advisory always withholds operational failure forecasts. The optional monitoring profile enables periodic freshness scans. See [virtual laboratory](docs/digital_twin.md), [roadmap](docs/roadmap.md) and [quickstart](docs/quickstart.md).
 
