@@ -333,6 +333,23 @@ def render_cwru_extension():
     st.download_button("Download extension evidence", json.dumps(report, indent=2), "cwru_extension_summary.json", "application/json")
 
 
+def render_cwru_selective():
+    st.subheader("Selective bearing diagnosis audit")
+    report = read_report("cwru_selective_summary.json")
+    st.caption("Frozen development-selected rejection rule; new severity on the same experimental rig.")
+    e = report["evaluation"]
+    a, b, c = st.columns(3)
+    a.metric("Coverage", f'{e["coverage"]:.0%}')
+    b.metric("Incorrect accepted suggestions", f'{e["incorrect_accepted"]}/{e["accepted"]}')
+    c.metric("Withheld suggestions", e["abstained"])
+    st.caption(f'Development-selected margin threshold: {report["policy"]["margin_threshold"]:.2f}; score floor: {report["policy"]["score_floor"]:.6f}.')
+    st.dataframe(pd.DataFrame(e["decisions"]), hide_index=True)
+    st.markdown(f'Forced ranking produced **{e["forced_errors"]}** errors across {e["records"]} recordings.')
+    st.warning("All four ball faults remain unresolved. Zero observed retained errors is not a zero-risk guarantee. No held-out normal controls, calibrated probabilities, or independent-platform validation.")
+    st.markdown(f"[Execution evidence]({report['run_url']}) · revision `{report['revision']}`")
+    st.download_button("Download selective evidence", json.dumps(report, indent=2), "cwru_selective_summary.json", "application/json")
+
+
 def render_report():
     from research.technical_report import generate_report
     st.subheader("Technical evidence report")
@@ -362,6 +379,7 @@ def render_evidence():
         "Physical vibration replay": render_physical_replay,
         "CWRU spectral audit": render_cwru,
         "CWRU diagnostic extension": render_cwru_extension,
+        "CWRU selective diagnosis": render_cwru_selective,
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
