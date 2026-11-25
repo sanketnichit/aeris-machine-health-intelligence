@@ -1,12 +1,24 @@
 # AERIS — Machine Health Intelligence
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.24522637.svg)](https://doi.org/10.5281/zenodo.24522637) [![MIT License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+
 AERIS began as a BTech project on the UCI AI4I 2020 dataset and has expanded into a reproducible machine-health research prototype. The project uses AI-assisted development; its evidence, code, limitations and experimental decisions are documented for review.
 
 **Live demo:** https://aeris-machine-health-intelligence.streamlit.app/ (deployment availability is not guaranteed by CI).
 
-**Research release candidate:** see [VERSION](VERSION) · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
+**Archived research release:** [v0.1.0](https://github.com/sanketnichit/aeris-machine-health-intelligence/releases/tag/v0.1.0) · [Zenodo DOI](https://doi.org/10.5281/zenodo.24522637) · [Quickstart](docs/quickstart.md) · [Architecture](docs/architecture.md) · [Changelog](CHANGELOG.md)
+
+## Cite AERIS
+
+Nichit, S. (2026). *AERIS: Machine Health Intelligence* (Version 0.1.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.24522637
+
+[ORCID](https://orcid.org/0009-0000-6993-7561) · [Citation metadata](CITATION.cff) · [All versions DOI](https://doi.org/10.5281/zenodo.24522636)
+
+The DOI identifies the archived software release, not a peer-reviewed article. The development branch main includes later work that is not part of the archived revision. See [publication documentation](docs/publication.md).
 
 ## Local platform deployment
+
+**Development add-on:** [Durable edge telemetry buffer](docs/edge_buffer.md) stages observations locally and replays them after an API outage. This is post-v0.1.0 development, not a validated physical hardware connector.
 
 Run the dashboard and persistent local research API together with `docker compose up --build --detach --wait`. See the [API and deployment guide](docs/api.md). Both host ports bind to localhost; this is not a public production service.
 
