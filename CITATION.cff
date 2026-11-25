@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use AERIS in research, please cite the archived v0.1.0 release."
+title: "AERIS: Machine Health Intelligence"
+type: software
+authors:
+  - family-names: Nichit
+    given-names: Sanket
+    orcid: "https://orcid.org/0009-0000-6993-7561"
+version: "0.1.0"
+date-released: 2026-11-24
+doi: "10.5281/zenodo.24522637"
+repository-code: "https://github.com/sanketnichit/aeris-machine-health-intelligence"
+url: "https://zenodo.org/records/24522637"
+license: MIT
+keywords:
+  - predictive maintenance
+  - remaining useful life
+  - machine health monitoring
+  - reproducible research
+  - uncertainty quantification
