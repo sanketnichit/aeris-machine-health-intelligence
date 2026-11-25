@@ -1,0 +1,33 @@
+name: AERIS Paderborn source intake
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-paderborn-intake.yml
+permissions:
+  contents: read
+jobs:
+  intake:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt rarfile==4.2
+      - run: sudo apt-get update && sudo apt-get install -y libarchive-tools
+      - run: python -m pytest -q tests/test_paderborn_intake.py
+      - run: python -m research.verify_evidence
+      - name: Acquire and inspect pinned source archives
+        run: |
+          mkdir -p intake-evidence
+          python -m research.paderborn_intake --directory "$RUNNER_TEMP/paderborn" --output intake-evidence/summary.json
+          cp research/PADERBORN_INTAKE_PROTOCOL.md intake-evidence/protocol.md
+          python -m pip freeze > intake-evidence/environment.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paderborn-intake-evidence
+          path: intake-evidence/
+          if-no-files-found: error
