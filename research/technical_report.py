@@ -84,6 +84,17 @@ def generate_report(root=ROOT):
                       f"Normal controls receiving a fault suggestion: {mfpt['normal_incorrect_accepted']}/{len(mfpt['normal_assessment'])}.",
                       "Positive selected laboratory cross-rig transfer, not a healthy-state diagnosis or field validation. No rolling-element controls; repeated loads may share physical hardware.",
                       mfpt["data_attribution"], ""])
+    if "mfpt_robustness_summary.json" in reports:
+        robustness = reports["mfpt_robustness_summary.json"]
+        lines.extend(["", "## MFPT sensor robustness (post-v0.1.0)", "",
+                      f"{robustness['record_scenario_count']} repeated recording-scenario assessments; {robustness['window_scenario_count']} window-scenario evaluations.",
+                      "", "| Scenario | Correct accepted | Incorrect accepted | Withheld | Correct after gate |", "|---|---:|---:|---:|---:|"])
+        for s in robustness["scenarios"]:
+            a, b = s["ungated"], s["gated"]
+            lines.append(f"| {s['kind']} {s['value']:g} | {a['correct_accepted']} | {a['incorrect_accepted']} | {a['abstained']} | {b['correct_accepted']} |")
+        lines.extend(["", "Speed metadata error produced 5/9 incorrect accepted suggestions at -5% and 1/1 at +5%. No safe tolerance established.",
+                      "The explicit quality gate removed 50 correct suggestions and prevented zero observed incorrect suggestions. Artificial repeated perturbations, not independent hardware validation.",
+                      robustness["data_attribution"], ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
