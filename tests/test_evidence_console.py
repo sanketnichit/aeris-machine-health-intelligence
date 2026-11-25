@@ -228,3 +228,21 @@ def test_mfpt_robustness_workspace():
     app.radio(key="mfpt_robustness_gate").set_value("gated").run()
     assert not app.exception
     assert any("No safe tolerance" in w.value for w in app.warning)
+
+
+def test_mfpt_order_uncertainty_workspace():
+    report = read_report("mfpt_order_uncertainty_summary.json")
+    assert report["record_scenario_count"] == 170
+    narrow = [s for s in report["scenarios"] if s["declared_uncertainty"] == .01]
+    wide = [s for s in report["scenarios"] if s["declared_uncertainty"] == .05]
+    assert sum(s["interval"]["correct_accepted"] for s in narrow) == 27
+    assert sum(s["prevented_incorrect"] for s in narrow) == 6
+    assert sum(s["lost_correct"] for s in narrow) == 18
+    assert all(s["interval"]["accepted"] == 0 and s["interval"]["retained_error"] is None for s in wide)
+    assert sum(s["lost_correct"] for s in wide) == 45
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"), default_timeout=30).run()
+    app.sidebar.radio(key="research_page").set_value("MFPT order uncertainty").run()
+    assert not app.exception
+    app.radio(key="mfpt_order_width").set_value(.05).run()
+    assert not app.exception
+    assert any("retained error is undefined" in w.value for w in app.warning)
