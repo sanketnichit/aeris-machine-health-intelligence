@@ -64,3 +64,7 @@ The research dashboard and generated technical report expose the registered stud
 ## Regime-aware development
 
 [Findings](CMAPSS_REGIME_DEVELOPMENT_FINDINGS.md). Setting support detects multi-condition transfer but misses the FD003 domain difference; the fixed selective policy has low coverage. All official labels remain excluded from this development audit.
+
+## Paderborn physical acquisition
+
+[Structural intake findings](PADERBORN_INTAKE_FINDINGS.md). All 12 inspected waveforms differ from the nominal sample count. No diagnostic performance claim.

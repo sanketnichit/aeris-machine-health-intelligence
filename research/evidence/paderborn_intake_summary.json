@@ -1,0 +1,303 @@
+{
+  "scope": "paderborn_source_intake_structural_only_not_diagnostic_validation",
+  "revision": "11332eced976ccd3603f468c748fdfa1e1ce2601",
+  "publisher": "Paderborn University KAt Bearing DataCenter",
+  "source_license": "CC BY-NC 4.0 (original publisher terms)",
+  "mirror_doi": "10.5281/zenodo.15845309",
+  "specimens": 3,
+  "inventory_measurements": 240,
+  "inspected_recordings": 12,
+  "diagnostic_scoring_performed": false,
+  "nominal_sample_count_mismatches": 12,
+  "archives": [
+    {
+      "specimen": "K001",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/K001.rar",
+      "sha256": "0f119ebdb28fb2f4d9fac1beb1319429f63f7ae1256c23c872f280f3560918e5",
+      "md5": "af6dc58283d356cd438e7738a2d525b8",
+      "bytes": 173881721,
+      "inventory_measurements": 80,
+      "selected_recordings": [
+        {
+          "filename": "N15_M07_F10_K001_1.mat",
+          "condition": "N15_M07_F10",
+          "sha256": "e1a971e93991e5f8bbfdcacde5a0fec895a4248f8232d52b59ff85d034c9c00d",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256001,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N09_M07_F10_K001_1.mat",
+          "condition": "N09_M07_F10",
+          "sha256": "c55f4c6a5d6d9a83d18d24dce4f164ffc85721e4e358df1c1ac9886583c2269f",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256823,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N15_M01_F10_K001_1.mat",
+          "condition": "N15_M01_F10",
+          "sha256": "84ff03769c3efa9cd2c3e0cbeefa60ed6bcec3436efa804637788a638b5f23f3",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256070,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N15_M07_F04_K001_1.mat",
+          "condition": "N15_M07_F04",
+          "sha256": "4790406e566cd6ed93241bc0a1e51ea7b9603c38a712a93d2946140dfa581458",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 258669,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        }
+      ],
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KA04",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KA04.rar",
+      "sha256": "6fc317157e2cd4cb55bc54d6fac1b1753f8ab31abcccd1ac68cbfb78e5e8299d",
+      "md5": "f87503ed69a624ba6e1d9e573e6c09fb",
+      "bytes": 180920703,
+      "inventory_measurements": 80,
+      "selected_recordings": [
+        {
+          "filename": "N15_M07_F10_KA04_1.mat",
+          "condition": "N15_M07_F10",
+          "sha256": "c1caff884401a8476d3e8f42fb6efcd57c721888706af26cfeaeb2c3e99b35a5",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256004,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N09_M07_F10_KA04_1.mat",
+          "condition": "N09_M07_F10",
+          "sha256": "7db59955c834c4f74e8360bc873a4adc27beb569cf4406ba857777b1f986f138",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256001,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N15_M01_F10_KA04_1.mat",
+          "condition": "N15_M01_F10",
+          "sha256": "060dc5acbcab35a2aaad7d19be4b771e993a29f5b927d66bec96d23a972fd040",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256332,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N15_M07_F04_KA04_1.mat",
+          "condition": "N15_M07_F04",
+          "sha256": "46f3a5e8984ed72eca6b0824764c8c608132918ba6185002a59433c35904ae3e",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256475,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        }
+      ],
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KI04",
+      "source": "https://groups.uni-paderborn.de/kat/BearingDataCenter/KI04.rar",
+      "sha256": "8fde861a9ceac4b41fe8a030b4c5bbb4b9b9af0590d9338a8de0150b4661be77",
+      "md5": "a5a634fcdcb33a8501e7411d30441c6d",
+      "bytes": 172644279,
+      "inventory_measurements": 80,
+      "selected_recordings": [
+        {
+          "filename": "N15_M07_F10_KI04_1.mat",
+          "condition": "N15_M07_F10",
+          "sha256": "d77409dca95d03986b5957b73c2219f42f7bbfd8080ebbf6f5b9f11571476f9c",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256001,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N09_M07_F10_KI04_1.mat",
+          "condition": "N09_M07_F10",
+          "sha256": "fa5d43cd8ab8cec9cadb0b9356096231b9f2a1a925a2bf935b5d3bcb2eecdf5f",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256087,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N15_M01_F10_KI04_1.mat",
+          "condition": "N15_M01_F10",
+          "sha256": "24cd3f08730e2ffe0117e77ef8eb14433b6131bddf6508d2ea50bae950f936b3",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256732,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        },
+        {
+          "filename": "N15_M07_F04_KI04_1.mat",
+          "condition": "N15_M07_F04",
+          "sha256": "935c1b56751894110c6256fa3d06b0cc9e526417d0b7eee92abeaea1dce0617f",
+          "channel_names": [
+            "force",
+            "phase_current_1",
+            "phase_current_2",
+            "speed",
+            "temp_2_bearing_module",
+            "torque",
+            "vibration_1"
+          ],
+          "vibration_name": "vibration_1",
+          "sample_count": 256004,
+          "unit_metadata": "[]",
+          "raster_metadata": "HostService",
+          "finite_nonconstant": true,
+          "expected_nominal_samples": 256000,
+          "nominal_sample_count_matches": false
+        }
+      ],
+      "diagnostic_scoring_performed": false
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45616628635",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45616628635/artifacts/15022089011",
+  "artifact_sha256": "453ee50aebb0f3a4b45f16e50a1d00e3c559d44eae16b175fdc87600caad979c",
+  "data_attribution": "Christian Lessmeier et al., KAt-DataCenter, Chair of Design and Drive Technology, Paderborn University, PHM Europe 2016; original publisher CC BY-NC 4.0. Structural metadata only. https://mb.uni-paderborn.de/en/kat/research/bearing-datacenter"
+}

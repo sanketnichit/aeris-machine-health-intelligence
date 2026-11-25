@@ -186,6 +186,12 @@ def generate_report(root=ROOT):
             retained=s["accepted_mae"]
             lines.append(f"| {s['source']} | {s['target']} | {s['landmark']} | {s['endpoints']} | {s['support_rejected']} | {s['accepted']} | {raw if raw is not None else 'undefined'} | {retained if retained is not None else 'undefined'} |")
         lines.extend(["","Setting support is not fault-mode equivalence. Declared domain mismatch abstains regardless of support. The fixed width policy and marginal calibration do not establish retained conditional coverage or deployment safety.",""])
+    if "paderborn_intake_summary.json" in reports:
+        audit=reports["paderborn_intake_summary.json"]
+        lines.extend(["","## Paderborn physical source intake","",
+                      f"{audit['specimens']} specimens; {audit['inventory_measurements']} recording names; {audit['inspected_recordings']} inspected waveforms.",
+                      f"Nominal sample-count discrepancies: {audit['nominal_sample_count_mismatches']}.",
+                      "Structural acquisition only; no diagnosis, no calibrated timebase, no performance metrics. Raw signals are not redistributed.",""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
