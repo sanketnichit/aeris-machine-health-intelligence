@@ -58,6 +58,16 @@ def generate_report(root=ROOT):
         counts = cwru["expected_exceeds_alternative_count"]
         lines.extend(["", f"Expected-order fraction exceeds alternative: raw {counts['raw']}/{cwru['record_count']}, envelope {counts['envelope']}/{cwru['record_count']}.",
                       "Representation-specific non-DC power fractions; correlated seeded-fault recordings without normal controls. Not classification accuracy, RUL or field validation.", ""])
+    if "cwru_extension_summary.json" in reports:
+        extension = reports["cwru_extension_summary.json"]
+        raw, env = (extension["representations"][m] for m in ("raw", "envelope"))
+        lines.extend(["", "## CWRU diagnostic extension (post-v0.1.0)", "",
+                      f"Expected order ranks first: raw {raw['expected_first_count']}/{extension['fault_records']}; envelope {env['expected_first_count']}/{extension['fault_records']}.",
+                      f"Descriptive normal/fault pairwise AUC: raw {raw['normal_fault_pairwise_auc']:.2f}, envelope {env['normal_fault_pairwise_auc']:.2f}.",
+                      "", "| Fault group | Raw expected first | Envelope expected first |", "|---|---:|---:|"])
+        for group, metrics in env["by_group"].items():
+            lines.append(f"| {group} | {raw['by_group'][group]['expected_first']}/{metrics['records']} | {metrics['expected_first']}/{metrics['records']} |")
+        lines.extend(["", "No threshold selected. Small rolling-element defects fail all four envelope rankings. Correlated same-rig recordings and differing acquisition rates constrain interpretation; no diagnostic accuracy or field validation claim.", ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
