@@ -22,7 +22,7 @@ FIELDS={
     "angle_deg":r"(?:pressure angle|contact angle)",
 }
 NUMBER=r"[-+]?(?:\d+(?:[.,]\d+)?|[.,]\d+)"
-UNITS={"rolling_elements":r"(?:[-–—]|pcs\.?|pieces)?",
+UNITS={"rolling_elements":r"(?:[-–—]|pcs?\.?|pieces)?",
        "pitch_diameter_mm":r"mm","element_diameter_mm":r"mm","angle_deg":r"(?:°|deg(?:ree)?s?\.?)"}
 LOG_FIELDS={
     "sampling_rate":r"sampling (?:rate|frequency)|sample rate",

@@ -114,6 +114,10 @@
     "paderborn_cohort_summary.json": {
       "blob_sha": "861030cf4f88364da14887b26b24f252ebfc09a4",
       "bytes": 17403
+    },
+    "paderborn_documents_summary.json": {
+      "blob_sha": "afe874cf7b457c020d66f7ffeef0fddee06a8028",
+      "bytes": 43245
     }
   }
 }

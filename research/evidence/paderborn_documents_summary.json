@@ -1,0 +1,1392 @@
+{
+  "scope": "paderborn_document_geometry_candidates_not_verified_geometry_or_calibration",
+  "revision": "3cb20e3d850cc33715038dd51e95b776480910dc",
+  "cohort_blob_sha": "861030cf4f88364da14887b26b24f252ebfc09a4",
+  "specimens": 17,
+  "documents": 34,
+  "specimen_records": [
+    {
+      "specimen": "K001",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "K001/K001.pdf",
+          "sha256": "b6ef87e2fc60c7fdd50b6a8762c8a099d16d5242f897c60d5425c0e69478348a",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                         mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                      mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                          \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "K001/measuring_log_K001.pdf",
+          "sha256": "827f5ae9eec40ed96b2078fc4529bf0f07f4ffe063fceeb2a5a569d1ac809cb2",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "K002",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "K002/K002.pdf",
+          "sha256": "118e2c0ba5ed42f867896762287beeb7233580ca5061aeef5427a0595bde81dc",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                         mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                      mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                          \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "K002/measuring_log_K002.pdf",
+          "sha256": "10f28fd84743afdb49e8665164a01b75892afd74cbd869f959d2b7f3b9239427",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "K003",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "K003/K003.pdf",
+          "sha256": "b68b8ee1fde1f261a33afb32d5f63c6b725d10df0460d26a474f27a304bad6e5",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                         mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                      mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                          \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "K003/measuring_log_K003.pdf",
+          "sha256": "482a417a559c465a31083a7f724e763ace14d8fdb143e143e85afeb7a59f0440",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "K004",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "K004/K004.pdf",
+          "sha256": "12e2200935856df7a291dcf56fde983c52b47183a72ed19f6236909e0133f634",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                         mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                      mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                          \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "K004/measuring_log_K004.pdf",
+          "sha256": "4806097aa9577b87a46ab124959ed4bc85b267af81666b69826d926418574bf0",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "K005",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "K005/K005.pdf",
+          "sha256": "73a5b793e7b09380e92718665705a7e756bc0d5d1cad0df829f5bbe7e6ee62d8",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                         mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                      mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                          \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "K005/measuring_log_K005.pdf",
+          "sha256": "bd7cd9725dbd9c113aeee5dd3d347859ce62d3a3e1c8f3de0ac74aa85f7adbb0",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "K006",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "K006/K006.pdf",
+          "sha256": "157e355b31baec8063691aa17b291bb81969917d10e4beea0d76f11eb3c6ed0b",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                         mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                      mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                          \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "K006/measuring_log_K006.pdf",
+          "sha256": "624de609ea9b42ca1b5f124fe2a56c460744e029e02748a476b5b626c851ec43",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KA04",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KA04/KA04.pdf",
+          "sha256": "3f66eb5cb2df479c9f3cb16dd07e13bb8f662dab2289d445359a8cc58f824913",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 28.55,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 28.55,
+                  "label": "Pitch circle diameter                        mm             28.55"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KA04/measuring_log_KA04.pdf",
+          "sha256": "eaf9df99b2aae037c95f1ccf26abea4c7877ee8d73fa53a79672da7139a0d8d7",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KA15",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KA15/KA15.pdf",
+          "sha256": "6954e6549fed0b5f6aa9b88d13ec7ca7a5197ffa04235ed6799843d196cfd6d8",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 28.55,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 28.55,
+                  "label": "Pitch circle diameter                        mm             28.55"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KA15/measuring_log_KA15.pdf",
+          "sha256": "ce14deb79e8cca48691cca540bc7d74675680b68fcc107f10fe217883373add6",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KA16",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KA16/KA16.pdf",
+          "sha256": "a32c7a7a5e8234728e3faf695981f13d32dfc2068ae8d52ea436c79d202161e6",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                        mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KA16/measuring_log_KA16.pdf",
+          "sha256": "6235f7947fe01072e34d0e7b62bb67608d62030e56d686dd0f5d0030bc06a952",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KA22",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KA22/KA22.pdf",
+          "sha256": "629b287d6a206174e806afaa185d7f9d696e89cbf19c4aca0bfd59fb9a5ecc52",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                        mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KA22/measuring_log_KA22.pdf",
+          "sha256": "58a20e4ea94cd5228f6811f34a6858e0fd75b3a4ac2f54de8eefa7f9006bbb1a",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KA30",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KA30/KA30.pdf",
+          "sha256": "cdf2204bf71188f365bac1d2e7932dc8ccdba951743ee240846fa234f76310d8",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                        mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KA30/measuring_log_KA30.pdf",
+          "sha256": "6e7d644a059da2cb048ffdc68f94236e3caf2478fb690bca4c9d4f0031226e73",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KI04",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KI04/KI04.pdf",
+          "sha256": "89d141542651a64c803c0f989905d2b22ad1a79448ec3485299656b084d5297a",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                         mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                      mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                          \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KI04/measuring_log_KI04.pdf",
+          "sha256": "55018d7406a006a850484ee49f562c97c256df6c58fc4f99c8d9f64afd8a2e9e",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KI14",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KI14/KI14.pdf",
+          "sha256": "61c6da9af925d5a637073832414ea9c8dfe6d6b8a43f9d3d87129afb8980a0b2",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                        mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KI14/measuring_log_KI14.pdf",
+          "sha256": "1546d8e6536d01017396128ebee94fca29c8f266e63692c121681e0ae56bc0ae",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KI16",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KI16/KI16.pdf",
+          "sha256": "ca3588d7d5583af88f6969c94f8f40f9a6f2df9bb2b1920464466d95502755dd",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 28.55,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 28.55,
+                  "label": "Pitch circle diameter                        mm             28.55"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KI16/measuring_log_KI16.pdf",
+          "sha256": "8002dcd777684a2ca855f44ddcc351f61ad0b275c2f2c33b8a6d2d41998f2a20",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KI17",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KI17/KI17.pdf",
+          "sha256": "7b4efe0291ddc57c4adfbc0d38829b2cb6e2c45e74cb4e05b00773f0a03eebfd",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                        mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KI17/measuring_log_KI17.pdf",
+          "sha256": "b97c137076d039946a7f62427bfb7f904f960c418e8015e800c80d04c0813b6b",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KI18",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KI18/KI18.pdf",
+          "sha256": "39e36b4d110a3fe25ea10bc97be2e6c4a6d688923554e621f4e02d740c8d1ab2",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 29.05,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 22,
+                  "value": 29.05,
+                  "label": "Pitch circle diameter                        mm             29.05"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 24,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 26,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KI18/measuring_log_KI18.pdf",
+          "sha256": "70732989af77cf384382501d98607b1480e4173154de4b907c727b8cbc9a6022",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    },
+    {
+      "specimen": "KI21",
+      "documents": [
+        {
+          "kind": "fact_sheet",
+          "name": "KI21/KI21.pdf",
+          "sha256": "8a674661919f3e2bd7a86f7411c4bb6f57972249deca0ab1df0430db6d8a6d91",
+          "text_pages": 2,
+          "text_extraction_nonempty": true,
+          "geometry": {
+            "rolling_elements": {
+              "status": "unresolved",
+              "value": null,
+              "candidates": []
+            },
+            "pitch_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 28.55,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 21,
+                  "value": 28.55,
+                  "label": "Pitch circle diameter                        mm             28.55"
+                }
+              ]
+            },
+            "element_diameter_mm": {
+              "status": "unique_candidate",
+              "value": 6.75,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 23,
+                  "value": 6.75,
+                  "label": "Rolling element diameter                     mm             6.75"
+                }
+              ]
+            },
+            "angle_deg": {
+              "status": "unique_candidate",
+              "value": 0,
+              "candidates": [
+                {
+                  "page": 1,
+                  "line": 25,
+                  "value": 0,
+                  "label": "pressure angle                         \u00b0            0"
+                }
+              ]
+            }
+          },
+          "acquisition_keyword_pages": {
+            "sampling_rate": [],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        },
+        {
+          "kind": "measurement_log",
+          "name": "KI21/measuring_log_KI21.pdf",
+          "sha256": "3d812ed331cc52375fb7c7c1403ebdc60d45ce6969fe201f057597223e5a4d79",
+          "text_pages": 1,
+          "text_extraction_nonempty": true,
+          "geometry": {},
+          "acquisition_keyword_pages": {
+            "sampling_rate": [
+              1
+            ],
+            "duration": [],
+            "clock": []
+          },
+          "visual_review_completed": false,
+          "geometry_verified": false,
+          "clock_verified": false
+        }
+      ]
+    }
+  ],
+  "geometry_verified_specimens": 0,
+  "diagnostic_scoring_performed": false,
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45618162260",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45618162260/artifacts/15024265118",
+  "artifact_sha256": "15d7dfd9e8814efde1c4b118033a0abc9d43519fd903cdc517f667f2f7b02ae2",
+  "data_attribution": "Christian Lessmeier et al., KAt-DataCenter, Chair of Design and Drive Technology, Paderborn University, PHM Europe 2016; original publisher CC BY-NC 4.0. Structural metadata only. https://mb.uni-paderborn.de/en/kat/research/bearing-datacenter"
+}

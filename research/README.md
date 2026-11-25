@@ -72,3 +72,5 @@ The research dashboard and generated technical report expose the registered stud
 [Stored timing findings](PADERBORN_TIMEBASE_FINDINGS.md) and [pre-scoring cohort](PADERBORN_COHORT_PROTOCOL.md). Nonuniform timestamp vectors do not establish ADC clock jitter; scoring remains blocked.
 
 [Primary cohort inventory findings](PADERBORN_COHORT_FINDINGS.md): 17 specimens, 1,360 recording names, 34 fingerprinted fact sheets and measurement logs; no waveform scoring.
+
+[Specimen document findings](PADERBORN_DOCUMENTS_FINDINGS.md): all 34 PDFs inspected; initial geometry extraction incomplete and no timebase calibration.

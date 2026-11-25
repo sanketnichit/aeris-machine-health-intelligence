@@ -203,6 +203,11 @@ def generate_report(root=ROOT):
         lines.extend(["","## Paderborn primary cohort inventory","",
                       f"{audit['specimens']} primary specimens, {audit['inventory_measurements']} recording filenames, {documents} non-MAT members.",
                       "Archive identity verified; no waveform scoring or specimen geometry interpretation in this inventory.",""])
+    if "paderborn_documents_summary.json" in reports:
+        audit=reports["paderborn_documents_summary.json"]
+        lines.extend(["","## Paderborn specimen document audit","",
+                      f"{audit['documents']} pinned PDFs from {audit['specimens']} specimens. The initial parser found three geometry candidates per specimen but no rolling-element count.",
+                      "Text candidates are not visually verified geometry or calibrated measurement metadata.",""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
