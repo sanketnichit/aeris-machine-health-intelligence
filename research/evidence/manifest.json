@@ -50,6 +50,10 @@
     "cwru_extension_summary.json": {
       "blob_sha": "8fb0a389ffb3716676492fc85c6d40e5d73e89d3",
       "bytes": 17963
+    },
+    "cwru_selective_summary.json": {
+      "blob_sha": "beed82d6bc07020eef0fbe50b15e60a9d461d812",
+      "bytes": 22708
     }
   }
 }
