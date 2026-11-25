@@ -11,3 +11,7 @@ A later registered training-only regime-development report also triggers the acc
 ## Offline candidate verification
 
 Extract the uploaded candidate artifact into its own directory, then from a trusted checkout run `python -m scripts.verify_candidate_bundle <directory> --expected-revision <full-commit-sha>`. The verifier checks the exact five checksum entries, revision, preflight report fingerprint, required source paths, archive path safety and CRC without extracting source files. It checks internal consistency, not authenticity or workflow success. Obtain the artifact and expected revision independently from the successful GitHub run. The verifier does not publish anything.
+
+## Final bounded release gate
+
+The preflight now requires the registered Paderborn terminal conditional transfer outcome, not a favorable accuracy result. It checks the stated scope, complete predeclared denominators, explicit non-authorization and pinned source provenance. A geometry-blocked outcome is distinguishable from a conditional study with geometry candidates. Neither is calibrated external diagnostic validation. The original release and earlier accepted revisions remain unchanged.

@@ -26,7 +26,7 @@ Run the dashboard and persistent local research API together with `docker compos
 
 | Workspace | What it demonstrates |
 |---|---|
-| Research intelligence | Nine evidence-linked pages, benchmark comparisons, replay and technical report |
+| Research intelligence | Evidence-linked research pages, benchmark comparisons, replay and technical report |
 | AI4I failure prediction | Synthetic classification and model explanations |
 | Telemetry fleet | Persistent ingestion, monitoring events, review incidents, freshness and explainable advisory |
 | Virtual degradation laboratory | Seeded maintenance counterfactuals and separate measured-signal evidence |
@@ -51,7 +51,7 @@ See the [scientific conclusions](research/SCIENTIFIC_CONCLUSIONS.md) for the fin
 | Measured vibration-state transition | [Calibration audit](research/TWIN_CALIBRATION_FINDINGS.md) | 54 endpoints; 1.16% lower MAE than persistence, no established superiority or physical twin calibration |
 | Virtual maintenance sensitivity | [Frozen sensitivity study](research/TWIN_SENSITIVITY_FINDINGS.md) | 54 scenarios, 500 trials each; conditional simulated costs only |
 
-The research console provides nine on-demand workspaces, including offline evidence tables, cost comparisons, official benchmark metrics, simulated engine replay, measured physical vibration-feature replay and a downloadable technical report. The physical replay exposes 254 published points from three previously evaluated PRONOSTIA bearings. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. The official FD001 test set has been observed; future model changes require new independent evaluation.
+The research console provides on-demand workspaces, including offline evidence tables, cost comparisons, official benchmark metrics, simulated engine replay, measured physical vibration-feature replay and a downloadable technical report. The physical replay exposes 254 published points from three previously evaluated PRONOSTIA bearings. The original AI4I interactive classifier remains a separate workspace. See the [research index](research/README.md) for reproducibility and limitations. All four official legacy C-MAPSS test populations have been observed; future model changes require new independent evaluation. See the post-release [NASA multi-regime findings](research/CMAPSS_MULTIREGIME_FINDINGS.md), [regime-development findings](research/CMAPSS_REGIME_DEVELOPMENT_FINDINGS.md), [measurement reliability](research/MFPT_COMMON_MODE_FINDINGS.md), [capture advisory](docs/capture_advisory.md), [Paderborn physical cohort](research/PADERBORN_COHORT_FINDINGS.md), and [bounded release closure](docs/next_research_release_closure.md).
 
 ## What is in the project
 
