@@ -70,6 +70,10 @@
     "mfpt_breakpoint_summary.json": {
       "blob_sha": "a69b2b22ca1edfa61a3fb318595702f3f17eeda9",
       "bytes": 13350
+    },
+    "mfpt_counterexample_summary.json": {
+      "blob_sha": "a9a8b3415d22d966c553f76aaa0813ea3e4019a6",
+      "bytes": 14883
     }
   }
 }

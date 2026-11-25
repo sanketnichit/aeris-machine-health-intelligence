@@ -1,0 +1,543 @@
+{
+  "scope": "retrospective_point_counterexample_search_not_independent_validation",
+  "revision": "a74871adc0be66b6c114b0c66882734601898d76",
+  "source_revision": "d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d",
+  "reference_blob_sha": "ed136331c413517a3d7477e0ff90a080c866d183",
+  "breakpoint_audit_blob_sha": "a69b2b22ca1edfa61a3fb318595702f3f17eeda9",
+  "previous_audit_blob_sha": "44c7445a92cbb64cc46a7ef37681347cace22a72",
+  "source_license": "CC BY-NC-SA 4.0",
+  "score_floor": 0.00974446327636002,
+  "margin_threshold": 0.8,
+  "scenario_count": 10,
+  "record_count": 17,
+  "record_scenario_count": 170,
+  "scenarios": [
+    {
+      "counterexample_counts": {
+        "nominal_correct": {},
+        "nominal_incorrect": {
+          "abstention": 5
+        }
+      },
+      "point_evaluations": 225,
+      "declared_speed_error": -0.05,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": false,
+      "point": {
+        "fault_records": 14,
+        "accepted": 9,
+        "correct_accepted": 4,
+        "incorrect_accepted": 5,
+        "abstained": 5,
+        "coverage": 0.6428571428571429,
+        "retained_error": 0.5555555555555556,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 1,
+        "correct_accepted": 1,
+        "incorrect_accepted": 0,
+        "abstained": 13,
+        "coverage": 0.07142857142857142,
+        "retained_error": 0,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 4,
+        "correct_accepted": 4,
+        "incorrect_accepted": 0,
+        "abstained": 10,
+        "coverage": 0.2857142857142857,
+        "retained_error": 0,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 3,
+      "new_incorrect": 0,
+      "max_cells_checked": 38,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {
+          "abstention": 4
+        },
+        "nominal_incorrect": {
+          "abstention": 5
+        }
+      },
+      "point_evaluations": 721,
+      "declared_speed_error": -0.05,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 9,
+        "correct_accepted": 4,
+        "incorrect_accepted": 5,
+        "abstained": 5,
+        "coverage": 0.6428571428571429,
+        "retained_error": 0.5555555555555556,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 0,
+      "new_incorrect": 0,
+      "max_cells_checked": 90,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {
+          "abstention": 6
+        },
+        "nominal_incorrect": {}
+      },
+      "point_evaluations": 12,
+      "declared_speed_error": -0.01,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 8,
+        "correct_accepted": 8,
+        "incorrect_accepted": 0,
+        "abstained": 6,
+        "coverage": 0.5714285714285714,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 8,
+        "correct_accepted": 8,
+        "incorrect_accepted": 0,
+        "abstained": 6,
+        "coverage": 0.5714285714285714,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 0,
+      "new_incorrect": 0,
+      "max_cells_checked": 1,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {
+          "competing_suggestion": 5,
+          "abstention": 9
+        },
+        "nominal_incorrect": {}
+      },
+      "point_evaluations": 1312,
+      "declared_speed_error": -0.01,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 0,
+      "new_incorrect": 0,
+      "max_cells_checked": 162,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {
+          "abstention": 1
+        },
+        "nominal_incorrect": {}
+      },
+      "point_evaluations": 70,
+      "declared_speed_error": 0,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 11,
+        "correct_accepted": 11,
+        "incorrect_accepted": 0,
+        "abstained": 3,
+        "coverage": 0.7857142857142857,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 2,
+      "new_incorrect": 0,
+      "max_cells_checked": 36,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {
+          "abstention": 13,
+          "competing_suggestion": 1
+        },
+        "nominal_incorrect": {}
+      },
+      "point_evaluations": 1433,
+      "declared_speed_error": 0,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 0,
+      "new_incorrect": 0,
+      "max_cells_checked": 140,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {
+          "abstention": 5
+        },
+        "nominal_incorrect": {}
+      },
+      "point_evaluations": 218,
+      "declared_speed_error": 0.01,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 7,
+        "correct_accepted": 7,
+        "incorrect_accepted": 0,
+        "abstained": 7,
+        "coverage": 0.5,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 8,
+        "correct_accepted": 8,
+        "incorrect_accepted": 0,
+        "abstained": 6,
+        "coverage": 0.5714285714285714,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 1,
+      "new_incorrect": 0,
+      "max_cells_checked": 43,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {
+          "abstention": 13
+        },
+        "nominal_incorrect": {}
+      },
+      "point_evaluations": 1900,
+      "declared_speed_error": 0.01,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 0,
+      "new_incorrect": 0,
+      "max_cells_checked": 159,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {},
+        "nominal_incorrect": {
+          "competing_suggestion": 1
+        }
+      },
+      "point_evaluations": 2,
+      "declared_speed_error": 0.05,
+      "declared_uncertainty": 0.01,
+      "reference_in_interval": false,
+      "point": {
+        "fault_records": 14,
+        "accepted": 1,
+        "correct_accepted": 0,
+        "incorrect_accepted": 1,
+        "abstained": 13,
+        "coverage": 0.07142857142857142,
+        "retained_error": 1,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 0,
+      "new_incorrect": 0,
+      "max_cells_checked": 13,
+      "budget_abstentions": 0
+    },
+    {
+      "counterexample_counts": {
+        "nominal_correct": {},
+        "nominal_incorrect": {
+          "competing_suggestion": 1
+        }
+      },
+      "point_evaluations": 2,
+      "declared_speed_error": 0.05,
+      "declared_uncertainty": 0.05,
+      "reference_in_interval": true,
+      "point": {
+        "fault_records": 14,
+        "accepted": 1,
+        "correct_accepted": 0,
+        "incorrect_accepted": 1,
+        "abstained": 13,
+        "coverage": 0.07142857142857142,
+        "retained_error": 1,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "global_bound": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "refined": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "recovered_correct": 0,
+      "new_incorrect": 0,
+      "max_cells_checked": 88,
+      "budget_abstentions": 0
+    }
+  ],
+  "workflow_run_id": 45610868043,
+  "workflow_artifact_id": 15018544298,
+  "workflow_artifact_sha256": "74f0226a8c893754485fdf3fee8545a1424be06c34a8241523eb54526a845b03"
+}
