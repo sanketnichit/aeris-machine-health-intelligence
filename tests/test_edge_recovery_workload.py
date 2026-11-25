@@ -73,8 +73,8 @@ def test_offline_workload_recovery(tmp_path, monkeypatch):
         for j, asset in enumerate(ASSETS):
             records = history(database, asset, limit=1000)
             assert len(records) == 300
-            assert [r["timestamp"] for r in records] == [
-                (START + timedelta(seconds=i)).isoformat().replace("+00:00", "Z")
+            assert [datetime.fromisoformat(r["timestamp"].replace("Z", "+00:00")) for r in records] == [
+                START + timedelta(seconds=i)
                 for i in range(300)]
             assert [r["measurements"][SIGNAL]["value"] for r in records] == [
                 float(i + j) for i in range(300)]
