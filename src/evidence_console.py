@@ -392,6 +392,33 @@ def render_mfpt_robustness():
     st.download_button("Download robustness numerical evidence", json.dumps(report, indent=2), "mfpt_robustness_summary.json", "application/json")
 
 
+def render_mfpt_order_uncertainty():
+    st.subheader("Continuous frequency uncertainty audit")
+    report = read_report("mfpt_order_uncertainty_summary.json")
+    st.caption("Retrospective fixed-spectrum interval stability; not independent validation.")
+    width = st.radio("Declared relative uncertainty", [.01, .05], format_func=lambda x: f"±{x:.0%}", key="mfpt_order_width")
+    selected = [s for s in report["scenarios"] if s["declared_uncertainty"] == width]
+    a, b, c = st.columns(3)
+    a.metric("Incorrect point suggestions withheld", sum(s["prevented_incorrect"] for s in selected))
+    b.metric("Correct suggestions retained", sum(s["interval"]["correct_accepted"] for s in selected))
+    c.metric("Correct suggestions lost", sum(s["lost_correct"] for s in selected))
+    rows = pd.DataFrame([{"Speed error": f'{s["declared_speed_error"]:+.0%}',
+                          "Reference in interval": s["reference_in_interval"],
+                          "Point correct": s["point"]["correct_accepted"],
+                          "Point incorrect": s["point"]["incorrect_accepted"],
+                          "Interval correct": s["interval"]["correct_accepted"],
+                          "Interval incorrect": s["interval"]["incorrect_accepted"],
+                          "Interval withheld": s["interval"]["abstained"],
+                          "Interval retained error": s["interval"]["retained_error"]}
+                         for s in selected])
+    st.dataframe(rows, hide_index=True)
+    st.bar_chart(rows.set_index("Speed error")[["Point correct", "Interval correct"]])
+    st.warning("The ±5% guard accepts nothing; retained error is undefined. The ±1% interval excludes the reference at ±5% actual error. No guarantee outside declared bounds or safe operating tolerance.")
+    st.caption(report["data_attribution"])
+    st.markdown(f"[Execution evidence]({report['run_url']})")
+    st.download_button("Download uncertainty evidence", json.dumps(report, indent=2), "mfpt_order_uncertainty_summary.json", "application/json")
+
+
 def render_report():
     from research.technical_report import generate_report
     st.subheader("Technical evidence report")
@@ -424,6 +451,7 @@ def render_evidence():
         "CWRU selective diagnosis": render_cwru_selective,
         "MFPT cross-platform transfer": render_mfpt_transfer,
         "MFPT sensor robustness": render_mfpt_robustness,
+        "MFPT order uncertainty": render_mfpt_order_uncertainty,
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
