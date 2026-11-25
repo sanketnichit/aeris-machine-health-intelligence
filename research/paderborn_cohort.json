@@ -1,0 +1,295 @@
+{
+  "scope": "pre_scoring_cohort_registry_not_evaluation",
+  "publisher_paper": "https://mb.uni-paderborn.de/fileadmin-mb/kat/PDF/Veroeffentlichungen/20160703_PHME16_CM_bearing.pdf",
+  "mirror": "https://doi.org/10.5281/zenodo.15845309",
+  "records": [
+    {
+      "specimen": "K001",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "af6dc58283d356cd438e7738a2d525b8",
+      "structural_pilot": true,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "K002",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "88631bc0081a6470846d18189d46381d",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "K003",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "08b61792e1058dc47dd21071666bca2c",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "K004",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "5b9fde1c6d754806539f9a890ee6bbdd",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "K005",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "28d91412ad14583fbdfda958b64a8267",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "K006",
+      "origin": "healthy",
+      "label": "normal",
+      "mirror_md5": "b36389294fc5a21539d9fcfacfa3604a",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA01",
+      "origin": "artificial",
+      "label": "outer",
+      "mirror_md5": "5627ec9320199078205db5325c1c2f84",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA03",
+      "origin": "artificial",
+      "label": "outer",
+      "mirror_md5": "0bba6927ac1732d23934a909af4c1fc6",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA05",
+      "origin": "artificial",
+      "label": "outer",
+      "mirror_md5": "22b6ffd9ff083f084918c34f6ddcc538",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA06",
+      "origin": "artificial",
+      "label": "outer",
+      "mirror_md5": "be58a820fee4851b2c16a97a88c282cb",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA07",
+      "origin": "artificial",
+      "label": "outer",
+      "mirror_md5": "185e3de688149ebabf20c51d80fd7dd8",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA08",
+      "origin": "artificial",
+      "label": "outer",
+      "mirror_md5": null,
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA09",
+      "origin": "artificial",
+      "label": "outer",
+      "mirror_md5": "de9392fdbf878171a429c2451d2696fd",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI01",
+      "origin": "artificial",
+      "label": "inner",
+      "mirror_md5": "03429a4ab5e3768b7395d1654e55bead",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI03",
+      "origin": "artificial",
+      "label": "inner",
+      "mirror_md5": "26f0452f00ab698a4e657e27b7a249b3",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI05",
+      "origin": "artificial",
+      "label": "inner",
+      "mirror_md5": "c777459ddc7a1d38df7155f09e0ce782",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI07",
+      "origin": "artificial",
+      "label": "inner",
+      "mirror_md5": "c26144f53ebcc34562bdc2e3a0ef1087",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI08",
+      "origin": "artificial",
+      "label": "inner",
+      "mirror_md5": "f546b3481ffdcd80f0d14a797db48deb",
+      "structural_pilot": false,
+      "cohort": "separate_artificial",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA04",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "f87503ed69a624ba6e1d9e573e6c09fb",
+      "structural_pilot": true,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA15",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "db518f97ba5bcaedb09c648a317431e0",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA16",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "ef848f5621f9c10523c313131d1a4c21",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA22",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "7a16a5bc88d5fe1d83d169f88f0709e8",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KA30",
+      "origin": "accelerated",
+      "label": "outer",
+      "mirror_md5": "715c0cf7862a7ba83e7c6a6fb5c91a61",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KB23",
+      "origin": "accelerated",
+      "label": "mixed",
+      "mirror_md5": "bb87c72669baa9dbbefd10b5294ffcc8",
+      "structural_pilot": false,
+      "cohort": "mixed_unresolved",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KB24",
+      "origin": "accelerated",
+      "label": "mixed",
+      "mirror_md5": "c60ce8867c824583540794ae00cce333",
+      "structural_pilot": false,
+      "cohort": "mixed_unresolved",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KB27",
+      "origin": "accelerated",
+      "label": "mixed",
+      "mirror_md5": "965dd4af26391d7def4638c8b31a87e7",
+      "structural_pilot": false,
+      "cohort": "mixed_unresolved",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI04",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "a5a634fcdcb33a8501e7411d30441c6d",
+      "structural_pilot": true,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI14",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "13603834975435ca10eb08de6d1840dc",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI16",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "db14eae04a213afd0d1ca99d3d850342",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI17",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "d1055fe5cc44948e5d3a39f2e0db9dbe",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI18",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "db5da511e9240dbc56ec1e850fd91699",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    },
+    {
+      "specimen": "KI21",
+      "origin": "accelerated",
+      "label": "inner",
+      "mirror_md5": "911ce3e37a86d258818e3e93274752a2",
+      "structural_pilot": false,
+      "cohort": "primary",
+      "geometry_status": "specimen_fact_sheet_unverified"
+    }
+  ]
+}
