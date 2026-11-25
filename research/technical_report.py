@@ -106,6 +106,47 @@ def generate_report(root=ROOT):
         lines.extend(["", "Both uncertainty guards withheld all six incorrect point suggestions in each repeated grid. The narrow guard retains 27 correct suggestions; the wide guard retains none, so its retained error is undefined.",
                       "The narrow interval excludes the reference at ±5% actual error; no stability guarantee outside declared bounds. Retrospective sensitivity only, not independent validation.",
                       order["data_attribution"], ""])
+    if "mfpt_breakpoint_summary.json" in reports:
+        audit = reports["mfpt_breakpoint_summary.json"]
+        rows = audit["scenarios"]
+        lines.extend(["", "## MFPT closed-cell stability refinement", "",
+                      f"Recovered {sum(s['recovered_correct'] for s in rows)} correct suggestions across {audit['record_scenario_count']} repeated assessments.",
+                      f"New incorrect suggestions: {sum(s['new_incorrect'] for s in rows)}. A sufficient floating-point stability check, not exact interval arithmetic.", ""])
+    if "mfpt_counterexample_summary.json" in reports:
+        audit = reports["mfpt_counterexample_summary.json"]
+        lines.extend(["", "## MFPT decision counterexamples", "",
+                      f"{sum(s['point_evaluations'] for s in audit['scenarios'])} point evaluations.",
+                      "| Nominal outcome | Abstention witness | Competing suggestion witness |", "|---|---:|---:|"])
+        for group in ("nominal_correct", "nominal_incorrect"):
+            counts = [s["counterexample_counts"][group] for s in audit["scenarios"]]
+            lines.append(f"| {group} | {sum(c.get('abstention',0) for c in counts)} | {sum(c.get('competing_suggestion',0) for c in counts)} |")
+        lines.extend(["", "First witnesses only; absence of a witness is not proof of invariance.", ""])
+    if "mfpt_possibility_summary.json" in reports:
+        audit = reports["mfpt_possibility_summary.json"]
+        rows = audit["scenarios"]
+        contained = [s for s in rows if s["reference_in_interval"]]
+        lines.extend(["", "## MFPT diagnostic possibility sets", "",
+                      f"Fault truth membership with reference containment: {sum(s['fault_truth_in_outer_set'] for s in contained)}/{sum(s['fault_records'] for s in contained)} repeated fault assessments.",
+                      f"Outer-set narrowing in {sum(s['global_to_cell_shrunk'] for s in rows)}/{audit['record_scenario_count']} assessments.",
+                      "A singleton is not a stable diagnosis; an empty set does not establish health. These are not probabilities or exact attainable sets.", ""])
+    if "mfpt_measurement_width_summary.json" in reports:
+        audit = reports["mfpt_measurement_width_summary.json"]
+        lines.extend(["", "## MFPT measurement width and bias", "",
+                      f"{audit['record_scenario_count']} repeated recording-scenario assessments.",
+                      "| Reference contained | Fault assessments | Correct accepted | Incorrect accepted |", "|---|---:|---:|---:|"])
+        for contained in (True, False):
+            rows = [s["refined"] for s in audit["scenarios"] if s["reference_in_interval"] == contained]
+            lines.append(f"| {contained} | {sum(s['fault_records'] for s in rows)} | {sum(s['correct_accepted'] for s in rows)} | {sum(s['incorrect_accepted'] for s in rows)} |")
+        lines.extend(["", "Reducing declared uncertainty does not correct actual bias. No hardware accuracy requirement is established.", ""])
+    if "mfpt_bias_budget_summary.json" in reports:
+        audit = reports["mfpt_bias_budget_summary.json"]
+        lines.extend(["", "## MFPT systematic-bias budget", "",
+                      f"{audit['record_scenario_count']} repeated recording-scenario assessments.",
+                      "| Assumed bias bound | Correct accepted | Incorrect accepted | Withheld |", "|---|---:|---:|---:|"])
+        for bound in sorted({s["assumed_bias_bound"] for s in audit["scenarios"]}):
+            rows = [s["composed"] for s in audit["scenarios"] if s["assumed_bias_bound"] == bound]
+            lines.append(f"| {bound:.0%} | {sum(s['correct_accepted'] for s in rows)} | {sum(s['incorrect_accepted'] for s in rows)} | {sum(s['abstained'] for s in rows)} |")
+        lines.extend(["", "Externally declared bounds are not sensor calibration. The same 17 physical recordings recur across synthetic metadata perturbations; these studies are not independent population validation.", ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
