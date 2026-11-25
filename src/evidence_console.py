@@ -368,6 +368,30 @@ def render_mfpt_transfer():
     st.download_button("Download MFPT numerical evidence", json.dumps(report, indent=2), "mfpt_transfer_summary.json", "application/json")
 
 
+def render_mfpt_robustness():
+    st.subheader("MFPT sensor robustness audit")
+    report = read_report("mfpt_robustness_summary.json")
+    st.caption("Retrospective perturbations of previously observed recordings, not independent validation.")
+    a, b, c = st.columns(3)
+    a.metric("Scenarios", report["scenario_count"])
+    b.metric("Recording-scenario assessments", report["record_scenario_count"])
+    c.metric("Window-scenario evaluations", report["window_scenario_count"])
+    mode = st.radio("Quality gate", ["ungated", "gated"], format_func=lambda m: "Explicit metadata gate" if m == "gated" else "Original selective rule", key="mfpt_robustness_gate")
+    rows = pd.DataFrame([{"Scenario": f'{s["kind"]} {s["value"]:g}', "Correct accepted": s[mode]["correct_accepted"],
+                          "Incorrect accepted": s[mode]["incorrect_accepted"], "Withheld faults": s[mode]["abstained"],
+                          "Coverage": s[mode]["coverage"], "Retained error": s[mode]["retained_error"],
+                          "Normal false suggestions": s[mode]["normal_incorrect_accepted"]}
+                         for s in report["scenarios"]])
+    st.dataframe(rows, hide_index=True)
+    st.bar_chart(rows.set_index("Scenario")[["Correct accepted", "Incorrect accepted", "Withheld faults"]])
+    lost = sum(s["guard_lost_correct"] for s in report["scenarios"])
+    prevented = sum(s["guard_prevented_incorrect"] for s in report["scenarios"])
+    st.warning(f"At -5% speed error, 5/9 accepted suggestions were wrong; at +5%, 1/1 was wrong. The metadata gate removes {lost} correct suggestions and prevents {prevented} observed incorrect suggestions. No safe tolerance is established.")
+    st.caption(report["data_attribution"])
+    st.markdown(f"[Execution evidence]({report['run_url']})")
+    st.download_button("Download robustness numerical evidence", json.dumps(report, indent=2), "mfpt_robustness_summary.json", "application/json")
+
+
 def render_report():
     from research.technical_report import generate_report
     st.subheader("Technical evidence report")
@@ -399,6 +423,7 @@ def render_evidence():
         "CWRU diagnostic extension": render_cwru_extension,
         "CWRU selective diagnosis": render_cwru_selective,
         "MFPT cross-platform transfer": render_mfpt_transfer,
+        "MFPT sensor robustness": render_mfpt_robustness,
         "Technical report": render_report,
     }
     page = st.sidebar.radio("Research page", list(pages), key="research_page")
