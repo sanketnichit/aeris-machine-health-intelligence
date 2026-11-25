@@ -183,3 +183,17 @@ def test_cwru_extension_workspace():
     assert not app.exception
     assert any(m.label == "Envelope expected order first" and m.value == "8/16" for m in app.metric)
     assert any("0/4" in w.value for w in app.warning)
+
+
+def test_cwru_selective_workspace():
+    report = read_report("cwru_selective_summary.json")
+    assert report["policy"]["margin_threshold"] == .8
+    assert sum(r["analyzed_samples"] for r in report["records"]) == 589824
+    e = report["evaluation"]
+    assert (e["accepted"], e["incorrect_accepted"], e["abstained"], e["forced_errors"]) == (6, 0, 6, 4)
+    assert all(d["suggestion"] is None for d in e["decisions"] if d["truth"] == "ball")
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"), default_timeout=30).run()
+    app.sidebar.radio(key="research_page").set_value("CWRU selective diagnosis").run()
+    assert not app.exception
+    assert any(m.label == "Coverage" and m.value == "50%" for m in app.metric)
+    assert any("not a zero-risk guarantee" in w.value for w in app.warning)
