@@ -42,3 +42,45 @@ def render_multiregime(read_report,registered):
     st.caption("MAE in simulated cycles; NASA score is a summed asymmetric penalty, not directly comparable across different endpoint counts.")
     st.markdown(f"[Execution evidence]({report['run_url']}) | revision {report['revision']}")
     st.download_button("Download registered multi-regime evidence",json.dumps(report,indent=2),NAME,"application/json")
+    render_development(read_report,registered)
+
+
+DEVELOPMENT="cmapss_regime_development_summary.json"
+
+
+def development_rows(report,source,target):
+    rows=[]
+    for s in report["scenarios"]:
+        if (s["source"],s["target"])!=(source,target):
+            continue
+        metrics=s.get("metrics",{})
+        rows.append({"Age (cycles)":s["landmark"],"Calibration engines":s["calibration_survivors"],
+                     "Evaluation endpoints":s["endpoints"],"Setting support rejected":s["support_rejected"],
+                     "Accepted forecasts":s["accepted"],"Acceptance fraction":s["coverage"],
+                     "Age MAE":metrics.get("age",{}).get("mae"),
+                     "Relative MAE":metrics.get("relative",{}).get("mae"),
+                     "Regime MAE":metrics.get("regime",{}).get("mae"),
+                     "Raw interval coverage":s.get("raw_interval_coverage"),
+                     "Accepted interval coverage":s["accepted_interval_coverage"],
+                     "Accepted MAE":s["accepted_mae"],"Reasons":json.dumps(s["reasons"],sort_keys=True)})
+    return pd.DataFrame(rows)
+
+
+def render_development(read_report,registered):
+    st.subheader("Training-only regime and forecast applicability")
+    st.caption("Engine-disjoint fitting, calibration and evaluation at observable ages. The official test offsets are not accessed by this development audit.")
+    if DEVELOPMENT not in registered:
+        st.info("Regime-development protocol committed; numerical evidence is not yet registered.")
+        return
+    report=read_report(DEVELOPMENT)
+    modes=sorted({(s["source"],s["target"]) for s in report["scenarios"]})
+    source,target=st.selectbox("Development source and target",modes,
+                              format_func=lambda pair:f"{pair[0]} to {pair[1]}",
+                              key="cmapss_regime_pair")
+    rows=development_rows(report,source,target)
+    st.dataframe(rows,hide_index=True)
+    st.bar_chart(rows.set_index("Age (cycles)")[["Age MAE","Relative MAE","Regime MAE"]])
+    st.warning("Setting support is not domain equivalence. Coverage among retained forecasts is descriptive and may differ from raw interval coverage. No conditional coverage or operational authorization is established.")
+    st.caption(f"Fixed illustrative interval-width limit: {report['width_limit_cycles']:g} simulated cycles.")
+    st.markdown(f"[Development execution]({report['run_url']})")
+    st.download_button("Download registered regime-development evidence",json.dumps(report,indent=2),DEVELOPMENT,"application/json")

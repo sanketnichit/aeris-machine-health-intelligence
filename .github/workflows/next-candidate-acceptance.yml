@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - research/evidence/cmapss_multiregime_summary.json
+      - research/evidence/cmapss_regime_development_summary.json
 permissions:
   contents: read
 jobs:
