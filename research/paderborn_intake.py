@@ -112,12 +112,13 @@ def named_channels(record):
     a=np.asarray(matches[0]["Data"])
     if a.ndim!=1 or np.iscomplexobj(a) or not np.issubdtype(a.dtype,np.number):
         raise ValueError("Expected real one-dimensional vibration data")
-    if len(a)!=EXPECTED_SAMPLES or not np.isfinite(a).all() or np.min(a)==np.max(a):
-        raise ValueError("Unexpected vibration sample count or invalid values")
+    if not 2<=len(a)<=1_000_000 or not np.isfinite(a).all() or np.min(a)==np.max(a):
+        raise ValueError("Invalid or excessive vibration samples")
     return {"channel_names":names,"vibration_name":"vibration_1","sample_count":len(a),
             "unit_metadata":str(matches[0].get("Unit","not_present")),
             "raster_metadata":str(matches[0].get("Raster","not_present")),
-            "finite_nonconstant":True}
+            "finite_nonconstant":True,"expected_nominal_samples":EXPECTED_SAMPLES,
+            "nominal_sample_count_matches":len(a)==EXPECTED_SAMPLES}
 
 
 def inspect_mat(raw,filename):
@@ -131,7 +132,8 @@ def inspect_mat(raw,filename):
 def inspect_archive(directory,entry):
     specimen=entry["specimen"]
     path=Path(directory)/(specimen+".rar")
-    if any(fingerprint(path)[k]!=entry[k] for k in ("sha256","md5","bytes")):
+    actual=fingerprint(path)
+    if any(actual[k]!=entry[k] for k in ("sha256","md5","bytes")):
         raise ValueError("Archive fingerprint mismatch")
     with rarfile.RarFile(path) as archive:
         files=[(i.filename,i.file_size) for i in archive.infolist() if not i.isdir()]
@@ -159,7 +161,9 @@ def run(directory):
             "mirror_doi":"10.5281/zenodo.15845309",
             "specimens":len(rows),"inventory_measurements":sum(r["inventory_measurements"] for r in rows),
             "inspected_recordings":sum(len(r["selected_recordings"]) for r in rows),
-            "diagnostic_scoring_performed":False,"archives":rows}
+            "diagnostic_scoring_performed":False,
+            "nominal_sample_count_mismatches":sum(not x["nominal_sample_count_matches"] for row in rows for x in row["selected_recordings"]),
+            "archives":rows}
 
 
 if __name__=="__main__":

@@ -5,6 +5,7 @@ on:
     branches: [main]
     paths:
       - .github/workflows/research-paderborn-intake.yml
+      - research/paderborn_intake.py
 permissions:
   contents: read
 jobs:

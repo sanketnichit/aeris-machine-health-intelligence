@@ -30,7 +30,7 @@ def test_named_vibration_channel_not_positional():
     assert result["vibration_name"]=="vibration_1"
 
 
-@pytest.mark.parametrize("data",[np.ones(EXPECTED_SAMPLES),np.arange(12),np.full(EXPECTED_SAMPLES,np.nan)])
+@pytest.mark.parametrize("data",[np.ones(EXPECTED_SAMPLES),np.arange(1),np.full(EXPECTED_SAMPLES,np.nan)])
 def test_invalid_waveform_rejected(data):
     with pytest.raises(ValueError):
         named_channels({"Y":[{"Name":"vibration_1","Data":data}]})
@@ -39,3 +39,10 @@ def test_invalid_waveform_rejected(data):
 def test_current_only_not_substituted():
     with pytest.raises(ValueError,match="vibration_1"):
         named_channels({"Y":[{"Name":"current","Data":np.arange(EXPECTED_SAMPLES)}]})
+
+
+def test_non_nominal_count_is_reported_not_repaired():
+    result=named_channels({"Y":[{"Name":"vibration_1","Data":np.arange(EXPECTED_SAMPLES+1)}]})
+    assert result["sample_count"]==EXPECTED_SAMPLES+1
+    assert result["expected_nominal_samples"]==EXPECTED_SAMPLES
+    assert not result["nominal_sample_count_matches"]
