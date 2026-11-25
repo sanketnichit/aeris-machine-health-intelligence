@@ -6,6 +6,10 @@ on:
     paths:
       - app.py
       - src/evidence_console.py
+      - src/vibration_console.py
+      - src/vibration_acquisition.py
+      - src/vibration_spectrum.py
+      - src/capture_archive.py
       - research/technical_report.py
       - scripts/browser_smoke.py
       - .streamlit/config.toml
