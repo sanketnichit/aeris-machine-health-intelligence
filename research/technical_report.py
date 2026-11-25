@@ -44,6 +44,20 @@ def generate_report(root=ROOT):
         lines.append(f"| {name} | {m['mae']:.3f} | {m['rmse']:.3f} |")
     lines.extend(["","The adaptive advantage over learned forecasting did not replicate. Do not select a new primary using these observed evaluation outcomes.",
                   ""])
+    if "cwru_spectral_summary.json" in reports:
+        cwru = reports["cwru_spectral_summary.json"]
+        lines.extend(["", "## CWRU measured spectral audit (post-v0.1.0)", "",
+                      f"Envelope improves expected-order power fraction in {cwru['envelope_improves_expected_count']}/{cwru['record_count']} recordings.",
+                      "", "| Recording | Defect | Load (HP) | Raw FFT (%) | Envelope (%) |",
+                      "|---|---|---:|---:|---:|"])
+        for row in cwru["records"]:
+            fault = row["fault"]
+            raw = 100 * row["median_fractions"]["raw"][fault]
+            env = 100 * row["median_fractions"]["envelope"][fault]
+            lines.append(f"| {row['file_id']} | {fault} | {row['load_hp']} | {raw:.5f} | {env:.4f} |")
+        counts = cwru["expected_exceeds_alternative_count"]
+        lines.extend(["", f"Expected-order fraction exceeds alternative: raw {counts['raw']}/{cwru['record_count']}, envelope {counts['envelope']}/{cwru['record_count']}.",
+                      "Representation-specific non-DC power fractions; correlated seeded-fault recordings without normal controls. Not classification accuracy, RUL or field validation.", ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
