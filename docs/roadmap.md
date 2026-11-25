@@ -35,3 +35,5 @@ Completed research on fixed MFPT recordings identifies uncertainty-induced abste
 The frozen [NASA multi-regime protocol](../research/CMAPSS_MULTIREGIME_PROTOCOL.md) extends evaluation beyond FD001. A separate [non-publishing candidate gate](next_candidate_acceptance.md) covers the expanded application and integrated reliability stack. No release tag or DOI is changed.
 
 The first post-release candidate [acceptance record](candidate_851f08901e5a.md) confirms the exact 851f08901e5a revision passed both jobs. New regime-development changes are a separate candidate.
+
+The second [accepted candidate](candidate_45fd9e8413fc.md) covers the registered NASA regime-development results and passed 390 tests in both package environments. Paderborn timing and the offline verifier are later changes. The [frozen cohort](../research/PADERBORN_COHORT_PROTOCOL.md) will trigger a fresh acceptance campaign on evidence registration.
