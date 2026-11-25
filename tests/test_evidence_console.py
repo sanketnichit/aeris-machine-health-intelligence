@@ -212,3 +212,19 @@ def test_mfpt_transfer_workspace():
     assert not app.exception
     assert any(m.label == "Fault coverage" and m.value == "100%" for m in app.metric)
     assert any("not a healthy diagnosis" in w.value for w in app.warning)
+
+
+def test_mfpt_robustness_workspace():
+    report = read_report("mfpt_robustness_summary.json")
+    assert report["record_scenario_count"] == 238
+    assert report["window_scenario_count"] == 952
+    assert sum(s["guard_lost_correct"] for s in report["scenarios"]) == 50
+    assert sum(s["guard_prevented_incorrect"] for s in report["scenarios"]) == 0
+    speed = next(s for s in report["scenarios"] if s["kind"]=="speed_error" and s["value"]==-.05)
+    assert (speed["ungated"]["accepted"], speed["ungated"]["incorrect_accepted"]) == (9,5)
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"), default_timeout=30).run()
+    app.sidebar.radio(key="research_page").set_value("MFPT sensor robustness").run()
+    assert not app.exception
+    app.radio(key="mfpt_robustness_gate").set_value("gated").run()
+    assert not app.exception
+    assert any("No safe tolerance" in w.value for w in app.warning)
