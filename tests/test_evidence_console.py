@@ -155,3 +155,18 @@ def test_physical_replay_workspace():
         app.checkbox(key=f"physical_replay_truth_{bearing}").set_value(True).run()
         assert not app.exception
         assert any(m.label=="Actual remaining recorded snapshots" for m in app.metric)
+
+
+def test_cwru_measured_spectral_workspace():
+    from research.verify_evidence import verify
+    assert any(r["file"] == "cwru_spectral_summary.json" for r in verify())
+    report = read_report("cwru_spectral_summary.json")
+    assert len(report["records"]) == report["record_count"] == 8
+    assert sum(r["analyzed_samples"] for r in report["records"]) == 786432
+    assert sum(r["envelope_improves_expected"] for r in report["records"]) == 8
+    assert report["expected_exceeds_alternative_count"] == {"raw": 4, "envelope": 8}
+    app = AppTest.from_file(str(Path(__file__).resolve().parents[1]/"app.py"), default_timeout=30).run()
+    app.sidebar.radio(key="research_page").set_value("CWRU spectral audit").run()
+    assert not app.exception
+    assert any(m.label == "Envelope improves expected order" and m.value == "8/8" for m in app.metric)
+    assert any("No normal controls" in w.value for w in app.warning)
