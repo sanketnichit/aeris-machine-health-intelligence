@@ -68,3 +68,5 @@ The research dashboard and generated technical report expose the registered stud
 ## Paderborn physical acquisition
 
 [Structural intake findings](PADERBORN_INTAKE_FINDINGS.md). All 12 inspected waveforms differ from the nominal sample count. No diagnostic performance claim.
+
+[Stored timing findings](PADERBORN_TIMEBASE_FINDINGS.md) and [pre-scoring cohort](PADERBORN_COHORT_PROTOCOL.md). Nonuniform timestamp vectors do not establish ADC clock jitter; scoring remains blocked.

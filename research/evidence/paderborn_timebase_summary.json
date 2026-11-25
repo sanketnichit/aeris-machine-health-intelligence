@@ -1,0 +1,2090 @@
+{
+  "scope": "paderborn_timebase_metadata_audit_not_calibration_or_diagnostic_validation",
+  "revision": "ba648a45016b3d018e6668973caf3a244543a6c8",
+  "intake_blob_sha": "8debeed6066b9d90f2d562f88c4772da820ae70c",
+  "recordings": 12,
+  "records": [
+    {
+      "specimen": "K001",
+      "filename": "N15_M07_F10_K001_1.mat",
+      "sha256": "e1a971e93991e5f8bbfdcacde5a0fec895a4248f8232d52b59ff85d034c9c00d",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": -0.00018734297194389262,
+            "maximum": 3.999812229304376,
+            "median": 1.9998122293043759,
+            "first": -0.00018734297194389262,
+            "last": 3.999812229304376,
+            "strictly_increasing": true,
+            "median_step": 0.0002497906292586727,
+            "min_step": 0.0002493629055782872,
+            "max_step": 0.0002502183529391466,
+            "max_relative_step_deviation": 0.0017123287680700515,
+            "span": 3.9999995722763195
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256001
+            ],
+            "dtype": "float64",
+            "count": 256001,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.999998716828959,
+            "median": 1.9999995722763197,
+            "first": 0,
+            "last": 3.999998716828959,
+            "strictly_increasing": true,
+            "median_step": 0.000015825776168654215,
+            "min_step": 0.000014542605128120556,
+            "max_step": 0.000015825776169098305,
+            "max_relative_step_deviation": 0.08108108107046336,
+            "span": 3.999998716828959
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": -0.002828108973728356,
+            "maximum": 3.997171463302591,
+            "median": 1.9971714633025914,
+            "first": -0.002828108973728356,
+            "last": 3.997171463302591,
+            "strictly_increasing": true,
+            "median_step": 0.9999999999999999,
+            "min_step": 0.9999995722763196,
+            "max_step": 1,
+            "max_relative_step_deviation": 4.277236802519014e-7,
+            "span": 3.9999995722763195
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": 1499.3323988086177,
+            "maximum": 1499.8109295926902,
+            "median": 1499.6100780402817,
+            "first": 1499.3350303854802,
+            "last": 1499.4665996655422
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256001
+            ],
+            "count": 256001,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "K001",
+      "filename": "N09_M07_F10_K001_1.mat",
+      "sha256": "c55f4c6a5d6d9a83d18d24dce4f164ffc85721e4e358df1c1ac9886583c2269f",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16008
+            ],
+            "dtype": "float64",
+            "count": 16008,
+            "status": "finite",
+            "minimum": -0.00022241631372343917,
+            "maximum": 3.9998806650932135,
+            "median": 1.9998293382515855,
+            "first": -0.00022241631372343917,
+            "last": 3.9998806650932135,
+            "strictly_increasing": true,
+            "median_step": 0.0002497906292586727,
+            "min_step": 0.0002497906292582286,
+            "max_step": 0.0002502183529395907,
+            "max_relative_step_deviation": 0.0017123287698478972,
+            "span": 4.000103081406937
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256823
+            ],
+            "dtype": "float64",
+            "count": 256823,
+            "status": "finite",
+            "minimum": -0.0000034217894419041883,
+            "maximum": 4,
+            "median": 2.0055924871191015,
+            "first": -0.0000034217894419041883,
+            "last": 4,
+            "strictly_increasing": true,
+            "median_step": 0.000015398052489068448,
+            "min_step": 0.000004277236802074924,
+            "max_step": 0.000015825776169542394,
+            "max_relative_step_deviation": 0.7222222222510628,
+            "span": 4.000003421789442
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.998396891646471,
+            "median": 1.9992279587571717,
+            "first": 0,
+            "last": 3.998396891646471,
+            "strictly_increasing": true,
+            "median_step": 0.9996139793785859,
+            "min_step": 0.9995547396488731,
+            "max_step": 0.9996141932404261,
+            "max_relative_step_deviation": 0.0000592626063008898,
+            "span": 3.998396891646471
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16008
+            ],
+            "dtype": "float64",
+            "count": 16008,
+            "status": "finite",
+            "minimum": 899.4132533286152,
+            "maximum": 900.1407765386616,
+            "median": 899.7242677805614,
+            "first": 899.4742444862216,
+            "last": 900.1407765386616
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256823
+            ],
+            "count": 256823,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "K001",
+      "filename": "N15_M01_F10_K001_1.mat",
+      "sha256": "84ff03769c3efa9cd2c3e0cbeefa60ed6bcec3436efa804637788a638b5f23f3",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16005
+            ],
+            "dtype": "float64",
+            "count": 16005,
+            "status": "finite",
+            "minimum": -0.00009238831493119104,
+            "maximum": 3.9997874213309226,
+            "median": 1.9998473026461556,
+            "first": -0.00009238831493119104,
+            "last": 3.9997874213309226,
+            "strictly_increasing": true,
+            "median_step": 0.0002497906292586727,
+            "min_step": 0.0002497906292582286,
+            "max_step": 0.0002502183529395907,
+            "max_relative_step_deviation": 0.0017123287698478972,
+            "span": 3.999879809645854
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256070
+            ],
+            "dtype": "float64",
+            "count": 256070,
+            "status": "finite",
+            "minimum": -0.000014114881447757632,
+            "maximum": 3.999988023736954,
+            "median": 1.9999647127963804,
+            "first": -0.000014114881447757632,
+            "last": 3.999988023736954,
+            "strictly_increasing": true,
+            "median_step": 0.000015825776168654215,
+            "min_step": 0.00001539805248818027,
+            "max_step": 0.00007057440723912123,
+            "max_relative_step_deviation": 3.4594594594928294,
+            "span": 4.0000021386184015
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.998881074852499,
+            "median": 1.99944053742625,
+            "first": 0,
+            "last": 3.998881074852499,
+            "strictly_increasing": true,
+            "median_step": 0.9997202687131248,
+            "min_step": 0.9997202687131246,
+            "max_step": 0.9997202687131251,
+            "max_relative_step_deviation": 3.3316010269180843e-16,
+            "span": 3.998881074852499
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16005
+            ],
+            "dtype": "float64",
+            "count": 16005,
+            "status": "finite",
+            "minimum": 1499.1978117493268,
+            "maximum": 1499.9030944177916,
+            "median": 1499.6748136760516,
+            "first": 1499.609317507295,
+            "last": 1499.9030944177916
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256070
+            ],
+            "count": 256070,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "K001",
+      "filename": "N15_M07_F04_K001_1.mat",
+      "sha256": "4790406e566cd6ed93241bc0a1e51ea7b9603c38a712a93d2946140dfa581458",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": -0.00009367148597194674,
+            "maximum": 3.9999059007903477,
+            "median": 1.999905900790348,
+            "first": -0.00009367148597194674,
+            "last": 3.9999059007903477,
+            "strictly_increasing": true,
+            "median_step": 0.0002497906292586727,
+            "min_step": 0.00024936290557828677,
+            "max_step": 0.0002502183529391466,
+            "max_relative_step_deviation": 0.0017123287680700515,
+            "span": 3.9999995722763195
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              258669
+            ],
+            "dtype": "float64",
+            "count": 258669,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.999992300973756,
+            "median": 2.0208442581089994,
+            "first": 0,
+            "last": 3.999992300973756,
+            "strictly_increasing": true,
+            "median_step": 0.000015825776168654215,
+            "min_step": 0.000003849513122045067,
+            "max_step": 0.000016681223529380063,
+            "max_relative_step_deviation": 0.7567567567605488,
+            "span": 3.999992300973756
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": -0.0028127109212398175,
+            "maximum": 3.99718686135508,
+            "median": 1.9971868613550798,
+            "first": -0.0028127109212398175,
+            "last": 3.99718686135508,
+            "strictly_increasing": true,
+            "median_step": 1,
+            "min_step": 0.9999995722763197,
+            "max_step": 1,
+            "max_relative_step_deviation": 4.2772368025190133e-7,
+            "span": 3.9999995722763195
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": 1499.0141094190958,
+            "maximum": 1500.204212070475,
+            "median": 1499.5321005288608,
+            "first": 1500.204212070475,
+            "last": 1500.1889467042274
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              258669
+            ],
+            "count": 258669,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KA04",
+      "filename": "N15_M07_F10_KA04_1.mat",
+      "sha256": "c1caff884401a8476d3e8f42fb6efcd57c721888706af26cfeaeb2c3e99b35a5",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": -0.00010949815200482146,
+            "maximum": 3.9998391745892428,
+            "median": 1.9998340418633678,
+            "first": -0.00010949815200482146,
+            "last": 3.9998391745892428,
+            "strictly_increasing": true,
+            "median_step": 0.0002497926592610611,
+            "min_step": 0.00019162176600839853,
+            "max_step": 0.0002502203864174213,
+            "max_relative_step_deviation": 0.23287671232911417,
+            "span": 3.9999486727412474
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256004
+            ],
+            "dtype": "float64",
+            "count": 256004,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.999995295001281,
+            "median": 1.9999668511453892,
+            "first": 0,
+            "last": 3.999995295001281,
+            "strictly_increasing": true,
+            "median_step": 0.00001582590478177437,
+            "min_step": 0.000002138635781356868,
+            "max_step": 0.00001582590478221846,
+            "max_relative_step_deviation": 0.8648648648625896,
+            "span": 3.999995295001281
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": -0.003326434094302717,
+            "maximum": 3.996682975903135,
+            "median": 1.99667784317726,
+            "first": -0.003326434094302717,
+            "last": 3.996682975903135,
+            "strictly_increasing": true,
+            "median_step": 1.0000025663629375,
+            "min_step": 1.000001710908625,
+            "max_step": 1.0000025663629377,
+            "max_relative_step_deviation": 8.554521170977301e-7,
+            "span": 4.000009409997438
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": 1498.9267724343358,
+            "maximum": 1500.5302163574827,
+            "median": 1499.773872613605,
+            "first": 1499.821782884418,
+            "last": 1498.9267724343358
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256004
+            ],
+            "count": 256004,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KA04",
+      "filename": "N09_M07_F10_KA04_1.mat",
+      "sha256": "7db59955c834c4f74e8360bc873a4adc27beb569cf4406ba857777b1f986f138",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": -0.00010949815200482146,
+            "maximum": 3.999890074120839,
+            "median": 1.999890074120839,
+            "first": -0.00010949815200482146,
+            "last": 3.999890074120839,
+            "strictly_increasing": true,
+            "median_step": 0.0002497926592610611,
+            "min_step": 0.000249792659260617,
+            "max_step": 0.0002502203864174213,
+            "max_relative_step_deviation": 0.0017123287674885954,
+            "span": 3.9999995722728436
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256001
+            ],
+            "dtype": "float64",
+            "count": 256001,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 4,
+            "median": 1.9999995722728436,
+            "first": 0,
+            "last": 4,
+            "strictly_increasing": true,
+            "median_step": 0.00001582590478177437,
+            "min_step": 0.000015398177625414178,
+            "max_step": 0.000016681359094050663,
+            "max_relative_step_deviation": 0.054054054038127596,
+            "span": 4
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": -0.0028905801220647756,
+            "maximum": 3.9971089921507788,
+            "median": 1.997108992150779,
+            "first": -0.0028905801220647756,
+            "last": 3.9971089921507788,
+            "strictly_increasing": true,
+            "median_step": 0.9999999999999999,
+            "min_step": 0.9999995722728438,
+            "max_step": 1,
+            "max_relative_step_deviation": 4.277271561381469e-7,
+            "span": 3.9999995722728436
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": 899.0502039914142,
+            "maximum": 900.673873743968,
+            "median": 899.4390730720282,
+            "first": 899.8326440096719,
+            "last": 899.5787429731653
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256001
+            ],
+            "count": 256001,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KA04",
+      "filename": "N15_M01_F10_KA04_1.mat",
+      "sha256": "060dc5acbcab35a2aaad7d19be4b771e993a29f5b927d66bec96d23a972fd040",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": -0.00015612041203812415,
+            "maximum": 3.999830620046118,
+            "median": 1.9998434518608055,
+            "first": -0.00015612041203812415,
+            "last": 3.999830620046118,
+            "strictly_increasing": true,
+            "median_step": 0.0002497926592610611,
+            "min_step": 0.0002361053902606436,
+            "max_step": 0.0002502203864174213,
+            "max_relative_step_deviation": 0.05479452054719024,
+            "span": 3.999986740458156
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256332
+            ],
+            "dtype": "float64",
+            "count": 256332,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.999988451366781,
+            "median": 2.002571709527066,
+            "first": 0,
+            "last": 3.999988451366781,
+            "strictly_increasing": true,
+            "median_step": 0.00001582590478177437,
+            "min_step": 8.554543124983383e-7,
+            "max_step": 0.00001582590478221846,
+            "max_relative_step_deviation": 0.945945945947842,
+            "span": 3.999988451366781
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": -0.0027810819700599546,
+            "maximum": 3.9972056584880957,
+            "median": 1.9972043753066269,
+            "first": -0.0027810819700599546,
+            "last": 3.9972056584880957,
+            "strictly_increasing": true,
+            "median_step": 0.9999999999999998,
+            "min_step": 0.9999858850038431,
+            "max_step": 1.000000855454313,
+            "max_relative_step_deviation": 0.000014114996156666674,
+            "span": 3.9999867404581555
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": 1497.9202018682129,
+            "maximum": 1501.0551154135396,
+            "median": 1499.6723763105308,
+            "first": 1499.3775851337527,
+            "last": 1498.5963405195737
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256332
+            ],
+            "count": 256332,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KA04",
+      "filename": "N15_M07_F04_KA04_1.mat",
+      "sha256": "46f3a5e8984ed72eca6b0824764c8c608132918ba6185002a59433c35904ae3e",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": -0.00015612041203812415,
+            "maximum": 3.999843879587962,
+            "median": 1.9998434518608055,
+            "first": -0.00015612041203812415,
+            "last": 3.999843879587962,
+            "strictly_increasing": true,
+            "median_step": 0.0002497926592610611,
+            "min_step": 0.00024936493210472974,
+            "max_step": 0.0002506481135733374,
+            "max_relative_step_deviation": 0.0034246575331993595,
+            "span": 4
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256475
+            ],
+            "dtype": "float64",
+            "count": 256475,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 4,
+            "median": 2.003703689446132,
+            "first": 0,
+            "last": 4,
+            "strictly_increasing": true,
+            "median_step": 0.00001582590478177437,
+            "min_step": 0.000004277271562269647,
+            "max_step": 0.00001625363193813456,
+            "max_relative_step_deviation": 0.7297297297532402,
+            "span": 4
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": -0.0036091617445964154,
+            "maximum": 3.9963908382554036,
+            "median": 1.9963912659825598,
+            "first": -0.0036091617445964154,
+            "last": 3.9963908382554036,
+            "strictly_increasing": true,
+            "median_step": 0.9999997861364219,
+            "min_step": 0.9999995722728438,
+            "max_step": 1.0000008554543125,
+            "max_relative_step_deviation": 0.0000010693181192556107,
+            "span": 4
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": 1498.8233076551703,
+            "maximum": 1500.2373123349666,
+            "median": 1499.6917177249677,
+            "first": 1500.2373123349666,
+            "last": 1499.4472743994156
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256475
+            ],
+            "count": 256475,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KI04",
+      "filename": "N15_M07_F10_KI04_1.mat",
+      "sha256": "d77409dca95d03986b5957b73c2219f42f7bbfd8080ebbf6f5b9f11571476f9c",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": -0.00010906995832672163,
+            "maximum": 3.9998905023163465,
+            "median": 1.9998905023163465,
+            "first": -0.00010906995832672163,
+            "last": 3.9998905023163465,
+            "strictly_increasing": true,
+            "median_step": 0.0002497915908348247,
+            "min_step": 0.00024936386550775905,
+            "max_step": 0.00025021931616153736,
+            "max_relative_step_deviation": 0.0017123287682990797,
+            "span": 3.9999995722746733
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256001
+            ],
+            "dtype": "float64",
+            "count": 256001,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.9999995722746733,
+            "median": 1.9999995722746733,
+            "first": 0,
+            "last": 3.9999995722746733,
+            "strictly_increasing": true,
+            "median_step": 0.000015825837090366335,
+            "min_step": 0.000014970386437000889,
+            "max_step": 0.00001582583709058838,
+            "max_relative_step_deviation": 0.054054054043446736,
+            "span": 3.9999995722746733
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": -0.002890567758321504,
+            "maximum": 3.9971090045163518,
+            "median": 1.9971090045163518,
+            "first": -0.002890567758321504,
+            "last": 3.9971090045163518,
+            "strictly_increasing": true,
+            "median_step": 1,
+            "min_step": 0.9999995722746733,
+            "max_step": 1,
+            "max_relative_step_deviation": 4.2772532671264685e-7,
+            "span": 3.9999995722746733
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": 1498.8549287467083,
+            "maximum": 1500.3487871803,
+            "median": 1499.7307401832088,
+            "first": 1499.5538158547142,
+            "last": 1500.1021601525285
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256001
+            ],
+            "count": 256001,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KI04",
+      "filename": "N09_M07_F10_KI04_1.mat",
+      "sha256": "fa5d43cd8ab8cec9cadb0b9356096231b9f2a1a925a2bf935b5d3bcb2eecdf5f",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16006
+            ],
+            "dtype": "float64",
+            "count": 16006,
+            "status": "finite",
+            "minimum": -0.00018905459443296913,
+            "maximum": 3.999818644461449,
+            "median": 1.9998147949335079,
+            "first": -0.00018905459443296913,
+            "last": 3.999818644461449,
+            "strictly_increasing": true,
+            "median_step": 0.0002497915908348247,
+            "min_step": 0.00024979159083393654,
+            "max_step": 0.00025021931616198145,
+            "max_relative_step_deviation": 0.0017123287686636754,
+            "span": 4.000007699055882
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256087
+            ],
+            "dtype": "float64",
+            "count": 256087,
+            "status": "finite",
+            "minimum": -0.000001710901307072632,
+            "maximum": 3.999999572274673,
+            "median": 2.0000491884125786,
+            "first": -0.000001710901307072632,
+            "last": 3.999999572274673,
+            "strictly_increasing": true,
+            "median_step": 0.00001582583709014429,
+            "min_step": 0.0000012831759801379405,
+            "max_step": 0.000033790300814295904,
+            "max_relative_step_deviation": 1.135135135148028,
+            "span": 4.00000128317598
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.998928548056438,
+            "median": 1.9994640601655553,
+            "first": 0,
+            "last": 3.998928548056438,
+            "strictly_increasing": true,
+            "median_step": 0.999732243945441,
+            "min_step": 0.9997318162201142,
+            "max_step": 0.9997322439454415,
+            "max_relative_step_deviation": 4.2783988354286955e-7,
+            "span": 3.998928548056438
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16006
+            ],
+            "dtype": "float64",
+            "count": 16006,
+            "status": "finite",
+            "minimum": 898.7832953372572,
+            "maximum": 900.6182523515007,
+            "median": 899.8173756602349,
+            "first": 899.3012136960634,
+            "last": 899.4236098594673
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256087
+            ],
+            "count": 256087,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KI04",
+      "filename": "N15_M01_F10_KI04_1.mat",
+      "sha256": "24cd3f08730e2ffe0117e77ef8eb14433b6131bddf6508d2ea50bae950f936b3",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16006
+            ],
+            "dtype": "float64",
+            "count": 16006,
+            "status": "finite",
+            "minimum": -0.00017152005693954475,
+            "maximum": 3.9998117984412636,
+            "median": 1.9998199253267543,
+            "first": -0.00017152005693954475,
+            "last": 3.9998117984412636,
+            "strictly_increasing": true,
+            "median_step": 0.00024979479614151145,
+            "min_step": 0.00024979479614106737,
+            "max_step": 0.00025022252695716674,
+            "max_relative_step_deviation": 0.0017123287685023127,
+            "span": 3.999983318498203
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256732
+            ],
+            "dtype": "float64",
+            "count": 256732,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.999993156306955,
+            "median": 2.0050763093161055,
+            "first": 0,
+            "last": 3.999993156306955,
+            "strictly_increasing": true,
+            "median_step": 0.000015398309352043782,
+            "min_step": 4.277308152111914e-7,
+            "max_step": 0.000023525194841944597,
+            "max_relative_step_deviation": 0.9722222222302334,
+            "span": 3.999993156306955
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.998733916786681,
+            "median": 1.9993669583933404,
+            "first": 0,
+            "last": 3.998733916786681,
+            "strictly_increasing": true,
+            "median_step": 0.9996834791966702,
+            "min_step": 0.99968347919667,
+            "max_step": 0.9996834791966704,
+            "max_relative_step_deviation": 2.221149089144324e-16,
+            "span": 3.998733916786681
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16006
+            ],
+            "dtype": "float64",
+            "count": 16006,
+            "status": "finite",
+            "minimum": 1498.5937157224544,
+            "maximum": 1500.8124269473956,
+            "median": 1499.9915124051417,
+            "first": 1498.5937157224544,
+            "last": 1500.07982646824
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256732
+            ],
+            "count": 256732,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    },
+    {
+      "specimen": "KI04",
+      "filename": "N15_M07_F04_KI04_1.mat",
+      "sha256": "935c1b56751894110c6256fa3d06b0cc9e526417d0b7eee92abeaea1dce0617f",
+      "record_fields": [
+        "Description",
+        "Info",
+        "X",
+        "Y"
+      ],
+      "time_axes": [
+        {
+          "index": 0,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": -0.00010949768365349282,
+            "maximum": 3.9998900745910198,
+            "median": 1.9998900745910198,
+            "first": -0.00010949768365349282,
+            "last": 3.9998900745910198,
+            "strictly_increasing": true,
+            "median_step": 0.0002497915908348247,
+            "min_step": 0.00024979159083438063,
+            "max_step": 0.00025021931616153736,
+            "max_relative_step_deviation": 0.0017123287668858367,
+            "span": 3.9999995722746733
+          }
+        },
+        {
+          "index": 1,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService"
+          },
+          "vector": {
+            "shape": [
+              256004
+            ],
+            "dtype": "float64",
+            "count": 256004,
+            "status": "finite",
+            "minimum": 0,
+            "maximum": 3.999994011845425,
+            "median": 2.0000228833049825,
+            "first": 0,
+            "last": 3.999994011845425,
+            "strictly_increasing": true,
+            "median_step": 0.000015825837090366335,
+            "min_step": 0.000004277253267570558,
+            "max_step": 0.00001582583709058838,
+            "max_relative_step_deviation": 0.729729729735797,
+            "span": 3.999994011845425
+          }
+        },
+        {
+          "index": 2,
+          "metadata": {
+            "Name": "[]",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Temp_1Hz"
+          },
+          "vector": {
+            "shape": [
+              5
+            ],
+            "dtype": "float64",
+            "count": 5,
+            "status": "finite",
+            "minimum": -0.0027344480140499214,
+            "maximum": 3.997265124260623,
+            "median": 1.9972651242606232,
+            "first": -0.0027344480140499214,
+            "last": 3.997265124260623,
+            "strictly_increasing": true,
+            "median_step": 1,
+            "min_step": 0.9999995722746732,
+            "max_step": 1,
+            "max_relative_step_deviation": 4.2772532682366915e-7,
+            "span": 3.9999995722746733
+          }
+        }
+      ],
+      "channels": [
+        {
+          "name": "speed",
+          "metadata": {
+            "Name": "speed",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "Mech_4kHz",
+            "Device": "Platform",
+            "XIndex": "1",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              16001
+            ],
+            "dtype": "float64",
+            "count": 16001,
+            "status": "finite",
+            "minimum": 1498.4005050689402,
+            "maximum": 1501.2747501359754,
+            "median": 1499.7228339269795,
+            "first": 1499.3067304875392,
+            "last": 1499.7836892709709
+          },
+          "raster_and_count_candidates": [
+            0
+          ],
+          "count_only_candidates": [
+            0
+          ]
+        },
+        {
+          "name": "vibration_1",
+          "metadata": {
+            "Name": "vibration_1",
+            "Type": "4",
+            "Unit": "[]",
+            "Raster": "HostService",
+            "Device": "Platform",
+            "XIndex": "2",
+            "DownSampling": "1",
+            "Description": "[]",
+            "DisplayIdentifier": "[]",
+            "Path": "Model Root/Einggangssignal",
+            "Flags": "2",
+            "Min": "-1.7976931348623157e+308",
+            "Max": "1.7976931348623157e+308",
+            "MinWeak": "-1.7976931348623157e+308",
+            "MaxWeak": "1.7976931348623157e+308"
+          },
+          "vector": {
+            "shape": [
+              256004
+            ],
+            "count": 256004,
+            "dtype": "float64"
+          },
+          "raster_and_count_candidates": [
+            1
+          ],
+          "count_only_candidates": [
+            1
+          ]
+        }
+      ],
+      "timing_association_verified": false,
+      "diagnostic_scoring_performed": false
+    }
+  ],
+  "diagnostic_scoring_performed": false,
+  "operational_authorization": false,
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45617208442",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45617208442/artifacts/15022806696",
+  "artifact_sha256": "789d8c79e19840e636c85be83eb0300cca4c6da8111613fa20ad28dd0414b0fa",
+  "data_attribution": "Christian Lessmeier et al., KAt-DataCenter, Chair of Design and Drive Technology, Paderborn University, PHM Europe 2016; original publisher CC BY-NC 4.0. Structural metadata only. https://mb.uni-paderborn.de/en/kat/research/bearing-datacenter"
+}

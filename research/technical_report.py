@@ -192,6 +192,11 @@ def generate_report(root=ROOT):
                       f"{audit['specimens']} specimens; {audit['inventory_measurements']} recording names; {audit['inspected_recordings']} inspected waveforms.",
                       f"Nominal sample-count discrepancies: {audit['nominal_sample_count_mismatches']}.",
                       "Structural acquisition only; no diagnosis, no calibrated timebase, no performance metrics. Raw signals are not redistributed.",""])
+    if "paderborn_timebase_summary.json" in reports:
+        audit=reports["paderborn_timebase_summary.json"]
+        lines.extend(["","## Paderborn stored timebase audit","",
+                      f"{audit['recordings']} exact pilot recordings rechecked.",
+                      "Stored vibration time axes are nonuniform. Internal raster/count/index agreement is not physical clock calibration. No uniform-FFT diagnostic validation or field claim.",""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",

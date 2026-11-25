@@ -23,6 +23,7 @@ PAGES = [
     ("MFPT measurement reliability", "MFPT diagnostic measurement reliability"),
     ("Calibration decision lab", "Calibration and common-mode decision lab"),
     ("NASA multi-regime evaluation", "NASA C-MAPSS multi-regime evaluation"),
+    ("Paderborn acquisition", "Paderborn physical acquisition and timing"),
     ("Technical report", "Technical evidence report"),
 ]
 
