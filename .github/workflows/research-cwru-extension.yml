@@ -1,0 +1,39 @@
+name: AERIS CWRU extension
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/research-cwru-extension.yml
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install -r requirements.txt
+      - run: python -m pytest -q tests/test_cwru_extension.py tests/test_cwru_spectral_audit.py
+      - name: Acquire fixed official files
+        run: |
+          mkdir -p "$RUNNER_TEMP/cwru" cwru-extension-evidence
+          for id in 97 98 99 100 118 119 120 121 169 170 171 172 185 186 187 188 197 198 199 200; do
+            curl --fail --location --retry 2 --max-time 60 --max-filesize 20000000 "https://engineering.case.edu/sites/default/files/$id.mat" -o "$RUNNER_TEMP/cwru/$id.mat"
+          done
+      - name: Execute frozen extension
+        run: |
+          python -m research.cwru_extension "$RUNNER_TEMP/cwru" --output cwru-extension-evidence/summary.json
+          python -m pip freeze > cwru-extension-evidence/environment.txt
+          git rev-parse HEAD > cwru-extension-evidence/revision.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cwru-extension-evidence
+          path: cwru-extension-evidence/
+          if-no-files-found: error
