@@ -226,7 +226,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
-workspace = st.sidebar.radio("Workspace", ["Research intelligence", "AI4I failure prediction", "Telemetry fleet", "Virtual degradation laboratory"], index=0)
+workspace = st.sidebar.radio("Workspace", ["Research intelligence", "AI4I failure prediction", "Telemetry fleet", "Virtual degradation laboratory", "Vibration laboratory"], index=0)
 if workspace == "Research intelligence":
     render_evidence()
     st.stop()
@@ -239,6 +239,11 @@ if workspace == "Telemetry fleet":
 if workspace == "Virtual degradation laboratory":
     from src.twin_console import render_twin
     render_twin()
+    st.stop()
+
+if workspace == "Vibration laboratory":
+    from src.vibration_console import render_vibration
+    render_vibration()
     st.stop()
 
 from src.features import MODEL_FEATURES, add_engineered_features
