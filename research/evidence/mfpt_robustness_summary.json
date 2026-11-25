@@ -1,0 +1,459 @@
+{
+  "scope": "paired_retrospective_mfpt_sensor_perturbations_not_independent_validation",
+  "revision": "f361723ccecafc9bda8683d68171b00b4fddcd4d",
+  "source_revision": "d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d",
+  "source_url": "https://raw.githubusercontent.com/mathworks/RollingElementBearingFaultDiagnosis-Data/d3efefb6ce84fa1ee6c0311f80f7c89cf903ad1d/",
+  "source_license": "CC BY-NC-SA 4.0",
+  "reference_blob_sha": "ed136331c413517a3d7477e0ff90a080c866d183",
+  "score_floor": 0.00974446327636002,
+  "margin_threshold": 0.8,
+  "scenario_count": 14,
+  "record_count": 17,
+  "record_scenario_count": 238,
+  "window_scenario_count": 952,
+  "source_sha256": {
+    "train_data/baseline_1.mat": "23f63a29f61c398e930fc69221beb729bd931656508fdda41aa63a0809cf4d8f",
+    "train_data/baseline_2.mat": "5949a1330d7846c3052853d6f8248f78398713de43c250e1c978dbf9bdef11b8",
+    "test_data/baseline_3.mat": "d4b7c69d9f9ef4e9e7b4f5e9964c2dd58bc09a2787b3e3d89877ec27400eb003",
+    "train_data/InnerRaceFault_vload_1.mat": "943e1f0ecef2496ee5233063765d40b8a3aab480044b36a9feaa3483e5331db9",
+    "train_data/InnerRaceFault_vload_2.mat": "4e85dc145f230db5b687d032ba94e849d58adb85fd1c00e605efba0bc14edc92",
+    "train_data/InnerRaceFault_vload_3.mat": "f4b100c59db948212f1603112952af332967497db66c6ebe5b4f799ac62dd4bf",
+    "train_data/InnerRaceFault_vload_4.mat": "3826a49dcac630176b82569a0b923ef16fa13db5a667171066ffac62949d498b",
+    "train_data/InnerRaceFault_vload_5.mat": "5eb0c3b88f4abab2d00f17f12170a25e51946adf05ff95ee79844360ccce2e92",
+    "test_data/InnerRaceFault_vload_6.mat": "51ace00de918012668beae944442588004655f40447497944ac63d71b3aa9e64",
+    "test_data/InnerRaceFault_vload_7.mat": "f9b0131045d8b05cd410fb72e8c2db06ee2eab16177cbc09657a63fef3110ef6",
+    "train_data/OuterRaceFault_vload_1.mat": "8a1977da6f1c8dd74c7826b66e75cf9d52e1cdcf6000c1348d1b356a06781af0",
+    "train_data/OuterRaceFault_vload_2.mat": "1883793fc865e10c6ddebe8a8241dd4924bfd4b4fd0ba6284affc697d2b29e6d",
+    "train_data/OuterRaceFault_vload_3.mat": "52410e466c71413e70b9da800d8c1fa4d74ada9bfcf14e45bbe455e1a073296d",
+    "train_data/OuterRaceFault_vload_4.mat": "81b4b1dde9340774c9170633d564fdc08b8a55e38676c3033a8088a0121c6191",
+    "train_data/OuterRaceFault_vload_5.mat": "8f5b43ae668518165cd65fcb3cf30cd9e32e6f69b3c5192b4ebb93ff42c47689",
+    "test_data/OuterRaceFault_vload_6.mat": "ea167417e39b7481a9ea422fdc5f5b67b96d8521f27cf703e46c4f8cbb8cd995",
+    "test_data/OuterRaceFault_vload_7.mat": "38ef59f7fea41d4839d89dd9aa7ad3cab783f2e5f10960e34c81c83d3328105e"
+  },
+  "scenarios": [
+    {
+      "kind": "clean",
+      "value": 0,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "noise_db",
+      "value": 20,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "noise_db",
+      "value": 10,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "noise_db",
+      "value": 0,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "clip_rms",
+      "value": 2,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 14,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "clip_rms",
+      "value": 0.5,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 8,
+        "correct_accepted": 8,
+        "incorrect_accepted": 0,
+        "abstained": 6,
+        "coverage": 0.5714285714285714,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 8,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "speed_error",
+      "value": -0.05,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 9,
+        "correct_accepted": 4,
+        "incorrect_accepted": 5,
+        "abstained": 5,
+        "coverage": 0.6428571428571429,
+        "retained_error": 0.5555555555555556,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 9,
+        "correct_accepted": 4,
+        "incorrect_accepted": 5,
+        "abstained": 5,
+        "coverage": 0.6428571428571429,
+        "retained_error": 0.5555555555555556,
+        "forced_errors": 7,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "speed_error",
+      "value": -0.01,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "speed_error",
+      "value": 0.01,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "speed_error",
+      "value": 0.05,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 1,
+        "correct_accepted": 0,
+        "incorrect_accepted": 1,
+        "abstained": 13,
+        "coverage": 0.07142857142857142,
+        "retained_error": 1,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 1,
+        "correct_accepted": 0,
+        "incorrect_accepted": 1,
+        "abstained": 13,
+        "coverage": 0.07142857142857142,
+        "retained_error": 1,
+        "forced_errors": 14,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "clock_error",
+      "value": -0.01,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 13,
+        "correct_accepted": 13,
+        "incorrect_accepted": 0,
+        "abstained": 1,
+        "coverage": 0.9285714285714286,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "clock_error",
+      "value": 0.01,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 0,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "missing",
+      "value": 0.01,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 14,
+      "guard_prevented_incorrect": 0
+    },
+    {
+      "kind": "missing",
+      "value": 0.1,
+      "ungated": {
+        "fault_records": 14,
+        "accepted": 14,
+        "correct_accepted": 14,
+        "incorrect_accepted": 0,
+        "abstained": 0,
+        "coverage": 1,
+        "retained_error": 0,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "gated": {
+        "fault_records": 14,
+        "accepted": 0,
+        "correct_accepted": 0,
+        "incorrect_accepted": 0,
+        "abstained": 14,
+        "coverage": 0,
+        "retained_error": null,
+        "forced_errors": 0,
+        "normal_records": 3,
+        "normal_incorrect_accepted": 0
+      },
+      "guard_lost_correct": 14,
+      "guard_prevented_incorrect": 0
+    }
+  ],
+  "run_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45576809182",
+  "full_artifact_url": "https://github.com/sanketnichit/aeris-machine-health-intelligence/actions/runs/45576809182/artifacts/15004083662",
+  "artifact_sha256": "952a35eb68ebfdff1e63e2bd82eedc71d931a416aa919d18089a6084e8dfcb",
+  "data_attribution": "Eric Bechhoefer, Condition Based Maintenance Fault Database for Testing Diagnostics and Prognostic Algorithms (2013); MathWorks redistribution, CC BY-NC-SA 4.0. Derived numerical results, no raw waveforms."
+}
