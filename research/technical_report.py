@@ -95,6 +95,17 @@ def generate_report(root=ROOT):
         lines.extend(["", "Speed metadata error produced 5/9 incorrect accepted suggestions at -5% and 1/1 at +5%. No safe tolerance established.",
                       "The explicit quality gate removed 50 correct suggestions and prevented zero observed incorrect suggestions. Artificial repeated perturbations, not independent hardware validation.",
                       robustness["data_attribution"], ""])
+    if "mfpt_order_uncertainty_summary.json" in reports:
+        order = reports["mfpt_order_uncertainty_summary.json"]
+        lines.extend(["", "## MFPT continuous order uncertainty (post-v0.1.0)", "",
+                      f"{order['record_scenario_count']} repeated recording-scenario comparisons.",
+                      "", "| Speed error | Declared uncertainty | Reference in interval | Point correct | Point incorrect | Guard correct | Guard incorrect |", "|---|---|---|---:|---:|---:|---:|"])
+        for s in order["scenarios"]:
+            a, b = s["point"], s["interval"]
+            lines.append(f"| {s['declared_speed_error']:+.0%} | {s['declared_uncertainty']:.0%} | {s['reference_in_interval']} | {a['correct_accepted']} | {a['incorrect_accepted']} | {b['correct_accepted']} | {b['incorrect_accepted']} |")
+        lines.extend(["", "Both uncertainty guards withheld all six incorrect point suggestions in each repeated grid. The narrow guard retains 27 correct suggestions; the wide guard retains none, so its retained error is undefined.",
+                      "The narrow interval excludes the reference at ±5% actual error; no stability guarantee outside declared bounds. Retrospective sensitivity only, not independent validation.",
+                      order["data_attribution"], ""])
     calibration=reports["twin_calibration_summary.json"]
     summary=calibration["summary"]["all"]
     lines.extend(["","## Measured vibration-state transition audit","",
