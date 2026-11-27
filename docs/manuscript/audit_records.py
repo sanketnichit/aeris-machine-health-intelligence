@@ -44,6 +44,7 @@ def run(package, mfpt, paderborn):
     per = collections.defaultdict(collections.Counter)
     totals = collections.defaultdict(collections.Counter)
     keys, validn = set(), 0
+    paired = collections.defaultdict(dict)
     for s in M["scenarios"]:
         c = s["assumed_common_bound"]
         key = (c,s["primary_speed_error"],s["primary_bias_bound"],s["secondary_mode"])
@@ -60,6 +61,9 @@ def run(package, mfpt, paderborn):
             assert not s["declared_decomposition_valid"] or contains
             validn += s["declared_decomposition_valid"]
             accepted = g["suggestion"] is not None
+            pair_key = (*key[1:], x["file_id"])
+            assert c not in paired[pair_key]
+            paired[pair_key][c] = (accepted, contained)
             assert not accepted or i is not None
             o = outcome(x["truth"],g["suggestion"])
             a[o] += 1
@@ -75,6 +79,10 @@ def run(package, mfpt, paderborn):
             assert a[k] == s[v]
         totals[c].update(a)
     assert len(keys) == 120 and validn == 1224
+    assert len(paired) == 680 and all(set(v) == {0,.01,.05} for v in paired.values())
+    transitions = collections.Counter((v[0][0], v[.01][0]) for v in paired.values())
+    assert transitions == {(True,True):205,(True,False):143,(False,False):332}
+    assert sum(v[0][0] and not v[0][1] and not v[.01][0] for v in paired.values()) == 74
     assert len(P["records"]) == 68 and len({x["filename"] for x in P["records"]}) == 68
     sp, pc, pa = (collections.defaultdict(collections.Counter) for _ in range(3))
     agree = both = 0
@@ -106,7 +114,7 @@ def run(package, mfpt, paderborn):
         for specimen in P["specimen_summaries"]:
             a=sp[specimen["specimen"]]
             check(collections.Counter({o:n for (h,o),n in a.items() if h==mode}),specimen["metrics"][mode])
-    return {"mfpt_comparisons":len(keys)*17,"valid_decomposition_contained":validn,
+    result = {"mfpt_comparisons":len(keys)*17,"valid_decomposition_contained":validn,
             "mfpt_totals":totals,
             "mfpt_per_fault_record":{i:[a[c,"correct"] for c in (0,.01,.05)] for i,a in per.items() if ids[i]!="normal"},
             "paderborn_comparisons":len(P["records"]),"agreement":agree,"both_accept_same":both,
@@ -114,6 +122,23 @@ def run(package, mfpt, paderborn):
             "paderborn_specimens":{i:{o:n for (h,o),n in a.items() if h=="nominal"} for i,a in sp.items()},
             "paderborn_conditions":{i:{o:n for (h,o),n in a.items() if h=="nominal"} for i,a in pc.items()},
             "relative_waveform_l2_range":[min(x["preprocessing"]["relative_waveform_l2_difference"] for x in P["records"]),max(x["preprocessing"]["relative_waveform_l2_difference"] for x in P["records"])]}
+
+    result["paired_acceptance_0_to_1pct"] = {"both":205,"lost":143,"gained":0,"neither":332}
+    figure_data = json.loads(Path(__file__).with_name("figure_data.json").read_text())
+    f = figure_data["mfpt"]
+    ordered = sorted(result["mfpt_per_fault_record"], key=lambda x:x.split("/")[-1])
+    assert [result["mfpt_per_fault_record"][k] for k in ordered] == f["per_record"]
+    assert [[totals[c][k] for k in ("correct","fault_withheld","accepted_outside","false_compatible")] for c in (0,.01,.05)] == f["counts"]
+    for kind in ("inner","outer"):
+        group = [per[k] for k in ordered if ids[k] == kind]
+        assert [sum(a[c,"correct"] for a in group) for c in (0,.01,.05)] == f[kind+"_correct"]
+        assert [sum(a[c,"correct"]>0 for a in group) for c in (0,.01,.05)] == f[kind+"_records"]
+    f = figure_data["paderborn"]
+    assert [result["paderborn_specimens"][k].get("correct",0) for k in f["ids"]] == f["correct"]
+    assert [result["paderborn_specimens"][k].get("healthy_false",0) for k in f["ids"]] == f["false_suggestions"]
+    assert result["relative_waveform_l2_range"] == f["relative_waveform_l2_range"]
+    result["figure_data_verified"] = True
+    return result
 
 if __name__ == "__main__":
     if len(sys.argv) != 4:

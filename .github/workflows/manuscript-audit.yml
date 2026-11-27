@@ -1,0 +1,36 @@
+name: AERIS manuscript artifact audit
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - docs/manuscript/**
+      - .github/workflows/manuscript-audit.yml
+permissions:
+  contents: read
+  actions: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Retrieve exact archived evidence
+        run: |
+          set -euo pipefail
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/15025206458/zip" > package.zip
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/15020404150/zip" > mfpt.zip
+          gh api "repos/$GITHUB_REPOSITORY/actions/artifacts/15022373895/zip" > paderborn.zip
+      - name: Verify exact projection and recording-level figures
+        run: |
+          set -euo pipefail
+          node docs/manuscript/verify_projection.mjs | tee projection.json
+          python docs/manuscript/audit_records.py package.zip mfpt.zip paderborn.zip | tee audit.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: manuscript-audit-results
+          path: |
+            projection.json
+            audit.json
