@@ -1,0 +1,57 @@
+{
+  "scope": "manuscript_algebra_and_frozen_summary_reaggregation",
+  "archive_revision": "5e6aba8f01f0a35347698c4c45661b09db7a92ca",
+  "projection": {
+    "cases": 3060,
+    "feasible": 1658,
+    "empty": 1402,
+    "failures": 0
+  },
+  "mfpt": [
+    {
+      "common_bound": 0,
+      "scenarios": 40,
+      "fault_assessments": 560,
+      "normal_assessments": 120,
+      "correct": 348,
+      "wrong": 0,
+      "normal_false": 0,
+      "abstained": 212,
+      "contained": 340,
+      "conflicts": 170,
+      "differential": 0,
+      "nonempty_without_reference": 170,
+      "accepted_without_reference": 74
+    },
+    {
+      "common_bound": 0.01,
+      "scenarios": 40,
+      "fault_assessments": 560,
+      "normal_assessments": 120,
+      "correct": 205,
+      "wrong": 0,
+      "normal_false": 0,
+      "abstained": 355,
+      "contained": 442,
+      "conflicts": 170,
+      "differential": 34,
+      "nonempty_without_reference": 68,
+      "accepted_without_reference": 0
+    },
+    {
+      "common_bound": 0.05,
+      "scenarios": 40,
+      "fault_assessments": 560,
+      "normal_assessments": 120,
+      "correct": 0,
+      "wrong": 0,
+      "normal_false": 0,
+      "abstained": 560,
+      "contained": 510,
+      "conflicts": 170,
+      "differential": 170,
+      "nonempty_without_reference": 0,
+      "accepted_without_reference": 0
+    }
+  ]
+}
