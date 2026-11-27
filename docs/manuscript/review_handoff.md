@@ -1,0 +1,5 @@
+# Manuscript v0.3 — review handoff
+
+The exact archived MFPT artifact was reaggregated on 2026-11-27. The v0.2 paired interpretation was wrong: 74 reference-excluding acceptances at C=0 were not all withheld at C=1%. The paired outcomes are 45 accepted with containment restored, 21 withheld with containment restored, 8 withheld without containment. The total reference-excluding accepted count still falls from 74 to zero. Aggregate outcomes and figures remain unchanged. The checker now asserts the actual three-way split. The initial workflow also exposed a variable-name error, corrected without changing evidence.
+
+For independent review: evaluate the exact scalar derivation, the adequacy of the narrow case-study contribution relative to prior work, the use of repeated recordings and the conditional timing interpretation. No new experiment, independent field validation or peer review is claimed. The paper remains a working draft. Use manuscript_v0.3.md rather than v0.2; v0.2 is retained as historical draft. No archived software tags changed.

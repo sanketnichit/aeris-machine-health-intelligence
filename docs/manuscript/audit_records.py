@@ -82,7 +82,8 @@ def run(package, mfpt, paderborn):
     assert len(paired) == 680 and all(set(v) == {0,.01,.05} for v in paired.values())
     transitions = collections.Counter((v[0][0], v[.01][0]) for v in paired.values())
     assert transitions == {(True,True):205,(True,False):143,(False,False):332}
-    assert sum(v[0][0] and not v[0][1] and not v[.01][0] for v in paired.values()) == 74
+    outside_transitions = collections.Counter(v[.01] for v in paired.values() if v[0][0] and not v[0][1])
+    assert outside_transitions == {(True,True):45,(False,True):21,(False,False):8}
     assert len(P["records"]) == 68 and len({x["filename"] for x in P["records"]}) == 68
     sp, pc, pa = (collections.defaultdict(collections.Counter) for _ in range(3))
     agree = both = 0
@@ -137,6 +138,7 @@ def run(package, mfpt, paderborn):
     assert [result["paderborn_specimens"][k].get("correct",0) for k in f["ids"]] == f["correct"]
     assert [result["paderborn_specimens"][k].get("healthy_false",0) for k in f["ids"]] == f["false_suggestions"]
     assert result["relative_waveform_l2_range"] == f["relative_waveform_l2_range"]
+    result["initial_reference_excluding_acceptances_at_1pct"] = {"retained_with_containment":45,"withheld_with_containment":21,"withheld_without_containment":8}
     result["figure_data_verified"] = True
     return result
 

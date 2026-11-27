@@ -1,4 +1,4 @@
-# Internal critical review — revised draft v0.2
+# Internal critical review — revised draft v0.3
 
 **Decision: major revision before submission.** This is an AI-assisted internal review, not external peer review or an acceptance decision.
 
@@ -7,10 +7,10 @@
 | Shared error and selective diagnosis are established | Ragot (2022) already treats correlated bounded uncertainty; Siddique et al. and Zhao et al. (2026) address speed uncertainty and selective diagnosis. The paper explicitly limits its contribution to a retrospective case study. | Narrowed; novelty not established |
 | Pseudoreplication | 17 MFPT recordings reused 120 times, 17 Paderborn specimens under four conditions. No iid intervals or significance tests. Added Wheat et al. (2024) and Vieira et al. (2026). | Addressed in text |
 | Confusing containment failure and fault misclassification | Define coverage, retained fault error and healthy false-suggestion fraction separately. Reference exclusion is not a wrong label. | Addressed |
-| Unpaired comparisons | Recomputed matched acceptance transitions: 205 both, 143 lost, 0 gained, 332 neither from 0 to 1%. All 74 zero-bound reference-excluding acceptances withheld at 1%. | Local artifact reaggregation passed |
+| Unpaired comparisons | Recomputed matched acceptance transitions: 205 both, 143 lost, 0 gained, 332 neither from 0 to 1%. Of 74 initially reference-excluding acceptances, 45 remain accepted with restored containment, 21 withheld with containment restored, and 8 withheld without containment. Corrected after exact pairing. | Local artifact reaggregation passed |
 | Model versus hardware | Paderborn timing hypotheses are not independent sensor indications; no verified clock, geometry or actual common error. No causal claim. | Addressed as limitation; physical validation absent |
 | No matched external baseline | Zero-common guard is an internal comparator, not a comparison against recent methods. | Open scientific limitation |
-| Figures and artifacts | Independently checked archive digests and per-record counts locally; added automated figure data assertions and artifact workflow. | Local check passed; workflow run pending |
+| Figures and artifacts | Independently checked archive digests and per-record counts locally; added automated figure data assertions and artifact workflow. | Local artifact reaggregation passed; automated checker rerun required after correction |
 | Citation metadata | Publisher pages confirm Ragot, Siddique et al., Zhao et al., original Paderborn DOI; added two evaluation studies. Existing foundational references checked at publisher/abstract level. | Full-text citation-chain review incomplete |
 | Author and rights | Author must review and understand equations, verify references, confirm affiliation/declarations/permissions, and seek independent expert feedback. | Open |
 
