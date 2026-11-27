@@ -63,7 +63,7 @@ def run(package, mfpt, paderborn):
             accepted = g["suggestion"] is not None
             pair_key = (*key[1:], x["file_id"])
             assert c not in paired[pair_key]
-            paired[pair_key][c] = (accepted, contained)
+            paired[pair_key][c] = (accepted, contains)
             assert not accepted or i is not None
             o = outcome(x["truth"],g["suggestion"])
             a[o] += 1
